@@ -1,0 +1,6 @@
+=form_for(@pomodoro) do |f|
+  - if @pomodoro.errors.any?
+    #id='errors'
+      =pluralize( @pomodoro.errors.count, "error:" )
+
+  
