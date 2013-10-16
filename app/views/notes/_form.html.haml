@@ -1,6 +1,9 @@
-=form_for(@pomodoro) do |f|
-  - if @pomodoro.errors.any?
-    #id='errors'
-      =pluralize( @pomodoro.errors.count, "error:" )
+= form_for(@note) do |f|
+  -if @note.errors.any?
+    = render 'errors'
 
-  
+  .field
+    = f.label :description
+    = f.text_field :description
+  .actions
+    = f.submit
