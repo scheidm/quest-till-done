@@ -1,0 +1,41 @@
+2013/10/20
+----------
+Channel : Google Hangout
+
+Meeting Agenda
+==============
+
+Completed Task
+--------------
+Mun
+- jstree basic view and prototype
+Kevin
+- deploy server at 54.200.206.254 with auto update with git repos
+- Meet with Prof. Cai
+Mark
+- added basic definition for pomodoro and node
+ 
+ToDo
+----
+- Add issue tracker in bitbucket with email notification
+- Different port number to support different branch of development
+- Move treeview prototype to micro-prototype
+- create small branch for each devs (i.e. micro-prototype/pomodoroview) 
+- Wednesday for weekly meeting
+
+Upcoming Task
+-------------
+Mun - implementing treeview for pomodoro and nodes
+Mark - implementing models and relationship, pomodoro timer
+Kevin - deployment server for different branch
+
+Micro-prototype
+---------------
+- list of pomodoros :expand => list of nodes in the pomodoro
+- timer function
+	- start pomodoro, create new to last for 30 miins, rinse and repeat unti	l someone click stopped
+	- tagging pomodoro for each individual task in task view
+
+- pomodoro page be a tree view
+- CRUD interface for task
+- Object for tree view
