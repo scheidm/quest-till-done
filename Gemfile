@@ -49,3 +49,5 @@ gem 'execjs'
 gem 'therubyracer'
 
 gem 'haml'
+
+gem 'delayed_job'

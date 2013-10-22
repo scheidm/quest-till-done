@@ -2709,3 +2709,110 @@ ActionView::Template::Error (undefined method `description' for #<Note id: nil, 
   Rendered /home/vagrant/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.9ms)
   Rendered /home/vagrant/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (3.0ms)
   Rendered /home/vagrant/.rvm/gems/ruby-2.0.0-p247/gems/actionpack-4.0.0/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (22.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2013-10-22 17:51:33 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/vagrant/.rvm/gems/ruby-2.0.0-p247/gems/railties-4.0.0/lib/rails/templates/rails/welcome/index.html.erb (5.4ms)
+Completed 200 OK in 51ms (Views: 27.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/notes" for 10.0.2.2 at 2013-10-22 17:51:45 +0000
+Processing by NotesController#index as HTML
+  Rendered notes/index.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 897ms (Views: 861.7ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/assets/nodes.css?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/notes.css?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/application.css?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/pomodoros.css?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/nodes.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/pomodoros.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/notes.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+
+
+Started GET "/assets/application.js?body=1" for 10.0.2.2 at 2013-10-22 17:51:46 +0000
+  [1m[36mNote Load (1.4ms)[0m  [1mSELECT "nodes".* FROM "nodes" ORDER BY "nodes"."id" ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.4ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[35mPomodoro Load (1.7ms)[0m  SELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1
+  [1m[36mPomodoro Load (2.8ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (4.1ms)[0m  [1mDROP TABLE "pomodoros"[0m
+  [1m[35mSQL (0.6ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20131016153749'
+  [1m[36m (3.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePomodoros (20131016153749)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.2ms)[0m  [1mCREATE TABLE "pomodoros" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "end_time" date, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131016153749"]]
+  [1m[36m (3.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (4.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mPomodoro Load (1.6ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (13.3ms)[0m  [1mINSERT INTO "pomodoros" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", Tue, 22 Oct 2013 18:08:38 UTC +00:00], ["updated_at", Tue, 22 Oct 2013 18:08:38 UTC +00:00]]
+  [1m[35m (5.3ms)[0m  commit transaction
+  [1m[36mPomodoro Load (3.2ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1[0m
+  [1m[35mPomodoro Load (1.7ms)[0m  SELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.8ms)[0m  [1mDROP TABLE "notes"[0m
+  [1m[35mSQL (0.6ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20131016153801'
+  [1m[36m (4.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateNotes (20131016153801)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.4ms)[0m  [1mCREATE TABLE "notes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131016153801"]]
+  [1m[36m (4.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (4.1ms)[0m  [1mDROP TABLE "notes"[0m
+  [1m[35mSQL (0.5ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20131016153801'
+  [1m[36m (4.2ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateNotes (20131016153801)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.4ms)[0m  [1mCREATE TABLE "notes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131016153801"]]
+  [1m[36m (4.0ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.3ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mPomodoro Load (1.4ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1[0m
+  [1m[36mPomodoro Load (1.6ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (13.3ms)[0m  [1mINSERT INTO "nodes" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", Tue, 22 Oct 2013 18:17:11 UTC +00:00], ["updated_at", Tue, 22 Oct 2013 18:17:11 UTC +00:00]]
+  [1m[35m (4.9ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (3.8ms)[0m  [1mDROP TABLE "notes"[0m
+  [1m[35mSQL (0.6ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20131016153801'
+  [1m[36m (3.9ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.6ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
