@@ -4,6 +4,7 @@ class PomodorosController < ApplicationController
   end
 
   def new
+    @pomo = Pomodoro.new
   end
 
   def show
