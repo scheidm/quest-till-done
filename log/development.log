@@ -2816,3 +2816,40 @@ Migrating to CreateNotes (20131016153801)
   [1m[35mSQL (0.6ms)[0m  DELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20131016153801'
   [1m[36m (3.9ms)[0m  [1mcommit transaction[0m
   [1m[35mActiveRecord::SchemaMigration Load (1.6ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (8.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateNotes (20131016153801)
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36m (23.7ms)[0m  [1mCREATE TABLE "notes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (5.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131016153801"]]
+  [1m[36m (22.2ms)[0m  [1mcommit transaction[0m
+Migrating to ConnectPomodoroToNotes (20131023230002)
+  [1m[35m (0.5ms)[0m  begin transaction
+  [1m[36m (36.2ms)[0m  [1mDROP TABLE "nodes"[0m
+  [1m[35m (4.6ms)[0m  DROP TABLE "notes"
+  [1m[36m (6.1ms)[0m  [1mDROP TABLE "pomodoros"[0m
+  [1m[35m (132.4ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (8.9ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ConnectPomodoroToNotes (20131023230002)
+  [1m[35m (0.5ms)[0m  begin transaction
+  [1m[36m (31.4ms)[0m  [1mDROP TABLE "nodes"[0m
+  [1m[35m (5.6ms)[0m  DROP TABLE "notes"
+  [1m[36m (4.8ms)[0m  [1mDROP TABLE "pomodoros"[0m
+  [1m[35m (135.6ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (9.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ConnectPomodoroToNotes (20131023230002)
+  [1m[35m (0.4ms)[0m  begin transaction
+  [1m[36m (34.8ms)[0m  [1mDROP TABLE "nodes"[0m
+  [1m[35m (7.7ms)[0m  DROP TABLE "notes"
+  [1m[36m (10.7ms)[0m  [1mDROP TABLE "pomodoros"[0m
+  [1m[35m (33.8ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (16.0ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ConnectPomodoroToNotes (20131023230002)
+  [1m[35m (0.6ms)[0m  begin transaction
+  [1m[36m (55.3ms)[0m  [1mDROP TABLE "nodes"[0m
+  [1m[35m (4.6ms)[0m  DROP TABLE "notes"
+  [1m[36m (9.9ms)[0m  [1mDROP TABLE "pomodoros"[0m
+  [1m[35m (1.3ms)[0m  CREATE TABLE "nodes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "pomodoro_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (1.1ms)[0m  [1mCREATE TABLE "notes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "description" text, "pomodoro_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (6.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20131023230002"]]
+  [1m[36m (35.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (11.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
