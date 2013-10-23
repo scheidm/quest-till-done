@@ -16,10 +16,10 @@ class PomodorosController < ApplicationController
 
     @pomos.each {|item|
       @TreeData = ({:data => 'pomodoro ' + item.id.to_s, :attr => { :href => '/pomodoros/' + item.id.to_s }})
-      @TreeData[:children] = children = []
-      item.nodes.each {|item|
-        children <<  ({:data => item.id, :attr => { :href => '/nodes/' + item.id.to_s }})
-      }
+      #@TreeData[:children] = children = []
+      #item.nodes.each {|item|
+      #  children <<  ({:data => item.id, :attr => { :href => '/nodes/' + item.id.to_s }})
+      #}
       data.push(@TreeData)
     }
 
