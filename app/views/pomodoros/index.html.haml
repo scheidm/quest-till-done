@@ -9,3 +9,24 @@
       %td face
 
 = link_to 'New Pomodoro', new_pomodoro_path
+#treeView
+:javascript
+  $(document).ready(function(){
+          $("#treeView").jstree({
+              core : { "animation" : 100 },
+              themes : { "theme" : "classic", "icons" : true, "dots": false },
+              "json_data": {
+                  "ajax" : {
+                      "url" : "/pomodoros/getTree.json",
+                      "data" : function(m) {
+                          return { id: m.attr ? m.attr("id") : 0 };
+                      }
+                  }
+              },
+              plugins: ["themes", "json_data", "dnd", "ui" ],
+          }).bind("select_node.jstree", function (e, data)
+              {
+                  window.location= data.rslt.obj.attr("href");
+              }
+          );
+      });

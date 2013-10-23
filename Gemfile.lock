@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/tristanm/jstree-rails.git
+  revision: e2ad211ea7835a1811e66c3d4ef1e21bfbe6e27d
+  specs:
+    jstree-rails (0.0.1)
+      rails (>= 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,6 +130,7 @@ DEPENDENCIES
   haml
   jbuilder (~> 1.2)
   jquery-rails
+  jstree-rails!
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
   sdoc
