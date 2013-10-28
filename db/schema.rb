@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131016154401) do
+ActiveRecord::Schema.define(version: 20131023230002) do
 
   create_table "nodes", force: true do |t|
+    t.integer  "pomodoro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "pomodoros", force: true do |t|
-    t.date     "end_time"
+  create_table "notes", force: true do |t|
+    t.text     "description"
+    t.integer  "pomodoro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
