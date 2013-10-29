@@ -50,6 +50,6 @@ gem 'therubyracer'
 
 gem 'haml'
 
-gem 'delayed_job'
+gem 'delayed_job_active_record'
 
 gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'

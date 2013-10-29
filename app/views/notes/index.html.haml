@@ -3,11 +3,10 @@
     %tr
       %th Description
       %th Pomodoro
-      %th Task
   %tbody
-    %tr
-      %td face
-      %td face
-      %td face
+    - @notes.each do |note|
+      %tr
+        %td= note.description
+        %td= note.pomodoro_id
 
 = link_to 'New note', new_note_path

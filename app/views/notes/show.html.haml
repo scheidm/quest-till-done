@@ -1,0 +1,11 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @note.description
+%p
+  %strong Pomodoro ID:
+  = @note.pomodoro_id
+
+= link_to 'Edit', edit_note_path(@note)
+
+= link_to 'Back', notes_path

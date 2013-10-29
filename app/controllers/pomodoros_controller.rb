@@ -7,21 +7,6 @@ class PomodorosController < ApplicationController
     @pomodoro = Pomodoro.new
   end
 
-  def create
-    @pomodoro = Pomodoro.new()
-    @pomodoro.created_at = DateTime.now
-
-    respond_to do |format|
-      if @pomodoro.save
-        format.html { redirect_to @pomodoro, notice: 'Pomodoro was successfully created.' }
-        #format.json { render action: 'show', status: :created, location: @pomodoro }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @pomodoro.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   def show
   end
 
