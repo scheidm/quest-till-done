@@ -1,3 +1,5 @@
-class Note < Node
-  attr_accessor :description
+class Note < ActiveRecord::Base
+  attr_accessor :pomodoro
+  belongs_to :pomodoro
+  validates_associated :pomodoro
 end

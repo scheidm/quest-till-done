@@ -7,6 +7,21 @@ class PomodorosController < ApplicationController
     @pomodoro = Pomodoro.new
   end
 
+  def create
+    @pomodoro = Pomodoro.new()
+    @pomodoro.created_at = DateTime.now
+
+    respond_to do |format|
+      if @pomodoro.save
+        format.html { redirect_to @pomodoro, notice: 'Pomodoro was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @pomodoro }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @pomodoro.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def show
   end
 
@@ -16,10 +31,10 @@ class PomodorosController < ApplicationController
 
     @pomos.each {|item|
       @TreeData = ({:data => 'pomodoro ' + item.id.to_s, :attr => { :href => '/pomodoros/' + item.id.to_s }})
-      #@TreeData[:children] = children = []
-      #item.nodes.each {|item|
-      #  children <<  ({:data => item.id, :attr => { :href => '/nodes/' + item.id.to_s }})
-      #}
+      @TreeData[:children] = children = []
+      item.notes.each {|item|
+        children <<  ({:data => item.description, :attr => { :href => '/notes/' + item.id.to_s }})
+      }
       data.push(@TreeData)
     }
 
