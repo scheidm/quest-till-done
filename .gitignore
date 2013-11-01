@@ -1,2 +1,4 @@
-/tmp
+tmp/**/*
+db/*.sqlite3
+log/*.log
 *.sw[a-z]
