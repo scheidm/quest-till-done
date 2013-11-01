@@ -16297,3 +16297,4525 @@ Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:34:17 -
 
 
 Started GET "/assets/fontawesome-webfont.woff" for 127.0.0.1 at 2013-10-31 20:34:20 -0400
+
+
+Started GET "/assets/note.png" for 127.0.0.1 at 2013-10-31 20:37:14 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 37ms (Views: 35.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:37:19 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:37:20 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:37:20 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:37:20 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:37:20 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 60ms (Views: 59.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:38:40 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.2ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (4.2ms)
+Completed 200 OK in 51ms (Views: 50.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:41 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:38:42 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 27ms (Views: 26.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[36mPomodoro Load (0.2ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros"[0m
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 1]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 2]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 3]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 20ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:38:43 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (2.0ms)
+Completed 200 OK in 59ms (Views: 58.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:44 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.5ms)
+Completed 200 OK in 31ms (Views: 29.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:38:48 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:38:49 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:38:49 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:38:49 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:41:13 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 30ms (Views: 29.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:41:14 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.2ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (4.5ms)
+Completed 200 OK in 51ms (Views: 49.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:15 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 31ms (Views: 30.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:38 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:41:54 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.2ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (5.0ms)
+Completed 200 OK in 60ms (Views: 59.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:41:55 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 41ms (Views: 40.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[36mPomodoro Load (0.1ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros"[0m
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 1]]
+  [1m[36mNote Load (0.0ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 2]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 3]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:42:01 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (2.2ms)
+Completed 200 OK in 32ms (Views: 31.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:02 -0400
+
+
+Started GET "/notes/new" for 127.0.0.1 at 2013-10-31 20:42:03 -0400
+Processing by NotesController#new as HTML
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" DESC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (31.5ms)[0m  INSERT INTO "pomodoros" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", Fri, 01 Nov 2013 00:42:03 UTC +00:00], ["updated_at", Fri, 01 Nov 2013 00:42:03 UTC +00:00]]
+  [1m[36m (161.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "delayed_jobs" ("created_at", "handler", "run_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 01 Nov 2013 00:42:03 UTC +00:00], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Pomodoro\n  attributes:\n    id: 4\n    end_time: \n    created_at: 2013-11-01 00:42:03.432065498 Z\n    updated_at: 2013-11-01 00:42:03.432065498 Z\nmethod_name: :close\nargs: []\n"], ["run_at", Fri, 01 Nov 2013 01:12:03 UTC +00:00], ["updated_at", Fri, 01 Nov 2013 00:42:03 UTC +00:00]]
+  [1m[35m (145.7ms)[0m  commit transaction
+  Rendered notes/_form.html.haml (86.6ms)
+  Rendered notes/new.html.haml within layouts/application (97.3ms)
+Completed 200 OK in 527ms (Views: 137.9ms | ActiveRecord: 340.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:03 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:03 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:03 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:04 -0400
+
+
+Started POST "/notes" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+Processing by NotesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"c6FpruUBHayZTqSSR85OmX8jBu9CIz6TKu1xIQch928=", "note"=>{"description"=>"New note", "pomodoro_id"=>"4"}, "commit"=>"Create Note"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "notes" ("created_at", "description", "pomodoro_id", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Fri, 01 Nov 2013 00:42:08 UTC +00:00], ["description", "New note"], ["pomodoro_id", 4], ["updated_at", Fri, 01 Nov 2013 00:42:08 UTC +00:00]]
+  [1m[36m (176.2ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/notes/14
+Completed 302 Found in 180ms (ActiveRecord: 176.6ms)
+
+
+Started GET "/notes/14" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+Processing by NotesController#show as HTML
+  Parameters: {"id"=>"14"}
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT 1  [["id", "14"]]
+  Rendered notes/show.html.haml within layouts/application (0.6ms)
+Completed 200 OK in 52ms (Views: 51.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:08 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.5ms)
+Completed 200 OK in 31ms (Views: 30.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:11 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 32ms (Views: 31.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.0ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:42:14 -0400
+
+
+Started GET "/assets/note.png" for 127.0.0.1 at 2013-10-31 20:42:15 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.3ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 49ms (Views: 48.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:30 -0400
+
+
+Started GET "/notes/new" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+Processing by NotesController#new as HTML
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" DESC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "delayed_jobs" ("created_at", "handler", "run_at", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Fri, 01 Nov 2013 00:42:38 UTC +00:00], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Pomodoro\n  attributes:\n    id: 4\n    end_time: \n    created_at: 2013-11-01 00:42:03.432065000 Z\n    updated_at: 2013-11-01 00:42:03.432065000 Z\nmethod_name: :close\nargs: []\n"], ["run_at", Fri, 01 Nov 2013 01:12:38 UTC +00:00], ["updated_at", Fri, 01 Nov 2013 00:42:38 UTC +00:00]]
+  [1m[36m (156.7ms)[0m  [1mcommit transaction[0m
+  Rendered notes/_form.html.haml (2.8ms)
+  Rendered notes/new.html.haml within layouts/application (3.5ms)
+Completed 200 OK in 198ms (Views: 35.0ms | ActiveRecord: 157.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:42:38 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.3ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (2.5ms)
+Completed 200 OK in 58ms (Views: 57.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:33 -0400
+
+
+Started GET "/notes/new" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+Processing by NotesController#new as HTML
+  [1m[36mPomodoro Load (0.2ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" DESC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "delayed_jobs" ("created_at", "handler", "run_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 01 Nov 2013 00:43:34 UTC +00:00], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Pomodoro\n  attributes:\n    id: 4\n    end_time: \n    created_at: 2013-11-01 00:42:03.432065000 Z\n    updated_at: 2013-11-01 00:42:03.432065000 Z\nmethod_name: :close\nargs: []\n"], ["run_at", Fri, 01 Nov 2013 01:13:34 UTC +00:00], ["updated_at", Fri, 01 Nov 2013 00:43:34 UTC +00:00]]
+  [1m[35m (173.7ms)[0m  commit transaction
+  Rendered notes/_form.html.haml (1.9ms)
+  Rendered notes/new.html.haml within layouts/application (3.4ms)
+Completed 200 OK in 214ms (Views: 34.7ms | ActiveRecord: 174.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:34 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:35 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.3ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (2.4ms)
+Completed 200 OK in 35ms (Views: 34.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:43:36 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.3ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (1.7ms)
+Completed 200 OK in 46ms (Views: 45.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:02 -0400
+
+
+Started GET "/notes/new" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+Processing by NotesController#new as HTML
+  [1m[36mPomodoro Load (0.2ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" DESC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "delayed_jobs" ("created_at", "handler", "run_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 01 Nov 2013 00:44:03 UTC +00:00], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Pomodoro\n  attributes:\n    id: 4\n    end_time: \n    created_at: 2013-11-01 00:42:03.432065000 Z\n    updated_at: 2013-11-01 00:42:03.432065000 Z\nmethod_name: :close\nargs: []\n"], ["run_at", Fri, 01 Nov 2013 01:14:03 UTC +00:00], ["updated_at", Fri, 01 Nov 2013 00:44:03 UTC +00:00]]
+  [1m[35m (148.0ms)[0m  commit transaction
+  Rendered notes/_form.html.haml (1.8ms)
+  Rendered notes/new.html.haml within layouts/application (3.2ms)
+Completed 200 OK in 184ms (Views: 30.2ms | ActiveRecord: 148.6ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:03 -0400
+
+
+Started GET "/notes/new" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+Processing by NotesController#new as HTML
+  [1m[36mPomodoro Load (0.2ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros" ORDER BY "pomodoros"."id" DESC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "delayed_jobs" ("created_at", "handler", "run_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["created_at", Fri, 01 Nov 2013 00:44:27 UTC +00:00], ["handler", "--- !ruby/object:Delayed::PerformableMethod\nobject: !ruby/ActiveRecord:Pomodoro\n  attributes:\n    id: 4\n    end_time: \n    created_at: 2013-11-01 00:42:03.432065000 Z\n    updated_at: 2013-11-01 00:42:03.432065000 Z\nmethod_name: :close\nargs: []\n"], ["run_at", Fri, 01 Nov 2013 01:14:27 UTC +00:00], ["updated_at", Fri, 01 Nov 2013 00:44:27 UTC +00:00]]
+  [1m[35m (216.9ms)[0m  commit transaction
+  Rendered notes/_form.html.haml (5.3ms)
+  Rendered notes/new.html.haml within layouts/application (6.3ms)
+Completed 200 OK in 286ms (Views: 64.1ms | ActiveRecord: 217.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:27 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.7ms)
+Completed 200 OK in 30ms (Views: 29.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:29 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.3ms)
+Completed 200 OK in 31ms (Views: 30.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/Tomato-icon.png" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.0ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:44:36 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:44:57 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (5.9ms)
+Completed 200 OK in 55ms (Views: 54.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[36mPomodoro Load (0.1ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros"[0m
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 1]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 2]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 3]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:44:58 -0400
+
+
+Started GET "/assets/note.png" for 127.0.0.1 at 2013-10-31 20:44:59 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (4.1ms)
+Completed 200 OK in 32ms (Views: 31.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.1ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 7ms (Views: 0.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:45:35 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.8ms)
+Completed 200 OK in 35ms (Views: 34.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:37 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 36ms (Views: 34.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 6ms (Views: 0.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:45:38 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 30ms (Views: 29.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:50 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:45:51 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:45:51 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[36mPomodoro Load (0.1ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros"[0m
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 1]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 2]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 3]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:45:51 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.2ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (5.2ms)
+Completed 200 OK in 62ms (Views: 61.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:45:52 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.4ms)
+Completed 200 OK in 30ms (Views: 29.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:46:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:00 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.3ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (2.3ms)
+Completed 200 OK in 31ms (Views: 29.6ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:01 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.3ms)
+Completed 200 OK in 29ms (Views: 28.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:42 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 37ms (Views: 36.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:47:44 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:47:45 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:47:45 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 6ms (Views: 0.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/jstree-themes/default/d.png" for 127.0.0.1 at 2013-10-31 20:47:45 -0400
+
+
+Started GET "/assets/jstree-themes/default/throbber.gif" for 127.0.0.1 at 2013-10-31 20:47:45 -0400
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:47:45 -0400
+
+
+Started GET "/assets/note.png" for 127.0.0.1 at 2013-10-31 20:47:47 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.9ms)
+Completed 200 OK in 58ms (Views: 57.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:00 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 30ms (Views: 29.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.1ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 32ms (Views: 0.4ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:48:09 -0400
+
+
+Started GET "/assets/note.png" for 127.0.0.1 at 2013-10-31 20:48:13 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 29ms (Views: 28.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:51:59 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[36mPomodoro Load (0.2ms)[0m  [1mSELECT "pomodoros".* FROM "pomodoros"[0m
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 1]]
+  [1m[36mNote Load (0.0ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 2]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 3]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+Processing by NotesController#index as HTML
+  [1m[35mNote Load (0.2ms)[0m  SELECT "notes".* FROM "notes"
+  Rendered notes/index.html.haml within layouts/application (4.6ms)
+Completed 200 OK in 49ms (Views: 48.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:00 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:52:01 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.8ms)
+Completed 200 OK in 36ms (Views: 34.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:26 -0400
+
+
+Started GET "/pomodoros" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+Processing by PomodorosController#index as HTML
+  Rendered pomodoros/index.html.haml within layouts/application (0.4ms)
+Completed 200 OK in 58ms (Views: 57.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/assets/jstree-themes/default/style.css" for 127.0.0.1 at 2013-10-31 20:56:27 -0400
+
+
+Started GET "/pomodoros/getTree.json?id=0" for 127.0.0.1 at 2013-10-31 20:56:28 -0400
+Processing by PomodorosController#getTree as JSON
+  Parameters: {"id"=>"0"}
+  [1m[35mPomodoro Load (0.2ms)[0m  SELECT "pomodoros".* FROM "pomodoros"
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 1]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 2]]
+  [1m[36mNote Load (0.1ms)[0m  [1mSELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?[0m  [["pomodoro_id", 3]]
+  [1m[35mNote Load (0.1ms)[0m  SELECT "notes".* FROM "notes" WHERE "notes"."pomodoro_id" = ?  [["pomodoro_id", 4]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 5ms (Views: 0.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/assets/Tomato-icon-min.png" for 127.0.0.1 at 2013-10-31 20:56:28 -0400
+
+
+Started GET "/assets/note.png" for 127.0.0.1 at 2013-10-31 20:56:29 -0400
+
+
+Started GET "/notes" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+Processing by NotesController#index as HTML
+  [1m[36mNote Load (0.2ms)[0m  [1mSELECT "notes".* FROM "notes"[0m
+  Rendered notes/index.html.haml within layouts/application (1.8ms)
+Completed 200 OK in 31ms (Views: 29.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/bootstrap.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/bootstrap_and_overrides.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/nodes.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter-bootstrap-static/fontawesome.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/notes.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/pomodoros.css?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-transition.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-alert.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-modal.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-dropdown.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-scrollspy.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tab.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-tooltip.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-popover.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-button.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-collapse.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-carousel.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-typeahead.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap/bootstrap-affix.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/twitter/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/jquery.jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/jstree.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/nodes.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/notes.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/pomodoros.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-10-31 20:56:31 -0400
