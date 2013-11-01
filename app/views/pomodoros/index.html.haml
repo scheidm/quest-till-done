@@ -4,7 +4,7 @@
   $(document).ready(function(){
           $("#treeView").jstree({
               core : { "animation" : 100 },
-              themes : { "theme" : "classic", "icons" : true, "dots": false },
+              <!--themes : { "theme" : "classic", "icons" : true, "dots": false },-->
               "json_data": {
                   "ajax" : {
                       "url" : "/pomodoros/getTree.json",
@@ -13,10 +13,33 @@
                       }
                   }
               },
-              plugins: ["themes", "json_data", "dnd", "ui" ],
+              "types" : {
+                  "valid_children" : [ "pomodoro" ],
+                  "types" : {
+                      "valid_children" : [ "pomodoro" ],
+                      "pomodoro" : {
+                          "icon" : {
+                              "image" : "/assets/Tomato-icon-min.png"
+                          },
+                          "valid_children" : [ "note" ],
+                        },
+                      "note" : {
+                          "icon" : {
+                              "image" : "/assets/note.png"
+                          },
+                      },
+                      "default" : {
+                          "valid_children" : [ "default" ]
+                      }
+                  }
+              }  ,
+
+              plugins: ["themes", "json_data", "dnd", "ui", "types" ],
           }).bind("select_node.jstree", function (e, data)
               {
                   window.location= data.rslt.obj.attr("href");
               }
           );
       });
+
+%img(src='/assets/Tomato-icon.png')

@@ -15,10 +15,10 @@ class PomodorosController < ApplicationController
     data = [];
 
     @pomos.each {|item|
-      @TreeData = ({:data => 'pomodoro ' + item.id.to_s, :attr => { :href => '/pomodoros/' + item.id.to_s }})
+      @TreeData = ({:data => 'pomodoro ' + item.id.to_s, :attr => { :href => '/pomodoros/' + item.id.to_s, :rel => 'pomodoro' }})
       @TreeData[:children] = children = []
       item.notes.each {|item|
-        children <<  ({:data => item.description, :attr => { :href => '/notes/' + item.id.to_s }})
+        children <<  ({:data => item.description, :attr => { :href => '/notes/' + item.id.to_s, :rel => 'note' }})
       }
       data.push(@TreeData)
     }
