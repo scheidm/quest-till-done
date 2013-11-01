@@ -9,7 +9,7 @@ class NotesController < NodesController
 
   def new
     @pomodoro = Pomodoro.last
-    @pomodoro = Pomodoro.create if @pomodoro.created_at<30.minutes.ago
+    @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
     @pomodoro.delay({:run_at => 30.minutes.from_now}).close
     @note = Note.new
     @note.pomodoro_id = @pomodoro.id
