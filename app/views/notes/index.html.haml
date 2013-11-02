@@ -1,0 +1,13 @@
+%h2 Notes
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Description
+      %th Pomodoro
+  %tbody
+    - @notes.each do |note|
+      %tr
+        %td= note.description
+        %td= note.pomodoro_id
+
+= link_to 'New note', new_note_path

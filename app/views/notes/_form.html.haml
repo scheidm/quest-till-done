@@ -1,0 +1,10 @@
+= form_for(@note) do |f|
+  -if @note.errors.any?
+    = render 'errors'
+
+  .field
+    = f.label :description
+    = f.text_field :description
+    = f.hidden_field :pomodoro_id, value: @pomodoro.id
+  .actions
+    = f.submit :class => "btn btn-primary"
