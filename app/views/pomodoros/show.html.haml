@@ -1,0 +1,18 @@
+%p#notice= notice
+%h2 Pomodoro
+%p
+  %strong Index:
+  = @pomodoro.id
+%p
+  %strong Created At:
+  = @pomodoro.created_at
+
+%p
+  %strong End Time:
+  = @pomodoro.end_time
+
+%p
+  %strong Updated At:
+  = @pomodoro.updated_at
+
+= link_to 'Back', pomodoros_path

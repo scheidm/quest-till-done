@@ -8,6 +8,7 @@ class PomodorosController < ApplicationController
   end
 
   def show
+    @pomodoro = Pomodoro.find(params[:id])
   end
 
   def getTree
@@ -15,7 +16,9 @@ class PomodorosController < ApplicationController
     data = [];
 
     @pomos.each {|item|
-      @TreeData = ({:data => 'pomodoro ' + item.id.to_s, :attr => { :href => '/pomodoros/' + item.id.to_s, :rel => 'pomodoro' }})
+      _endTime = item.end_time
+      _endTime = (item.end_time.nil? ) ? 'Now' : item.end_time.to_formatted_s(:long)
+      @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/pomodoros/' + item.id.to_s, :rel => 'pomodoro' }})
       @TreeData[:children] = children = []
       item.notes.each {|item|
         children <<  ({:data => item.description, :attr => { :href => '/notes/' + item.id.to_s, :rel => 'note' }})
