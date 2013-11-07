@@ -57,3 +57,5 @@ gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 gem 'twitter-bootstrap-rails'
 
 gem 'minitest-rails'
+
+gem 'jasmine', :group => [:development, :test]
