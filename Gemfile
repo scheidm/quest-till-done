@@ -57,3 +57,9 @@ gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 gem 'twitter-bootstrap-rails'
 
 gem 'minitest-rails'
+
+gem 'delayed_job'
+
+gem 'cucumber-rails'
+
+gem 'spork-rails'
