@@ -11,7 +11,24 @@ class PomodorosController < ApplicationController
     @pomodoro = Pomodoro.find(params[:id])
   end
 
+  def set
+    @state = params[:state]
+    @state = (@state.casecmp('Start') == 0) ? 'Stop' : 'Start'
+    session[:state] = @state
+    render :text => @state
+  end
+
+  def getState
+    @state = (session[:state].nil?) ? 'Start' : session[:state]
+    render :text => @state
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
   def getTree
+
     @pomos = Pomodoro.all
     data = [];
 
