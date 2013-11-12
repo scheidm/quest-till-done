@@ -8,6 +8,11 @@ class NotesController < NodesController
   end
 
   def new
+    if session[:state].nil? || session[:state].casecmp('Start') == 0
+      @notes = Note.all
+       render action: 'index', note: @notes, notice: 'No active pomodoro.'
+    end
+
     @pomodoro = Pomodoro.last
     @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
     @pomodoro.delay({:run_at => 30.minutes.from_now}).close
