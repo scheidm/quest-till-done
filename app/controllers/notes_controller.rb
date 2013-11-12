@@ -10,7 +10,7 @@ class NotesController < NodesController
   def new
     if session[:state].nil? || session[:state].casecmp('Start') == 0
       @notes = Note.all
-       render action: 'index', note: @notes, notice: 'No active pomodoro.'
+       render action: 'index', notice: 'No active pomodoro.' , note: @notes
     end
 
     @pomodoro = Pomodoro.last
