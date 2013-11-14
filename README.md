@@ -8,8 +8,9 @@ Quest Till Done Project
 
 ##Application Location
 * Server: 54.200.206.254
-* master: #port 80
-  microprototype: #port 1000
+* master: #port 80    
+  microprototype: #port 1000    
+####[http://54.200.206.254]
 * username: ubuntu
 * sudo is automatic, no password
 
