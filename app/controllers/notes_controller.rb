@@ -11,9 +11,8 @@ class NotesController < NodesController
     @pomodoro = Pomodoro.last
     @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
     @pomodoro.delay({:run_at => 30.minutes.from_now}).close
-    @note = Note.new
+    @note = Note.new()
     @note.pomodoro_id = @pomodoro.id
-    return @note
   end
 
   def create
@@ -26,7 +25,7 @@ class NotesController < NodesController
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render action: 'show', status: :created, location: @note }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new'}
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
