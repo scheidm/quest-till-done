@@ -1,0 +1,29 @@
+Progress Report
+==
+Meeting Channel: None
+---------------------
+
+Done:
+Chin:
+Added bootstrap layout, finished prototype view for pomodoros and view
+
+Mark:
+Updated issue tracker.
+Merged micro-view into prototype.
+Test unit research
+Test cases for pomodoro
+updated and posted status report
+
+Kevin:
+Installed and tested Rspec/ Unit test compariation
+
+TODO:
+----
+Mark:
+define task model and basic relationship
+
+Chin:
+Integrate micro-view branch back to main prototype branch
+
+Kevin:
+Decide on testing framework.
