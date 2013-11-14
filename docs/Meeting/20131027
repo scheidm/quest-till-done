@@ -1,0 +1,21 @@
+Week of 10/27
+===========
+Meeting Channel: Google Hangout
+
+ToDo
+-------
+Presentation slide for 10/29 - M
+Status Report    - C
+Finishes Micro-prototype View and Controller - C
+Deploy Micro-prototype to server, configure auto-deployment script - K
+
+Done
+-------
+Integrated basic treeview for Pomodoros into MicroPrototype - C
+Deployed server with different port pointing to different branch - K
+DB migration scripts for Pomodoro, Node and Notes relationship - M
+Test unit setup for Rails testing - M
+
+Presentation
+------------
+Presentaion prepared on Google Hangout
