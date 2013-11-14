@@ -60,3 +60,4 @@ gem 'minitest-rails'
 
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
+gem 'heritage'
