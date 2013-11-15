@@ -63,6 +63,8 @@ gem 'jasmine-core', '1.3.1'
 gem 'heritage'
 gem 'delayed_job'
 
-gem 'cucumber-rails'
-
 gem 'spork-rails'
+
+group :test do
+  gem 'cucumber-rails', require: false
+end

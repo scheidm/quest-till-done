@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131107123441) do
+ActiveRecord::Schema.define(version: 20131115135951) do
+
+  create_table "actions", force: true do |t|
+    t.string   "name"
+    t.string   "status"
+    t.text     "description"
+    t.integer  "estimated_cost"
+    t.integer  "current_cost"
+    t.date     "deadline"
+    t.string   "priority"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,6 +41,10 @@ ActiveRecord::Schema.define(version: 20131107123441) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "links", force: true do |t|
+    t.text "description"
+  end
 
   create_table "nodes", force: true do |t|
     t.integer  "pomodoro_id"
@@ -46,6 +63,13 @@ ActiveRecord::Schema.define(version: 20131107123441) do
 
   create_table "pomodoros", force: true do |t|
     t.date     "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quotes", force: true do |t|
+    t.text     "text"
+    t.integer  "link_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

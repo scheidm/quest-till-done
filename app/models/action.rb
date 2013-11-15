@@ -1,5 +1,4 @@
-class Action < Node
-  has_many :pomodoros
+class Action < ActiveRecord::Base
   has_many :nodes, through: :pomodoros
 
 end
