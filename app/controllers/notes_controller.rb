@@ -10,19 +10,16 @@ class NotesController < NodesController
   def new
     if session[:state].nil? || session[:state].casecmp('Start') == 0
       @notes = Note.all
+      flash[:notice] = 'No active pomodoro.'
        render action: 'index', notice: 'No active pomodoro.' , note: @notes
     end
-
-    @pomodoro = Pomodoro.last
-    @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
-    @pomodoro.delay({:run_at => 30.minutes.from_now}).close
     @note = Note.new()
-    @note.pomodoro_id = @pomodoro.id
   end
 
   def create
     @note = Note.new(note_params)
-
+    @pomodoro = Pomodoro.last
+    @note.pomodoro_id = @pomodoro.id
     @note.created_at = DateTime.now
 
     respond_to do |format|

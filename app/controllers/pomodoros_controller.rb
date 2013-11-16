@@ -11,11 +11,20 @@ class PomodorosController < ApplicationController
     @pomodoro = Pomodoro.find(params[:id])
   end
 
-  def set
+  def setState
     @state = params[:state]
-    @state = (@state.casecmp('Start') == 0) ? 'Stop' : 'Start'
-    session[:state] = @state
-    render :text => @state
+    @pomodoro = Pomodoro.last
+    if params[:state] == 'Start'
+      @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago || !@pomodoro.end_time.nil?
+      session[:pomodoro_id] = @pomodoro.id
+    end
+    else if params[:state] == 'Stop'
+      Pomodoro.last.close
+      session[:pomodoro_id] = nil
+    end
+    session[:state] = (@state.casecmp('Start') == 0) ? 'Stop' : 'Start'
+    #render :text => session[:state]
+    redirect_to :back
   end
 
   def getState

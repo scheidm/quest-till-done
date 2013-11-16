@@ -1,11 +1,11 @@
 class Pomodoro < ActiveRecord::Base
-  attr_accessor :end_time
   has_many :tags
   has_many :nodes
   has_many :notes
 
   def close
-    self.end_time=Time.now if self.end_time.nil?
+    self.end_time = Time.now
+    save
   end
 
 end
