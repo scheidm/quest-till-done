@@ -43,6 +43,8 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    acts_as_relation (1.0.0)
+      activerecord
     arel (4.0.0)
     atomic (1.1.14)
     builder (3.1.4)
@@ -85,7 +87,6 @@ GEM
       multi_json (~> 1.3)
     haml (4.0.3)
       tilt
-    heritage (0.3.2)
     hike (1.2.3)
     i18n (0.6.5)
     jasmine-core (1.3.1)
@@ -196,13 +197,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_relation
   coffee-rails (~> 4.0.0)
   cucumber-rails
   delayed_job
   delayed_job_active_record
   execjs
   haml
-  heritage
   jasmine!
   jasmine-core (= 1.3.1)
   jbuilder (~> 1.2)
