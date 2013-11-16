@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131116163514) do
+ActiveRecord::Schema.define(version: 20131116164608) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -43,7 +43,9 @@ ActiveRecord::Schema.define(version: 20131116163514) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "links", force: true do |t|
-    t.text "description"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "nodes", force: true do |t|
@@ -66,9 +68,10 @@ ActiveRecord::Schema.define(version: 20131116163514) do
     t.datetime "updated_at"
   end
 
-  create_table "quotes", force: true do |t|
-    t.text     "text"
-    t.integer  "link_id"
+  create_table "records", force: true do |t|
+    t.integer  "as_record_id"
+    t.string   "as_record_type"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
