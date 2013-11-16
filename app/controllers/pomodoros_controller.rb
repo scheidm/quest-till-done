@@ -29,7 +29,14 @@ class PomodorosController < ApplicationController
 
   def getState
     @state = (session[:state].nil?) ? 'Start' : session[:state]
-    render :text => @state
+    if @state == 'Stop'
+      @timeRemaining = ((Pomodoro.last.created_at.utc + 5.seconds - Time.now.utc)).to_i
+    else
+      @timeRemaining = 0
+    end
+
+    @data = { state: @state, duration: @timeRemaining}
+    render :text => @data.to_json
   end
 
   def not_found
