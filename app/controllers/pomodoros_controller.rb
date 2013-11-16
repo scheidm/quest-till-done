@@ -28,14 +28,46 @@ class PomodorosController < ApplicationController
   end
 
   def getState
-    @state = (session[:state].nil?) ? 'Start' : session[:state]
-    if @state == 'Stop'
-      @timeRemaining = ((Pomodoro.last.created_at.utc + 5.seconds - Time.now.utc)).to_i
-    else
+    @button = params[:button]
+    if params[:button] == 'Start'
+      if(Pomodoro.last.nil? || !Pomodoro.last.end_time.nil?)
+        @pomodoro = Pomodoro.create
+      else
+        @pomodoro = Pomodoro.last
+      end
+
+      diff = (@pomodoro.created_at.utc + 10.seconds - Time.now.utc).to_i
+      if( diff > 0)
+        @timeRemaining = diff
+        start
+      else
+        @timeRemaining = 0
+        @pomodoro.close
+        stop
+      end
+    elsif params[:button] == 'Stop'
+      Pomodoro.last.close if !Pomodoro.last.nil?
+      stop
       @timeRemaining = 0
+    else
+      if session[:state] == 'Running'
+        @pomodoro = Pomodoro.last
+        diff = (@pomodoro.created_at.utc + 10.seconds - Time.now.utc).to_i
+        if( diff > 0)
+          @timeRemaining = diff
+          start
+        else
+          @timeRemaining = 0
+          @pomodoro.close
+          stop
+        end
+      end
     end
 
-    @data = { state: @state, duration: @timeRemaining}
+    @timeRemaining = 0 if @timeRemaining.nil? || @timeRemaining < 0
+    @button = (session[:state].nil? || session[:state] == 'Running') ? 'Stop' : 'Start'
+
+    @data = { button: @button, duration: @timeRemaining}
     render :text => @data.to_json
   end
 
@@ -61,5 +93,16 @@ class PomodorosController < ApplicationController
 
     #render :text => @user.to_json(:include => {:tasks => {}})
     render :text => data.to_json
+  end
+
+  private
+  def start
+    session[:state] = 'Running'
+    session[:pomodoro_id] = @pomodoro.id
+  end
+
+  def stop
+    session[:state] = 'Stopped'
+    session[:pomodoro_id] = nil
   end
 end

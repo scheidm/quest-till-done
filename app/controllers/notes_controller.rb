@@ -8,7 +8,7 @@ class NotesController < NodesController
   end
 
   def new
-    if session[:state].nil? || session[:state].casecmp('Start') == 0
+    if session[:state].nil? || session[:state].casecmp('Stopped') == 0
       @notes = Note.all
       flash[:notice] = 'No active pomodoro.'
        render action: 'index', notice: 'No active pomodoro.' , note: @notes

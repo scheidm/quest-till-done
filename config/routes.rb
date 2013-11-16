@@ -2,8 +2,8 @@ Quest::Application.routes.draw do
 
   resources :pomodoros do
     collection do
-      get 'getTree', 'getState', 'setState'
-     # post 'setState'
+      get 'getTree', 'getState'
+      post 'setState'
     end
   end
   resources :notes

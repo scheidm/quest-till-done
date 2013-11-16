@@ -4,7 +4,7 @@ class Pomodoro < ActiveRecord::Base
   has_many :notes
 
   def close
-    self.end_time = Time.now
+    self.end_time = Time.now if self.end_time.nil?
     save
   end
 
