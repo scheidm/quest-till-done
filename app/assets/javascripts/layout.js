@@ -24,7 +24,7 @@ function setState(state)
             //location.reload(true);
         }
     });
-}
+};
 function getState(button)
 {
     $.ajax({
@@ -44,7 +44,7 @@ function getState(button)
             $("#startStopBtn").text(result.button);
         }
     });
-}
+};
 
 function timesUp()
 {
@@ -54,9 +54,10 @@ function timesUp()
         var tree = $.jstree._reference("#treeView");
         tree.refresh();
     } catch (e) {}
-}
+};
 
-$.fn.countdown = function (callback, duration, message) {
+function timer(callback, duration, message)
+{
     message = message || "";
     var container = $(this[0]).html(duration + message);
     countdown = setInterval(function () {
@@ -68,3 +69,5 @@ $.fn.countdown = function (callback, duration, message) {
         }
     }, 1000);
 };
+
+$.fn.countdown = timer
