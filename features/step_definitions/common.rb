@@ -12,7 +12,7 @@ When /^DEBUG element with (id|class|text) "([^"]+)"$/ do |key, val|
 end
 
 When /^I go to (.*)$/ do |url|
-  @browser = SCHEMA.browser
+  @browser = Watir::Browser.new :ff
   @browser.goto url
 end 
 
