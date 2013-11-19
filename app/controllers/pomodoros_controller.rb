@@ -45,10 +45,12 @@ class PomodorosController < ApplicationController
         @pomodoro.close
         stop
       end
+      @button = 'Stop'
     elsif params[:button] == 'Stop'
       Pomodoro.last.close if !Pomodoro.last.nil?
       stop
       @timeRemaining = 0
+      @button = 'Start'
     else
       if session[:state] == 'Running'
         @pomodoro = Pomodoro.last
@@ -56,16 +58,20 @@ class PomodorosController < ApplicationController
         if( diff > 0)
           @timeRemaining = diff
           start
+          @button = 'Stop'
         else
           @timeRemaining = 0
           @pomodoro.close
           stop
+          @button = 'Start'
         end
+      else
+        @button = 'Start'
       end
     end
 
     @timeRemaining = 0 if @timeRemaining.nil? || @timeRemaining < 0
-    @button = (session[:state].nil? || session[:state] == 'Running') ? 'Stop' : 'Start'
+    #@button = (!session[:state].nil? || session[:state] == 'Running') ? 'Stop' : 'Start'
 
     @data = { button: @button, duration: @timeRemaining}
     render :text => @data.to_json

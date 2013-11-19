@@ -6,6 +6,10 @@ $(document).ready(function ()
     {
         var button = $("#startStopBtn").text();
         getState(button);
+        try {
+            var tree = $.jstree._reference("#treeView");
+            tree.refresh();
+        } catch (e) {}
     });
 });
 
@@ -46,6 +50,10 @@ function timesUp()
 {
     $("#startStopBtn").text('Start');
     getState("Stop");
+    try {
+        var tree = $.jstree._reference("#treeView");
+        tree.refresh();
+    } catch (e) {}
 }
 
 $.fn.countdown = function (callback, duration, message) {
