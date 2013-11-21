@@ -1,0 +1,43 @@
+2013/11/12 - 2013/11/13
+-----------------------
+Channel: Google Hangout
+
+Meeting Agenda
+==============
+
+Completed Since last week:
+-------------------------
+Mun:
+Finished Ui, js and portion of controller logic of startstop button. Will continue and will lookinto timer for the pomodoro. 
+Mark:
+Resolved administrative issues, organizing issue tracker status 
+reports and emails to Salvage.
+Kevin:
+Group/User class implemented, not integrated issue#14
+rdoc installed /Documentation
+investigated jquery ui drag and drop, had a working html page. issue #22
+compared rspec and unit test for rails
+
+
+TODO:
+----
+Mun:
+Finish up startstop btn, and write js test for the button jquery.
+
+Mark:
+As before, finish up the project/task model.
+Additionally, implement the database structure as per our decision in 
+the next group meeting.
+
+Kevin:
+Reviewing more robust tree libraries.
+Investigate test with authorization
+
+Mark & Kevin:
+Will meet with Dr. Cai on Friday to resolve communication issues.
+
+Progress:
+--------
+1. Decided on a database/multi inherietece schema,[docs in google drive, will move to docs folder]
+2. Need to improve issue taking and creating process to avoid ad-hoc work, try to be more organized  in making progress
+
