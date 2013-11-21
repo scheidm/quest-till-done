@@ -20,8 +20,9 @@ class PomodorosController < ApplicationController
       _endTime = (item.end_time.nil? ) ? 'Now' : item.end_time.to_formatted_s(:long)
       @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/pomodoros/' + item.id.to_s, :rel => 'pomodoro' }})
       @TreeData[:children] = children = []
-      item.notes.each {|item|
-        children <<  ({:data => item.description, :attr => { :href => '/notes/' + item.id.to_s, :rel => 'note' }})
+      item.nodes.each {|node|
+        type = node.specific
+        children <<  ({:data => type.class.name, :attr => { :href => '/'+ type.class.name.downcase + 's/' + type.id.to_s, :rel => type.class.name }})
       }
       data.push(@TreeData)
     }

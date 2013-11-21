@@ -1,0 +1,15 @@
+%h1 Listing actions
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+  %tbody
+    - @actions.each do |action|
+      %tr
+        %td= link_to 'Show', action
+        %td= link_to 'Edit', edit_action_path(action)
+        %td= link_to 'Destroy', action, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Action', new_action_path
