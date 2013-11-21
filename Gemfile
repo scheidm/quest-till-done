@@ -60,3 +60,12 @@ gem 'minitest-rails'
 
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
+gem 'acts_as_relation'
+gem 'delayed_job'
+gem 'spork-rails'
+
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'watir-webdriver'
+end

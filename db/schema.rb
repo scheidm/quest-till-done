@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131116021139) do
+ActiveRecord::Schema.define(version: 20131116165313) do
+
+  create_table "actions", force: true do |t|
+    t.string   "name"
+    t.string   "status"
+    t.text     "description"
+    t.integer  "estimated_cost"
+    t.integer  "current_cost"
+    t.date     "deadline"
+    t.string   "priority"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -29,7 +42,15 @@ ActiveRecord::Schema.define(version: 20131116021139) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "links", force: true do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "nodes", force: true do |t|
+    t.integer  "as_node_id"
+    t.string   "as_node_type"
     t.integer  "pomodoro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -37,13 +58,27 @@ ActiveRecord::Schema.define(version: 20131116021139) do
 
   create_table "notes", force: true do |t|
     t.text     "description"
-    t.integer  "pomodoro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "pomodoros", force: true do |t|
     t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quotes", force: true do |t|
+    t.text     "text"
+    t.integer  "link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "records", force: true do |t|
+    t.integer  "as_record_id"
+    t.string   "as_record_type"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
