@@ -19,6 +19,7 @@ class NotesController < NodesController
   def create
     @note = Note.new(note_params)
     @pomodoro = Pomodoro.last
+    @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
     @note.pomodoro_id = @pomodoro.id
     @note.created_at = DateTime.now
 
