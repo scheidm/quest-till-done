@@ -1,0 +1,16 @@
+= form_for(@action, :as => :task) do |f|
+  -if @action.errors.any?
+    = render 'errors'
+
+  .field
+    = f.label :name
+    = f.text_field :name
+    = f.label :status
+    = f.text_field :status
+    = f.label :description
+    = f.text_field :description
+    = f.label :deadline
+    = f.text_field :deadline, :as => :string, :class => 'datepicker'
+
+  .actions
+    = f.submit :class => "btn btn-primary", :disable_with => "Saving..."

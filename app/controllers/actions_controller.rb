@@ -28,7 +28,7 @@ class ActionsController < ApplicationController
 
     respond_to do |format|
       if @action.save
-        format.html { redirect_to @action, notice: 'Action was successfully created.' }
+        format.html { redirect_to @action, notice: 'Task was successfully created.' }
         format.json { render action: 'show', status: :created, location: @action }
       else
         format.html { render action: 'new' }
@@ -69,6 +69,6 @@ class ActionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def action_params
-      params[:action]
+      params.require(:task).permit(:description, :name, :status, :deadline)
     end
 end
