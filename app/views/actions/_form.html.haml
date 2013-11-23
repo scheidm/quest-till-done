@@ -13,4 +13,4 @@
     = f.text_field :deadline, :as => :string, :class => 'datepicker'
 
   .actions
-    = f.submit :class => "btn btn-primary", :disable_with => "Saving..."
+    = f.submit :class => "btn btn-primary", data: { disable_with: 'Saving ...' }

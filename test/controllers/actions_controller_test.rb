@@ -2,10 +2,6 @@ require "test_helper"
 
 class ActionsControllerTest < ActionController::TestCase
 
-  before do
-    @action = actions(:one)
-  end
-
   def test_index
     get :index
     assert_response :success
@@ -19,30 +15,35 @@ class ActionsControllerTest < ActionController::TestCase
 
   def test_create
     assert_difference('Action.count') do
-      post :create, action: {  }
+      post :create, task: { :name => 'test' }
     end
-
+    assert_equal 'test', assigns(:action).name
     assert_redirected_to action_path(assigns(:action))
   end
 
   def test_show
-    get :show, id: @action
+    action = actions(:one)
+    get :show, id: action
     assert_response :success
   end
 
   def test_edit
-    get :edit, id: @action
+    action = actions(:one)
+    get :edit, id: action
     assert_response :success
   end
 
   def test_update
-    put :update, id: @action, action: {  }
+    action = actions(:one)
+    put :update, id: action, task: { :name => 'test'  }
+    assert_equal 'test', assigns(:action).name
     assert_redirected_to action_path(assigns(:action))
   end
 
   def test_destroy
+    action = actions(:one)
     assert_difference('Action.count', -1) do
-      delete :destroy, id: @action
+      delete :destroy, id: action
     end
 
     assert_redirected_to actions_path

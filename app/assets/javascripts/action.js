@@ -6,7 +6,8 @@ $(document).ready(function(){
     $('.datepicker').datepicker({
         onRender: function(date) {
             return date.valueOf() < now.valueOf() ? 'disabled' : '';
-        }
+        },
+        format: 'yyyy-mm-dd'
     }).on('changeDate', function(ev) {
             $('.datepicker').datepicker('hide');
         }).datepicker();
