@@ -11,22 +11,6 @@ class PomodorosController < ApplicationController
     @pomodoro = Pomodoro.find(params[:id])
   end
 
-  def setState
-    @state = params[:state]
-    @pomodoro = Pomodoro.last
-    if params[:state] == 'Start'
-      @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago || !@pomodoro.end_time.nil?
-      session[:pomodoro_id] = @pomodoro.id
-    end
-    else if params[:state] == 'Stop'
-      Pomodoro.last.close
-      session[:pomodoro_id] = nil
-    end
-    session[:state] = (@state.casecmp('Start') == 0) ? 'Stop' : 'Start'
-    #render :text => session[:state]
-    redirect_to :back
-  end
-
   def getState
     @button = params[:button]
     if params[:button] == 'Start'
@@ -36,10 +20,11 @@ class PomodorosController < ApplicationController
         @pomodoro = Pomodoro.last
       end
 
-      diff = (@pomodoro.created_at.utc + 10.seconds - Time.now.utc).to_i
+      diff = (@pomodoro.created_at.utc + 30.seconds - Time.now.utc).to_i
       if( diff > 0)
         @timeRemaining = diff
         start
+        print 'Sparta2 ',session[:state]
       else
         @timeRemaining = 0
         @pomodoro.close
@@ -52,9 +37,11 @@ class PomodorosController < ApplicationController
       @timeRemaining = 0
       @button = 'Start'
     else
+      temp = session[:state]
+      print 'Sparta ',temp
       if session[:state] == 'Running'
         @pomodoro = Pomodoro.last
-        diff = (@pomodoro.created_at.utc + 10.seconds - Time.now.utc).to_i
+        diff = (@pomodoro.created_at.utc + 30.seconds - Time.now.utc).to_i
         if( diff > 0)
           @timeRemaining = diff
           start
@@ -73,6 +60,7 @@ class PomodorosController < ApplicationController
     @timeRemaining = 0 if @timeRemaining.nil? || @timeRemaining < 0
     #@button = (!session[:state].nil? || session[:state] == 'Running') ? 'Stop' : 'Start'
 
+    print 'Sparta3 ',session[:state]
     @data = { button: @button, duration: @timeRemaining}
     render :text => @data.to_json
   end

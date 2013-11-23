@@ -64,6 +64,9 @@ gem 'acts_as_relation'
 gem 'delayed_job'
 gem 'spork-rails'
 
+# session db gem
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
