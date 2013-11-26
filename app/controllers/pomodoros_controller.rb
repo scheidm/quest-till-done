@@ -24,7 +24,7 @@ class PomodorosController < ApplicationController
         @pomodoro = Pomodoro.last
       end
 
-      diff = (@pomodoro.created_at.utc + 30.seconds - Time.now.utc).to_i
+      diff = (@pomodoro.created_at.utc + Quest::Application.config.pomodoro_length.seconds - Time.now.utc).to_i
       if( diff > 0)
         @timeRemaining = diff
         start
@@ -42,7 +42,7 @@ class PomodorosController < ApplicationController
     else
       if session[:state] == 'Running'
         @pomodoro = Pomodoro.last
-        diff = (@pomodoro.created_at.utc + 30.seconds - Time.now.utc).to_i
+        diff = (@pomodoro.created_at.utc + Quest::Application.config.pomodoro_length.seconds - Time.now.utc).to_i
         if( diff > 0)
           @timeRemaining = diff
           start
