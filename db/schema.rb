@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131029013855) do
+ActiveRecord::Schema.define(version: 20131123034611) do
+
+  create_table "actions", force: true do |t|
+    t.string   "name"
+    t.string   "status"
+    t.text     "description"
+    t.integer  "estimated_cost"
+    t.integer  "current_cost"
+    t.date     "deadline"
+    t.string   "priority"
+    t.integer  "parent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -29,7 +42,15 @@ ActiveRecord::Schema.define(version: 20131029013855) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
+  create_table "links", force: true do |t|
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "nodes", force: true do |t|
+    t.integer  "as_node_id"
+    t.string   "as_node_type"
     t.integer  "pomodoro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -37,16 +58,40 @@ ActiveRecord::Schema.define(version: 20131029013855) do
 
   create_table "notes", force: true do |t|
     t.text     "description"
-    t.integer  "pomodoro_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "pomodoros", force: true do |t|
-    t.date     "end_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "quotes", force: true do |t|
+    t.text     "text"
+    t.integer  "link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "records", force: true do |t|
+    t.integer  "as_record_id"
+    t.string   "as_record_type"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
   create_table "tags", force: true do |t|
     t.datetime "created_at"

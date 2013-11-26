@@ -1,10 +1,14 @@
 Quest::Application.routes.draw do
+
   resources :pomodoros do
     collection do
-      get :getTree
+      get 'getTree', 'getState'
+      post 'setState'
     end
   end
   resources :notes
+
+  resources :actions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

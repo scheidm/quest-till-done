@@ -56,21 +56,31 @@
           <li><%= link_to "Projects", "/actions"  %></li>
           <li><%= link_to "Notes", "/notes"  %></li>
         </ul>
+        <div  style="float:right;">
+          <p></p>
+          <a class="countdown" style="color:white; padding-right: 10px;"></a>
+          <a id="startStopBtn" class="btn btn-primary" >Start</a>
+        </div>
       </nav>
     </header>
 
-    <div class="container-fluid">
+    <div class="container" style="padding-top: 80px;">
       <div class="row-fluid">
-
-        <div class="span12">
+        <div>
+          <% flash.each do |key, value| %>
+              <div class="<%= flash_class(key) %> fade in">
+                <a href="#" data-dismiss="alert" class="close">×</a>
+                <%= value %>
+              </div>
+          <% end %>
           <%= yield %>
+
         </div>
       </div><!--/row-->
 
       <footer>
         <p>&copy; Quest Till Done 2013</p>
       </footer>
-
     </div> <!-- /container -->
 
   </body>

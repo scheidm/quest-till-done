@@ -1,0 +1,20 @@
+%h1 Tasks
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th Status
+      %th Deadline
+  %tbody
+    - @actions.each do |action|
+      %tr
+        %td= action.name
+        %td= action.description
+        %td= action.status
+        %td= action.deadline
+        %td= link_to 'Show', action
+        %td= link_to 'Edit', edit_action_path(action)
+        %td= link_to 'Destroy', action, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Task', new_action_path

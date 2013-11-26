@@ -8,17 +8,19 @@ class NotesController < NodesController
   end
 
   def new
-    @pomodoro = Pomodoro.last
-    @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
-    @pomodoro.delay({:run_at => 30.minutes.from_now}).close
-    @note = Note.new
-    @note.pomodoro_id = @pomodoro.id
-    return @note
+    if session[:state].nil? || session[:state].casecmp('Stopped') == 0
+      @notes = Note.all
+      flash[:notice] = 'No active pomodoro.'
+       render action: 'index', notice: 'No active pomodoro.' , note: @notes
+    end
+    @note = Note.new()
   end
 
   def create
     @note = Note.new(note_params)
-
+    @pomodoro = Pomodoro.last
+    @pomodoro = Pomodoro.create if @pomodoro.nil? || @pomodoro.created_at<30.minutes.ago
+    @note.pomodoro_id = @pomodoro.id
     @note.created_at = DateTime.now
 
     respond_to do |format|
@@ -26,7 +28,7 @@ class NotesController < NodesController
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render action: 'show', status: :created, location: @note }
       else
-        format.html { render action: 'new' }
+        format.html { render action: 'new'}
         format.json { render json: @note.errors, status: :unprocessable_entity }
       end
     end
