@@ -38,38 +38,31 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fluid-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Quest</a>
-          <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Pomodoros", "/pomodoros"  %></li>
-              <li><%= link_to "Notes", "/notes"  %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+    <header class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a href="../" class="navbar-brand">Quest</a>
         </div>
       </div>
-    </div>
+      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Timeline", "/pomodoros"  %></li>
+          <li><%= link_to "Projects", "/actions"  %></li>
+          <li><%= link_to "Notes", "/notes"  %></li>
+        </ul>
+      </nav>
+    </header>
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Navigation</li>
-              <li><%= link_to "Pomodoros", "/pomodoros"  %></li>
-              <li><%= link_to "Notes", "/notes"  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-          <%= bootstrap_flash %>
+
+        <div class="span12">
           <%= yield %>
         </div>
       </div><!--/row-->
