@@ -61,6 +61,7 @@ gem 'jasmine-core', '1.3.1'
 gem 'acts_as_relation'
 gem 'delayed_job'
 gem 'spork-rails'
+gem 'high_voltage'
 
 # session db gem
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
