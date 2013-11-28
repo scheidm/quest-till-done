@@ -1,5 +1,7 @@
 class ActionsController < ApplicationController
   before_action :set_action, only: [:show, :edit, :update, :destroy]
+  require 'json_Generator'
+  include JsonGenerator::ActionModule
 
   # GET /actions
   # GET /actions.json
@@ -19,6 +21,11 @@ class ActionsController < ApplicationController
 
   # GET /actions/1/edit
   def edit
+  end
+
+  def getTree
+    teasd = generateTree
+    render :json => generateTree
   end
 
   # POST /actions
