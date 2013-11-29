@@ -11,7 +11,7 @@ module JsonGenerator
         @TreeData[:children] = children = []
         item.nodes.each {|node|
           type = node.specific
-          children <<  ({:data => type.class.name, :attr => { :href => '/'+ type.class.name.downcase + 's/' + type.id.to_s, :rel => type.class.name }})
+          children <<  ({:data => type.description, :attr => { :href => '/'+ type.class.name.downcase + 's/' + type.id.to_s, :rel => type.class.name }})
         }
         data.push(@TreeData)
       }
