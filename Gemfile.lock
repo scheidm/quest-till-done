@@ -83,6 +83,8 @@ GEM
       cucumber (>= 1.2.0)
       nokogiri (>= 1.5.0)
       rails (>= 3.0.0)
+    d3_rails (3.3.10)
+      railties (>= 3.1.0)
     database_cleaner (1.2.0)
     delayed_job (4.0.0)
       activesupport (>= 3.0, < 4.1)
@@ -209,6 +211,7 @@ DEPENDENCIES
   acts_as_relation
   coffee-rails (~> 4.0.0)
   cucumber-rails
+  d3_rails
   database_cleaner
   delayed_job
   delayed_job_active_record
