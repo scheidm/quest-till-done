@@ -58,6 +58,8 @@ gem 'twitter-bootstrap-rails'
 
 gem 'minitest-rails'
 
+gem 'd3_rails', "~> 3.4.1"
+
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
 gem 'acts_as_relation'
