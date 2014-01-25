@@ -1,0 +1,40 @@
+5 Use Cases
+
+5.1 Logging In
+	The user access the correct website and is logged in by providing following correct information
+*A field to enter username, labeled Username
+*A field to enter password, labeled Password
+	After the user enters he/she username and password and hit the Submit option. If the username and password is valid, the user will be logged in and the system will proceed to the welcome Homepage.
+
+5.2 Use cases for all users
+5.2.1 User Profile
+	A user can view  its profile for performance metrics.
+5.2.2 VCS import
+Upon user first time login or in the user profile page, a user can set a VCS credentials.
+5.2.3 Manage Projects
+A user can add, delete, update projects they own
+5.2.4 Timer setup
+A user can setup a timer to alert for switching tasks or take a break.
+5.2.5 Various View
+A user can view their projects in following fashion:
+*Recent Activity View
+*Important & Priority View
+*Projects overview
+5.2.6 Add Task Item 
+A user can add task items described in [get the ref in section 3]
+5.2.7 Search
+A user can fully search on created projects and tasks.
+5.10 Import & Export QTD workflow data
+A user can import QTD file and get exported projects to display on current system.
+A user can export QTD workflow data into JPG, PDF, QTD file format for sharing and backup purpose.
+
+5.3 Use case for all administrators
+	All administrators has the following use cases
+5.3.1 Add/delete user in his/her group
+5.3.2 Administrators can assign tasks to groups and 
+users
+5.3.3 Administrators can promote and demote users/administrators as administrators and QTD Group Member.
+
+5.4 Use case for QTD Site Administrator
+5.4.1 Site Online/Offline
+5.4.2 Send global announcements. 

@@ -56,7 +56,7 @@ gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 
 gem 'minitest-rails'
 
-gem 'd3_rails'
+gem 'd3_rails', "~> 3.4.1"
 
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
@@ -73,3 +73,4 @@ group :test do
   gem 'database_cleaner'
   gem 'watir-webdriver'
 end
+gem 'devise'

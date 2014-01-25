@@ -16,3 +16,4 @@
 //= require d3
 //= require jstree
 //= require_tree .
+//= require d3
