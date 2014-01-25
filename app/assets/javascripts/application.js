@@ -15,3 +15,4 @@
 //= require twitter/bootstrap
 //= require jstree
 //= require_tree .
+//= require d3
