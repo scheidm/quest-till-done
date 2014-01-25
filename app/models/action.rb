@@ -1,4 +1,5 @@
 class Action < ActiveRecord::Base
+  has_many :records, through: :encounters
   STATES = ["Unstarted", "In Progress", "Completed"]
   validates_inclusion_of :status, :in => STATES
   validates_presence_of :name

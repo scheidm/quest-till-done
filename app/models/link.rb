@@ -1,4 +1,3 @@
-class Link < ActiveRecord::Base
-  acts_as :record
+class Link < Record
   has_many :quotes, dependent: :destroy
 end

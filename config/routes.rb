@@ -2,13 +2,13 @@ Quest::Application.routes.draw do
   get "welcome/index"
   devise_for :admins
   devise_for :users
-  resources :pomodoros do
+  resources :encounters do
     collection do
       get 'getTree', 'getState'
       post 'setState'
     end
   end
-  resources :notes
+  resources :records
   resources :users
 
   resources :actions do

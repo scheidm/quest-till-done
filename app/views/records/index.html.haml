@@ -1,0 +1,13 @@
+%h2 Notes
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Description
+      %th Encounter
+  %tbody
+    - @records.each do |record|
+      %tr
+        %td= record.description
+        %td= record.encounter_id
+
+= link_to 'New record', new_record_path
