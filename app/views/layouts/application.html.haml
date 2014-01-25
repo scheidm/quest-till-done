@@ -30,7 +30,7 @@
     %header.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
         .row{style: "margin-top: 10px;margin-bottom: 10px;margin-left:10px;margin-right:10px"}
-          .col-md-4.qtd-col
+          .col-md-5.qtd-col
             .col-md-4.qtd-col
               .col-md-5.qtd-col
                 %img.img-rounded.img-responsive{src: "/assets/Avatar.jpg"}/
@@ -38,15 +38,15 @@
                 %div
                   %a{href: "/users/"}
                     Steve
-                    %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Current level"} 3
+                  %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"} 3
                 %div{style: "color:#999999"}
                   C# Guru
-                .progress.progress-mini
+                .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Experience"}
                   .progress-bar{role: "progressbar", style: "width: 50%;"}
             .col-md-2
-              %button.btn.btn-info{style: "margin-top: 0px;width: 40px"} 13
+              %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
               %div{style: "margin-top: 5px"}
-                %button.btn.btn-success{style: "margin-top: 0px;width: 40px"}
+                %button.btn.btn-success{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Quick Add"}
                   %span.glyphicon.glyphicon-plus-sign
             .col-md-6.qtd-col
               %table{style: "margin-top: 10px"}
@@ -60,13 +60,14 @@
                     %span{style: "float: right;color:#ffffff"} Campaign:
                   %td
                     %a{href: "#"} Github API
-          .col-md-8.qtd-col
+          .col-md-7.qtd-col
             .col-md-5.qtd-col
               %form.navbar-form.navbar-left{role: "search"}
                 .form-group
                   %input.form-control{placeholder: "Search", type: "text"}/
-                %button.btn.btn-default{type: "submit"} Search
-            .col-md-5.qtd-col
+                %button.btn.btn-default{type: "submit"}
+                  %span.glyphicon.glyphicon-search
+            .col-md-6.qtd-col
               .navbar-inverse
                 .navbar-header
                   %a.navbar-brand{href: "#"}
@@ -99,7 +100,7 @@
               / </td>
               / </tr>
               / </table>
-            .col-md-2.qtd-col
+            .col-md-1.qtd-col
               %a.countdown{style: "color:white; padding-right: 10px;"}
               %a#startStopBtn.btn.btn-primary Start
     .container
