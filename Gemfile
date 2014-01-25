@@ -60,7 +60,6 @@ gem 'd3_rails'
 
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
-gem 'acts_as_relation'
 gem 'delayed_job'
 gem 'spork-rails'
 gem 'high_voltage'

@@ -52,8 +52,6 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    acts_as_relation (1.0.0)
-      activerecord
     arel (4.0.1)
     atomic (1.1.14)
     builder (3.1.4)
@@ -208,7 +206,6 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store!
-  acts_as_relation
   coffee-rails (~> 4.0.0)
   cucumber-rails
   d3_rails

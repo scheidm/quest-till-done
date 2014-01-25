@@ -1,55 +1,55 @@
-class PomodorosController < ApplicationController
+class EncountersController < ApplicationController
 
   require 'json_Generator'
-  include JsonGenerator::PomodoroModule
+  include JsonGenerator::EncounterModule
 
   def index
-    @pomos = Pomodoro.all
+    @encounters = Encounter.all
   end
 
   def new
-    @pomodoro = Pomodoro.new
+    @encounter = Encounter.new
   end
 
   def show
-    @pomodoro = Pomodoro.find(params[:id])
+    @encounter = Encounter.find(params[:id])
   end
 
   def getState
     @button = params[:button]
     if params[:button] == 'Start'
-      if(Pomodoro.last.nil? || !Pomodoro.last.end_time.nil?)
-        @pomodoro = Pomodoro.create
+      if(Encounter.last.nil? || !Encounter.last.end_time.nil?)
+        @encounter = Encounter.create
       else
-        @pomodoro = Pomodoro.last
+        @encounter = Encounter.last
       end
 
-      diff = (@pomodoro.created_at.utc + Quest::Application.config.pomodoro_length.seconds - Time.now.utc).to_i
+      diff = (@encounter.created_at.utc + Quest::Application.config.encounter_length.seconds - Time.now.utc).to_i
       if( diff > 0)
         @timeRemaining = diff
         start
       else
         @timeRemaining = 0
-        @pomodoro.close
+        @encounter.close
         stop
       end
       @button = 'Stop'
     elsif params[:button] == 'Stop'
-      Pomodoro.last.close if !Pomodoro.last.nil?
+      Encounter.last.close if !Encounter.last.nil?
       stop
       @timeRemaining = 0
       @button = 'Start'
     else
       if session[:state] == 'Running'
-        @pomodoro = Pomodoro.last
-        diff = (@pomodoro.created_at.utc + Quest::Application.config.pomodoro_length.seconds - Time.now.utc).to_i
+        @encounter = Encounter.last
+        diff = (@encounter.created_at.utc + Quest::Application.config.encounter_length.seconds - Time.now.utc).to_i
         if( diff > 0)
           @timeRemaining = diff
           start
           @button = 'Stop'
         else
           @timeRemaining = 0
-          @pomodoro.close
+          @encounter.close
           stop
           @button = 'Start'
         end
@@ -70,16 +70,16 @@ class PomodorosController < ApplicationController
   end
 
   def getTree
-    #@pomos = Pomodoro.all
+    #@pomos = Encounter.all
     #data = [];
     #
     #@pomos.each {|item|
     #  _endTime = item.end_time
     #  _endTime = (item.end_time.nil? ) ? 'Now' : item.end_time.to_formatted_s(:long)
-    #  @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/pomodoros/' + item.id.to_s, :rel => 'pomodoro' }})
+    #  @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/encounters/' + item.id.to_s, :rel => 'encounter' }})
     #  @TreeData[:children] = children = []
-    #  item.nodes.each {|node|
-    #    type = node.specific
+    #  item.records.each {|record|
+    #    type = record.specific
     #    children <<  ({:data => type.class.name, :attr => { :href => '/'+ type.class.name.downcase + 's/' + type.id.to_s, :rel => type.class.name }})
     #  }
     #  data.push(@TreeData)
@@ -93,11 +93,11 @@ class PomodorosController < ApplicationController
   private
   def start
     session[:state] = 'Running'
-    session[:pomodoro_id] = @pomodoro.id
+    session[:encounter_id] = @encounter.id
   end
 
   def stop
     session[:state] = 'Stopped'
-    session[:pomodoro_id] = nil
+    session[:encounter_id] = nil
   end
 end
