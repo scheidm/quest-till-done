@@ -1,6 +1,6 @@
-=form_for(@pomodoro) do |f|
-  -if @pomodoro.errors.any?
+=form_for(@encounter) do |f|
+  -if @encounter.errors.any?
     #errors
-      =pluralize( @pomodoro.errors.count, "error:" )
+      =pluralize( @encounter.errors.count, "error:" )
 
   

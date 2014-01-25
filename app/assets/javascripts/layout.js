@@ -34,7 +34,7 @@ function setState(state)
 {
     $.ajax({
         type: "POST",
-        url: "/pomodoros/setState",
+        url: "/encounters/setState",
         data: "button=" + button,
         cache: false,
         success: function(result) {
@@ -46,7 +46,7 @@ function getState(button)
 {
     $.ajax({
         type: "GET",
-        url: "/pomodoros/getState",
+        url: "/encounters/getState",
         data: "button=" + button,
         dataType: 'json',
         cache: false,

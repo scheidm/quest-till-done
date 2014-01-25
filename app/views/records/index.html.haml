@@ -3,11 +3,11 @@
   %thead
     %tr
       %th Description
-      %th Pomodoro
+      %th Encounter
   %tbody
     - @records.each do |record|
       %tr
         %td= record.description
-        %td= record.pomodoro_id
+        %td= record.encounter_id
 
 = link_to 'New record', new_record_path

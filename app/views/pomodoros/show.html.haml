@@ -1,18 +1,18 @@
 %p#notice= notice
-%h2 Pomodoro
+%h2 encounter
 %p
   %strong Index:
-  = @pomodoro.id
+  = @encounter.id
 %p
   %strong Created At:
-  = @pomodoro.created_at
+  = @encounter.created_at
 
 %p
   %strong End Time:
-  = @pomodoro.end_time
+  = @encounter.end_time
 
 %p
   %strong Updated At:
-  = @pomodoro.updated_at
+  = @encounter.updated_at
 
-= link_to 'Back', pomodoros_path
+= link_to 'Back', encounters_path

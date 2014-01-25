@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 20131123034611) do
 
   create_table "records", force: true do |t|
     t.string   "type"
-    t.integer  "pomodoro_id"
-    t.text     "description", null: false
+    t.text     "description",  null: false
     t.string   "url"
+    t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
