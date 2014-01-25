@@ -74,3 +74,8 @@
     border-bottom-color: rgb(188, 212, 229);
     background-color: rgb(236, 242, 247);
 }
+
+.qtd-col {
+    padding-right: 5px;
+    padding-left: 5px;
+}

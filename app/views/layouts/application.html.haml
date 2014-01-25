@@ -29,12 +29,12 @@
   %body
     %header.navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        .row-fluid{style: "margin-top: 10px;margin-bottom: 10px;margin-left: 30px;margin-right: 30px;"}
-          .span5
-            .span3
-              %div{style: "padding-right:10px;float:left;"}
-                %img.img-rounded{height: "62", src: "/assets/Avatar.jpg", width: "62"}/
-              %div{style: "float:right;color:#333"}
+        .row{style: "margin-top: 10px;margin-bottom: 10px;margin-left:10px;margin-right:10px"}
+          .col-md-4.qtd-col
+            .col-md-4.qtd-col
+              .col-md-5.qtd-col
+                %img.img-rounded.img-responsive{src: "/assets/Avatar.jpg"}/
+              .col-md-7.qtd-col
                 %div
                   %a{href: "/users/"}
                     Steve
@@ -42,12 +42,13 @@
                 %div{style: "color:#999999"}
                   C# Guru
                 .progress.progress-mini
-                  .bar{role: "progressbar", style: "width: 50%;"}
-            .span2
+                  .progress-bar{role: "progressbar", style: "width: 50%;"}
+            .col-md-2
               %button.btn.btn-info{style: "margin-top: 0px;width: 40px"} 13
               %div{style: "margin-top: 5px"}
-                %button.btn.btn-success.icon-plus-sign{style: "margin-top: 0px;width: 40px"}
-            .span7
+                %button.btn.btn-success{style: "margin-top: 0px;width: 40px"}
+                  %span.glyphicon.glyphicon-plus-sign
+            .col-md-6.qtd-col
               %table{style: "margin-top: 10px"}
                 %tr
                   %td
@@ -59,16 +60,19 @@
                     %span{style: "float: right;color:#ffffff"} Campaign:
                   %td
                     %a{href: "#"} Github API
-          .span7
-            .span4
-              %form.form-search{style: "line-height: 40px"}
-                %input.input-medium.search-query{type: "text"}/
-                %button.btn.icon-search{type: "submit"}
-            .span6
-              .navbar.navbar-inverse
-                %a.brand.icon-map-marker{href: "#", style: "margin-left: 0px"}
+          .col-md-8.qtd-col
+            .col-md-5.qtd-col
+              %form.navbar-form.navbar-left{role: "search"}
+                .form-group
+                  %input.form-control{placeholder: "Search", type: "text"}/
+                %button.btn.btn-default{type: "submit"} Search
+            .col-md-5.qtd-col
+              .navbar-inverse
+                .navbar-header
+                  %a.navbar-brand{href: "#"}
+                    %span.glyphicon.glyphicon-map-marker
                 .navbar-inner
-                  %ul.nav
+                  %ul.nav.navbar-nav
                     %li.active
                       %a{href: "#"} Timeline
                     %li
@@ -95,13 +99,17 @@
               / </td>
               / </tr>
               / </table>
-            .span2
+            .col-md-2.qtd-col
               %a.countdown{style: "color:white; padding-right: 10px;"}
               %a#startStopBtn.btn.btn-primary Start
-    .container-fluid
-      .span12{style: "padding-top: 100px"}
-        = bootstrap_flash
-        = yield
+    .container
+      .row
+        %div
+          - flash.each do |key, value|
+            %div{class: "#{flash_class(key)} fade in"}
+              %a.close{"data-dismiss" => "alert", href: "#"} ×
+              = value
+          = yield
     / /row
     %footer
       %p © Quest Till Done 2013
