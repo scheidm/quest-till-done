@@ -1,13 +1,13 @@
 module JsonGenerator
-  module PomodoroModule
+  module EncounterModule
     def generateTree
-      @pomos = Pomodoro.all
+      @encounters = Encounter.all
       data = []
 
-      @pomos.each {|item|
+      @encounters.each {|item|
         _endTime = item.end_time
         _endTime = (item.end_time.nil? ) ? 'Now' : item.end_time.to_formatted_s(:long)
-        @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/pomodoros/' + item.id.to_s, :rel => 'pomodoro' }})
+        @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/encounters/' + item.id.to_s, :rel => 'encounters' }})
         @TreeData[:children] = children = []
         item.nodes.each {|node|
           type = node.specific

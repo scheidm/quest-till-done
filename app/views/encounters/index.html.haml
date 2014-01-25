@@ -1,0 +1,50 @@
+%h2 Time Line
+#treeView
+:javascript
+  $(document).ready(function(){
+          $("#treeView").jstree({
+              core : { "animation" : 100 },
+
+              themes : { "theme" : "apple", "icons" : true, "dots": false },
+              "json_data": {
+                  "ajax" : {
+                      "url" : "/encounters/getTree.json",
+                      "data" : function(m) {
+                          return { id: m.attr ? m.attr("id") : 0 };
+                      }
+                  }
+              },
+              "types" : {
+                  "valid_children" : [ "encounter" ],
+                  "types" : {
+                      "valid_children" : [ "encounter" ],
+                      "encounter" : {
+                          "icon" : {
+                              "image" : "/assets/month.png"
+                          },
+                          "valid_children" : [ "note" ],
+                        },
+                      "link" : {
+                        "icon" : {
+                            "image" : "/assets/link.png"
+                        },
+                      },
+                      "note" : {
+                          "icon" : {
+                              "image" : "/assets/note.png"
+                          },
+                      },
+                      "default" : {
+                          "valid_children" : [ "default" ]
+                      }
+                  }
+              }  ,
+
+              plugins: ["themes", "json_data", "dnd", "ui", "types" ],
+          }).bind("select_node.jstree", function (e, data)
+              {
+                  window.location= data.rslt.obj.attr("href");
+              }
+          );
+      });
+= link_to 'New encounter', new_encounter_path
