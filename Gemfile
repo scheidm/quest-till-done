@@ -54,15 +54,16 @@ gem 'delayed_job_active_record'
 
 gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 
-gem 'twitter-bootstrap-rails'
-
 gem 'minitest-rails'
+
+gem 'd3_rails'
 
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
 gem 'acts_as_relation'
 gem 'delayed_job'
 gem 'spork-rails'
+gem 'high_voltage'
 
 # session db gem
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'

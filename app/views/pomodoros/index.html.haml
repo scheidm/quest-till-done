@@ -1,10 +1,11 @@
-%h2 Pomodoros
+%h2 Time Line
 #treeView
 :javascript
   $(document).ready(function(){
           $("#treeView").jstree({
               core : { "animation" : 100 },
-              <!--themes : { "theme" : "classic", "icons" : true, "dots": false },-->
+
+              themes : { "theme" : "apple", "icons" : true, "dots": false },
               "json_data": {
                   "ajax" : {
                       "url" : "/pomodoros/getTree.json",
@@ -19,10 +20,15 @@
                       "valid_children" : [ "pomodoro" ],
                       "pomodoro" : {
                           "icon" : {
-                              "image" : "/assets/Tomato-icon-min.png"
+                              "image" : "/assets/month.png"
                           },
                           "valid_children" : [ "note" ],
                         },
+                      "link" : {
+                        "icon" : {
+                            "image" : "/assets/link.png"
+                        },
+                      },
                       "note" : {
                           "icon" : {
                               "image" : "/assets/note.png"
