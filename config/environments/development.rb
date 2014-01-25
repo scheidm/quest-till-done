@@ -26,12 +26,9 @@ Quest::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-<<<<<<< HEAD
   config.pomodoro_length=60
-=======
 
   # defualt URL
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
->>>>>>> origin/master
 end
