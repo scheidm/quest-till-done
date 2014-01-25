@@ -38,49 +38,139 @@
   </head>
   <body>
 
-    <div class="navbar navbar-fluid-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <a class="brand" href="#">Quest</a>
-          <a id="startStopBtn" class="btn btn-primary" style="float:right" >Start</a>
-          <p class="countdown" style="float:right;color:white;"></p>
-          <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Pomodoros", "/pomodoros"  %></li>
-              <li><%= link_to "Notes", "/notes"  %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+    <header class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand">
+            <div style="padding-right:10px;float:left;">
+              <img src="/assets/Avatar.jpg" height="62" width="62" class="img-rounded">
+            </div>
+            <div style="float:right;color:#333">
+              <div>
+                <a href="/users/">Steve <span id="badge" class="badge"  data-placement="right" data-toggle="tooltip" title="Current level">3</span></a>
+              </div>
+              <div id='detailLevel' data-placement='bottom' data-trigger="hover" title="Experience" style="color:#999999">
+                C# Guru
+              </div>
+
+              <div id="experience" style="display:none;width:100px">
+                <ul class="pull-right dropdown-navbar dropdown-menu">
+                  <li>
+                    <div class="clearfix">
+                      <span class="pull-left">Software Update</span>
+                      <span class="pull-right">65%</span>
+                    </div>
+                    <div class="progress progress-mini ">
+                      <div style="width:65%" class="progress-bar "></div>
+                    </div>
+                  </li>
+                </ul>
+                <h5>40 exp more to levelup!</h5>
+                <div class="progress progress-striped active" style="width:200px;height: 9px">
+                  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--<a href="../" class="navbar-brand">Quest</a>-->
         </div>
       </div>
-    </div>
 
-    <div class="container-fluid">
+      <nav class="collapse navbar-collapse bs-navbar-collapse pull-right" role="navigation">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "Timeline", "/pomodoros"  %></li>
+          <li>
+            <a href="/actions">Projects</a>
+            <div>
+            <ul id="projectDropDown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <i class="icon-tasks"></i>
+                  <span class="badge badge-grey">4</span>
+                </a>
+
+                <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                  <li class="dropdown-header">
+                    <i class="icon-ok"></i>
+                    3 Projects ongoing
+                  </li>
+
+                  <li>
+                    <a href="#">
+                      <div class="clearfix">
+                        <span class="pull-left">Senior Design</span>
+                        <span class="pull-right">35%</span>
+                      </div>
+
+                      <div class="progress progress-mini ">
+                        <div style="width:65%" class="progress-bar "></div>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">
+                      <div class="clearfix">
+                        <span class="pull-left">Physics 101</span>
+                        <span class="pull-right">75%</span>
+                      </div>
+
+                      <div class="progress progress-mini ">
+                        <div style="width:35%" class="progress-bar progress-bar-danger"></div>
+                      </div>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#">
+                      <div class="clearfix">
+                        <span class="pull-left">Design Document</span>
+                        <span class="pull-right">90%</span>
+                      </div>
+
+                      <div class="progress progress-mini progress-striped active">
+                        <div style="width:90%" class="progress-bar progress-bar-success"></div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </ul>
+            </div>
+          </li>
+          <li><%= link_to "Notes", "/notes"  %></li>
+        </ul>
+        <div class="pull-right">
+          <p></p>
+          <a class="countdown" style="color:white; padding-right: 10px;"></a>
+          <a id="startStopBtn" class="btn btn-primary" >Start</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container" style="padding-top: 100px;">
       <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-              <li class="nav-header">Navigation</li>
-              <li><%= link_to "Pomodoros", "/pomodoros"  %></li>
-              <li><%= link_to "Tasks", "/actions"  %></li>
-              <li><%= link_to "Notes", "/notes"  %></li>
-            </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
-        <div class="span9">
-          <%= bootstrap_flash %>
+        <div>
+          <% flash.each do |key, value| %>
+              <div class="<%= flash_class(key) %> fade in">
+                <a href="#" data-dismiss="alert" class="close">×</a>
+                <%= value %>
+              </div>
+          <% end %>
           <%= yield %>
+
         </div>
       </div><!--/row-->
 
       <footer>
         <p>&copy; Quest Till Done 2013</p>
       </footer>
-
     </div> <!-- /container -->
 
   </body>
