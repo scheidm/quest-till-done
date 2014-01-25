@@ -42,26 +42,6 @@ ActiveRecord::Schema.define(version: 20131123034611) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "links", force: true do |t|
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "nodes", force: true do |t|
-    t.integer  "as_node_id"
-    t.string   "as_node_type"
-    t.integer  "pomodoro_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "notes", force: true do |t|
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "pomodoros", force: true do |t|
     t.datetime "end_time"
     t.datetime "created_at"
@@ -70,14 +50,15 @@ ActiveRecord::Schema.define(version: 20131123034611) do
 
   create_table "quotes", force: true do |t|
     t.text     "text"
-    t.integer  "link_id"
+    t.integer  "record_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "records", force: true do |t|
-    t.integer  "as_record_id"
-    t.string   "as_record_type"
+    t.string   "type"
+    t.integer  "pomodoro_id"
+    t.text     "description", null: false
     t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"

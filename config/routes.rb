@@ -6,7 +6,7 @@ Quest::Application.routes.draw do
       post 'setState'
     end
   end
-  resources :notes
+  resources :records
   resources :users
 
   resources :actions do
