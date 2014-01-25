@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20131123034611) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "pomodoros", force: true do |t|
-    t.datetime "end_time"
+  create_table "encounters", force: true do |t|
+    t.date     "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 20131123034611) do
 
   create_table "records", force: true do |t|
     t.string   "type"
-    t.integer  "pomodoro_id"
-    t.text     "description", null: false
+    t.text     "description",  null: false
     t.string   "url"
+    t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
