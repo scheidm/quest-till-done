@@ -9,9 +9,8 @@ class QuestsController < ApplicationController
 
   def new
     if session[:state].nil? || session[:state].casecmp('Stopped') == 0
-      @quests = Quest.all
       flash[:notice] = 'No active encounter.'
-      render action: 'index', notice: 'No active encounter.' , quests: @quests
+      redirect_to action: 'index'
     end
     @quest = Quest.new()
   end
