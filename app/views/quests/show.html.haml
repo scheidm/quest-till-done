@@ -1,0 +1,11 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @quest.name
+%p
+  %strong Encounter ID:
+  = @record.encounter_id
+
+= link_to 'Edit', edit_quest_path(@quest)
+
+= link_to 'Back', quest_path

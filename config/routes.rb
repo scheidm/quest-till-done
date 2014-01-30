@@ -10,6 +10,7 @@ QuestTillDone::Application.routes.draw do
   end
   resources :records
   resources :users
+  resources :quests
 
   resources :actions do
     collection do
