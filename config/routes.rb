@@ -1,4 +1,4 @@
-Quest::Application.routes.draw do
+QuestTillDone::Application.routes.draw do
   get "welcome/index"
   devise_for :admins
   devise_for :users
