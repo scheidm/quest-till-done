@@ -37,7 +37,7 @@
               .col-md-7.qtd-col
                 %div
                   %a{href: "/users/"}
-                    Steve
+                    =@user.username
                   %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"} 3
                 %div{style: "color:#999999"}
                   C# Guru
@@ -106,6 +106,7 @@
     .container
       .row
         %div{style: "padding-top: 110px"}
+          = render 'user/user_widget'
           - flash.each do |key, value|
             %div{class: "#{flash_class(key)} fade in"}
               %a.close{"data-dismiss" => "alert", href: "#"} ×
