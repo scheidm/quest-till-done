@@ -11,6 +11,7 @@ QuestTillDone::Application.routes.draw do
   resources :records
   resources :users
   resources :quests
+  resources :campaigns
 
   resources :actions do
     collection do

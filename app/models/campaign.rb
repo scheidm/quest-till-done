@@ -1,0 +1,2 @@
+class Campaign < Quest
+end
