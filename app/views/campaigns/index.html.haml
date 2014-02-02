@@ -1,0 +1,15 @@
+%h2 Campaigns
+= @username
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Name
+      %th Description
+  %tbody
+    - @campaigns.each do |campaign|
+      %tr
+        %td
+          %a{href: campaign_path(campaign)}= campaign.name
+        %td= campaign.description
+
+= link_to 'New Campaign', new_campaign_path

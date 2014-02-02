@@ -1,0 +1,28 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @quest.name
+%p
+  %strong Description
+  = @quest.description
+#tree-container{data: {quest_id: @quest.id} }
+
+= link_to 'Add Child Quest', new_quest_path(:id => @quest.id)
+= link_to 'Edit', edit_quest_path(@quest)
+
+= link_to 'Back', campaign_path(@quest.campaign_id)
+
+:javascript
+  $(document).ready(function () {
+     var treeId =  { id: $('#tree-container').data('quest-id')};
+     $.ajax({
+       type: "GET",
+       url: "getTree",
+       data: treeId,
+       success: function(data) {
+        var jsonData = JSON.parse(data);
+
+        buildTree(jsonData);
+       }
+     });
+  });

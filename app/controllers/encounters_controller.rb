@@ -24,7 +24,7 @@ class EncountersController < ApplicationController
         @encounter = Encounter.last
       end
 
-      diff = (@encounter.created_at.utc + Quest::Application.config.encounter_length.seconds - Time.now.utc).to_i
+      diff = (@encounter.created_at.utc + QuestTillDone::Application.config.encounter_length.seconds - Time.now.utc).to_i
       if( diff > 0)
         @timeRemaining = diff
         start
@@ -42,7 +42,7 @@ class EncountersController < ApplicationController
     else
       if session[:state] == 'Running'
         @encounter = Encounter.last
-        diff = (@encounter.created_at.utc + Quest::Application.config.encounter_length.seconds - Time.now.utc).to_i
+        diff = (@encounter.created_at.utc + QuestTillDone::Application.config.encounter_length.seconds - Time.now.utc).to_i
         if( diff > 0)
           @timeRemaining = diff
           start

@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Quest::Application.load_tasks
+QuestTillDone::Application.load_tasks

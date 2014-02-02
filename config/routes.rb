@@ -1,4 +1,4 @@
-Quest::Application.routes.draw do
+QuestTillDone::Application.routes.draw do
   get "welcome/index"
   devise_for :admins
   devise_for :users
@@ -10,6 +10,16 @@ Quest::Application.routes.draw do
   end
   resources :records
   resources :users
+  resources :quests do
+    collection do
+      get 'getTree'
+    end
+  end
+  resources :campaigns do
+    collection do
+      get 'getTree'
+    end
+  end
 
   resources :actions do
     collection do
