@@ -3,8 +3,8 @@ class CampaignsController < ApplicationController
   require 'json_Generator'
   include JsonGenerator::QuestModule
 
-  def indexcd
-    @campaigns = Campaign.where('campaign_id IS NULL or campaign_id = ""', :user_id =>  current_user.id)
+  def index
+    @campaigns = Campaign.where('campaign_id == id', :user_id =>  current_user.id)
   end
 
   def show

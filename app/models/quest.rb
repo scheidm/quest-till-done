@@ -4,4 +4,14 @@ class Quest < ActiveRecord::Base
   belongs_to :parent, :class_name => 'Quest'
   has_many :quests, :foreign_key => 'parent_id'
   belongs_to :user
+  after_create :set_campaign
+
+  protected
+  def set_campaign
+     if(self.campaign_id.nil?)
+       self.reload
+       self.campaign_id = self.id
+       self.save
+     end
+  end
 end
