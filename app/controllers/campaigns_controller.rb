@@ -4,7 +4,7 @@ class CampaignsController < ApplicationController
   include JsonGenerator::QuestModule
 
   def index
-    @campaigns = Campaign.where('campaign_id == id', :user_id =>  current_user.id)
+    @campaigns = Campaign.where( :user_id =>  current_user.id)
   end
 
   def show
