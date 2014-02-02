@@ -2,7 +2,7 @@ var countdown = 0
 $(document).ready(function ()
 {
     getState(null);
-    getTask();
+    //getTask();
     $('#startStopBtn').click(function ()
     {
         var button = $("#startStopBtn").text();

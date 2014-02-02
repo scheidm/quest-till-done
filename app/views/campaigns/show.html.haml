@@ -5,7 +5,24 @@
 %p
   %strong Description:
   = @campaign.description
+#tree-container{data: {campaign_id: @campaign.id} }
+:javascript
+  $(document).ready(function () {
+     var treeId =  { id: $('#tree-container').data('campaign-id')};
+     $.ajax({
+       type: "GET",
+       url: "getTree",
+       data: treeId,
+       success: function(data) {
+        var jsonData = JSON.parse(data);
 
+        buildTree(jsonData);
+       }
+     });
+  });
+
+
+= link_to 'Add Quest', new_quest_path(:id => @campaign.id)
 = link_to 'Edit', edit_campaign_path(@campaign)
 
 = link_to 'Back', campaigns_path

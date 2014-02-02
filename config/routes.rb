@@ -10,8 +10,16 @@ QuestTillDone::Application.routes.draw do
   end
   resources :records
   resources :users
-  resources :quests
-  resources :campaigns
+  resources :quests do
+    collection do
+      get 'getTree'
+    end
+  end
+  resources :campaigns do
+    collection do
+      get 'getTree'
+    end
+  end
 
   resources :actions do
     collection do

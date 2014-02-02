@@ -19,9 +19,41 @@ module JsonGenerator
     end
   end
 
-  module ActionModule
-    def generateTree
-      return Action.all.to_json
+  module QuestModule
+    def generateCampaignTree (campaign)
+      if (!campaign.is_a?(Campaign))
+        raise 'Expected argument to be a campaign'
+      end
+      data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s}}
+      data[:children] = children = []
+      campaign.quests.each {|quest|
+        children << generateChildTree(quest)
+      }
+
+      return data.to_json
+    end
+    def generateQuestTree (quest)
+      if (!quest.is_a?(Quest))
+        raise 'Expected argument to be a campaign'
+      end
+      data = generateChildTree(quest)
+
+      return data.to_json
+    end
+
+
+    def generateChildTree(quest)
+
+      data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s}}
+      if(quest.quests.size == 0)
+         return data
+      else
+        data[:children] = children = []
+        quest.quests.each {|quest|
+          children << generateChildTree(quest)
+        }
+      end
+      return data
     end
   end
 end

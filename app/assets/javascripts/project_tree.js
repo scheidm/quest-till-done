@@ -37,15 +37,21 @@ function buildTree(treeData)
 
     // Add the dot at every node
     node.append("svg:circle")
-        .attr("r", 5.5);
+        .attr("r", 5.5)
+        .on("click", click);
 
     // place the name atribute left or right depending if children
     node.append("svg:text")
         .attr("dx", function(d) { return d.children ? -8 : 8; })
         .attr("dy", 3)
         .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
-        .text(function(d) { return d.name; });
+        .text(function(d) { return d.attr.name; });
+
 };
+
+function click(d) {
+    window.location.href =  d.attr.url;
+}
 
 function buildTreeRadial(treeData)
 {

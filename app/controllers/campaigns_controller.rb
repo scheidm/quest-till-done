@@ -1,7 +1,11 @@
 class CampaignsController < ApplicationController
 
+  require 'json_Generator'
+  include JsonGenerator::QuestModule
+
   def index
-    @campaigns = Campaign.where(:campaign_id => nil, :user_id =>  current_user.id)
+    camp = Campaign.find(13)
+    @campaigns = Campaign.where('campaign_id IS NULL or campaign_id = ""', :user_id =>  current_user.id)
   end
 
   def show
@@ -10,6 +14,11 @@ class CampaignsController < ApplicationController
 
   def new
     @campaign = Campaign.new()
+  end
+
+  def getTree
+    campaign = Campaign.find(params[:id])
+    render :text => generateCampaignTree(campaign)
   end
 
   def create

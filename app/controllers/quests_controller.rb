@@ -1,4 +1,8 @@
 class QuestsController < ApplicationController
+
+  require 'json_Generator'
+  include JsonGenerator::QuestModule
+
   def index
     @quests = Quest.all
   end
@@ -8,15 +12,17 @@ class QuestsController < ApplicationController
   end
 
   def new
-    if session[:state].nil? || session[:state].casecmp('Stopped') == 0
-      flash[:notice] = 'No active encounter.'
-      redirect_to action: 'index'
-    end
     @quest = Quest.new()
+    parent = params[:id]
+    if(parent != nil)
+      @quest.parent_id = parent
+      @quest.campaign = Quest.find(parent).campaign
+    end
+
   end
 
   def create
-    @quest = Quest.new(record_params)
+    @quest = Quest.new(quest_params)
 
     respond_to do |format|
       if @quest.save
@@ -29,7 +35,14 @@ class QuestsController < ApplicationController
     end
   end
 
+  def getTree
+    def getTree
+      quest = Quest.find(params[:id])
+      render :text => generateQuestTree(quest)
+    end
+  end
+
   def quest_params
-    params.require(:quest).permit(:description, :name)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id)
   end
 end
