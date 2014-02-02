@@ -74,13 +74,13 @@
                     %span.glyphicon.glyphicon-map-marker
                 .navbar-inner
                   %ul.nav.navbar-nav
-                    %li.active
+                    %li{:class => "#{'active' if current_page?(root_path)}"}
                       %a{href: "#"} Timeline
-                    %li
+                    %li{:class => "#{'active' if current_page?(root_path)}"}
                       %a{href: "#"} Priority
-                    %li
+                    %li{:class => "#{'active' if current_page?(campaigns_path)}"}
                       %a{href: campaigns_path} Campaign
-                    %li
+                    %li{:class => "#{'active' if current_page?(root_path)}"}
                       %a{href: "#"} Groups
               / <table class="header-table">
               / <tr>
