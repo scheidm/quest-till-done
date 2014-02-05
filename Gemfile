@@ -59,3 +59,5 @@ gem 'twitter-bootstrap-rails'
 gem 'minitest-rails'
 
 gem 'devise'
+
+gem 'cancan'
