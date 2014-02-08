@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130003516) do
+ActiveRecord::Schema.define(version: 20140208202608) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -106,6 +106,15 @@ ActiveRecord::Schema.define(version: 20140130003516) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
   create_table "tags", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "timers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "setting_time"
+    t.integer  "current_time"
+    t.boolean  "enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

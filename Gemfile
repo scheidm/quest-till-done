@@ -73,3 +73,5 @@ group :test do
   gem 'watir-webdriver'
 end
 gem 'devise'
+
+gem 'flipclockjs-rails', "~> 0.4.0b"

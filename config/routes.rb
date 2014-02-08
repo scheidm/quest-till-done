@@ -9,6 +9,12 @@ QuestTillDone::Application.routes.draw do
     end
   end
   resources :records
+  resources :timers do
+    collection do
+      get 'get_current_time', 'get_setting_time', 'reset_timer'
+      post 'start_timer', 'stop_timer'
+    end
+  end
   resources :users
   resources :quests do
     collection do
