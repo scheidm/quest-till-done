@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  attr_accessor :login
+  attr_accessor :login, :active_quest
 
   #validates :username,
   #  :uniqueness => {
