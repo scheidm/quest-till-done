@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   
   attr_accessor :login, :active_quest
 
+  @group = Hash.new 
+  has_one :timer
+  has_one :active_quest
+  after_create :create_timer
   #validates :username,
   #  :uniqueness => {
   #    :case_sensitive => false
@@ -20,5 +24,10 @@ class User < ActiveRecord::Base
     else
       where(conditions).first  
     end
+  end
+
+  def self.addGroup(groupName, isAdmin)
+    @group[groupName] = isAdmin
+ 
   end
 end

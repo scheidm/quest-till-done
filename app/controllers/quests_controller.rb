@@ -36,10 +36,8 @@ class QuestsController < ApplicationController
   end
 
   def getTree
-    def getTree
-      quest = Quest.find(params[:id])
-      render :text => generateQuestTree(quest)
-    end
+    quest = Quest.find(params[:id])
+    render :text => generateQuestTree(quest)
   end
 
   def quest_params
