@@ -54,10 +54,28 @@ gem 'delayed_job_active_record'
 
 gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 
-gem 'twitter-bootstrap-rails'
-
 gem 'minitest-rails'
 
+gem 'd3_rails', "~> 3.4.1"
+
+gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
+gem 'jasmine-core', '1.3.1'
+gem 'delayed_job'
+gem 'spork-rails'
+gem 'high_voltage'
+
+# session db gem
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
+group :test do
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
+  gem 'watir-webdriver'
+end
 gem 'devise'
 
+<<<<<<< HEAD
 gem 'cancan'
+=======
+gem 'flipclockjs-rails', "~> 0.4.0b"
+>>>>>>> upstream/t1

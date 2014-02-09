@@ -1,0 +1,9 @@
+= form_for(@record) do |f|
+  -if @record.errors.any?
+    = render 'errors'
+
+  .field
+    = f.label :description
+    = f.text_field :description
+  .actions
+    = f.submit :class => "btn btn-primary"

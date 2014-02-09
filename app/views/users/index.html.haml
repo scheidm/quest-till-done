@@ -1,0 +1,53 @@
+%h2 User Profile
+%p
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title User Details
+  .panel-body
+    %p
+      %strong User Name:
+      = 'Steve'
+      %p
+      %strong Member Since:
+      = 'October 13 2013'
+
+      %p
+      %strong Level:
+      = '3'
+
+      %p
+      %strong Title:
+      = 'C# Guru'
+
+      %p
+      %strong Experience:
+      = '60 / 100'
+      .progress.progress-mini.progress-striped.active{style: 'width:250px'}
+        .progress-bar{style: "width:60%"}
+.panel.panel-info.pull-left
+  .panel-heading
+    %h3.panel-title Skill Point
+  .panel-body
+    %p
+      %h5
+        C#
+        %span.label.label-primary 3
+      .progress.progress-mini{style: 'width:250px;margin-top:10px;margin-left:10px'}
+        .progress-bar{style: "width:65%"}
+      %p
+        %h5
+          Java
+          %span.label.label-success 1
+        .progress.progress-mini{style: 'width:250px;margin-top:10px;margin-left:10px'}
+          .progress-bar.progress-bar-success{style: "width:25%"}
+      %p
+        %h5
+          Rails
+          %span.label.label-warning 7
+        .progress.progress-mini{style: 'width:250px;margin-top:10px;margin-left:10px'}
+          .progress-bar.progress-bar-warning{style: "width:75%"}
+.panel.panel-success{style: 'margin-left:300px'}
+  .panel-heading
+    %h3.panel-title Recent Activity
+  .panel-body
+

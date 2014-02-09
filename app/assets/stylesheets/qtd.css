@@ -1,0 +1,82 @@
+.header-table{
+    width:100%;
+    margin-bottom:5px;
+    margin-top:5px;
+}
+.header-table th,.header-table td{
+    padding:8px;
+    line-height:20px;
+    text-align:left;
+    vertical-align:top;
+}
+.dropdown-navbar {
+    padding: 0px;
+    width: 240px;
+    -webkit-box-shadow: rgba(30, 30, 100, 0.247059) 0px 2px 4px;
+    box-shadow: rgba(30, 30, 100, 0.247059) 0px 2px 4px;
+    border-color: rgb(188, 212, 229);
+}
+.dropdown-navbar > li > a {
+    border-bottom-color: rgb(228, 236, 243);
+}
+.dropdown-navbar > li {
+    padding: 0px 8px;
+    background-color: rgb(255, 255, 255);
+}
+.dropdown-navbar > li > a {
+    padding: 10px 2px;
+    margin: 0px;
+    border-bottom: 1px solid;
+    border-color: rgb(236, 242, 247);
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(85, 85, 85);
+}
+.dropdown-navbar > li.dropdown-header {
+    text-shadow: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 34px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: none;
+    border-bottom: 1px solid;
+}
+.dropdown-menu {
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+    border-radius: 0px;
+}
+.progress.progress-mini {
+    height: 9px;
+}
+.progress {
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: rgb(218, 218, 218);
+    height: 18px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+.progress span {
+    line-height: 0px;
+}
+.dropdown-header {
+    display: block;
+    padding: 3px 20px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #999;
+}
+.dropdown-navbar > li.dropdown-header {
+    color: rgb(128, 144, 160);
+    border-bottom-color: rgb(188, 212, 229);
+    background-color: rgb(236, 242, 247);
+}
+
+.qtd-col {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+.badge-important{background-color:#b94a48;}

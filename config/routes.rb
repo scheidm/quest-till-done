@@ -1,13 +1,40 @@
-Quest::Application.routes.draw do
+QuestTillDone::Application.routes.draw do
   get "welcome/index"
   devise_for :admins
   devise_for :users
-  resources :pomodoros do
+  resources :encounters do
     collection do
-      get :getTree
+      get 'getTree', 'getState'
+      post 'setState'
     end
   end
-  resources :notes
+  resources :records
+  resources :timers do
+    collection do
+      get 'get_current_time', 'get_setting_time', 'reset_timer'
+      post 'start_timer', 'stop_timer'
+    end
+  end
+  resources :users
+  resources :quests do
+    collection do
+      get 'getTree'
+    end
+  end
+  resources :campaigns do
+    collection do
+      get 'getTree'
+    end
+  end
+
+  resources :actions do
+    collection do
+      get 'getTree'
+    end
+  end
+
+  get '/project', to: redirect('/')
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

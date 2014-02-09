@@ -1,0 +1,11 @@
+= form_for(@campaign, :as => :campaign, :url => campaigns_path(@campaign)) do |f|
+  -if @campaign.errors.any?
+    = render 'errors'
+
+  .field
+    = f.label :name
+    = f.text_field :name
+    = f.label :description
+    = f.text_field :description
+  .actions
+    = f.submit :class => "btn btn-primary"
