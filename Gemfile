@@ -74,8 +74,5 @@ group :test do
 end
 gem 'devise'
 
-<<<<<<< HEAD
 gem 'cancan'
-=======
 gem 'flipclockjs-rails', "~> 0.4.0b"
->>>>>>> upstream/t1

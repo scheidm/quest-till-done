@@ -6,12 +6,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   attr_accessor :login
-<<<<<<< HEAD
   @group = Hash.new 
-=======
   has_one :timer
   after_create :create_timer
->>>>>>> upstream/t1
   #validates :username,
   #  :uniqueness => {
   #    :case_sensitive => false
