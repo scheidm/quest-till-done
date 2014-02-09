@@ -8,11 +8,6 @@ class RecordsController < ApplicationController
   end
 
   def new
-    if session[:state].nil? || session[:state].casecmp('Stopped') == 0
-      @records = Record.all
-      flash[:notice] = 'No active encounter.'
-       render action: 'index', notice: 'No active encounter.' , record: @records
-    end
     @record = Record.new()
   end
 
