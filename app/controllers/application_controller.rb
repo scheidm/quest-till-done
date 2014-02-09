@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
 
   def load_user
     @user = current_user
-    @active_quest = Object.new
     active_quest = current_user.active_quest
     if(active_quest.nil?)
        @active_quest_name = ''
