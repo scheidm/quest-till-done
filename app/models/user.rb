@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  def seld.addGroup(groupName, isAdmin)
+  def self.addGroup(groupName, isAdmin)
     @group[groupName] = isAdmin
  
   end
