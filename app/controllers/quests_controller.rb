@@ -40,6 +40,14 @@ class QuestsController < ApplicationController
     render :text => generateQuestTree(quest)
   end
 
+  def set_active
+    quest = Quest.find(params[:id])
+    user = User.find(current_user.id)
+    user.active_quest_id = quest.id
+    user.save
+    render :nothing => true
+  end
+
   def quest_params
     params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id)
   end

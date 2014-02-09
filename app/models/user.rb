@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   attr_accessor :login
   @group = Hash.new 
   has_one :timer
+
+  belongs_to :active_quest, :class_name => 'Quest'
   after_create :create_timer
   #validates :username,
   #  :uniqueness => {
