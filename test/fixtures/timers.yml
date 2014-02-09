@@ -1,0 +1,14 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  setting_time: 1
+  current_time: 1
+  enabled: false
+
+two:
+  user_id: 
+  setting_time: 1
+  current_time: 1
+  enabled: false

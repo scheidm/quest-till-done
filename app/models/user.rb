@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   attr_accessor :login
-
+  has_one :timer
+  after_create :create_timer
   #validates :username,
   #  :uniqueness => {
   #    :case_sensitive => false
