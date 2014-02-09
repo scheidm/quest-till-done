@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   attr_accessor :login
+  @group = Hash.new 
   has_one :timer
   after_create :create_timer
   #validates :username,
@@ -21,5 +22,10 @@ class User < ActiveRecord::Base
     else
       where(conditions).first  
     end
+  end
+
+  def seld.addGroup(groupName, isAdmin)
+    @group[groupName] = isAdmin
+ 
   end
 end
