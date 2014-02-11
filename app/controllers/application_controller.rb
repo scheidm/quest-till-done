@@ -9,18 +9,20 @@ class ApplicationController < ActionController::Base
   protected
 
   def load_user
-    @user = current_user
-    active_quest = current_user.active_quest
-    if(active_quest.nil?)
-       @active_quest_name = ''
-       @active_quest_url = '#'
-       @active_quest_campaign_name = ''
-       @active_quest__campaign_url = '#'
-    else
-      @active_quest_name = active_quest.name
-      @active_quest_url = quest_path(active_quest)
-      @active_quest_campaign_name = active_quest.campaign.name
-      @active_quest__campaign_url = campaigns_path(active_quest.campaign)
+    if(user_signed_in?)
+      @user = current_user
+      active_quest = current_user.active_quest
+      if(active_quest.nil?)
+         @active_quest_name = ''
+         @active_quest_url = '#'
+         @active_quest_campaign_name = ''
+         @active_quest__campaign_url = '#'
+      else
+        @active_quest_name = active_quest.name
+        @active_quest_url = quest_path(active_quest)
+        @active_quest_campaign_name = active_quest.campaign.name
+        @active_quest__campaign_url = campaigns_path(active_quest.campaign)
+      end
     end
   end
 
