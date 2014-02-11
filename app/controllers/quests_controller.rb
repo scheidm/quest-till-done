@@ -23,7 +23,7 @@ class QuestsController < ApplicationController
 
   def create
     @quest = Quest.new(quest_params)
-
+    @quest.status = 'Open'
     respond_to do |format|
       if @quest.save
         format.html { redirect_to @quest, notice: 'Quest was successfully created.' }
@@ -32,6 +32,35 @@ class QuestsController < ApplicationController
         format.html { render action: 'new'}
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def edit
+    @quest = Quest.find(params[:id])
+  end
+
+  # PATCH/PUT /quests/1
+  # PATCH/PUT /quests/1.json
+  def update
+    @quest = Quest.find(params[:id])
+    respond_to do |format|
+      if @quest.update(quest_params)
+        format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render quest: 'edit' }
+        format.json { render json: @quest.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /quests/1
+  # DELETE /quests/1.json
+  def destroy
+    @quest.destroy
+    respond_to do |format|
+      format.html { redirect_to campaigns_path }
+      format.json { head :no_content }
     end
   end
 
@@ -49,6 +78,6 @@ class QuestsController < ApplicationController
   end
 
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance)
   end
 end

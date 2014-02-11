@@ -7,7 +7,11 @@
     = f.text_field :name
     = f.label :description
     = f.text_field :description
+    = f.collection_select :user_id, User.all, :id, :username, {:include_blank => "Please select"}
+    = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'], ['Closed', 'Closed']], @quest.status)
+    = f.check_box :importance
     = f.hidden_field :parent_id
     = f.hidden_field :campaign_id
+
   .actions
     = f.submit :class => "btn btn-primary"
