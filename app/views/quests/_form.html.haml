@@ -3,15 +3,19 @@
     = render 'errors'
 
   .field
-    = f.label :name
-    = f.text_field :name
-    = f.label :description
-    = f.text_field :description
-    = f.collection_select :user_id, User.all, :id, :username, {:include_blank => "Please select"}
-    = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'], ['Closed', 'Closed']], @quest.status)
+    .form-group
+    = f.label :name, :class => 'control-label'
+    = f.text_field :name, :class => 'form-control', :required => 'true'
+    = f.label :description, :class => 'control-label'
+    = f.text_field :description, :class => 'control-label', :class => 'form-control'
+    = f.label 'Owner', :class => 'control-label'
+    = f.collection_select :user_id, User.all, :id, :username, {:include_blank => "Please select"}, :class => 'form-control'
+    = f.label 'Status', :class => 'control-label'
+    = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'], ['Closed', 'Closed']], @quest.status), {}, html_options = {:class => 'form-control'}
+    = f.label 'Is Important?', :class => 'control-label'
     = f.check_box :importance
     = f.hidden_field :parent_id
     = f.hidden_field :campaign_id
 
   .actions
-    = f.submit :class => "btn btn-primary"
+    = f.submit :class => 'btn btn-primary pull-right'

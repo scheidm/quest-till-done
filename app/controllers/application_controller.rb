@@ -10,8 +10,8 @@ class ApplicationController < ActionController::Base
 
   def load_user
     if(user_signed_in?)
-      @user = current_user
-      active_quest = current_user.active_quest
+      @user = User.find(current_user.id)
+      active_quest = @user.active_quest
       if(active_quest.nil?)
          @active_quest_name = ''
          @active_quest_url = '#'
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
         @active_quest_name = active_quest.name
         @active_quest_url = quest_path(active_quest)
         @active_quest_campaign_name = active_quest.campaign.name
-        @active_quest__campaign_url = campaigns_path(active_quest.campaign)
+        @active_quest_campaign_url = campaign_path(active_quest.campaign)
       end
     end
   end

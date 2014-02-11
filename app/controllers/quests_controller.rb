@@ -9,6 +9,11 @@ class QuestsController < ApplicationController
 
   def show
     @quest = Quest.find(params[:id])
+    if(User.find(current_user.id).active_quest.id == @quest.id)
+      @active_quest = true
+    else
+      @active_quest = false
+    end
   end
 
   def new
@@ -18,7 +23,9 @@ class QuestsController < ApplicationController
       @quest.parent_id = parent
       @quest.campaign = Quest.find(parent).campaign
     end
-
+    @status = [['Alabama', 'AL'],
+        ['Alaska', 'AK'],
+        ['Arizona', 'AZ']]
   end
 
   def create
@@ -26,8 +33,8 @@ class QuestsController < ApplicationController
     @quest.status = 'Open'
     respond_to do |format|
       if @quest.save
-        format.html { redirect_to @quest, notice: 'Quest was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @quest }
+        format.html { redirect_to campaign_path(@quest.campaign), notice: 'Quest was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
         format.html { render action: 'new'}
         format.json { render json: @quest.errors, status: :unprocessable_entity }
