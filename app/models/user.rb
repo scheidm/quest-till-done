@@ -5,10 +5,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   
-  attr_accessor :login
+  attr_accessor :login, :active_quest
+
   @group = Hash.new 
   has_one :timer
-
   belongs_to :active_quest, :class_name => 'Quest'
   after_create :create_timer
   #validates :username,
