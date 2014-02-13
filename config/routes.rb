@@ -19,6 +19,7 @@ QuestTillDone::Application.routes.draw do
   resources :quests do
     collection do
       get 'getTree'
+      post 'set_active'
     end
   end
   resources :campaigns do

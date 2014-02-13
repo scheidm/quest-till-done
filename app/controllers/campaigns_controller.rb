@@ -35,6 +35,35 @@ class CampaignsController < ApplicationController
     end
   end
 
+  def edit
+    @campaign = Campaign.find(params[:id])
+  end
+
+  # PATCH/PUT /campaigns/1
+  # PATCH/PUT /campaigns/1.json
+  def update
+    @campaign = Campaign.find(params[:id])
+    respond_to do |format|
+      if @campaign.update(campaign_params)
+        format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render campaign: 'edit' }
+        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /campaigns/1
+  # DELETE /campaigns/1.json
+  def destroy
+    @campaign.destroy
+    respond_to do |format|
+      format.html { redirect_to campaigns_path }
+      format.json { head :no_content }
+    end
+  end
+
   def campaign_params
     params.require(:campaign).permit(:description, :name)
   end

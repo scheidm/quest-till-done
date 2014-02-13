@@ -5,14 +5,14 @@ function buildTree(treeData)
     var height = 800;
     var width = 800;
     var svg = d3.select("#tree-container").append("svg:svg")
-        .attr("width", width)
-        .attr("height", height)
+       // .attr("width", width)
+        //.attr("height", height)
         .append("g")
         .attr("transform", "translate(100, 0)"); // shift everything to the right
 
     // Create a tree "canvas"
     var tree = d3.layout.tree()
-        .size([height,width - 160])
+        .size([height,width])
 
     var diagonal = d3.svg.diagonal()
         .projection(function(d) { return [d.y, d.x]; });
