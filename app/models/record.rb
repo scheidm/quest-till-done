@@ -1,5 +1,6 @@
 class Record < ActiveRecord::Base
   attr_accessor :encounter
+  belongs_to :quest
   belongs_to :encounter
   validates_associated :encounter
 
