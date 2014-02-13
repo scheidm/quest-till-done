@@ -9,7 +9,8 @@ class QuestsController < ApplicationController
 
   def show
     @quest = Quest.find(params[:id])
-    if(User.find(current_user.id).active_quest.id == @quest.id)
+    @user = User.find(current_user.id)
+    if(!@user.active_quest.nil?&&User.find(current_user.id).active_quest.id == @quest.id)
       @active_quest = true
     else
       @active_quest = false
