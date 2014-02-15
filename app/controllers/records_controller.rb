@@ -17,6 +17,8 @@ class RecordsController < ApplicationController
     @encounter = Encounter.create if @encounter.nil? || @encounter.created_at<30.minutes.ago
     @record.encounter_id = @encounter.id
     @record.created_at = DateTime.now
+    @user = User.find(current_user.id)
+    @record.quest=@user.active_quest
 
     respond_to do |format|
       if @record.save

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140215141843) do
+=======
+ActiveRecord::Schema.define(version: 20140213221449) do
+>>>>>>> origin/t1
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -66,7 +70,7 @@ ActiveRecord::Schema.define(version: 20140215141843) do
   end
 
   create_table "quests", force: true do |t|
-    t.string   "name",           null: false
+    t.string   "name",                           null: false
     t.string   "status"
     t.string   "priority"
     t.text     "description"
@@ -78,6 +82,7 @@ ActiveRecord::Schema.define(version: 20140215141843) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "importance",     default: false
   end
 
   create_table "quotes", force: true do |t|
@@ -94,6 +99,7 @@ ActiveRecord::Schema.define(version: 20140215141843) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quest_id"
   end
 
   create_table "sessions", force: true do |t|
@@ -147,7 +153,7 @@ ActiveRecord::Schema.define(version: 20140215141843) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "active_quest"
+    t.integer  "active_quest_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

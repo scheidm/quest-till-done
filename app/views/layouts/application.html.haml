@@ -54,12 +54,12 @@
                   %td
                     %span{style: "float: right;color:#ffffff"} Active Quest:
                   %td
-                    %a{href: "#"} Github Integration
+                    = link_to @active_quest_name, @active_quest_url
                 %tr
                   %td
                     %span{style: "float: right;color:#ffffff"} Campaign:
                   %td
-                    %a{href: "#"} Github API
+                    = link_to @active_quest_campaign_name, @active_quest_campaign_url
           .col-md-7.qtd-col
             .col-md-4.qtd-col
               %form.navbar-form.navbar-left{role: "search"}

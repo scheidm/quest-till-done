@@ -9,7 +9,21 @@ class ApplicationController < ActionController::Base
   protected
 
   def load_user
-    @user = current_user
+    if(user_signed_in?)
+      @user = User.find(current_user.id)
+      active_quest = @user.active_quest
+      if(active_quest.nil?)
+         @active_quest_name = ''
+         @active_quest_url = '#'
+         @active_quest_campaign_name = ''
+         @active_quest__campaign_url = '#'
+      else
+        @active_quest_name = active_quest.name
+        @active_quest_url = quest_path(active_quest)
+        @active_quest_campaign_name = active_quest.campaign.name
+        @active_quest_campaign_url = campaign_path(active_quest.campaign)
+      end
+    end
   end
 
   def configure_permitted_parameters
