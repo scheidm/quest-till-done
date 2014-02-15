@@ -1,5 +1,4 @@
 class Encounter < ActiveRecord::Base
-  has_many :tags
   has_many :records
   has_many :notes
   belongs_to :user
