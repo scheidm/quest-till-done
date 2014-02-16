@@ -5,6 +5,7 @@
       %th Description
       %th Date
       %th Encounter
+      %th Type
 
   %tbody
     - @records.group_by{ |m| m.encounter_id }.each do |record|
@@ -13,8 +14,9 @@
           %tr
           %td=record[1][s].description
           %td{:rowspan => record.size}=record[1][s].created_at
-
+          %td=record[1][s].record_type
         %th{:rowspan => record.size}=record[0]
+
 
 
 %table
@@ -37,6 +39,7 @@
         - date[1].each do |record|
           %ul
             %li=record.encounter_id
+
 
 
 

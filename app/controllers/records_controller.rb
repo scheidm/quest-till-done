@@ -18,7 +18,7 @@ class RecordsController < ApplicationController
     @record.encounter_id = @encounter.id
     @record.created_at = DateTime.now
     @user = User.find(current_user.id)
-    @record.quest=@user.active_quest
+    @record.quest_id=@user.active_quest
 
     respond_to do |format|
       if @record.save
@@ -29,6 +29,10 @@ class RecordsController < ApplicationController
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def delete
+    @record= Record.find { params[:id]}.destroy
   end
 
   def record_params
