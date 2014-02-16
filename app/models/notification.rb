@@ -9,6 +9,7 @@ class Notification
 
   attr_accessor :target
 
+  # temp stub here
   def self.notification_levels
     [N_DISABLED, N_PARTICIPATING, N_WATCH]
   end
