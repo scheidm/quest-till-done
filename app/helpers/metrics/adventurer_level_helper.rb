@@ -1,0 +1,2 @@
+module Metrics::AdventurerLevelHelper
+end

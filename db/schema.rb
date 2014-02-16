@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216152135) do
+ActiveRecord::Schema.define(version: 20140216163030) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -108,6 +108,11 @@ ActiveRecord::Schema.define(version: 20140216152135) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
+  create_table "skill_points", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -151,6 +156,9 @@ ActiveRecord::Schema.define(version: 20140216152135) do
     t.datetime "updated_at"
     t.integer  "active_quest_id"
     t.integer  "notification_level",     default: 1,  null: false
+    t.integer  "adventure_level"
+    t.integer  "recent_level"
+    t.text     "achievements"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
