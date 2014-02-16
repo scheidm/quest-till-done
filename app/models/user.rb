@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_one :timer
-  has_many :skill_pointses
+  has_many :skill_point
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :create_timer
   #validates :username,
