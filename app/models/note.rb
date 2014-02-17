@@ -1,3 +1,5 @@
 class Note < Record
   validates_presence_of :description, :allow_blank => false
+  validates url, abscence: true
+  validates quote, abscence: true
 end
