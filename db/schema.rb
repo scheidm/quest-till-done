@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140215141843) do
-=======
-ActiveRecord::Schema.define(version: 20140213221449) do
->>>>>>> origin/t1
+ActiveRecord::Schema.define(version: 20140217170450) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -85,13 +81,6 @@ ActiveRecord::Schema.define(version: 20140213221449) do
     t.boolean  "importance",     default: false
   end
 
-  create_table "quotes", force: true do |t|
-    t.text     "text"
-    t.integer  "record_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "records", force: true do |t|
     t.string   "type"
     t.text     "description",  null: false
@@ -99,7 +88,7 @@ ActiveRecord::Schema.define(version: 20140213221449) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quest_id"
+    t.text     "quote"
   end
 
   create_table "sessions", force: true do |t|
