@@ -1,3 +1,5 @@
+/doc
+/html
 tmp/**/*
 db/*.sqlite3
 log/*.log
