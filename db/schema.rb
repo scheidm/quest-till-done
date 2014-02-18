@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218165113) do
+ActiveRecord::Schema.define(version: 20140218182316) do
 
   create_table "admins", force: true do |t|
     t.string   "username",           default: "", null: false
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140218165113) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "campaign_id"
   end
 
   create_table "sessions", force: true do |t|

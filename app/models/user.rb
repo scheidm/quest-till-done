@@ -31,4 +31,13 @@ class User < ActiveRecord::Base
     @group[groupName] = isAdmin
  
   end
+
+  # Generates a paginated collection encounters for the user
+  # @param end_time [datetime] last time included in list of encounters
+  # end_time defaults to the current time.
+  # @return [collection] first page of encounters preceeding end_time
+  # 
+  def timeline( end_time=Time.now )
+    Encounter.where('user_id = (?)',self.id).where('created_at <= (?)', end_time)
+  end
 end
