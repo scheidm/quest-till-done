@@ -77,4 +77,16 @@ class TimersController < ApplicationController
   def extend_timer
 
   end
+
+  # Pause the timer and create a new timer for break
+  # @return [JSON] break_timer
+  def break
+
+  end
+
+  # Extend the current break
+  # @return [JSON] Updated break_timer
+  def extend_break
+
+  end
 end
