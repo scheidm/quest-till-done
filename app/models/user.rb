@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   @group = Hash.new 
+  has_one :group, as: :user_group
   has_one :timer
+  has_and_belongs_to_many :groups
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :create_timer
   #validates :username,
