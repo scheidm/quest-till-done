@@ -1,3 +1,4 @@
+
 class UserMailer < ActionMailer::Base
   default from: "admin@qtd.com"
   

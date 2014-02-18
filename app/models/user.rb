@@ -1,3 +1,4 @@
+#
 class User < ActiveRecord::Base
   acts_as_taggable_on :skills
   # Include default devise modules. Others available are:
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_one :timer
-  has_many :skill_point
+  has_many :skill_pointses
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :create_timer
   #validates :username,
@@ -19,6 +20,8 @@ class User < ActiveRecord::Base
   #  },
   #  :format => /[A-Za-z]/
   #
+
+  # Devise check for authentication
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -27,6 +30,8 @@ class User < ActiveRecord::Base
       where(conditions).first  
     end
   end
+
+
 
   def self.addGroup(groupName, isAdmin)
     @group[groupName] = isAdmin
@@ -38,5 +43,23 @@ class User < ActiveRecord::Base
   # Add notification
   # Add expiration
   #
+
+
+  # Check if user session is expired
+  # @return [bool] Returns true if user session is expired
+  def expired?
+    if user.where(:username => current_user).where(:expiration_time) < Time.now
+
+    end
+  end
+
+
+  # Request for deletion
+  # @return [void]
+  def deleteRequest
+
+  end
+
+
 
 end

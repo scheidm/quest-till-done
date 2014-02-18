@@ -1,12 +1,18 @@
+# Controller for Quest
 class QuestsController < ApplicationController
 
   require 'json_Generator'
   include JsonGenerator::QuestModule
 
+  # Show all of user's quests
+  # @return [Html] A list of quests of the user
   def index
     @quests = Quest.all
   end
 
+  # Show the detail of a quest
+  # @param id [Integer] Quest's id
+  # @return [Html] Quest detail page with that id
   def show
     @quest = Quest.find(params[:id])
     @user = User.find(current_user.id)
@@ -17,6 +23,8 @@ class QuestsController < ApplicationController
     end
   end
 
+  # Create new quest
+  # @return [Html] New quest page
   def new
     @quest = Quest.new()
     parent = params[:id]
@@ -24,11 +32,11 @@ class QuestsController < ApplicationController
       @quest.parent_id = parent
       @quest.campaign = Quest.find(parent).campaign
     end
-    @status = [['Alabama', 'AL'],
-        ['Alaska', 'AK'],
-        ['Arizona', 'AZ']]
   end
 
+  # Save new quest
+  # @param quest_params [quest_params] field input from creation page
+  # @return [Html] redirect back to the new quest page
   def create
     @quest = Quest.new(quest_params)
     @quest.status = 'Open'
@@ -43,12 +51,16 @@ class QuestsController < ApplicationController
     end
   end
 
+  # Edit existing quest
+  # @param id [Integer] Quest's id
+  # @return [Html] Quest's editing page
   def edit
     @quest = Quest.find(params[:id])
   end
 
-  # PATCH/PUT /quests/1
-  # PATCH/PUT /quests/1.json
+  # Update quest changes and save the changes
+  # @param quest_params [quest_params] field input from creation page
+  # @return [Html] redirect back to quest's campaign page
   def update
     @quest = Quest.find(params[:id])
     respond_to do |format|
@@ -62,8 +74,9 @@ class QuestsController < ApplicationController
     end
   end
 
-  # DELETE /quests/1
-  # DELETE /quests/1.json
+  # Delete quest and all the records it associated with
+  # @param id [Integer] Quest's id
+  # @return [Html] redirect back to quest's campaign page
   def destroy
     @quest.destroy
     respond_to do |format|
@@ -72,11 +85,16 @@ class QuestsController < ApplicationController
     end
   end
 
+  # Get Json for generating tree view
+  # @param id [Integer] Quest's id
+  # @return [JSON] quest's information in JSON format
   def getTree
     quest = Quest.find(params[:id])
     render :text => generateQuestTree(quest)
   end
 
+  # Set quest as user's current active quest
+  # @param id [Integer] Quest's id
   def set_active
     quest = Quest.find(params[:id])
     user = User.find(current_user.id)
@@ -85,6 +103,14 @@ class QuestsController < ApplicationController
     render :nothing => true
   end
 
+  # Define allowed parameter for a Campaign model
+  # @param id [Integer] Quest's id
+  # @param description [String] Quest's description
+  # @param parent_id [Integer] Quest's parent quest id
+  # @param campaign_id [Integer] Quest's campaign id
+  # @param user_id [Integer] Owner's user_id
+  # @param status [String] Quest's status
+  # @param importance [Boolean] Quest importance check
   def quest_params
     params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance)
   end

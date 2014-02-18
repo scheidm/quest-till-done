@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216163030) do
-
-  create_table "actions", force: true do |t|
-    t.string   "name"
-    t.string   "status"
-    t.text     "description"
-    t.integer  "estimated_cost"
-    t.integer  "current_cost"
-    t.date     "deadline"
-    t.string   "priority"
-    t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140217190002) do
 
   create_table "admins", force: true do |t|
     t.string   "username",           default: "", null: false
@@ -81,13 +68,6 @@ ActiveRecord::Schema.define(version: 20140216163030) do
     t.boolean  "importance",     default: false
   end
 
-  create_table "quotes", force: true do |t|
-    t.text     "text"
-    t.integer  "record_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "records", force: true do |t|
     t.string   "record_type"
     t.text     "description",  null: false
@@ -95,7 +75,7 @@ ActiveRecord::Schema.define(version: 20140216163030) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quest_id"
+    t.text     "quote"
   end
 
   create_table "sessions", force: true do |t|
