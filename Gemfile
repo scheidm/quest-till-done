@@ -76,3 +76,8 @@ gem 'devise'
 
 gem 'cancan'
 gem 'flipclockjs-rails', "~> 0.4.0b"
+gem 'acts-as-taggable-on'
+gem 'foreman'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
+gem 'yard'

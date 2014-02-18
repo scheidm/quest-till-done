@@ -11,20 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213221449) do
-
-  create_table "actions", force: true do |t|
-    t.string   "name"
-    t.string   "status"
-    t.text     "description"
-    t.integer  "estimated_cost"
-    t.integer  "current_cost"
-    t.date     "deadline"
-    t.string   "priority"
-    t.integer  "parent_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140217190002) do
 
   create_table "admins", force: true do |t|
     t.string   "username",           default: "", null: false
@@ -81,13 +68,6 @@ ActiveRecord::Schema.define(version: 20140213221449) do
     t.boolean  "importance",     default: false
   end
 
-  create_table "quotes", force: true do |t|
-    t.text     "text"
-    t.integer  "record_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "records", force: true do |t|
     t.string   "type"
     t.text     "description",  null: false
@@ -95,7 +75,7 @@ ActiveRecord::Schema.define(version: 20140213221449) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quest_id"
+    t.text     "quote"
   end
 
   create_table "sessions", force: true do |t|
@@ -108,10 +88,23 @@ ActiveRecord::Schema.define(version: 20140213221449) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
-  create_table "tags", force: true do |t|
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "timers", force: true do |t|
     t.integer  "user_id"
