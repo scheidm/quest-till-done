@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217190002) do
+ActiveRecord::Schema.define(version: 20140218133824) do
 
   create_table "admins", force: true do |t|
     t.string   "username",           default: "", null: false
@@ -52,6 +52,11 @@ ActiveRecord::Schema.define(version: 20140217190002) do
     t.integer  "user_id"
   end
 
+  create_table "friends", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "quests", force: true do |t|
     t.string   "name",                           null: false
     t.string   "status"
@@ -75,6 +80,7 @@ ActiveRecord::Schema.define(version: 20140217190002) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quest_id"
     t.text     "quote"
   end
 
@@ -91,6 +97,15 @@ ActiveRecord::Schema.define(version: 20140217190002) do
   create_table "skill_points", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level"
+    t.integer  "exp"
+  end
+
+  create_table "skills", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "achievements"
+    t.string   "description"
   end
 
   create_table "taggings", force: true do |t|
@@ -139,6 +154,8 @@ ActiveRecord::Schema.define(version: 20140217190002) do
     t.integer  "adventure_level"
     t.integer  "recent_level"
     t.text     "achievements"
+    t.integer  "level"
+    t.integer  "exp"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

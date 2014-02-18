@@ -161,6 +161,7 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
+    role_model (0.8.1)
     rsolr (1.0.9)
       builder (>= 2.1.2)
     rspec (2.14.1)
@@ -258,6 +259,7 @@ DEPENDENCIES
   jstree-rails!
   minitest-rails
   rails (= 4.0.0)
+  role_model
   sass-rails (~> 4.0.0)
   sdoc
   spork-rails
