@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140218133824) do
+=======
+ActiveRecord::Schema.define(version: 20140218205708) do
+>>>>>>> upstream/t1
 
   create_table "admins", force: true do |t|
     t.string   "username",           default: "", null: false
@@ -84,6 +88,16 @@ ActiveRecord::Schema.define(version: 20140218133824) do
     t.text     "quote"
   end
 
+  create_table "rounds", force: true do |t|
+    t.string   "type"
+    t.integer  "event_id"
+    t.string   "event_description"
+    t.integer  "encounter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "campaign_id"
+  end
+
   create_table "sessions", force: true do |t|
     t.string   "session_id", null: false
     t.text     "data"
@@ -150,12 +164,16 @@ ActiveRecord::Schema.define(version: 20140218133824) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "active_quest_id"
+<<<<<<< HEAD
     t.integer  "notification_level",     default: 1,  null: false
     t.integer  "adventure_level"
     t.integer  "recent_level"
     t.text     "achievements"
     t.integer  "level"
     t.integer  "exp"
+=======
+    t.integer  "group_id"
+>>>>>>> upstream/t1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

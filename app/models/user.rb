@@ -12,8 +12,15 @@ class User < ActiveRecord::Base
   
   attr_accessor :login
 
+<<<<<<< HEAD
   has_one :timer
   has_many :skill_pointses
+=======
+  @group = Hash.new 
+  has_one :group, as: :user_group
+  has_one :timer
+  has_and_belongs_to_many :groups
+>>>>>>> upstream/t1
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :create_timer
   #validates :username,
@@ -40,6 +47,7 @@ class User < ActiveRecord::Base
  
   end
 
+<<<<<<< HEAD
   #
   # TODO
   # Add notification
@@ -64,4 +72,14 @@ class User < ActiveRecord::Base
 
 
 
+=======
+  # Generates a paginated collection encounters for the user
+  # @param end_time [datetime] last time included in list of encounters
+  # end_time defaults to the current time.
+  # @return [collection] first page of encounters preceeding end_time
+  # 
+  def timeline( end_time=Time.now )
+    Encounter.where('user_id = (?)',self.id).where('created_at <= (?)', end_time)
+  end
+>>>>>>> upstream/t1
 end
