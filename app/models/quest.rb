@@ -22,24 +22,24 @@ class Quest < ActiveRecord::Base
   # Set campaign id after creation
   after_create :set_campaign
 
-  searchable do
-    text :name, :description
-    text :status
-    integer :estimated_cost, :current_cost, :parent__id, :campaign_id
-    time :updated_at,:created_at
-    text :records do
-      records.map{ |r| r.description }
-    end
-    text :records do
-      records.map{ |r| r.description }
-    end
-    text :links do
-      links.map{ |l| l.url }
-    end
-    text :notes do
-      notes.map{ |n| n.description }
-    end
-  end
+  #searchable do
+    #text :name, :description
+    #text :status
+    #integer :estimated_cost, :current_cost, :parent__id, :campaign_id
+    #time :updated_at,:created_at
+    #text :records do
+      #records.map{ |r| r.description }
+    #end
+    #text :records do
+      #records.map{ |r| r.description }
+    #end
+    #text :links do
+      #links.map{ |l| l.url }
+    #end
+    #text :notes do
+      #notes.map{ |n| n.description }
+    #end
+  #end
 
   protected
   # Set campaign id after creation
