@@ -5,6 +5,7 @@ class SkillPoint < ActiveRecord::Base
 
   def initialize
 
+
   end
 
 

@@ -1,9 +1,8 @@
 class CreateFriends < ActiveRecord::Migration
   def change
     create_table :friends do |t|
-      t.user_id
-      t.friends
-      t.timestamps
+#       This is suppose to be array of friends
+       t.timestamps
     end
   end
 end
