@@ -4,6 +4,7 @@ class Encounter < ActiveRecord::Base
   has_many :tags
   # Encounter has many records
   has_many :records
+  has_many :rounds
   # Encounter belongs to a user
   belongs_to :user
 
