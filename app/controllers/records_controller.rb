@@ -1,16 +1,29 @@
+# Controller for Record
 class RecordsController < ApplicationController
+
+  # Show all records belongs to a user
+  # @return [Html] All records belong to a user
   def index
     @records = Record.all
   end
 
+  # Show record detail
+  # @param id [Integer] record id
+  # @return [Html] Record detail page with the id
   def show
     @record = Record.find(params[:id])
   end
 
+  # Create new record for a quest
+  # @param id [Integer] Record id
+  # @return [Html] New record creation page
   def new
     @record = Record.new()
   end
 
+  # Save new record
+  # @param record_params[record_params] field input from creation page
+  # @return [Html] redirect back to records index page
   def create
     @record = Record.new(record_params)
     @encounter = Encounter.last
@@ -31,6 +44,17 @@ class RecordsController < ApplicationController
     end
   end
 
+  # Delete record
+  # @param id [Integer] record id
+  # @return [Html] redirect back to record index page
+  def destroy
+
+  end
+
+  # Define allowed parameter for a record model
+  # @param description [String] Record's description
+  # @param encounter_id [Integer] Record's encounter_id
+  # @param encounter [Encounter] Record's encounter
   def record_params
     params.require(:record).permit(:description, :encounter_id, :encounter)
   end

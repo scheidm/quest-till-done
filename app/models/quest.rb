@@ -11,10 +11,15 @@ class Quest < ActiveRecord::Base
   has_many :links
   has_many :notes
   belongs_to :campaign, :class_name => 'Quest'
+  # Has many quests underneath this quest's subtree
   has_many :all_quests, :class_name => 'Quest', :foreign_key => 'campaign_id'
+  # Belongs to a immediate parent quest
   belongs_to :parent, :class_name => 'Quest'
+  # A quest could have many immediate children quest
   has_many :quests, :foreign_key => 'parent_id'
+  # Belongs to a user/owner
   belongs_to :user
+  # Set campaign id after creation
   after_create :set_campaign
 
   searchable do
@@ -37,9 +42,9 @@ class Quest < ActiveRecord::Base
   end
 
   protected
-  ##
-  # = this is some documentation
-  #
+  # Set campaign id after creation
+  # If the campaign id is nil, it means it is a campaign but not a quest
+  # In that case, set campaign id to its own id
   def set_campaign
      if(self.campaign_id.nil?)
        self.reload
