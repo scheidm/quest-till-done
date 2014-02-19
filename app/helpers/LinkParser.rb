@@ -1,11 +1,6 @@
-class LinkParser
-
-		
-  def initialize()
-    @Links=[]
-  end
-
-  def findLinks(strings)
+module LinkParser
+  def find_links(strings)
+    links=[]
     re = /http:\/\/\S*/i
 
     matches = strings.match re
@@ -13,13 +8,7 @@ class LinkParser
     matches.each do |match|
       links.push(match)
     end
-
-  end
-
-  def getLinks()
-    links.each do |link|
-      puts link
-    end
+    links
   end
 end
 

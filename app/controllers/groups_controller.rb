@@ -1,4 +1,4 @@
-class Profiles::GroupsController < ApplicationController
+class GroupsController < ApplicationController
   layout "profile"
 
   def index
