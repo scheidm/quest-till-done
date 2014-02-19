@@ -41,6 +41,12 @@ ActiveRecord::Schema.define(version: 20140218234850) do
     t.datetime "updated_at"
   end
 
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "quests", force: true do |t|
     t.string   "name",                           null: false
     t.string   "status"
@@ -64,8 +70,8 @@ ActiveRecord::Schema.define(version: 20140218234850) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "quest_id"
     t.text     "quote"
+    t.integer  "quest_id"
   end
 
   create_table "rounds", force: true do |t|
@@ -118,8 +124,6 @@ ActiveRecord::Schema.define(version: 20140218234850) do
     t.string "name"
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
-
   create_table "timers", force: true do |t|
     t.integer  "user_id"
     t.integer  "setting_time"
@@ -144,6 +148,7 @@ ActiveRecord::Schema.define(version: 20140218234850) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "active_quest_id"
+    t.integer  "group_id"
     t.integer  "notification_level",     default: 1,  null: false
     t.integer  "adventure_level"
     t.integer  "recent_level"
@@ -154,5 +159,10 @@ ActiveRecord::Schema.define(version: 20140218234850) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "users_groups", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
 
 end
