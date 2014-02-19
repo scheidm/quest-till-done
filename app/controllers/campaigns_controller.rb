@@ -91,6 +91,7 @@ class CampaignsController < ApplicationController
 
   # Export a Campaign to a QTD specific format
   # @param id [Integer] Campaign's id
+  # @param type [String] File format to be exported
   # @return [File] downloadable file
   def export
 
