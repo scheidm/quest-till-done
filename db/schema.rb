@@ -11,27 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140218133824) do
-=======
-ActiveRecord::Schema.define(version: 20140218205708) do
->>>>>>> upstream/t1
-
-  create_table "admins", force: true do |t|
-    t.string   "username",           default: "", null: false
-    t.string   "email",              default: "", null: false
-    t.string   "encrypted_password", default: "", null: false
-    t.integer  "sign_in_count",      default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",    default: 0
-    t.string   "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140218234850) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -164,16 +144,12 @@ ActiveRecord::Schema.define(version: 20140218205708) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "active_quest_id"
-<<<<<<< HEAD
     t.integer  "notification_level",     default: 1,  null: false
     t.integer  "adventure_level"
     t.integer  "recent_level"
     t.text     "achievements"
     t.integer  "level"
     t.integer  "exp"
-=======
-    t.integer  "group_id"
->>>>>>> upstream/t1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

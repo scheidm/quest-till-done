@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-# Campaigns class for a project
-=======
 # Campaigns model storing the root task in a project. A given campaign will 
->>>>>>> upstream/t1
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
   has_many :quests
