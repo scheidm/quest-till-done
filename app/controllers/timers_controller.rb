@@ -74,6 +74,7 @@ class TimersController < ApplicationController
   end
 
   # Extend the timer duration for manual mode
+  # @param current_time [Integer] current time in seconds
   def extend_timer
 
   end
