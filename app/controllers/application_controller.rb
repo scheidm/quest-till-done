@@ -31,4 +31,11 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
+
+  def check_password_expiration
+    # check inactive mins
+    if current_user && current_user.password_expires_at && current_user.password_expires_at < Time.now
+      redirect_to new_profile_password_path and return
+    end
+  end
 end

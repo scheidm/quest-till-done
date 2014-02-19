@@ -11,23 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140218220622) do
-
-  create_table "admins", force: true do |t|
-    t.string   "username",           default: "", null: false
-    t.string   "email",              default: "", null: false
-    t.string   "encrypted_password", default: "", null: false
-    t.integer  "sign_in_count",      default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.integer  "failed_attempts",    default: 0
-    t.string   "unlock_token"
-    t.datetime "locked_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140218234850) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -52,8 +36,7 @@ ActiveRecord::Schema.define(version: 20140218220622) do
     t.integer  "user_id"
   end
 
-  create_table "groups", force: true do |t|
-    t.string   "name"
+  create_table "friends", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,12 +58,13 @@ ActiveRecord::Schema.define(version: 20140218220622) do
   end
 
   create_table "records", force: true do |t|
-    t.string   "type"
+    t.string   "record_type"
     t.text     "description",  null: false
     t.string   "url"
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "quest_id"
     t.text     "quote"
   end
 
@@ -103,6 +87,20 @@ ActiveRecord::Schema.define(version: 20140218220622) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "skill_points", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "level"
+    t.integer  "exp"
+  end
+
+  create_table "skills", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "achievements"
+    t.string   "description"
+  end
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -146,15 +144,15 @@ ActiveRecord::Schema.define(version: 20140218220622) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "active_quest_id"
-    t.integer  "group_id"
+    t.integer  "notification_level",     default: 1,  null: false
+    t.integer  "adventure_level"
+    t.integer  "recent_level"
+    t.text     "achievements"
+    t.integer  "level"
+    t.integer  "exp"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "users_groups", id: false, force: true do |t|
-    t.integer "user_id"
-    t.integer "group_id"
-  end
 
 end

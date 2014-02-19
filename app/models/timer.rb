@@ -1,4 +1,4 @@
-# Timer model for a timer configuration
+# Timer class for a timer configuration
 class Timer < ActiveRecord::Base
   # Timer belongs to a user
   belongs_to :user

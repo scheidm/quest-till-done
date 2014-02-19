@@ -1,0 +1,2 @@
+module Social::GroupRecentActivitiesHelper
+end

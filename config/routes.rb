@@ -90,4 +90,41 @@ QuestTillDone::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+  get '/timeline', to: redirect('/records')
+
+
+  #
+  # Profiles
+  #
+  resource :profile, only: [:show, :update] do
+    member do
+      get :history
+      get :design
+
+      put :reset_private_token
+      put :update_username
+    end
+
+    scope module: :profiles do
+      resource :account, only: [:show, :update]
+      resource :notifications, only: [:show, :update]
+      resource :password, only: [:new, :create, :edit, :update] do
+        member do
+          put :reset
+        end
+      end
+      resources :keys
+      resources :groups, only: [:index] do
+        member do
+          delete :leave
+        end
+      end
+      resource :avatar, only: [:destroy]
+    end
+  end
+
+  match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
+
 end

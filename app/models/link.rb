@@ -1,4 +1,4 @@
-# Link model for a Record
+# Link class for a Record
 class Link < Record
   has_many :quotes, dependent: :destroy
   # Validate presence of description and url

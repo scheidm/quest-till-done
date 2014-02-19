@@ -33,6 +33,7 @@ class RecordsController < ApplicationController
     @user = User.find(current_user.id)
     @record.quest=@user.active_quest
 
+
     respond_to do |format|
       if @record.save
         format.html { redirect_to @record, notice: 'Record was successfully created.' }
@@ -48,7 +49,7 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def destroy
-
+    @record= Record.find { params[:id]}.destroy
   end
 
   # Define allowed parameter for a record model

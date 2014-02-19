@@ -72,9 +72,10 @@ group :test do
   gem 'database_cleaner'
   gem 'watir-webdriver'
 end
-gem 'devise'
 
+gem 'devise'
 gem 'cancan'
+gem 'role_model'
 gem 'flipclockjs-rails', "~> 0.4.0b"
 gem 'acts-as-taggable-on'
 gem 'foreman'
