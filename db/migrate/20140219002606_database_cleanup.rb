@@ -2,7 +2,7 @@ class DatabaseCleanup < ActiveRecord::Migration
   def up
     drop_table :tags
     drop_table :skill_points
-    create_table skill_points do |t|
+    create_table :skill_points do |t|
       t.timestamps
       t.integer  :level
       t.integer  :exp

@@ -1,6 +1,5 @@
 QuestTillDone::Application.routes.draw do
   get "welcome/index"
-  devise_for :admins
   devise_for :users
   resources :encounters do
     collection do
