@@ -1,4 +1,6 @@
-# Campaigns model storing the root task in a project. A given campaign will 
+# Campaigns model storing the root task in a project. The class is defined with
+# single table inheritance with the Quest model. That is, a Campaign is largely
+# a scope on quest, a Quest.where('campaign_id = NULL')
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
   has_many :quests
