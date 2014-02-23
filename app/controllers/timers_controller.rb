@@ -1,52 +1,31 @@
 # Controller for Timer related functions
 class TimersController < ApplicationController
+  require 'timer/timer_helper'
+  include TimerHelper
 
   # Get current remaining time on the time counter
   # @return [JSON] the total remaining time or setting time
   def get_current_time
-    current_time = current_user.timer.current_time
-    encounter = Encounter.last
-    session[:state] ||= false
-    diff = current_time
-    state = session[:state]
-    if(!encounter.nil? && state)
-      diff = (Encounter.last.created_at.utc + current_time - Time.now.utc).to_i
-      if(diff < 0)
-        encounter.close
-        diff = setting_time
-        session[:state] = false
-      end
-    end
-    data = {current_time: diff, state: state}
-    render :text => data.to_json
+    render :text => getTime.to_json
   end
 
   # Get user's default time length for an encounter
   # @return [JSON] the default time length in seconds
   def get_setting_time
-    setting_time = current_user.timer.setting_time
-    data = {setting_time: setting_time}
-    render :text => data.to_json
+    render :text => getSettingTime.to_json
   end
 
   # Start the timer countdown
   # Open an encounter if there is not one currently active
   def start_timer
-    if(Encounter.last.nil? || !Encounter.last.end_time.nil?)
-      Encounter.create
-    end
-    session[:state] = true
+    startTimer
     render :nothing => true
   end
 
   # Stop/Pause the timer and record the current remaining time
   # @param current_time [String] current remaining time on the timer in seconds
   def stop_timer
-    current_time = params[:current_time]
-    t = Timer.where(:user_id => current_user.id).first
-    t.current_time = current_time
-    t.save
-    session[:state] = false
+    pauseTimer
     render :nothing => true
   end
 
@@ -54,17 +33,8 @@ class TimersController < ApplicationController
   # Closes any last opened encounter
   # @return [String] the default time length in seconds
   def reset_timer
-    session[:state] = false
-    encounter = Encounter.last
-    if(encounter.nil?)
-      return
-    elsif(encounter.end_time.nil?)
-      encounter.close
-    end
-    t = Timer.where(:user_id => current_user.id).first
-    t.current_time = t.setting_time
-    t.save
-    get_setting_time
+    resetTimer
+    render :text => getSettingTime.to_json
   end
 
   # Restart the timer when then timer reaches 0
