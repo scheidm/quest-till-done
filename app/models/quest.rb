@@ -45,11 +45,11 @@ class Quest < ActiveRecord::Base
   # Set campaign id after creation
   # If the campaign id is nil, it means it is a campaign but not a quest
   # In that case, set campaign id to its own id
-  def set_campaign
-     if(self.campaign_id.nil?)
-       self.reload
-       self.campaign_id = self.id
-       self.save
-     end
-  end
+  #def set_campaign
+     #if(self.campaign_id.nil?)
+       #self.reload
+       #self.campaign_id = self.id
+       #self.save
+     #end
+  #end
 end
