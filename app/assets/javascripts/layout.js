@@ -42,33 +42,33 @@ $(document).ready(function(){
 
     $('#startBtn').click(function()
     {
+        clock.start();
         $.ajax({
             type: "POST",
             url: "/timers/start_timer",
             success: function(result) {
-                clock.start();
             }
         });
     });
     $('#stopBtn').click(function()
     {
+        clock.stop();
         $.ajax({
             type: "POST",
             url: "/timers/stop_timer",
             data: "current_time=" + clock.getTime(),
             success: function(result) {
-                clock.stop();
             }
         });
     });
     $('#resetBtn').click(function()
     {
+        clock.stop();
         $.ajax({
             type: "GET",
             dataType: "json",
             url: "/timers/reset_timer",
             success: function(result) {
-                clock.stop();
                 var x = result.setting_time;
                 clock.setTime(result.setting_time);
             }

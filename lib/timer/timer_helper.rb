@@ -6,6 +6,9 @@ module TimerHelper
     if(Encounter.last.nil? || !Encounter.last.end_time.nil?)
       Encounter.create
     end
+    t = Timer.where(:user_id => current_user.id).first
+    t.updated_at = Time.now
+    t.save
     session[:state] = true
   end
 
@@ -39,20 +42,20 @@ module TimerHelper
 
   # get remaining time
   def getTime
-    current_time = current_user.timer.current_time
+    remain_time = current_user.timer.current_time
     encounter = Encounter.last
     session[:state] ||= false
-    diff = current_time
     state = session[:state]
     if(!encounter.nil? && state)
-      diff = (Encounter.last.created_at.utc + current_time - Time.now.utc).to_i
+      diff = (Encounter.last.created_at.utc + remain_time - Time.now.utc).to_i
+      remain_time = remain_time - (Time.now.utc - current_user.timer.updated_at.utc).to_i
       if(diff < 0)
         encounter.close
-        diff = setting_time
+        remain_time = setting_time
         session[:state] = false
       end
     end
-    data = {current_time: diff, state: state}
+    data = {current_time: remain_time, state: state}
     return data
   end
 
