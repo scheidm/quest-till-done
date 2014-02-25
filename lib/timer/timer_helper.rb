@@ -4,7 +4,9 @@ module TimerHelper
   # start timer and create encounter
   def startTimer
     if(Encounter.last.nil? || !Encounter.last.end_time.nil?)
-      Encounter.create
+      encounter = Encounter.new
+      encounter.user_id = current_user.id
+      encounter.save
     end
     t = Timer.where(:user_id => current_user.id).first
     t.updated_at = Time.now
@@ -66,5 +68,8 @@ module TimerHelper
     return data
   end
 
-
+  # get current state of the timer
+  def getState
+    return session[:state]
+  end
 end

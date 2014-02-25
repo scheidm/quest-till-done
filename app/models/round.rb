@@ -6,4 +6,17 @@
 class Round < ActiveRecord::Base
   belongs_to :encounter
   belongs_to :campaign
+
+  def self.createEvent(model, operation, campaign)
+    round = Round.new
+    round.encounter = Encounter.last
+    if(model.id.nil?)
+      model.reload
+    end
+    round.campaign_id = campaign.id
+    round.event_id = model.id
+    round.type = model.class.name.demodulize
+    round.event_description = operation
+    round.save
+  end
 end

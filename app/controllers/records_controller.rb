@@ -1,6 +1,11 @@
 # Controller for Record
 class RecordsController < ApplicationController
 
+  require 'json_Generator'
+  require 'Round/round_helper'
+  include JsonGenerator::QuestModule
+  include RoundHelper
+
   # Show all records belongs to a user
   # @return [Html] All records belong to a user
   def index
@@ -36,6 +41,7 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       if @record.save
+        createRound(@record, action_name, current_user.active_quest.campaign)
         format.html { redirect_to @record, notice: 'Record was successfully created.' }
         format.json { render action: 'show', status: :created, location: @record }
       else
