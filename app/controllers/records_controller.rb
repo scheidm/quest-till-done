@@ -24,6 +24,7 @@ class RecordsController < ApplicationController
   # @return [Html] New record creation page
   def new
     @record = Record.new()
+    @record.quest_id = params[:quest_id]
   end
 
   # Save new record
@@ -63,6 +64,6 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :record_type)
   end
 end

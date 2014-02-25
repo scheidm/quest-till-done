@@ -1,7 +1,7 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
 
-  attr_accessor :encounter, :quest, :record_type
+  attr_accessor :encounter, :quest
   # Record belongs to a quest
   belongs_to :quest
   # Record belongs to a encounter
