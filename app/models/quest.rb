@@ -20,7 +20,7 @@ class Quest < ActiveRecord::Base
   # Belongs to a user/owner
   belongs_to :user
   # Set campaign id after creation
-  after_create :set_campaign
+  #after_create :set_campaign
 
   #searchable do
     #text :name, :description

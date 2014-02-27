@@ -31,7 +31,8 @@ class QuestsController < ApplicationController
     parent = params[:id]
     if(parent != nil)
       @quest.parent_id = parent
-      @quest.campaign = Quest.find(parent).campaign
+      parent_quest = Quest.find(parent)
+      @quest.campaign_id = parent_quest.campaign_id || parent_quest.id
     end
   end
 
