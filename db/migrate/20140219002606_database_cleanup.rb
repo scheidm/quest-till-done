@@ -1,6 +1,5 @@
 class DatabaseCleanup < ActiveRecord::Migration
   def up
-    drop_table :tags
     drop_table :skill_points
     create_table :skill_points do |t|
       t.timestamps
@@ -16,9 +15,6 @@ class DatabaseCleanup < ActiveRecord::Migration
       t.datetime "updated_at"
       t.integer  "level"
       t.integer  "exp"
-    end
-    create_table "tags", force: true do |t|
-      t.string "name"
     end
   end
 end
