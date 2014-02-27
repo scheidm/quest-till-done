@@ -2,7 +2,7 @@
 module TimerHelper
 
   # start timer and create encounter
-  def startTimer
+  def start_timer
     if(Encounter.last.nil? || !Encounter.last.end_time.nil?)
       encounter = Encounter.new
       encounter.user_id = current_user.id
@@ -15,7 +15,7 @@ module TimerHelper
   end
 
   # pause timer
-  def pauseTimer
+  def stop_timer
     current_time = params[:current_time]
     t = Timer.where(:user_id => current_user.id).first
     t.current_time = current_time
@@ -24,7 +24,7 @@ module TimerHelper
   end
 
   # reset timer
-  def resetTimer
+  def reset_timer
     session[:state] = false
     encounter = Encounter.last
     if(encounter.nil?)
@@ -38,13 +38,14 @@ module TimerHelper
   end
 
   # restart timer
-  def restartTimer
+  def restart_timer
 
   end
 
   # get remaining time
-  def getTime
+  def get_current_time
     remain_time = current_user.timer.current_time
+    setting_time = current_user.timer.setting_time
     encounter = Encounter.last
     session[:state] ||= false
     state = session[:state]
@@ -55,6 +56,7 @@ module TimerHelper
         encounter.close
         remain_time = setting_time
         session[:state] = false
+        state = session[:state]
       end
     end
     data = {current_time: remain_time, state: state}
@@ -62,14 +64,14 @@ module TimerHelper
   end
 
   # get setting default time
-  def getSettingTime
+  def get_setting_time
     setting_time = current_user.timer.setting_time
     data = {setting_time: setting_time}
     return data
   end
 
   # get current state of the timer
-  def getState
+  def get_timer_state
     return session[:state]
   end
 end

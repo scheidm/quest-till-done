@@ -2,7 +2,6 @@
 class QuestsController < ApplicationController
 
   require 'json_Generator'
-  require 'Round/round_helper'
   include JsonGenerator::QuestModule
   include RoundHelper
 
@@ -44,7 +43,7 @@ class QuestsController < ApplicationController
     @quest.status = 'Open'
     respond_to do |format|
       if @quest.save
-        createRound(@quest, action_name, @quest.campaign)
+        create_round(@quest, action_name, @quest.campaign)
         format.html { redirect_to campaign_path(@quest.campaign), notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
@@ -68,7 +67,7 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
     respond_to do |format|
       if @quest.update(quest_params)
-        createRound(@quest, action_name, @quest.campaign)
+        create_round(@quest, action_name, @quest.campaign)
         format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,7 +81,7 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] redirect back to quest's campaign page
   def destroy
-    createRound(@quest, action_name, @quest.campaign)
+    create_round(@quest, action_name, @quest.campaign)
     @quest.destroy
     respond_to do |format|
       format.html { redirect_to campaigns_path }

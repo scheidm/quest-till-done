@@ -2,7 +2,6 @@
 class RecordsController < ApplicationController
 
   require 'json_Generator'
-  require 'Round/round_helper'
   include JsonGenerator::QuestModule
   include RoundHelper
 
@@ -42,7 +41,7 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       if @record.save
-        createRound(@record, action_name, current_user.active_quest.campaign)
+        create_round(@record, action_name, current_user.active_quest.campaign)
         format.html { redirect_to @record, notice: 'Record was successfully created.' }
         format.json { render action: 'show', status: :created, location: @record }
       else

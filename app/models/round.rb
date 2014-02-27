@@ -7,7 +7,7 @@ class Round < ActiveRecord::Base
   belongs_to :encounter
   belongs_to :campaign
 
-  def self.createEvent(model, operation, campaign)
+  def self.create_event(model, operation, campaign)
     round = Round.new
     round.encounter = Encounter.last
     if(model.id.nil?)

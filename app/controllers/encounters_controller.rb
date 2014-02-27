@@ -83,23 +83,6 @@ class EncountersController < ApplicationController
   # @param id [Integer] Encounter's id
   # @return [JSON] the encounter's tree data in JSON format
   def getTree
-    #@pomos = Encounter.all
-    #data = [];
-    #
-    #@pomos.each {|item|
-    #  _endTime = item.end_time
-    #  _endTime = (item.end_time.nil? ) ? 'Now' : item.end_time.to_formatted_s(:long)
-    #  @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/encounters/' + item.id.to_s, :rel => 'encounter' }})
-    #  @TreeData[:children] = children = []
-    #  item.records.each {|record|
-    #    type = record.specific
-    #    children <<  ({:data => type.class.name, :attr => { :href => '/'+ type.class.name.downcase + 's/' + type.id.to_s, :rel => type.class.name }})
-    #  }
-    #  data.push(@TreeData)
-    #}
-
-
-    #render :text => @user.to_json(:include => {:tasks => {}})
     render :text => generateTree
   end
 

@@ -1,31 +1,31 @@
 # Controller for Timer related functions
 class TimersController < ApplicationController
-  require 'timer/timer_helper'
+  #require 'timer/timer_helper'
   include TimerHelper
 
   # Get current remaining time on the time counter
   # @return [JSON] the total remaining time or setting time
   def get_current_time
-    render :text => getTime.to_json
+    render :text => super.to_json
   end
 
   # Get user's default time length for an encounter
   # @return [JSON] the default time length in seconds
   def get_setting_time
-    render :text => getSettingTime.to_json
+    render :text => super.to_json
   end
 
   # Start the timer countdown
   # Open an encounter if there is not one currently active
   def start_timer
-    startTimer
+    super
     render :nothing => true
   end
 
   # Stop/Pause the timer and record the current remaining time
   # @param current_time [String] current remaining time on the timer in seconds
   def stop_timer
-    pauseTimer
+    super
     render :nothing => true
   end
 
@@ -33,8 +33,8 @@ class TimersController < ApplicationController
   # Closes any last opened encounter
   # @return [String] the default time length in seconds
   def reset_timer
-    resetTimer
-    render :text => getSettingTime.to_json
+    super
+    get_setting_time
   end
 
   # Restart the timer when then timer reaches 0
