@@ -5,21 +5,25 @@ module JsonGenerator
     # Generate a tree JSON for a user's encounter
     # @param user [User] User to generate encounter JSON for
     # @return [JSON] JSON formatted data
-    def generateTree
-      @encounters = Encounter.all
+    def generateTree(encounters)
       data = []
-
-      @encounters.each {|item|
-        _endTime = item.end_time
-        _endTime = (item.end_time.nil? ) ? 'Now' : item.end_time.to_formatted_s(:long)
-        @TreeData = ({:data => item.created_at.to_formatted_s(:long) + ' - ' + _endTime, :attr => { :href => '/encounters/' + item.id.to_s, :rel => 'encounters' }})
-        @TreeData[:children] = children = []
-        item.nodes.each {|node|
-          type = node.specific
-          children <<  ({:data => type.description, :attr => { :href => '/'+ type.class.name.downcase + 's/' + type.id.to_s, :rel => type.class.name }})
+      format = '%I:%M%p'
+      data_by_date = {}
+      encounters.each do |encounter|
+        end_time = (encounter.end_time.nil? ) ? 'Now' : encounter.end_time.strftime(format)
+        encounter_data = {:data => encounter.created_at.strftime(format) + ' to ' + end_time}
+        encounter_data[:children] = children = []
+        encounter.rounds.each {|round|
+          children << {:id => round.event_id, :data => round.event_description + ' ' + round.type, :attr => { :rel => round.type, :href => '/'+ round.type.tableize+'/' + round.event_id.to_s}}
         }
-        data.push(@TreeData)
-      }
+        data_by_date[encounter.created_at.to_date] ||= Array.new
+        data_by_date[encounter.created_at.to_date].push(encounter_data)
+      end
+      data_by_date.each do |key, value|
+        temp = {:data => key, :attr => { :rel => 'date'}}
+        temp[:children] = value
+        data.push(temp)
+      end
       return data.to_json
     end
   end

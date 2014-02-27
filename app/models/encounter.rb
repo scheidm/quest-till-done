@@ -12,7 +12,7 @@ class Encounter < ActiveRecord::Base
 
   # Set the end time for the encounter when called
   def close
-    self.end_time = Time.now if self.end_time.nil?
+    self.end_time = Time.now.utc if self.end_time.nil?
     save
   end
 
