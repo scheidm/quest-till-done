@@ -1,18 +1,19 @@
-= form_for(@record, :html=> {:multipart =>true}) do |f|
+= form_for(@record) do |f|
   -if @record.errors.any?
     = render 'errors'
 
   .field
-    = f.label :description, "Your Note Here"
+    .form-group
+    = f.label :description, "Your Note Here", :class => 'control-label'
     %br
-    = f.text_area :description, :cols => 55, :rows => 5
+    = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
     %br
-    = f.label :"Select type for Record"
+    = f.label :"Select type for Record", :class => 'control-label'
     %br
-    = f.select :record_type ,options_for_select([["Note", "Note"], ["Link", "Link"], ["Image", "Image"]])
+    = f.select :type ,options_for_select([["Note", "Note"], ["Link", "Link"], ["Image", "Image"]]), { }, :class => 'form-control'
     %br
     %br
-    = f.label :attachement, "Upload Image"
+    = f.label :attachement, "Upload Image", :class => 'control-label'
     = f.file_field(:logo)
     = f.hidden_field :quest_id
 
@@ -20,4 +21,4 @@
 
 
   .actions
-    = f.submit :class => "btn btn-primary"
+    = f.submit :class => "btn btn-primary pull-right"
