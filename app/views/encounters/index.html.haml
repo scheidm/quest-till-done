@@ -1,5 +1,8 @@
 %h2 Time Line
 #treeView
+
+= link_to 'New encounter', new_encounter_path
+%script{src: "http://cdn.knightlab.com/libs/timeline/latest/js/storyjs-embed.js", type: "text/javascript"}
 :javascript
   $(document).ready(function(){
           $("#treeView").jstree({
@@ -8,7 +11,7 @@
               themes : { "theme" : "apple", "icons" : true, "dots": false },
               "json_data": {
                   "ajax" : {
-                      "url" : "/encounters/getTree.json",
+                      "url" : "/encounters/get_user_timeline",
                       "data" : function(m) {
                           return { id: m.attr ? m.attr("id") : 0 };
                       }
@@ -17,13 +20,7 @@
               "types" : {
                   "valid_children" : [ "encounter" ],
                   "types" : {
-                      "valid_children" : [ "encounter" ],
-                      "encounter" : {
-                          "icon" : {
-                              "image" : "/assets/month.png"
-                          },
-                          "valid_children" : [ "note" ],
-                        },
+
                       "link" : {
                         "icon" : {
                             "image" : "/assets/link.png"
@@ -32,6 +29,21 @@
                       "note" : {
                           "icon" : {
                               "image" : "/assets/note.png"
+                          },
+                      },
+                      "campaign" : {
+                        "icon" : {
+                            "image" : "/assets/campaign.png"
+                        },
+                      },
+                      "quest" : {
+                          "icon" : {
+                              "image" : "/assets/image.png"
+                          },
+                      },
+                      "image" : {
+                          "icon" : {
+                              "image" : "/assets/image.png"
                           },
                       },
                       "default" : {
@@ -47,4 +59,4 @@
               }
           );
       });
-= link_to 'New encounter', new_encounter_path
+

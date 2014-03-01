@@ -1,8 +1,8 @@
 # Controller for Campaign
 class CampaignsController < ApplicationController
 
-  require 'json_Generator'
   include JsonGenerator::QuestModule
+  include RoundHelper
 
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
@@ -40,6 +40,7 @@ class CampaignsController < ApplicationController
 
     respond_to do |format|
       if @campaign.save
+        create_round(@campaign, action_name, @campaign)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully started.', location: campaigns_path(@campaign) }
         format.json { render action: 'show', status: :created, location: @campaign }
       else
@@ -63,6 +64,7 @@ class CampaignsController < ApplicationController
     @campaign = Campaign.find(params[:id])
     respond_to do |format|
       if @campaign.update(campaign_params)
+        create_round(@campaign, action_name, @campaign)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
         format.json { head :no_content }
       else
@@ -76,6 +78,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] redirect back to campaigns index page
   def destroy
+    create_round(@campaign, action_name, @campaign)
     @campaign.destroy
     respond_to do |format|
       format.html { redirect_to campaigns_path }

@@ -1,7 +1,7 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
 
-  attr_accessor :encounter, :quest, :record_type
+  attr_accessor :encounter, :quest
   # Record belongs to a quest
   belongs_to :quest
   # Record belongs to a encounter
@@ -15,8 +15,13 @@ class Record < ActiveRecord::Base
   scope :link, ->{where(type: "Link")}
   scope :note, ->{where(type: "Note")}
 
-  def after_create()
-      quest_id = quest.active_quest
+  def assign_encounter
+    self.encounter_id = Encounter.last.id
+    self.save
+  end
+  
+  def to_s
+    "#{self.description} ( for the Quest #{self.quest.to_s} )"
   end
 
 end

@@ -1,8 +1,8 @@
 # Controller for Quest
 class QuestsController < ApplicationController
 
-  require 'json_Generator'
   include JsonGenerator::QuestModule
+  include RoundHelper
 
   # Show all of user's quests
   # @return [Html] A list of quests of the user
@@ -27,15 +27,11 @@ class QuestsController < ApplicationController
   # @return [Html] New quest page
   def new
     @quest = Quest.new()
-    @parent = Quest.find(params[:id])
-    if(@parent != nil)
-      @quest.parent = @parent
-      Rails.logger.debug @parent.campaign?
-      if @parent.campaign?
-        @quest.campaign = @parent
-      else
-        @quest.campaign = @parent.campaign
-      end
+    parent = params[:id]
+    if(parent != nil)
+      @quest.parent_id = parent
+      parent_quest = Quest.find(parent)
+      @quest.campaign_id = parent_quest.campaign_id || parent_quest.id
     end
   end
 
@@ -47,6 +43,7 @@ class QuestsController < ApplicationController
     @quest.status = 'Open'
     respond_to do |format|
       if @quest.save
+        create_round(@quest, action_name, @quest.campaign)
         format.html { redirect_to campaign_path(@quest.campaign), notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
@@ -70,6 +67,7 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
     respond_to do |format|
       if @quest.update(quest_params)
+        create_round(@quest, action_name, @quest.campaign)
         format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,6 +81,7 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] redirect back to quest's campaign page
   def destroy
+    create_round(@quest, action_name, @quest.campaign)
     @quest.destroy
     respond_to do |format|
       format.html { redirect_to campaigns_path }

@@ -45,4 +45,12 @@ class Quest < ActiveRecord::Base
     self.campaign_id.nil?
   end
 
+  def get_campaign
+    return self.campaign || self
+  end
+
+  def to_s
+    self.name
+  end
+
 end
