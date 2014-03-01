@@ -46,7 +46,7 @@
             .col-md-2
               %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
               %div{style: "margin-top: 5px"}
-                %button.btn.btn-success{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Quick Add"}
+                = new_record_link(@active_quest_model) do
                   %span.glyphicon.glyphicon-plus-sign
             .col-md-6.qtd-col
               %table{style: "margin-top: 10px"}
@@ -74,8 +74,8 @@
                     %span.glyphicon.glyphicon-map-marker
                 .navbar-inner
                   %ul.nav.navbar-nav
-                    %li{:class => "#{'active' if current_page?(root_path)}"}
-                      %a{href: "/timeline"} Timeline
+                    %li{:class => "#{'active' if current_page?(encounters_path)}"}
+                      %a{href: encounters_path} Timeline
                     %li{:class => "#{'active' if current_page?(root_path)}"}
                       %a{href: "#"} Priority
                     %li{:class => "#{'active' if current_page?(campaigns_path)}"}
@@ -108,6 +108,13 @@
     = link_to 'Edit Profile', edit_user_registration_path
   %p
     = link_to 'Log Out', destroy_user_session_path, :method => :delete
+#new-record-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title New Quest
+      .modal-body.a-unique-class
 :css
   .clock{
   zoom: 0.3;

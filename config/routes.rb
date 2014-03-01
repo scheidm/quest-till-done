@@ -3,7 +3,7 @@ QuestTillDone::Application.routes.draw do
   devise_for :users
   resources :encounters do
     collection do
-      get 'getTree', 'getState'
+      get 'get_user_timeline'
       post 'setState'
     end
   end
@@ -22,12 +22,6 @@ QuestTillDone::Application.routes.draw do
     end
   end
   resources :campaigns do
-    collection do
-      get 'getTree'
-    end
-  end
-
-  resources :actions do
     collection do
       get 'getTree'
     end
