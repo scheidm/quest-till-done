@@ -19,5 +19,9 @@ class Record < ActiveRecord::Base
     self.encounter_id = Encounter.last.id
     self.save
   end
+  
+  def to_s
+    "#{self.description} ( for the Quest #{self.quest.to_s} )"
+  end
 
 end

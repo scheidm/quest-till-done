@@ -44,4 +44,9 @@ class Quest < ActiveRecord::Base
   def get_campaign
     return self.campaign || self
   end
+
+  def to_s
+    self.name
+  end
+
 end

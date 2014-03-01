@@ -14,7 +14,7 @@ module JsonGenerator
         encounter_data = {:data => encounter.created_at.strftime(format) + ' to ' + end_time}
         encounter_data[:children] = children = []
         encounter.rounds.each {|round|
-          children << {:id => round.event_id, :data => round.event_description + ' ' + round.type, :attr => { :rel => round.type, :href => '/'+ round.type.tableize+'/' + round.event_id.to_s}}
+          children << {:id => round.event_id, :data => round.event_description + ' ' + round.type+": "+round.related_obj.to_s, :attr => { :rel => round.type, :href => round.related_link}}
         }
         data_by_date[encounter.created_at.to_date] ||= Array.new
         data_by_date[encounter.created_at.to_date].push(encounter_data)
