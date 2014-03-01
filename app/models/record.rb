@@ -15,8 +15,9 @@ class Record < ActiveRecord::Base
   scope :link, ->{where(type: "Link")}
   scope :note, ->{where(type: "Note")}
 
-  def after_create()
-      quest_id = quest.active_quest
+  def assign_encounter
+    self.encounter_id = Encounter.last.id
+    self.save
   end
 
 end

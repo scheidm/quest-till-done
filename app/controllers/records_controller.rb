@@ -31,9 +31,6 @@ class RecordsController < ApplicationController
   # @return [Html] redirect back to records index page
   def create
     @record = Record.new(record_params)
-    @encounter = Encounter.last
-    @encounter = Encounter.create if @encounter.nil? || @encounter.created_at<30.minutes.ago
-    @record.encounter_id = @encounter.id
     @record.created_at = DateTime.now
     @user = User.find(current_user.id)
     @record.quest=@user.active_quest
@@ -41,7 +38,8 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       if @record.save
-        create_round(@record, action_name, current_user.active_quest.campaign)
+        create_round(@record, action_name, @record.quest.get_campaign)
+        @record.assign_encounter
         format.html { redirect_to @record, notice: 'Record was successfully created.' }
         format.json { render action: 'show', status: :created, location: @record }
       else
