@@ -1,7 +1,6 @@
 # Controller for Record
 class RecordsController < ApplicationController
 
-  require 'json_Generator'
   include JsonGenerator::QuestModule
   include RoundHelper
 

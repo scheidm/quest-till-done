@@ -1,11 +1,12 @@
 class EncountersController < ApplicationController
 
-  require 'json_Generator'
   include JsonGenerator::EncounterModule
 
   # Show all of user's campaigns
   # @return [Html] the index page for all encounter
   def index
+    #data generated on js side by calling the controller method
+    #get_user_timeline
   end
 
   def get_user_timeline

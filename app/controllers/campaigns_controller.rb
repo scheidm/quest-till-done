@@ -1,7 +1,6 @@
 # Controller for Campaign
 class CampaignsController < ApplicationController
 
-  require 'json_Generator'
   include JsonGenerator::QuestModule
   include RoundHelper
 
