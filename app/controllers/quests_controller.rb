@@ -27,10 +27,15 @@ class QuestsController < ApplicationController
   # @return [Html] New quest page
   def new
     @quest = Quest.new()
-    parent = params[:id]
-    if(parent != nil)
-      @quest.parent_id = parent
-      @quest.campaign = Quest.find(parent).campaign
+    @parent = Quest.find(params[:id])
+    if(@parent != nil)
+      @quest.parent = @parent
+      Rails.logger.debug @parent.campaign?
+      if @parent.campaign?
+        @quest.campaign = @parent
+      else
+        @quest.campaign = @parent.campaign
+      end
     end
   end
 
