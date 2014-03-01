@@ -5,6 +5,8 @@
 #@param full_text [String] the text to be found, 'Ruby on Rails', #'documentation'
 #@param :estimated_cost
 class Quest < ActiveRecord::Base
+  searchkick
+  scope :search_import, -> { includes(:records) }
   acts_as_taggable
   acts_as_taggable_on :skills
   has_many :records
@@ -19,8 +21,6 @@ class Quest < ActiveRecord::Base
   has_many :quests, :foreign_key => 'parent_id'
   # Belongs to a user/owner
   belongs_to :user
-  # Set campaign id after creation
-  #after_create :set_campaign
 
   #searchable do
     #text :name, :description
@@ -40,6 +40,10 @@ class Quest < ActiveRecord::Base
       #notes.map{ |n| n.description }
     #end
   #end
+  #
+  def campaign?
+    self.campaign_id.nil?
+  end
 
   def get_campaign
     return self.campaign || self

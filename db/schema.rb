@@ -70,8 +70,8 @@ ActiveRecord::Schema.define(version: 20140227043038) do
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "quote"
     t.integer  "quest_id"
+    t.text     "quote"
   end
 
   create_table "rounds", force: true do |t|
@@ -145,13 +145,13 @@ ActiveRecord::Schema.define(version: 20140227043038) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "active_quest_id"
-    t.integer  "group_id"
     t.integer  "notification_level",     default: 1,  null: false
     t.integer  "adventure_level"
     t.integer  "recent_level"
     t.text     "achievements"
     t.integer  "level"
     t.integer  "exp"
+    t.integer  "group_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
