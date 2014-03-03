@@ -22,25 +22,12 @@ class Quest < ActiveRecord::Base
   # Belongs to a user/owner
   belongs_to :user
 
-  #searchable do
-    #text :name, :description
-    #text :status
-    #integer :estimated_cost, :current_cost, :parent__id, :campaign_id
-    #time :updated_at,:created_at
-    #text :records do
-      #records.map{ |r| r.description }
-    #end
-    #text :records do
-      #records.map{ |r| r.description }
-    #end
-    #text :links do
-      #links.map{ |l| l.url }
-    #end
-    #text :notes do
-      #notes.map{ |n| n.description }
-    #end
-  #end
-  #
+  def search_data
+    attributes.merge(
+      record_desc: records.map(&:description)
+    )
+  end
+
   def campaign?
     self.campaign_id.nil?
   end
