@@ -1,6 +1,6 @@
 class EncountersController < ApplicationController
 
-  require 'json_Generator.rb'
+  require 'json_generator'
   include JsonGenerator::EncounterModule
 
   # Show all of user's campaigns

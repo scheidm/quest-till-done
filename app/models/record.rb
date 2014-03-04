@@ -1,5 +1,6 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
+  searchkick
 
   attr_accessor :encounter, :quest
   # Record belongs to a quest
