@@ -1,0 +1,15 @@
+%h3 Recent Achievements
+
+~# TODO
+~# Modify the skill_level or current skill level in the future
+-@groups.each do |t|
+%table
+  %thead
+    %tr
+      %th User Name
+      %th Group Name
+
+      - t.order(skill_level).each do |person|
+      %tr
+        =person.name
+        =person.skill_level.to_s

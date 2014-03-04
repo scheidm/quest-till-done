@@ -1,28 +1,34 @@
-%h2 Pomodoros
+%h2 Time Line
 #treeView
 :javascript
   $(document).ready(function(){
           $("#treeView").jstree({
               core : { "animation" : 100 },
-              <!--themes : { "theme" : "classic", "icons" : true, "dots": false },-->
+
+              themes : { "theme" : "apple", "icons" : true, "dots": false },
               "json_data": {
                   "ajax" : {
-                      "url" : "/pomodoros/getTree.json",
+                      "url" : "/encounters/getTree.json",
                       "data" : function(m) {
                           return { id: m.attr ? m.attr("id") : 0 };
                       }
                   }
               },
               "types" : {
-                  "valid_children" : [ "pomodoro" ],
+                  "valid_children" : [ "encounter" ],
                   "types" : {
-                      "valid_children" : [ "pomodoro" ],
-                      "pomodoro" : {
+                      "valid_children" : [ "encounter" ],
+                      "encounter" : {
                           "icon" : {
-                              "image" : "/assets/Tomato-icon-min.png"
+                              "image" : "/assets/month.png"
                           },
                           "valid_children" : [ "note" ],
                         },
+                      "link" : {
+                        "icon" : {
+                            "image" : "/assets/link.png"
+                        },
+                      },
                       "note" : {
                           "icon" : {
                               "image" : "/assets/note.png"
@@ -41,4 +47,4 @@
               }
           );
       });
-= link_to 'New Pomodoro', new_pomodoro_path
+= link_to 'New encounter', new_encounter_path

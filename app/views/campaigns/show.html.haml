@@ -1,0 +1,50 @@
+%h2
+  = @campaign.name
+
+%p
+  %strong Description:
+  = @campaign.description
+
+//= link_to new_quest_path(:id => @campaign.id), :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Add Quest' do
+//%span.glyphicon.glyphicon-plus
+= link_to new_quest_path(:id => @campaign.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
+  %span.glyphicon.glyphicon-plus
+= link_to '#edit-campaign-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
+  %span.glyphicon.glyphicon-pencil
+= link_to campaigns_path, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
+  %span.glyphicon.glyphicon-share-alt
+
+#tree-container{data: {campaign_id: @campaign.id}}
+#edit-campaign-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title Edit Campaign
+      .modal-body
+        = render 'form'
+#new-quest-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title New Quest
+      .modal-body.a-unique-class
+:javascript
+  $(document).ready(function () {
+     var treeId =  { id: $('#tree-container').data('campaign-id')};
+     $.ajax({
+       type: "GET",
+       url: "getTree",
+       data: treeId,
+       success: function(data) {
+        var jsonData = JSON.parse(data);
+
+        buildTree(jsonData);
+       }
+     });
+  });
+
+
+
+

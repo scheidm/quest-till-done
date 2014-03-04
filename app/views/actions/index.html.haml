@@ -1,0 +1,154 @@
+%h1 Tasks
+-#%table{:class => "table table-hover"}
+-#  %thead
+-#    %tr
+-#      %th Name
+-#      %th Description
+-#      %th Status
+-#      %th Deadline
+-#  %tbody
+-#    - @actions.each do |action|
+-#      %tr
+-#        %td= action.name
+-#        %td= action.description
+-#        %td= action.status
+-#        %td= action.deadline
+-#        %td= link_to 'Show', action
+-#        %td= link_to 'Edit', edit_action_path(action)
+-#        %td= link_to 'Destroy', action, method: :delete, data: { confirm: 'Are you sure?' }
+-#%br/
+%ul#tab.nav.nav-tabs
+  %li
+    %a{"data-toggle" => "tab", href: "#0"} OverView
+  %li
+    %a{"data-toggle" => "tab", href: "#1"} Mock UI
+  %li
+    %a{"data-toggle" => "tab", href: "#2"} Integration Test
+  %li
+    %a{"data-toggle" => "tab", href: "#3"} SRS
+  %li
+    %a{"data-toggle" => "tab", href: "#4"} Unit Test
+
+/ Tab panes
+.tab-content
+  #tree-container
+= link_to 'New Task', new_action_path
+
+:css
+  .g {
+    fill: none;
+  }
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .node {
+    font: 10px sans-serif;
+  }
+
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+
+:javascript
+
+  var treeData1 = {"name" : "Mock UI", "info" : "tst", "children" : [
+      {"name" : "Timeline" },
+      {"name" : "User Page" },
+      {"name" : "Project Page", "children": [
+          {"name" : "Tree structure", "children" :[
+              {"name" : "Nodes" },
+              {"name" : "Links" }
+          ]}] }
+  ]};
+  var treeData2 = {"name" : "Integration Test", "info" : "tst", "children" : [
+        {"name" : "Model Controller", "children": [
+            {"name" : "Modal validation" }]},
+        {"name" : "User Authentication" },
+    ]};
+  var treeData3 = {"name" : "SRS", "info" : "tst", "children" : [
+        {"name" : "Template" },
+        {"name" : "Requirement" , "children": [
+            {"name" : "Functional", "children" :[
+                {"name" : "TimeLine" },
+                {"name" : "SCM Integration" }
+            ]},
+            {"name" : "Non-Functional", "children" :[
+                {"name" : "Database" },
+                {"name" : "Server" }
+            ]}
+            ]},
+        {"name" : "General", "children": [
+            {"name" : "Metrics", "children" :[
+                {"name" : "Requirement" },
+                {"name" : "Testing" }
+            ]},
+            {"name" : "Information", "children" :[
+                {"name" : "Terminology" },
+                {"name" : "Table of content" }
+            ]}
+            ] }
+    ]};
+  var treeData4 = {"name" : "Unit Test", "info" : "tst", "children" : [
+        {"name" : "Controller" , "children": [
+            {"name" : "User controller", "children" :[
+              {"name" : "Authentication" },
+              {"name" : "User session" }
+            ]},
+            {"name" : "ProjectController"},
+            {"name" : "NodeController"}
+        ]},
+        {"name" : "Javascript" },
+        {"name" : "Model", "children": [
+            {"name" : "Validation", "children" :[
+                {"name" : "Nodes" },
+                {"name" : "Links" }
+            ]}] }
+    ]};
+  function combineData()
+  {
+    var data = '{"name" : "Steve", "info" : "tst", "children" : [';
+    data += JSON.stringify(treeData1) + ','
+     + JSON.stringify(treeData2) + ','
+     + JSON.stringify(treeData3) + ','
+     + JSON.stringify(treeData4) + ']}';
+    return $.parseJSON(data);
+  };
+  $('#tab a[href="#0"]').click(function (e) {
+    e.preventDefault();
+    $('#tree-container').html('');
+    buildTreeRadial(combineData());
+    $(this).tab('show')
+  });
+  $('#tab a[href="#1"]').click(function (e) {
+    e.preventDefault();
+    $('#tree-container').html('');
+    var treeData = JSON.parse(JSON.stringify(treeData1));
+    buildTree(treeData);
+    $(this).tab('show')
+  });
+  $('#tab a[href="#2"]').click(function (e) {
+    e.preventDefault();
+    $('#tree-container').html('');
+    var treeData = JSON.parse(JSON.stringify(treeData2));
+      buildTree(treeData);
+    $(this).tab('show')
+  })
+  $('#tab a[href="#3"]').click(function (e) {
+    e.preventDefault();
+    $('#tree-container').html('');
+    var treeData = JSON.parse(JSON.stringify(treeData3));
+      buildTree(treeData);
+    $(this).tab('show')
+  })
+  $('#tab a[href="#4"]').click(function (e) {
+    e.preventDefault();
+    $('#tree-container').html('');
+    var treeData = JSON.parse(JSON.stringify(treeData4));
+      buildTree(treeData);
+    $(this).tab('show')
+  })

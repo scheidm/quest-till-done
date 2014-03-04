@@ -1,0 +1,70 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @quest.name
+%p
+  %strong Description
+  =@quest.description
+  %p#quest_id.hidden
+    = @quest.id
+  %p#active_quest.hidden
+    = @active_quest
+%button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
+  %span.glyphicon.glyphicon-eye-open
+= link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
+  %span.glyphicon.glyphicon-plus
+= link_to '#edit-quest-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
+  %span.glyphicon.glyphicon-pencil
+= link_to campaign_path(@quest.campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
+  %span.glyphicon.glyphicon-share-alt
+
+#edit-quest-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title Edit Quest
+      .modal-body
+        = render 'form'
+#new-quest-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title New Quest
+      .modal-body.a-unique-class
+
+#tree-container{data: {quest_id: @quest.id} }
+
+:javascript
+  $(document).ready(function () {
+     var treeId =  { id: $('#tree-container').data('quest-id')};
+     $.ajax({
+       type: "GET",
+       url: "getTree",
+       data: treeId,
+       success: function(data) {
+        var jsonData = JSON.parse(data);
+
+        buildTree(jsonData);
+       }
+     });
+     $('#activeBtn').click(function()
+     {
+     var questId = { id: $('#quest_id').html()}
+        $.ajax({
+           type: "POST",
+           url: "set_active",
+           data: questId,
+           success: function(data) {
+              $('.flashMessage').html("Successfully set current quest to active quest");
+          }
+        });
+     });
+     var active = $('#active_quest').html().trim();
+     if(active == "true")
+        $('#activeBtn').prop('disabled', true);
+     $('#activeBtn').click(function() {
+        $('#activeBtn').prop('disabled', true);
+     })
+  });

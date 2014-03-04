@@ -1,0 +1,23 @@
+= form_for(@record, :html=> {:multipart =>true}) do |f|
+  -if @record.errors.any?
+    = render 'errors'
+
+  .field
+    = f.label :description, "Your Note Here"
+    %br
+    = f.text_area :description, :cols => 55, :rows => 5
+    %br
+    = f.label :"Select type for Record"
+    %br
+    = f.select :record_type ,options_for_select([["Note", "Note"], ["Link", "Link"], ["Image", "Image"]])
+    %br
+    %br
+    = f.label :attachement, "Upload Image"
+    = f.file_field(:logo)
+    = f.hidden_field :quest_id
+
+    %br
+
+
+  .actions
+    = f.submit :class => "btn btn-primary"
