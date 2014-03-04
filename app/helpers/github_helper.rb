@@ -1,5 +1,4 @@
 module GithubHelper
-  #github following
 
   def authorize
     @github  = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
@@ -23,7 +22,7 @@ module GithubHelper
   def login
     #@github_ = Github.new(:oauth_token => @user.github_token)
 
-    @github = Github.new login:'x', password:'x#'
+    @github = Github.new login:'x', password:'x'
     #@github = Github.new oauth_token:'11e5c37e512925d7de8f', client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995', login:'codingsnippets'
 
   end
@@ -83,7 +82,7 @@ module GithubHelper
   def import(username, projectname)
     project= Quest.new
     project.name = projectname
-
+    project.save
 
     # encounter stop
     #currentEnounter = Encounter.last
@@ -94,26 +93,38 @@ module GithubHelper
 
 
     # new encounter
-
+    Encounter.last.close
     commit_encounter =  Encounter.new
-    compaign = Campaign.new
+    campaign = Campaign.new
+    campaign.name = projectname
+    campaign.save
+    create_round(campaign, action_name, campaign)
+    commit_encounter.save
+    create_round(commit_encounter, action_name, campaign)
+
 
 
     @commits.each do |description, url|
       new_record = Record.new
-      #new_record.record_type = 'Link'
+      new_record.encounter_id = commit_encounter.id
+      new_record.quest_id = campaign.id
+      new_record.record_type = 'Link'
       new_record.description = description
       new_record.url = url
       new_record.save
-      create_round( new_record, action_name, commit_encounter)
+      create_round( new_record, action_name, campaign)
     end
 
     @issues.each do |description, url|
       new_record = Record.new
-      #new_record.recrod_type = 'Link'
+      new_record.encounter_id = commit_encounter.id
+      new_record.quest_id = campaign.id
+      new_record.record_type = 'Link'
       new_record.description = description
       new_record.url = url
       new_record.save
+      create_round( new_record, action_name, campaign)
+
     end
 
 
