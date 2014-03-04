@@ -45,4 +45,11 @@ class ApplicationController < ActionController::Base
     render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
 
   end
+
+
+  def full_search query
+    recs=Records.search query
+    quests=Quest.search query
+    @results=recs.results+quests.results
+  end
 end
