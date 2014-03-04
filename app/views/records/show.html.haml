@@ -4,10 +4,15 @@
   = @record.description
 %p
   %strong Encounter ID:
-  = @record.encounter_id
+  = @record.encounter
 %p
   %strong Type:
   = @record.record_type
+
+%p
+  %strong Link:
+  = @record.url
+
 
 = link_to 'Edit', edit_record_path(@record)
 

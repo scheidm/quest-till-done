@@ -1,0 +1,19 @@
+%h1 Show data pulled
+%h2 Repos
+%ul
+-@repos.each do |key,value|
+    %li
+        %a{ :href=>value }=key
+
+
+%h2 Issues for QTD
+%ul
+-@issues.each do |key,value|
+    %li
+        %a{ :href=>value }=key
+
+%h2 Commits
+%ul
+-@commits.each do |key,value|
+    %li
+        %a{ :href=>value }=key
