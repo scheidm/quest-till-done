@@ -22,12 +22,7 @@ class Round < ActiveRecord::Base
   end
 
   def related_obj
-    x={ 
-      "Record" => lambda{ |id| Record.find(id)},
-      "Campaign" => lambda{ |id| Campaign.find(id)},
-      "Quest" => lambda{ |id| Quest.find(id)}
-    }
-    x[self.type].call(self.event_id)
+    self.type.singularize.classify.constantize.find(self.event_id)
   end
 
   def related_link
