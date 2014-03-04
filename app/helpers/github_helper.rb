@@ -43,7 +43,19 @@ module GithubHelper
     @repos =  Hash.new
     JSON.parse(@github.repos.list.to_json).each do |t|
       @repos[(t["name"])] = t["html_url"]
+      if !Githubaccounts.find_by github_user: t["owner"]["login"], url: t["html_url"]
+        new_github = Githubaccounts.new
+        new_github.user = current_user
+        new_github.project_name = t["name"]
+        new_github.url = t["html_url"]
+        new_github.github_user = t["owner"]["login"]
+        new_github.save
+      end
+
     end
+
+
+
     return @repos
   end
 
@@ -79,7 +91,7 @@ module GithubHelper
 
   # Import a project to QTD
   # Note: this should be run only when first time import is initiated
-  def import(username, projectname)
+  def initial_import(username, projectname)
     project= Quest.new
     project.name = projectname
     project.save
@@ -93,7 +105,7 @@ module GithubHelper
 
 
     # new encounter
-    Encounter.last.close
+
     commit_encounter =  Encounter.new
     campaign = Campaign.new
     campaign.name = projectname
@@ -105,25 +117,27 @@ module GithubHelper
 
 
     @commits.each do |description, url|
-      new_record = Record.new
-      new_record.encounter_id = commit_encounter.id
-      new_record.quest_id = campaign.id
-      new_record.record_type = 'Link'
-      new_record.description = description
-      new_record.url = url
-      new_record.save
-      create_round( new_record, action_name, campaign)
+      new_commit = Commit.new
+      new_commit.encounter_id = commit_encounter.id
+      new_commit.quest_id = campaign.id
+      new_commit.description = description
+      new_commit.url = url
+      new_commit.github_projectname = projectname
+      new_commit.github_username= username
+      new_commit.save
+      create_round( new_commit, action_name, campaign)
     end
 
     @issues.each do |description, url|
-      new_record = Record.new
-      new_record.encounter_id = commit_encounter.id
-      new_record.quest_id = campaign.id
-      new_record.record_type = 'Link'
-      new_record.description = description
-      new_record.url = url
-      new_record.save
-      create_round( new_record, action_name, campaign)
+      new_issue = Issue.new
+      new_issue.encounter_id = commit_encounter.id
+      new_issue.quest_id = campaign.id
+      new_issue.description = description
+      new_issue.url = url
+      new_issue.github_projectname = projectname
+      new_issue.github_username = username
+      new_issue.save
+      create_round( new_issue, action_name, campaign)
 
     end
 
@@ -139,7 +153,11 @@ module GithubHelper
     #@timer.resume
     #project.save
 
-
-
   end
+
+
+  def del_project(username, projectname)
+    Record.where{(type == Commit) || (type == Issue)}.destroy_all
+  end
+
 end
