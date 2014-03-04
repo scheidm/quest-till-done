@@ -110,12 +110,12 @@
     = link_to 'Log Out', destroy_user_session_path, :method => :delete
 
 #new-record-modal.modal.fade
-  .modal-dialog
+  .modal-dialog{:style=> 'width: 800px;'}
     .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Record
-      .modal-body.a-unique-class
+      .modal-body.a-unique-class.record-modal-body
 :css
   .clock{
   zoom: 0.3;

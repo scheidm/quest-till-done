@@ -80,3 +80,67 @@
     padding-left: 5px;
 }
 .badge-important{background-color:#b94a48;}
+
+.record-modal-dialog {
+    width: 800px;
+}
+
+.record-panel {
+    display: table;
+}
+
+.record-panel-left {
+    position: relative;
+    display: table-cell;
+    padding-bottom: 30px;
+    min-width: 178px;
+}
+
+.record-panel-right {
+    border-left: 1px solid #e2e2e2;
+    width: 600px;
+}
+
+.record-panel-right-content {
+    margin: 10px 10px 10px 10px;
+}
+
+.record-type-list {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.record-type-list .record-type-item.record-type-selected {
+    background: #428bca;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 rgba(0,0,0,0.25);
+}
+
+.record-type-list .record-type-item {
+    display: block;
+    position: relative;
+    border: 0;
+    height: 24px;
+    background: 0;
+    color: #555;
+    text-decoration: none;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: middle
+}
+
+.record-type-item-align {
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 24px;
+}
+
+.record-modal-body {
+    padding: 0px;
+}
+
+.record-form-hidden {
+    display:none
+}
