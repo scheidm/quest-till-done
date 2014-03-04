@@ -26,7 +26,7 @@ class QuestTest < ActiveSupport::TestCase
     Record.reindex
     Rails.logger.info "TESTING"
     Rails.logger.info Record.first.description
-    x=Quest.search "Red", facets: [:record_desc]
+    x=Quest.search "Red"
     assert_equal 1, x.results.length
   end
 end

@@ -24,7 +24,7 @@ class Quest < ActiveRecord::Base
 
   def search_data
     attributes.merge(
-      record_desc: records.map(&:description)
+      note_desc: notes.map(&:description)
     )
   end
 
