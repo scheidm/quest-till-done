@@ -3,15 +3,15 @@
 .record-panel-left.pull-left
   %ul.record-type-list
     %li
-      %a#note.record-type-item.record-type-selected{href: "#"}
+      %a#note.record-type-item.record-type-selected{href: "javascript:void(0)"}
         %span.record-type-item-align
           %span Note
     %li
-      %a#link.record-type-item{href: "#"}
+      %a#link.record-type-item{href: "javascript:void(0)"}
         %span.record-type-item-align
           %span Link
     %li
-      %a#image.record-type-item{href: "#"}
+      %a#image.record-type-item{href: "javascript:void(0)"}
         %span.record-type-item-align
           %span Image
 .record-panel-right.pull-right
@@ -69,26 +69,26 @@
 
 
 :javascript
-  $(document).ready(function() {
-    $('#note').click(function(){
-      $('.new_record').addClass('record-form-hidden');
-      $('.record-type-item').removeClass('record-type-selected');
-      $('#note-form').removeClass('record-form-hidden');
+  $('#note').click(function(e){
+    e.preventDefault();
+    $('.new_record').addClass('record-form-hidden');
+    $('.record-type-item').removeClass('record-type-selected');
+    $('#note-form').removeClass('record-form-hidden');
 
-      $('#note').addClass('record-type-selected')
-    });
-    $('#link').click(function(){
-      $('.new_record').addClass('record-form-hidden');
-      $('.record-type-item').removeClass('record-type-selected');
-      $('#link-form').removeClass('record-form-hidden');
-      $('#link').addClass('record-type-selected')
-    });
-    $('#image').click(function(){
-      $('.new_record').addClass('record-form-hidden');
-      $('.record-type-item').removeClass('record-type-selected');
-      $('#image-form').removeClass('record-form-hidden');
-      $('#image').addClass('record-type-selected')
-    });
-
+    $('#note').addClass('record-type-selected')
+  });
+  $('#link').click(function(e){
+    e.preventDefault();
+    $('.new_record').addClass('record-form-hidden');
+    $('.record-type-item').removeClass('record-type-selected');
+    $('#link-form').removeClass('record-form-hidden');
+    $('#link').addClass('record-type-selected')
+  });
+  $('#image').click(function(e){
+    e.preventDefault();
+    $('.new_record').addClass('record-form-hidden');
+    $('.record-type-item').removeClass('record-type-selected');
+    $('#image-form').removeClass('record-form-hidden');
+    $('#image').addClass('record-type-selected')
   });
 

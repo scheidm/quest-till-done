@@ -76,8 +76,8 @@
                   %ul.nav.navbar-nav
                     %li{:class => "#{'active' if current_page?(encounters_path)}"}
                       %a{href: encounters_path} Timeline
-                    %li{:class => "#{'active' if current_page?(root_path)}"}
-                      %a{href: "#"} Priority
+                    %li{:class => "#{'active' if current_page?(priorities_path)}"}
+                      %a{href: priorities_path} Priority
                     %li{:class => "#{'active' if current_page?(campaigns_path)}"}
                       %a{href: campaigns_path} Campaign
                     %li{:class => "#{'active' if current_page?(root_path)}"}
@@ -115,7 +115,7 @@
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Record
-      .modal-body.a-unique-class.record-modal-body
+      .modal-body.record-unique-class.record-modal-body
 :css
   .clock{
   zoom: 0.3;
