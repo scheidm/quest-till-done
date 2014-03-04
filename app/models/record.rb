@@ -25,4 +25,15 @@ class Record < ActiveRecord::Base
     "#{self.description} ( for the Quest #{self.quest.to_s} )"
   end
 
+  @child_classes = []
+
+  def self.inherited(child)
+    @child_classes << child
+    super # important!
+  end
+
+  def self.child_classes
+    @child_classes
+  end
+
 end
