@@ -108,12 +108,13 @@
     = link_to 'Edit Profile', edit_user_registration_path
   %p
     = link_to 'Log Out', destroy_user_session_path, :method => :delete
+
 #new-record-modal.modal.fade
   .modal-dialog
     .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h4#myModalLabel.modal-title New Quest
+        %h4#myModalLabel.modal-title New Record
       .modal-body.a-unique-class
 :css
   .clock{
