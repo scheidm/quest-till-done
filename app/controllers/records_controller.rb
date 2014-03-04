@@ -1,6 +1,7 @@
 # Controller for Record
 class RecordsController < ApplicationController
 
+  require 'json_generator'
   include JsonGenerator::QuestModule
   include RoundHelper
 
@@ -38,8 +39,9 @@ class RecordsController < ApplicationController
       if @record.save
         create_round(@record, action_name, @record.quest.get_campaign)
         @record.assign_encounter
-        format.html { redirect_to @record, notice: 'Record was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @record }
+        format.html { redirect_to :back, notice: 'Record was successfully created.'}
+        #format.html { redirect_to @record, notice: 'Record was successfully created.' }
+        #format.json { render action: 'show', status: :created, location: @record }
       else
         format.html { render action: 'new'}
         format.json { render json: @record.errors, status: :unprocessable_entity }
@@ -59,6 +61,6 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :record_type)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type)
   end
 end

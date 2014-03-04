@@ -1,5 +1,6 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
+  searchkick
 
   attr_accessor :encounter, :quest
   # Record belongs to a quest
@@ -22,6 +23,17 @@ class Record < ActiveRecord::Base
   
   def to_s
     "#{self.description} ( for the Quest #{self.quest.to_s} )"
+  end
+
+  @child_classes = []
+
+  def self.inherited(child)
+    @child_classes << child
+    super # important!
+  end
+
+  def self.child_classes
+    @child_classes
   end
 
 end

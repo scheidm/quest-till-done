@@ -1,6 +1,7 @@
 # Controller for Quest
 class QuestsController < ApplicationController
 
+  require 'json_generator'
   include JsonGenerator::QuestModule
   include RoundHelper
 
