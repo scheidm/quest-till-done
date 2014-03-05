@@ -22,8 +22,8 @@ module GithubHelper
   def login
     #@github_ = Github.new(:oauth_token => @user.github_token)
 
-    @github = Github.new login:'x', password:'x'
-    #@github = Github.new oauth_token:'11e5c37e512925d7de8f', client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995', login:'codingsnippets'
+    #@github = Github.new login:'x', password:'x'
+    @github = Github.new oauth_token:'6f4956e20567870877bf184f03386d5e05a66eb6', client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995', login:'codingsnippets'
 
   end
 
@@ -68,7 +68,6 @@ module GithubHelper
     JSON.parse(issueobj.to_json).each do |t|
       @issues[t["title"]] = t["html_url"]
     end
-    return @issues
   end
 
 
@@ -86,7 +85,6 @@ module GithubHelper
     JSON.parse((@github.repos.commits.all username,projectname).to_json).each do |t|
       @commits[t["commit"]["message"]] = t["html_url"]
     end
-    @commits
   end
 
   # Import a project to QTD
