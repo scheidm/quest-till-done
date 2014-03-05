@@ -49,107 +49,98 @@ module GithubHelper
         new_github.project_name = t["name"]
         new_github.url = t["html_url"]
         new_github.github_user = t["owner"]["login"]
+        new_github.imported = nil
         new_github.save
       end
-
     end
-
-
-
-    return @repos
   end
 
 
   # List Issues
   # @return [Hash] The full list of issues
-  def list_issues(username, projectname)
+  def list_issues(username, projectname, encounter, campaign)
     @issues = Hash.new
     issueobj =  @github.issues.list :user => username, :repo => projectname
     JSON.parse(issueobj.to_json).each do |t|
       @issues[t["title"]] = t["html_url"]
+      if encounter || campaign
+        if !Record.find_by description: t["title"], url: t["html_url"]
+          new_issue = Issue.new
+          new_issue.encounter_id = encounter.id
+          new_issue.quest_id = campaign.id
+          new_issue.description = t["title"]
+          new_issue.url = t["html_url"]
+          new_issue.github_projectname = projectname
+          new_issue.github_username = username
+          new_issue.save
+          create_round( new_issue, action_name, campaign)
+        end
+      end
     end
-  end
-
-
-
-  #TODO need to take second look at the format
-  def save(project)
 
   end
-
 
   # Get commits from a project
-
-  def commits(username, projectname)
+  def list_commits(username, projectname, encounter, campaign)
     @commits = Hash.new
     JSON.parse((@github.repos.commits.all username,projectname).to_json).each do |t|
       @commits[t["commit"]["message"]] = t["html_url"]
+      if encounter && campaign
+        if !Record.find_by sha: t["sha"]
+          new_commit = Commit.new
+          new_commit.encounter_id = encounter.id
+          new_commit.quest_id = campaign.id
+          new_commit.description = t["commit"]["message"]
+          new_commit.url = t["html_url"]
+          new_commit.github_projectname = projectname
+          new_commit.github_username= username
+          new_commit.sha = t["sha"]
+          new_commit.save
+          create_round( new_commit, action_name, campaign)
+        end
+      end
     end
   end
 
   # Import a project to QTD
   # Note: this should be run only when first time import is initiated
   def initial_import(username, projectname)
-    project= Quest.new
-    project.name = projectname
-    project.save
+    # set import status
+    project = Githubaccounts.find_by(github_user: username, project_name: projectname, user_id: current_user)
+
+    if project.imported
+      return
+    end
+    # set as imported
+
+    project.imported = 1
+
 
     # encounter stop
-    #currentEnounter = Encounter.last
-    #currentEnounter.stop
-
-    #@timer.stop_timer
-    #@timer.reset
-
+    if Encounter.last
+      Encounter.last.close
+    end
 
     # new encounter
+    import_encounter =  Encounter.new
+    import_campaign = Campaign.new
+    import_campaign.name = projectname
+    import_campaign.description = "Imported Project for #{projectname}"
 
-    commit_encounter =  Encounter.new
-    campaign = Campaign.new
-    campaign.name = projectname
-    campaign.save
-    create_round(campaign, action_name, campaign)
-    commit_encounter.save
-    create_round(commit_encounter, action_name, campaign)
-
-
-
-    @commits.each do |description, url|
-      new_commit = Commit.new
-      new_commit.encounter_id = commit_encounter.id
-      new_commit.quest_id = campaign.id
-      new_commit.description = description
-      new_commit.url = url
-      new_commit.github_projectname = projectname
-      new_commit.github_username= username
-      new_commit.save
-      create_round( new_commit, action_name, campaign)
-    end
-
-    @issues.each do |description, url|
-      new_issue = Issue.new
-      new_issue.encounter_id = commit_encounter.id
-      new_issue.quest_id = campaign.id
-      new_issue.description = description
-      new_issue.url = url
-      new_issue.github_projectname = projectname
-      new_issue.github_username = username
-      new_issue.save
-      create_round( new_issue, action_name, campaign)
-
-    end
+    import_campaign.save
+    create_round(import_campaign, action_name, import_campaign)
+    import_encounter.save
+    create_round(import_encounter, action_name, import_campaign)
 
 
+    # import commits & issues
+    list_commits username, projectname, import_encounter, import_campaign
+    list_issues username, projectname, import_encounter, import_campaign
 
-    # end encounter
-    commit_encounter.save
 
+    #Close Encounter
+    Encounter.last.close
 
-    # create new encounter and add reamaing time
-    remaining_encounter = Encounter.new
-    # TODO NO resume function in timer???
-    #@timer.resume
-    #project.save
 
   end
 

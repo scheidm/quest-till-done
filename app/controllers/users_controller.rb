@@ -27,9 +27,8 @@ class UsersController < ApplicationController
   def show
     login
     list_projects
-    list_issues 'scheidm', 'quest-till-done'
-    commits 'scheidm', 'quest-till-done'
-    initial_import 'scheidm', 'quest-till-done'
+    list_issues 'scheidm', 'quest-till-done', nil, nil
+    list_commits 'scheidm', 'quest-till-done', nil, nil
   end
 
 
