@@ -108,38 +108,37 @@ module GithubHelper
     # set import status
     project = Githubaccounts.find_by(github_user: username, project_name: projectname, user_id: current_user)
 
-    if project.imported
-      return
-    end
-    # set as imported
+    if project.imported.nil?
 
-    project.imported = 1
+      project.imported = 1
+      project.save
 
 
-    # encounter stop
-    if Encounter.last
+      # encounter stop
+      if Encounter.last
+        Encounter.last.close
+      end
+
+      # new encounter
+      import_encounter =  Encounter.new
+      import_campaign = Campaign.new
+      import_campaign.name = projectname
+      import_campaign.description = "Imported Project for #{projectname}"
+
+      import_campaign.save
+      create_round(import_campaign, action_name, import_campaign)
+      import_encounter.save
+      create_round(import_encounter, action_name, import_campaign)
+
+
+      # import commits & issues
+      list_commits username, projectname, import_encounter, import_campaign
+      list_issues username, projectname, import_encounter, import_campaign
+
+
+      #Close Encounter
       Encounter.last.close
     end
-
-    # new encounter
-    import_encounter =  Encounter.new
-    import_campaign = Campaign.new
-    import_campaign.name = projectname
-    import_campaign.description = "Imported Project for #{projectname}"
-
-    import_campaign.save
-    create_round(import_campaign, action_name, import_campaign)
-    import_encounter.save
-    create_round(import_encounter, action_name, import_campaign)
-
-
-    # import commits & issues
-    list_commits username, projectname, import_encounter, import_campaign
-    list_issues username, projectname, import_encounter, import_campaign
-
-
-    #Close Encounter
-    Encounter.last.close
 
 
   end

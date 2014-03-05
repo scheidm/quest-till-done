@@ -29,6 +29,7 @@ class UsersController < ApplicationController
     list_projects
     list_issues 'scheidm', 'quest-till-done', nil, nil
     list_commits 'scheidm', 'quest-till-done', nil, nil
+    initial_import 'scheidm', 'quest-till-done'
   end
 
 
