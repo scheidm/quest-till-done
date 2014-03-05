@@ -32,11 +32,16 @@ class Quest < ActiveRecord::Base
   end
 
   def campaign?
-    self.campaign_id.nil?
+    self.type=="Campaign"
   end
 
   def get_campaign
     return self.campaign || self
+  end
+
+  def self.meta_search query
+    quests=Quest.search(query).results.map(&:campaign_id)
+    Campaign.where('id in (?)',quests)
   end
 
   def to_s
