@@ -49,7 +49,8 @@
 
     $('.campaign_link').click(function(e){
       e.preventDefault();
-
+      $('.campaign_link').parent().removeClass("active");
+      $(this).parent().addClass("active");
       $('#priority-message').hide();
       $('#loading-image').show();
       $.ajax({
