@@ -24,7 +24,19 @@ class QuestTest < ActiveSupport::TestCase
 
   test "Search related link description" do
     Record.reindex
-    x=Quest.search "Red", include: [:notes]
+    x=Quest.search "Red", include: [:links]
+    assert_equal 1, x.results.length
+  end
+
+  test "Search related link quote" do
+    Record.reindex
+    x=Quest.search "thorn", include: [:links]
+    assert_equal 1, x.results.length
+  end
+
+  test "Search related note description" do
+    Record.reindex
+    x=Quest.search "squirrel", include: [:notes]
     assert_equal 1, x.results.length
   end
 end
