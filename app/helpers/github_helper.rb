@@ -55,6 +55,15 @@ module GithubHelper
     end
   end
 
+  #List Branches
+  def list_branches(username, projectname)
+    @github.repos.user = username
+    @github.repos.repo = projectname
+    @branches = Hash.new()
+    @github.repos.branches.each do |t|
+      @branches[t["name"]] = t["commit"]["sha"]
+    end
+  end
 
   # List Issues
   # @return [Hash] The full list of issues
@@ -83,23 +92,28 @@ module GithubHelper
   # Get commits from a project
   def list_commits(username, projectname, encounter, campaign)
     @commits = Hash.new
-    JSON.parse((@github.repos.commits.all username,projectname).to_json).each do |t|
-      @commits[t["commit"]["message"]] = t["html_url"]
-      if encounter && campaign
-        if !Record.find_by sha: t["sha"]
-          new_commit = Commit.new
-          new_commit.encounter_id = encounter.id
-          new_commit.quest_id = campaign.id
-          new_commit.description = t["commit"]["message"]
-          new_commit.url = t["html_url"]
-          new_commit.github_projectname = projectname
-          new_commit.github_username= username
-          new_commit.sha = t["sha"]
-          new_commit.save
-          create_round( new_commit, action_name, campaign)
+
+    @branches.each do |branch_name, branch_sha|
+      JSON.parse((@github.repos.commits.list( username,projectname, :sha => branch_sha)).to_json).each do |t|
+        @commits[t["commit"]["message"]] = t["html_url"]
+        if encounter && campaign
+          if !Record.find_by sha: t["sha"]
+            new_commit = Commit.new
+            new_commit.encounter_id = encounter.id
+            new_commit.quest_id = campaign.id
+            new_commit.description = t["commit"]["message"]
+            new_commit.url = t["html_url"]
+            new_commit.github_projectname = projectname
+            new_commit.github_username= username
+            new_commit.sha = t["sha"]
+            new_commit.save
+            create_round(new_commit, action_name, campaign)
+          end
         end
       end
+
     end
+
   end
 
   # Import a project to QTD
