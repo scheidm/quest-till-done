@@ -1,5 +1,5 @@
 panda_record: {
-  record_type: Link,
+  type: Link,
   description: Red,
   quote: "like a rose, with a stem and pointy thorns",
   encounter_id: 1,
