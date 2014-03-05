@@ -1,8 +1,9 @@
 panda_record: {
-  record_type: Link,
+  type: Link,
   description: Red,
   quote: "like a rose, with a stem and pointy thorns",
   encounter_id: 1,
+  quest_id: 1,
   created_at: 1393875463,
   updated_at: 1393875463,
   id: 1

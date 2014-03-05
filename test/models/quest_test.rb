@@ -22,11 +22,9 @@ class QuestTest < ActiveSupport::TestCase
     assert_equal 1, x.results.length
   end
 
-  #test "Search related record description" do
-    #Record.reindex
-    #Rails.logger.info "TESTING"
-    #Rails.logger.info Record.first.description
-    #x=Quest.search "Red"
-    #assert_equal 1, x.results.length
-  #end
+  test "Search related link description" do
+    Record.reindex
+    x=Quest.search "Red", include: [:notes]
+    assert_equal 1, x.results.length
+  end
 end
