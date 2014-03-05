@@ -1,6 +1,11 @@
-class UsersController < ApplicationController
-  def index
 
+class UsersController < ApplicationController
+
+  include RoundHelper
+  include GithubHelper
+
+  def index
+    @user = current_user
   end
   def getFriends
     @friends = current_user.getFriends
@@ -16,12 +21,31 @@ class UsersController < ApplicationController
 
   # destroy avatar
   def destroy_avatar
-    @user = current_user
-    @user.remove_avatar!
 
-    @user.save
-    @user.reset_events_cache
-
-    redirect_to profile_path
   end
+
+  def show
+    login
+    list_projects
+    list_issues 'scheidm', 'quest-till-done'
+    commits 'scheidm', 'quest-till-done'
+    initial_import 'scheidm', 'quest-till-done'
+  end
+
+
+  def github_list
+    login
+    list_projects
+    @projects = Githubaccounts.where(user_id: current_user)
+  end
+
+  def github_project_import
+    initial_import params[:github_user], params[:repo_name]
+  end
+
+  def github_project_del
+
+  end
+
+
 end

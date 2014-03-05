@@ -1,4 +1,8 @@
 QuestTillDone::Application.routes.draw do
+
+
+  get "/users/github_list"
+
   get "welcome/index"
   devise_for :users
   resources :encounters do
@@ -118,6 +122,6 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
-  match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
+ # match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
 
 end

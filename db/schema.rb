@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301185637) do
+ActiveRecord::Schema.define(version: 20140304224537) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 20140301185637) do
     t.datetime "updated_at"
   end
 
+  create_table "githubaccounts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "github_user"
+    t.string   "project_name"
+    t.string   "url"
+    t.boolean  "imported"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -65,13 +75,15 @@ ActiveRecord::Schema.define(version: 20140301185637) do
 
   create_table "records", force: true do |t|
     t.string   "type"
-    t.text     "description",  null: false
+    t.text     "description",        null: false
     t.string   "url"
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quest_id"
     t.text     "quote"
+    t.text     "github_username"
+    t.text     "github_projectname"
   end
 
   create_table "rounds", force: true do |t|
