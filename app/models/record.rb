@@ -22,7 +22,6 @@ class Record < ActiveRecord::Base
   end
   
   def to_s
-    v = self.quest
     "#{self.description} ( for the Quest #{self.quest.to_s} )"
   end
 
