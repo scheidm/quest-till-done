@@ -2,7 +2,16 @@
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
   has_many :quests
-  default_scope Campaign.where('campaign_id is NULL')
+  scope :search_import, -> { includes(:records, :quests) }
+
+  def search_data
+    attributes.merge(
+      records: self.records.map(&:description),
+      notes: self.notes.map(&:description),
+      quotes: self.links.map(&:quote),
+      sites: self.links.map(&:url),
+    )
+  end
 
   # Generates a paginated collection encounters for the campaign
   # @param end_time [datetime] last time included in list of encounters
