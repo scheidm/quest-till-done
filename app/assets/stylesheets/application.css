@@ -12,4 +12,11 @@
  *= require bootstrap
  *= require flipclock
  *= require_tree .
+ *= require jasny-bootstrap
  */
+
+/*@media (min-width: 1200px) {*/
+    .container {
+        width: 1370px;
+    }
+/*}*/

@@ -27,7 +27,11 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
-  resources :priorities
+  resources :priorities do
+    collection do
+      get 'get_priorities'
+    end
+  end
 
   get '/project', to: redirect('/')
 
