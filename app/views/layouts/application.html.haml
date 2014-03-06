@@ -76,8 +76,8 @@
                   %ul.nav.navbar-nav
                     %li{:class => "#{'active' if current_page?(encounters_path)}"}
                       %a{href: encounters_path} Timeline
-                    %li{:class => "#{'active' if current_page?(root_path)}"}
-                      %a{href: "#"} Priority
+                    %li{:class => "#{'active' if current_page?(priorities_path)}"}
+                      %a{href: priorities_path} Priority
                     %li{:class => "#{'active' if current_page?(campaigns_path)}"}
                       %a{href: campaigns_path} Campaign
                     %li{:class => "#{'active' if current_page?(root_path)}"}
@@ -91,9 +91,9 @@
                   %span.glyphicon.glyphicon-pause
                 %button#resetBtn.btn.btn-danger{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Reset Encounter"}
                   %span.glyphicon.glyphicon-stop
-    .container
-      .row
-        %div{style: "padding-top: 110px"}
+    .container.special
+      .row.fill
+        .fill{style: "padding-top: 110px"}
           - flash.each do |key, value|
             %div{class: "#{flash_class(key)} fade in"}
               %a.close{"data-dismiss" => "alert", href: "#"} ×
@@ -110,12 +110,12 @@
     = link_to 'Log Out', destroy_user_session_path, :method => :delete
 
 #new-record-modal.modal.fade
-  .modal-dialog
+  .modal-dialog{:style=> 'width: 800px;'}
     .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Record
-      .modal-body.a-unique-class
+      .modal-body.record-unique-class.record-modal-body
 :css
   .clock{
   zoom: 0.3;

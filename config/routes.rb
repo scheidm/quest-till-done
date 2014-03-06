@@ -31,6 +31,12 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
+  resources :priorities do
+    collection do
+      get 'get_priorities'
+    end
+  end
+
   get '/project', to: redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.

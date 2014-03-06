@@ -19,3 +19,4 @@
 //= require_tree .
 //= require d3
 //= require layout.js
+//= require jasny-bootstrap

@@ -1,5 +1,4 @@
-function buildTree(treeData)
-{
+function buildTree(treeData) {
     var i = 0, duration = 750;
     // Create a svg canvas
     var height = 800;
@@ -38,7 +37,7 @@ function buildTree(treeData)
     // Add the dot at every node
     node.append("svg:circle")
         .attr("r", 5.5)
-        .on("click", click);
+        .on("click", nodeClick);
 
     // place the name atribute left or right depending if children
     node.append("svg:text")
@@ -47,9 +46,9 @@ function buildTree(treeData)
         .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
         .text(function(d) { return d.attr.name; });
 
-};
+}
 
-function click(d) {
+function nodeClick(d) {
     window.location.href =  d.attr.url;
 }
 
@@ -103,4 +102,4 @@ function buildTreeRadial(treeData)
         .attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
         .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
         .text(function(d) { return d.name; });
-};
+}

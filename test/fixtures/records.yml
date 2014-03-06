@@ -1,5 +1,4 @@
 panda_link: {
-  type: Link,
   description: Red,
   quote: "like a rose, with a stem and pointy thorns",
   encounter_id: 1,

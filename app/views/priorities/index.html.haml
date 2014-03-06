@@ -1,0 +1,91 @@
+:css
+  .container {
+    width: 95%;
+  }
+
+.priority-container.fill
+  .priority-content.priority-navmenu-offcanvas-content.fill
+    #myNavmenuCanvas.canvas-slid
+      %nav#myNavmenu.navmenu.navmenu-default.navmenu-fixed-left.offcanvas{role: "navigation", style: ""}
+        %a.navmenu-brand{href: "#"} Campaign
+        %ul.nav.navmenu-nav
+          - @campaigns.each do |campaign|
+            %li
+              %a{id: campaign.id, href: 'javascript:void(0)', class: 'campaign_link'}= campaign.name
+      .navbar.navbar-default.navbar-fixed-top
+        %button.navbar-toggle{"data-canvas" => "#myNavmenuCanvas", "data-placement" => "left", "data-target" => "#myNavmenu", "data-toggle" => "offcanvas", type: "button"}
+          %span.glyphicon.glyphicon-transfer
+      #priority-message
+        Select a campaign to view
+      #loading-image
+        #fadingBarsG
+          #fadingBarsG_1.fadingBarsG
+          #fadingBarsG_2.fadingBarsG
+          #fadingBarsG_3.fadingBarsG
+          #fadingBarsG_4.fadingBarsG
+          #fadingBarsG_5.fadingBarsG
+          #fadingBarsG_6.fadingBarsG
+          #fadingBarsG_7.fadingBarsG
+          #fadingBarsG_8.fadingBarsG
+      #priority-body.row
+        .col-md-5
+          %h2 Importance
+          %ul#importance-ul
+        .col-md-5
+          %h2 Deadline
+          %ul#deadline-ul
+
+
+:javascript
+  $(document).ready(function(){
+    $('#priority-body').hide();
+    $('#loading-image').hide();
+    $('#myNavmenu').offcanvas({
+      canvas: "#myNavmenuCanvas",
+      placement: "left",
+      target: "#myNavmenu",
+      toggle: "offcanvas"
+    })
+
+    $('.campaign_link').click(function(e){
+      e.preventDefault();
+      $('.campaign_link').parent().removeClass("active");
+      $(this).parent().addClass("active");
+      $('#priority-message').hide();
+      $('#loading-image').show();
+      $.ajax({
+       type: 'GET',
+       url: '/priorities/get_priorities',
+       data: 'id=' + $(this).attr("id"),
+       success: populatePriorities,
+       complete: hideLoadingImage
+      });
+    })
+
+    function populatePriorities(result) {
+      $('#importance-ul').empty();
+      $('#deadline-ul').empty();
+      var quests = JSON.parse(result);
+      $.each(quests[0], function() {
+        $('#importance-ul').append('<div class="panel panel-primary"><div class="panel-heading"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
+          +'<a class="list-group-item"><h4 class="list-group-item-heading">'+this.description+'</h4><p class="list-group-item-text">deadline: '+displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+      });
+      $.each(quests[1], function() {
+        $('#deadline-ul').append('<div class="panel panel-danger"><div class="panel-heading"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
+          +'<a class="list-group-item"><h4 class="list-group-item-heading">'+this.description+'</h4><p class="list-group-item-text">deadline: '+displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+      });
+
+
+    }
+
+    function displayEmptyIfNull(value) {
+      if (typeof value === "undefined" || value === null)
+        return "";
+      return value;
+    }
+    function hideLoadingImage() {
+        $('#loading-image').hide();
+        $('#priority-body').show();
+    }
+
+  })

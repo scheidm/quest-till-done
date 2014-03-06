@@ -5,6 +5,10 @@
 %p
   %strong Description
   =@quest.description
+%p
+  %strong Deadline
+  =@quest.deadline
+
   %p#quest_id.hidden
     = @quest.id
   %p#active_quest.hidden
@@ -70,8 +74,6 @@
           %p.list-group-item-text{href: link.url}
             = link.url
 
-
-
 :javascript
   $(document).ready(function () {
      var treeId =  { id: $('#tree-container').data('quest-id')};
@@ -102,5 +104,5 @@
         $('#activeBtn').prop('disabled', true);
      $('#activeBtn').click(function() {
         $('#activeBtn').prop('disabled', true);
-     })
+     });
   });
