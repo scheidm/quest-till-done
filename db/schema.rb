@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140305202812) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "importance",     default: false
+    t.string   "type"
   end
 
   create_table "records", force: true do |t|
@@ -165,6 +166,7 @@ ActiveRecord::Schema.define(version: 20140305202812) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
+    t.string   "github_token"
     t.text     "github_access_token"
     t.text     "github_username"
   end
