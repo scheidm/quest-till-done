@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_one :timer
   has_and_belongs_to_many :groups
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
-  after_create :create_timer
+  after_create :new_user_setup
   #validates :username,
   #  :uniqueness => {
   #    :case_sensitive => false
@@ -38,6 +38,13 @@ class User < ActiveRecord::Base
   end
 
 
+  def new_user_setup
+    self.create_timer
+    cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", user_id: self.id})
+    q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, user_id: self.id})
+    self.active_quest=q
+    self.save
+  end
 
   def self.addGroup(groupName, isAdmin)
     @group[groupName] = isAdmin
