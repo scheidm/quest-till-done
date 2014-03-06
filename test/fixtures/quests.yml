@@ -3,6 +3,13 @@
 
 panda: {
   name: panda,
+  id: 2,
+  description: don't touch!,
+  campaign_id: 1
+}
+genma: {
+  name: genma,
+  type: Campaign,
   id: 1,
-  description: don't touch!
+  description: old man!
 }

@@ -1,0 +1,25 @@
+%h2 Projects
+
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Project Name
+      %th Project Owner
+      %th Import
+
+  %tbody
+    - @projects.each do |t|
+      %tr
+        %td
+          =link_to(t.project_name, t.url )
+        %td
+          =t.github_user
+
+        - if t.imported
+          %td
+            =button_to "Delete", action: [:github_project_del, @users]
+        %else
+          %td
+            =button_to "Import", action: [:github_project_import, @users]
+
+
