@@ -134,15 +134,11 @@ module GithubHelper
       end
 
       # new encounter
-      import_encounter =  Encounter.new
       import_campaign = Campaign.new
       import_campaign.name = projectname
       import_campaign.description = "Imported Project for #{projectname}"
-
       import_campaign.save
       create_round(import_campaign, action_name, import_campaign)
-      import_encounter.save
-      create_round(import_encounter, action_name, import_campaign)
 
 
       # import commits & issues
