@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304224537) do
+ActiveRecord::Schema.define(version: 20140305202812) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20140304224537) do
     t.text     "quote"
     t.text     "github_username"
     t.text     "github_projectname"
+    t.text     "sha"
   end
 
   create_table "rounds", force: true do |t|
@@ -164,6 +165,8 @@ ActiveRecord::Schema.define(version: 20140304224537) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
+    t.text     "github_access_token"
+    t.text     "github_username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
