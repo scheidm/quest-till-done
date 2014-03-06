@@ -3,6 +3,8 @@ require "test_helper"
 class QuestTest < ActiveSupport::TestCase
   def setup 
     Quest.reindex
+    Campaign.reindex
+    Record.reindex
   end
 
   test "Search quest fields verbatim" do
@@ -22,11 +24,18 @@ class QuestTest < ActiveSupport::TestCase
     assert_equal 1, x.results.length
   end
 
-  #test "Search related record description" do
-    #Record.reindex
-    #Rails.logger.info "TESTING"
-    #Rails.logger.info Record.first.description
-    #x=Quest.search "Red"
-    #assert_equal 1, x.results.length
-  #end
+  test "Search related link description" do
+    x=Quest.search "Red"
+    assert_equal 1, x.results.length
+  end
+
+  test "Search related link quote" do
+    x=Quest.search "thorn"
+    assert_equal 1, x.results.length
+  end
+
+  test "Search related note description" do
+    x=Quest.search "squirrel"
+    assert_equal 1, x.results.length
+  end
 end

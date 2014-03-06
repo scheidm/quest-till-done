@@ -9,6 +9,11 @@
   %strong Type:
   = @record.type
 
+%p
+  %strong Link:
+  = @record.url
+
+
 = link_to 'Edit', edit_record_path(@record)
 
 = link_to 'Back', record_path
