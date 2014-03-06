@@ -1,9 +1,5 @@
-##
-#===A note on searching
-#While handled by solr, below is the details of how to operate Quest.search
-#Using solr, define full text search for quests and their records
-#@param full_text [String] the text to be found, 'Ruby on Rails', #'documentation'
-#@param :estimated_cost
+# A specific, actionable task to complete in given project.
+# Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
   searchkick
   scope :search_import, -> { includes(:records) }

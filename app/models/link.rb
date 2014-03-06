@@ -1,4 +1,5 @@
-# Link class for a Record
+# A record that represents a web reference, the path field holding the url of
+# the website in question
 class Link < Record
   has_many :quotes, dependent: :destroy
   # Validate presence of description and url

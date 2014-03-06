@@ -1,5 +1,5 @@
 require 'role_model'
-# User class
+# User class as handled through the devise gem
 class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills

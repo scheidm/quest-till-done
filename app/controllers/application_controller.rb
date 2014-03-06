@@ -1,3 +1,4 @@
+# Default controller in Rails, from which all other users inherit
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -8,6 +9,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
+
+  # Once a user is signed in, the application uses this to ensure that the
+  # header displays the correct information for the active task of the current
+  # user
   def load_user
     if(user_signed_in?)
       @user = User.find(current_user.id)
@@ -28,12 +33,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Limits parameters to those valid for devise user control, to prevent
+  # parameter injection from influencing the security of the site
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:login, :username, :email, :password, :remember_me) }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
+  # Ensures that password timeouts are followed up with prompts for logging back
+  # into the program
   def check_password_expiration
     # check inactive mins
     if current_user && current_user.password_expires_at && current_user.password_expires_at < Time.now
