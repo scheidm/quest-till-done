@@ -74,15 +74,14 @@ module GithubHelper
       @issues[t["title"]] = t["html_url"]
       if encounter || campaign
         if !Record.find_by description: t["title"], url: t["html_url"]
-          new_issue = Issue.new
-          new_issue.encounter_id = encounter.id
-          new_issue.quest_id = campaign.id
-          new_issue.description = t["title"]
-          new_issue.url = t["html_url"]
-          new_issue.github_projectname = projectname
-          new_issue.github_username = username
+          new_issue = Quest.new
+          new_issue.campaign_id = campaign.id
+          new_issue.name = t["title"]
+          new_issue.description = t["html_url"]
+          new_issue.user_id = current_user.id
           new_issue.save
           create_round( new_issue, action_name, campaign)
+
         end
       end
     end
@@ -133,17 +132,24 @@ module GithubHelper
         Encounter.last.close
       end
 
+      import_encounter = Encounter.new
+      import_encounter.user_id = current_user.id
+      import_encounter.save
+
       # new encounter
       import_campaign = Campaign.new
       import_campaign.name = projectname
       import_campaign.description = "Imported Project for #{projectname}"
+      import_campaign.user_id = current_user.id
       import_campaign.save
+      create_round(import_encounter, action_name, import_campaign)
+
       create_round(import_campaign, action_name, import_campaign)
 
 
       # import commits & issues
-      list_commits username, projectname, import_encounter, import_campaign
-      list_issues username, projectname, import_encounter, import_campaign
+      list_commits username, projectname, Encounter.last, import_campaign
+      list_issues username, projectname, Encounter.last, import_campaign
 
 
       #Close Encounter

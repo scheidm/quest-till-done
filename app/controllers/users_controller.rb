@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def github_project_del
-
+    del_project params[:github_user], params[:repo_name]
   end
 
 

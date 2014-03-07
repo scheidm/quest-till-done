@@ -17,7 +17,8 @@
 
         - if t.imported
           %td
-            =button_to "Delete", action: [:github_project_del, @users]
+            = button_to "Delete", controller: "users", action: "github_project_del"
+
         - else
           %td
-            =button_to "Import", action: [:github_project_import, @users]
+            = button_to "Import", controller: "users", action: "github_project_import"
