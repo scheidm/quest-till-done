@@ -1,9 +1,9 @@
-# Skill maps skillpoints to built-in skill types
+# Defines the achievements related to a given skill
 class Skill < ActiveRecord::Base
 
 
 
-  # Mapp Skill to Readable Skill text
+  # Map Skill to Readable Skill text
   # @return [String] Skill name
   def to_s
 

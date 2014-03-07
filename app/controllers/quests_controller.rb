@@ -117,6 +117,6 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline)
   end
 end

@@ -1,9 +1,5 @@
-##
-#===A note on searching
-#While handled by solr, below is the details of how to operate Quest.search
-#Using solr, define full text search for quests and their records
-#@param full_text [String] the text to be found, 'Ruby on Rails', #'documentation'
-#@param :estimated_cost
+# A specific, actionable task to complete in given project.
+# Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
   searchkick
   scope :search_import, -> { includes(:records) }
@@ -24,16 +20,24 @@ class Quest < ActiveRecord::Base
 
   def search_data
     attributes.merge(
-      note_desc: notes.map(&:description)
+      records: self.records.map(&:description),
+      notes: self.notes.map(&:description),
+      quotes: self.links.map(&:quote),
+      sites: self.links.map(&:url)
     )
   end
 
   def campaign?
-    self.campaign_id.nil?
+    self.type=="Campaign"
   end
 
   def get_campaign
     return self.campaign || self
+  end
+
+  def self.meta_search query
+    quests=Quest.search(query).results.map(&:campaign_id)
+    Campaign.where('id in (?)',quests)
   end
 
   def to_s

@@ -8,7 +8,7 @@
           $("#treeView").jstree({
               core : { "animation" : 100 },
 
-              themes : { "theme" : "apple", "icons" : true, "dots": false },
+              themes : { "theme" : "apple", "icons" : true, "dots": true },
               "json_data": {
                   "ajax" : {
                       "url" : "/encounters/get_user_timeline",
@@ -20,7 +20,16 @@
               "types" : {
                   "valid_children" : [ "encounter" ],
                   "types" : {
-
+                      "encounter" : {
+                        "icon" : {
+                            "image" : "/assets/encounter.png"
+                        },
+                      },
+                      "round" : {
+                        "icon" : {
+                            "image" : "/assets/round.png"
+                        },
+                      },
                       "link" : {
                         "icon" : {
                             "image" : "/assets/link.png"
@@ -38,7 +47,7 @@
                       },
                       "quest" : {
                           "icon" : {
-                              "image" : "/assets/image.png"
+                              "image" : "/assets/quest.png"
                           },
                       },
                       "image" : {

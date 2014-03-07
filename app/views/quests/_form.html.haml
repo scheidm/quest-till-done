@@ -12,6 +12,8 @@
     = f.collection_select :user_id, User.all, :id, :username, {:include_blank => "Please select"}, :class => 'form-control'
     = f.label 'Status', :class => 'control-label'
     = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'], ['Closed', 'Closed']], @quest.status), {}, html_options = {:class => 'form-control'}
+    = f.label 'Deadline', :class => 'control-label'
+    = f.date_field :deadline, :class => 'form-control'
     = f.label 'Is Important?', :class => 'control-label'
     = f.check_box :importance
     = f.hidden_field :parent_id

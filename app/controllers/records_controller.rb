@@ -61,6 +61,6 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url)
   end
 end
