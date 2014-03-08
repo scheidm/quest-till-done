@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140308142616) do
+ActiveRecord::Schema.define(version: 20140308165417) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -135,6 +135,10 @@ ActiveRecord::Schema.define(version: 20140308142616) do
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
 
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
   create_table "timers", force: true do |t|
     t.integer  "user_id"
     t.integer  "setting_time"
@@ -166,9 +170,9 @@ ActiveRecord::Schema.define(version: 20140308142616) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
+    t.string   "github_token"
     t.text     "github_access_token"
     t.text     "github_username"
-    t.string   "github_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
