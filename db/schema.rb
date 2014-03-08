@@ -135,8 +135,16 @@ ActiveRecord::Schema.define(version: 20140308173901) do
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
 
-# Could not dump table "timers" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "timers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "setting_time"
+    t.integer  "current_time"
+    t.boolean  "enabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "state"
+    t.string   "mode"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username",               default: "", null: false
