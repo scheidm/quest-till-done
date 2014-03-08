@@ -30,7 +30,6 @@ class UsersController < ApplicationController
     list_branches 'scheidm', 'quest-till-done'
     list_issues 'scheidm', 'quest-till-done', nil, nil
     list_commits 'scheidm', 'quest-till-done', nil, nil
-    initial_import 'scheidm', 'quest-till-done'
   end
 
 
@@ -41,10 +40,12 @@ class UsersController < ApplicationController
   end
 
   def github_project_import
+    login
     initial_import params[:github_user], params[:repo_name]
   end
 
   def github_project_del
+    login
     del_project params[:github_user], params[:repo_name]
   end
 

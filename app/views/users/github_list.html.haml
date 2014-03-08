@@ -17,8 +17,9 @@
 
         - if t.imported
           %td
-            = button_to "Delete", controller: "users", action: "github_project_del"
+            = link_to "Delete" , users_github_project_del_path(:github_user=>t.github_user, :repo_name=>t.project_name ), :class => "ui-button"
+
 
         - else
           %td
-            = button_to "Import", controller: "users", action: "github_project_import"
+            = link_to "Import", users_github_project_import_path(:github_user=>t.github_user, :repo_name=>t.project_name ), :class => "ui-button"

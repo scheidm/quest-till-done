@@ -2,6 +2,10 @@ QuestTillDone::Application.routes.draw do
 
 
   get "/users/github_list"
+  get "/users/github_project_import"
+  get "/users/github_project_del"
+  get "/users/show"
+  get "/users/index"
 
   get "welcome/index"
   devise_for :users
@@ -18,7 +22,7 @@ QuestTillDone::Application.routes.draw do
       post 'start_timer', 'stop_timer'
     end
   end
-  resources :users
+
   resources :quests do
     collection do
       get 'getTree'
