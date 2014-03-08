@@ -1,13 +1,16 @@
 QuestTillDone::Application.routes.draw do
 
 
-  get "/users/github_list"
-  get "/users/github_project_import"
-  get "/users/github_project_del"
-  get "/users/show"
-  get "/users/index"
+  get '/users/github_list'
+  get '/users/github_project_import'
+  get '/users/github_project_del'
+  get '/users/show'
+  get '/users/index'
 
-  get "welcome/index"
+  get '/users' => redirect('/users/index')
+
+
+  get 'welcome/index'
   devise_for :users
   resources :encounters do
     collection do

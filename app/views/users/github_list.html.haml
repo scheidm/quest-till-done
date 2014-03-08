@@ -17,9 +17,9 @@
 
         - if t.imported
           %td
-            = link_to "Delete" , users_github_project_del_path(:github_user=>t.github_user, :repo_name=>t.project_name ), :class => "ui-button"
+            = link_to "Delete" , users_github_project_del_path(:github_user=>t.github_user, :repo_name=>t.project_name ), :class => "btn"
 
 
         - else
           %td
-            = link_to "Import", users_github_project_import_path(:github_user=>t.github_user, :repo_name=>t.project_name ), :class => "ui-button"
+            = link_to "Import", users_github_project_import_path(:github_user=>t.github_user, :repo_name=>t.project_name ), :class => "btn"
