@@ -5,6 +5,7 @@ panda_link: {
   quest_id: 2,
   created_at: 1393875463,
   updated_at: 1393875463,
+  type: Link,
   id: 1
 }
 panda_note: {
