@@ -1,13 +1,11 @@
 QuestTillDone::Application.routes.draw do
 
 
-  get '/users/github_list'
-  get '/users/github_project_import'
-  get '/users/github_project_del'
-  get '/users/show'
-  get '/users/index'
-
-  get '/users' => redirect('/users/index')
+  resources :users do
+    collection do
+      get 'github_list', 'github_project_import', 'github_project_del', 'restart_countdown'
+    end
+  end
 
 
   get 'welcome/index'
