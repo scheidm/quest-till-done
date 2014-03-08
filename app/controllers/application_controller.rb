@@ -49,16 +49,4 @@ class ApplicationController < ActionController::Base
       redirect_to new_profile_password_path and return
     end
   end
-
-  def quest_autocomplete
-    render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
-
-  end
-
-
-  def full_search query
-    recs=Records.search query
-    quests=Quest.search query
-    @results=recs.results+quests.results
-  end
 end

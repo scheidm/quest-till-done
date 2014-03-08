@@ -32,16 +32,14 @@ class RecordsController < ApplicationController
   def create
     @record = Record.new(record_params)
     @record.created_at = DateTime.now
+    @record.user_id = current_user.id
     @user = User.find(current_user.id)
-    @record.quest=@user.active_quest
 
     respond_to do |format|
       if @record.save
         create_round(@record, action_name, @record.quest.get_campaign)
         @record.assign_encounter
         format.html { redirect_to :back, notice: 'Record was successfully created.'}
-        #format.html { redirect_to @record, notice: 'Record was successfully created.' }
-        #format.json { render action: 'show', status: :created, location: @record }
       else
         format.html { render action: 'new'}
         format.json { render json: @record.errors, status: :unprocessable_entity }

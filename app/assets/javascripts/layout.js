@@ -2,7 +2,24 @@
 $(document).ready(function(){
     var clock = $('#clock').FlipClock({
         autoStart: false,
-        countdown: true
+        countdown: true,
+        callbacks: {
+            stop: function() {
+                if(clock.getTime() <= 2)
+                    $.ajax({
+                        type: "GET",
+                        dataType: "json",
+                        url: "/timers/restart_countdown",
+                        success: function(result) {
+                            if(result.state == true)
+                            {
+                                clock.setTime(result.setting_time);
+                                clock.start();
+                            }
+                        }
+                    });
+            }
+        }
     });
 
     $('#avatar').popover({
@@ -30,7 +47,7 @@ $(document).ready(function(){
 
     $.ajax({
         type: "GET",
-        url: "/timers/get_current_time",
+        url: "/timers/get_time_current",
         dataType: 'json',
         cache: false,
         success: function(result) {
@@ -45,7 +62,7 @@ $(document).ready(function(){
         clock.start();
         $.ajax({
             type: "POST",
-            url: "/timers/start_timer",
+            url: "/timers/start_countdown",
             success: function(result) {
             }
         });
@@ -55,7 +72,7 @@ $(document).ready(function(){
         clock.stop();
         $.ajax({
             type: "POST",
-            url: "/timers/stop_timer",
+            url: "/timers/pause_countdown",
             data: "current_time=" + clock.getTime(),
             success: function(result) {
             }
@@ -67,9 +84,8 @@ $(document).ready(function(){
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "/timers/reset_timer",
+            url: "/timers/reset_countdown",
             success: function(result) {
-                var x = result.setting_time;
                 clock.setTime(result.setting_time);
             }
         });
