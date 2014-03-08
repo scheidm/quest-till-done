@@ -91,7 +91,7 @@ module GithubHelper
   # Get commits from a project
   def list_commits(username, projectname, encounter, campaign)
     @commits = Hash.new
-
+    list_branches username, projectname
     @branches.each do |branch_name, branch_sha|
       JSON.parse((@github.repos.commits.list( username,projectname, :sha => branch_sha)).to_json).each do |t|
         @commits[t["commit"]["message"]] = t["html_url"]
@@ -132,17 +132,12 @@ module GithubHelper
         Encounter.last.close
       end
 
-      import_encounter = Encounter.new
-      import_encounter.user_id = current_user.id
-      import_encounter.save
-
       # new encounter
       import_campaign = Campaign.new
       import_campaign.name = projectname
       import_campaign.description = "Imported Project for #{projectname}"
       import_campaign.user_id = current_user.id
       import_campaign.save
-      create_round(import_encounter, action_name, import_campaign)
 
       create_round(import_campaign, action_name, import_campaign)
 
@@ -160,8 +155,29 @@ module GithubHelper
   end
 
 
+  # Delete Project From QTD
+  # @param username     Github User Name
+  # @param projectname  Github Project Name
   def del_project(username, projectname)
-    Record.where{(type == Commit) || (type == Issue)}.destroy_all
+
+    project = Githubaccounts.find_by(github_user: username, project_name: projectname, user_id: current_user)
+    project.imported = nil
+
+
+    target_campaign = Quest.find_by(type: 'Campaign',  name: projectname, campaign_id:nil)
+    Quest.destroy(target_campaign.id)
+    Quest.destroy_all(campaign_id: target_campaign.id)
+
+
+    create_round(Encounter.last, action_name, Campaign.last)
+
+
+    Record.where(type: Commit).to_a.each do |t|
+      t.destroy
+      create_round(Encounter.last, action_name, Campaign.last)
+    end
+
+
   end
 
 end
