@@ -37,11 +37,6 @@ module TimerHelper
     t.save
   end
 
-  # restart timer
-  def restart_timer
-
-  end
-
   # get remaining time
   def get_current_time
     remain_time = current_user.timer.current_time
@@ -49,7 +44,7 @@ module TimerHelper
     encounter = current_user.last_encounter
     state = get_timer_state
     if(!encounter.nil? && state)
-      diff = (current_user.last_encounter.created_at.utc + remain_time - Time.now.utc).to_i
+      diff = (current_user.timer.updated_at + remain_time - Time.now.utc).to_i
       remain_time = remain_time - (Time.now.utc - current_user.timer.updated_at.utc).to_i
       if(diff < 0)
         encounter.close
@@ -62,6 +57,17 @@ module TimerHelper
     return data
   end
 
+  # try to reset time if auto mode
+  def restart_timer
+    if(current_user.timer.mode == 'auto')
+      reset_timer
+      start_timer
+      return get_current_time.merge get_setting_time
+    else
+      return {state: get_timer_state}
+    end
+  end
+
   # get setting default time
   def get_setting_time
     setting_time = current_user.timer.setting_time
@@ -69,8 +75,10 @@ module TimerHelper
     return data
   end
 
+
+
   # get current state of the timer
   def get_timer_state
-    return current_user.timer.state == 't'
+    return current_user.timer.get_state
   end
 end

@@ -7,6 +7,8 @@ class SearchesController < ApplicationController
     recs=Record.search params[:query]
     quests=Quest.search params[:query]
     @results = (recs.results + quests.results).paginate page: params[:page], per_page: 10
+    s = quests.size
+    v = s
   end
 
   # auto complete search for quest
