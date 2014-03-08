@@ -158,7 +158,6 @@ module GithubHelper
   # @param username     Github User Name
   # @param projectname  Github Project Name
   def del_project(username, projectname)
-
     project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user)
     project.imported = false
     project.save
