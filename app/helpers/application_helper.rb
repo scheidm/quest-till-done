@@ -10,7 +10,6 @@ module ApplicationHelper
   end
 
   def new_record_link(active_quest)
-      s = active_quest
       if(active_quest)
         link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => active_quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-record-modal.modal'
       else

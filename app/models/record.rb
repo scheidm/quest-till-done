@@ -36,4 +36,8 @@ class Record < ActiveRecord::Base
     @child_classes
   end
 
+  def to_link
+    self.quest.to_link
+  end
+
 end

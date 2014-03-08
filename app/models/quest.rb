@@ -44,4 +44,7 @@ class Quest < ActiveRecord::Base
     self.name
   end
 
+  def to_link
+    '/quests/' + self.id.to_s
+  end
 end

@@ -21,8 +21,8 @@ QuestTillDone::Application.routes.draw do
   resources :records
   resources :timers do
     collection do
-      get 'get_current_time', 'get_setting_time', 'reset_timer'
-      post 'start_timer', 'stop_timer'
+      get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown'
+      post 'start_countdown', 'pause_countdown'
     end
   end
 
@@ -44,7 +44,13 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
-  get '/project', to: redirect('/')
+  resources :searches do
+    collection do
+      get 'quest_autocomplete'
+    end
+  end
+
+  #get '/project', to: redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -100,11 +106,6 @@ QuestTillDone::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-
-  get '/timeline', to: redirect('/records')
-
-
   #
   # Profiles
   #

@@ -62,11 +62,16 @@
                     = link_to @active_quest_campaign_name, @active_quest_campaign_url
           .col-md-7.qtd-col
             .col-md-4.qtd-col
-              %form.navbar-form.navbar-left{role: "search"}
+              = form_tag searches_path, :method => 'get', :role => 'search', :class => 'navbar-form navbar-left' do |f|
                 .form-group
-                  %input.form-control{placeholder: "Search", type: "text"}/
-                %button.btn.btn-default{type: "submit"}
+                  = text_field_tag :query, params[:query], :placeholder => 'Search', :class => 'form-control'
+                = button_tag :type=> 'submit', :class => 'btn btn-default' do
                   %span.glyphicon.glyphicon-search
+              -#%form.navbar-form.navbar-left{role: "search"}
+              -#  .form-group
+              -#    %input.form-control{placeholder: "Search", type: "text" }
+              -#  %button.btn.btn-default{type: "submit"}
+              -#    %span.glyphicon.glyphicon-search
             .col-md-5.qtd-col
               .navbar-inverse
                 .navbar-header
