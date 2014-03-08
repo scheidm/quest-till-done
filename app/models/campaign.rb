@@ -24,4 +24,8 @@ class Campaign < Quest
     rounds=Rounds.where('campaign_id = (?)',self.id).where('created_at <= (?)', end_time).order(created_at: :desc).pluck(:encounter_id)
     Encounter.where('id in (?)',rounds)
   end
+
+  def to_link
+    '/campaigns/' + self.id.to_s
+  end
 end

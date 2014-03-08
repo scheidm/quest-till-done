@@ -37,7 +37,13 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
-  get '/project', to: redirect('/')
+  resources :searches do
+    collection do
+      get 'quest_autocomplete'
+    end
+  end
+
+  #get '/project', to: redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -93,11 +99,6 @@ QuestTillDone::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-
-  get '/timeline', to: redirect('/records')
-
-
   #
   # Profiles
   #

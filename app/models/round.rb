@@ -26,14 +26,6 @@ class Round < ActiveRecord::Base
   end
 
   def related_link
-    if Record.child_classes.to_s.include? self.type
-      "/quests/#{self.related_obj.quest_id}"
-    else
-      x={
-        "Campaign" => "/campaigns/#{self.event_id}",
-        "Quest" => "/quests/#{self.event_id}"
-      }
-      x[self.type]
-    end
+    self.related_obj.to_link
   end
 end
