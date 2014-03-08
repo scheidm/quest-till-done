@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   def github_list
     login
     list_projects
-    @projects = GithubAccount.where(user_id: current_user)
+    @projects = GithubRepo.where(user_id: current_user)
   end
 
   def github_project_import
