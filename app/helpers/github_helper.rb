@@ -70,7 +70,7 @@ module GithubHelper
   def list_issues(username, projectname, encounter, campaign)
     @issues = Hash.new
     issueobj =  @github.issues.list :user => username, :repo => projectname
-    JSON.parse(issueobj.to_json).each do |t|
+    issueobj.each do |t|
       @issues[t["title"]] = t["html_url"]
       if encounter || campaign
         if !Record.find_by description: t["title"], url: t["html_url"]
@@ -93,7 +93,7 @@ module GithubHelper
     @commits = Hash.new
     list_branches username, projectname
     @branches.each do |branch_name, branch_sha|
-      JSON.parse((@github.repos.commits.list( username,projectname, :sha => branch_sha)).to_json).each do |t|
+      @github.repos.commits.list( username,projectname, :sha => branch_sha).each do |t|
         @commits[t["commit"]["message"]] = t["html_url"]
         if encounter && campaign
           if !Record.find_by sha: t["sha"]
@@ -121,7 +121,7 @@ module GithubHelper
     # set import status
     project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user)
 
-    if project.imported.nil?
+    if project.imported.nil? || !project.imported
 
       project.imported = 1
       project.save
@@ -147,8 +147,7 @@ module GithubHelper
       list_issues username, projectname, Encounter.last, import_campaign
 
 
-      #Close Encounter
-      Encounter.last.close
+
     end
 
 
@@ -161,24 +160,24 @@ module GithubHelper
   def del_project(username, projectname)
 
     project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user)
-    project.imported = nil
+    project.imported = false
+    project.save
 
 
     target_campaign = Quest.find_by(type: 'Campaign',  name: projectname, campaign_id:nil)
+    #destroy all Rounds
+    Round.destroy_all(campaign_id: target_campaign.id)
+    #destroy all Quests related to campaign
+    Quest.destroy_all(campaign_id: target_campaign.id)
+    #destroy the campaign itself
     Quest.destroy(target_campaign.id)
-    #Quest.destroy_all(campaign_id: target_campaign.id)
 
+    #destroy all Commits
 
-    #create_round(Encounter.last, action_name, Campaign.last)
+    Record.destroy_all(type:'Commit', github_username: username, github_projectname: projectname)
 
-
-    Record.where(type: Commit).to_a.each do |t|
-      t.destroy
-      #create_round(Encounter.last, action_name, Campaign.last)
-    end
-
-    Round.destroy_all(campaign_id:target_campaign.id )
-
+    #make sure there is an encounter there
+    create_round(project, action_name, Campaign.last)
   end
 
 end
