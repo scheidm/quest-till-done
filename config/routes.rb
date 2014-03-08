@@ -1,9 +1,14 @@
 QuestTillDone::Application.routes.draw do
 
 
-  get "/users/github_list"
+  resources :users do
+    collection do
+      get 'github_list', 'github_project_import', 'github_project_del', 'restart_countdown'
+    end
+  end
 
-  get "welcome/index"
+
+  get 'welcome/index'
   devise_for :users
   resources :encounters do
     collection do
@@ -18,7 +23,7 @@ QuestTillDone::Application.routes.draw do
       post 'start_countdown', 'pause_countdown'
     end
   end
-  resources :users
+
   resources :quests do
     collection do
       get 'getTree'

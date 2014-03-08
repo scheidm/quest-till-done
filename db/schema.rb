@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140308173901) do
     t.datetime "updated_at"
   end
 
-  create_table "githubaccounts", force: true do |t|
+  create_table "github_repos", force: true do |t|
     t.integer  "user_id"
     t.string   "github_user"
     t.string   "project_name"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 20140308173901) do
     t.text     "quote"
     t.text     "github_username"
     t.text     "github_projectname"
+    t.text     "sha"
     t.integer  "user_id"
   end
 
@@ -135,6 +136,10 @@ ActiveRecord::Schema.define(version: 20140308173901) do
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
 
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
   create_table "timers", force: true do |t|
     t.integer  "user_id"
     t.integer  "setting_time"
@@ -169,6 +174,8 @@ ActiveRecord::Schema.define(version: 20140308173901) do
     t.integer  "exp"
     t.integer  "group_id"
     t.string   "github_token"
+    t.text     "github_access_token"
+    t.text     "github_username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

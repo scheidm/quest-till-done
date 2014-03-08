@@ -17,9 +17,11 @@
 
         - if t.imported
           %td
-            =button_to "Delete", action: [:github_project_del, @users]
-        %else
+            = link_to "Delete" , { :action => 'github_project_del',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+
+
+        - else
           %td
-            =button_to "Import", action: [:github_project_import, @users]
+            = link_to "Import",  { :action => 'github_project_import', :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
 
 
