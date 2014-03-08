@@ -52,9 +52,11 @@ class ApplicationController < ActionController::Base
 
   def quest_autocomplete
     render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
-
   end
 
+  def record_autocomplete
+    render json:  Record.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
+  end
 
   def full_search query
     recs=Records.search query
