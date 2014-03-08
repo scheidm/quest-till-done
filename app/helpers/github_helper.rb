@@ -166,17 +166,18 @@ module GithubHelper
 
     target_campaign = Quest.find_by(type: 'Campaign',  name: projectname, campaign_id:nil)
     Quest.destroy(target_campaign.id)
-    Quest.destroy_all(campaign_id: target_campaign.id)
+    #Quest.destroy_all(campaign_id: target_campaign.id)
 
 
-    create_round(Encounter.last, action_name, Campaign.last)
+    #create_round(Encounter.last, action_name, Campaign.last)
 
 
     Record.where(type: Commit).to_a.each do |t|
       t.destroy
-      create_round(Encounter.last, action_name, Campaign.last)
+      #create_round(Encounter.last, action_name, Campaign.last)
     end
 
+    Round.destroy_all(campaign_id:target_campaign.id )
 
   end
 
