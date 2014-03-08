@@ -32,8 +32,9 @@ class RecordsController < ApplicationController
   def create
     @record = Record.new(record_params)
     @record.created_at = DateTime.now
+    @record.user_id = current_user.id
     @user = User.find(current_user.id)
-    @record.quest=@user.active_quest
+    # @record.quest=@user.active_quest
 
     respond_to do |format|
       if @record.save

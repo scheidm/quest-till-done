@@ -26,6 +26,7 @@
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
         = f.hidden_field :type, :value => 'Note'
+        = f.hidden_field :quest_id
         %br
         .actions
         = f.submit :class => "btn btn-primary pull-right"

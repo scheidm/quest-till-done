@@ -4,11 +4,9 @@ class SearchesController < ApplicationController
   # Show all search result
   # @return [Html] All result
   def index
-    recs=Record.search params[:query]
-    quests=Quest.search params[:query]
+    recs=Record.search params[:query], where: {:user_id => current_user.id}
+    quests=Quest.search params[:query], where: { :user_id => current_user.id}
     @results = (recs.results + quests.results).paginate page: params[:page], per_page: 10
-    s = quests.size
-    v = s
   end
 
   # auto complete search for quest
