@@ -10,5 +10,12 @@ class Timer < ActiveRecord::Base
     self.current_time ||= 1800
     self.setting_time ||= 1800
     self.enabled ||= true
+    self.state ||= false
+  end
+
+  # set the current state
+  def set_state(state)
+    self.state = state
+    self.save
   end
 end

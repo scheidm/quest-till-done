@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   @group = Hash.new 
   has_one :group, as: :user_group
   has_one :timer
+  has_many :encounter
   has_and_belongs_to_many :groups
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :new_user_setup
@@ -80,5 +81,11 @@ class User < ActiveRecord::Base
   # 
   def timeline( end_time=Time.now )
     Encounter.where('user_id = (?)',self.id).where('created_at <= (?)', end_time)
+  end
+
+  # Get last encounter for the user
+  # @return [encounter] last encounter
+  def last_encounter
+    Encounter.where(:user_id => self.id).last
   end
 end

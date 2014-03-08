@@ -69,7 +69,6 @@ $(document).ready(function(){
             dataType: "json",
             url: "/timers/reset_timer",
             success: function(result) {
-                var x = result.setting_time;
                 clock.setTime(result.setting_time);
             }
         });

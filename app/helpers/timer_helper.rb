@@ -3,7 +3,7 @@ module TimerHelper
 
   # start timer and create encounter
   def start_timer
-    if(Encounter.last.nil? || !Encounter.last.end_time.nil?)
+    if(current_user.last_encounter.nil? || !current_user.last_encounter.end_time.nil?)
       encounter = Encounter.new
       encounter.user_id = current_user.id
       encounter.save
@@ -11,7 +11,7 @@ module TimerHelper
     t = Timer.where(:user_id => current_user.id).first
     t.updated_at = Time.now
     t.save
-    session[:state] = true
+    current_user.timer.set_state(true)
   end
 
   # pause timer
@@ -20,13 +20,13 @@ module TimerHelper
     t = Timer.where(:user_id => current_user.id).first
     t.current_time = current_time
     t.save
-    session[:state] = false
+    current_user.timer.set_state(false)
   end
 
   # reset timer
   def reset_timer
-    session[:state] = false
-    encounter = Encounter.last
+    current_user.timer.set_state(false)
+    encounter = current_user.last_encounter
     if(encounter.nil?)
       return
     elsif(encounter.end_time.nil?)
@@ -46,17 +46,16 @@ module TimerHelper
   def get_current_time
     remain_time = current_user.timer.current_time
     setting_time = current_user.timer.setting_time
-    encounter = Encounter.last
-    session[:state] ||= false
-    state = session[:state]
+    encounter = current_user.last_encounter
+    state = get_timer_state
     if(!encounter.nil? && state)
-      diff = (Encounter.last.created_at.utc + remain_time - Time.now.utc).to_i
+      diff = (current_user.last_encounter.created_at.utc + remain_time - Time.now.utc).to_i
       remain_time = remain_time - (Time.now.utc - current_user.timer.updated_at.utc).to_i
       if(diff < 0)
         encounter.close
         remain_time = setting_time
-        session[:state] = false
-        state = session[:state]
+        current_user.timer.set_state(false)
+        state = get_timer_state
       end
     end
     data = {current_time: remain_time, state: state}
@@ -72,6 +71,6 @@ module TimerHelper
 
   # get current state of the timer
   def get_timer_state
-    return session[:state]
+    return current_user.timer.state == 't'
   end
 end
