@@ -43,8 +43,8 @@ module GithubHelper
     @repos =  Hash.new
     JSON.parse(@github.repos.list.to_json).each do |t|
       @repos[(t["name"])] = t["html_url"]
-      if !Githubaccounts.find_by github_user: t["owner"]["login"], url: t["html_url"]
-        new_github = Githubaccounts.new
+      if !GithubAccount.find_by github_user: t["owner"]["login"], url: t["html_url"]
+        new_github = GithubAccount.new
         new_github.user = current_user
         new_github.project_name = t["name"]
         new_github.url = t["html_url"]
@@ -119,7 +119,7 @@ module GithubHelper
   # Note: this should be run only when first time import is initiated
   def initial_import(username, projectname)
     # set import status
-    project = Githubaccounts.find_by(github_user: username, project_name: projectname, user_id: current_user)
+    project = GithubAccount.find_by(github_user: username, project_name: projectname, user_id: current_user)
 
     if project.imported.nil?
 
@@ -160,7 +160,7 @@ module GithubHelper
   # @param projectname  Github Project Name
   def del_project(username, projectname)
 
-    project = Githubaccounts.find_by(github_user: username, project_name: projectname, user_id: current_user)
+    project = GithubAccount.find_by(github_user: username, project_name: projectname, user_id: current_user)
     project.imported = nil
 
 
