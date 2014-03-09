@@ -3,7 +3,10 @@ class CampaignsController < ApplicationController
 
   require 'json_generator'
   include JsonGenerator::QuestModule
+  include JsonGenerator::EncounterModule
   include RoundHelper
+
+  helper_method :campaign_timeline_path
 
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
@@ -87,9 +90,26 @@ class CampaignsController < ApplicationController
     end
   end
 
+  # View timeline
+  # @param id [Integer] Campaign'id to be viewed
+  # @return [Html] partial view of the timeline
+  def timeline
+    @campaign = Campaign.find(params[:id])
+  end
+
+  # Get the current timeline for the campaign
+  # @param campaign [Campaign] Campaign
+  # @return [JSON] JSON of the timeline details
+  def get_campaign_timeline
+    @encounters = Encounter.where(:user_id => current_user.id)
+    render :text => generateTree(@encounters, params[:id])
+  end
+
   # Import a QTD specific format Campaign to generate a campaign
   # @param path [String] file path
   def import
+    encounter = Encounter.new
+    encounter.rounds = Encounter.where(:user_id => current_user.id, :campaign_id => params[:id])
 
   end
 
@@ -99,6 +119,12 @@ class CampaignsController < ApplicationController
   # @return [File] downloadable file
   def export
 
+  end
+
+  # custom helper path for timeline
+  # @param id [Integer] Campaign
+  def campaign_timeline_path(campaign)
+    "/campaigns/timeline?id=#{campaign.id}"
   end
 
   # Define allowed parameter for a Campaign model

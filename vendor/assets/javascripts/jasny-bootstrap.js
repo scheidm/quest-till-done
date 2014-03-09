@@ -238,7 +238,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
   }
 
   OffCanvas.prototype.recalc = function () {
-    if (this.state() !== 'slid' || this.$calcClone.css('display') === 'none') return
+    if (this.state !== 'slid' || this.$calcClone.css('display') === 'none') return
     
     var offset = -1 * this.offset()
     
