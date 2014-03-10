@@ -44,13 +44,11 @@ module GithubHelper
     JSON.parse(@github.repos.list.to_json).each do |t|
       @repos[(t["name"])] = t["html_url"]
       if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"]
-        new_github = GithubRepo.new
-        new_github.user = current_user
-        new_github.project_name = t["name"]
-        new_github.url = t["html_url"]
-        new_github.github_user = t["owner"]["login"]
-        new_github.imported = nil
-        new_github.save
+        new_github = GithubRepo.create({user: current_user,
+                                        project_name: t["name"],
+                                        url: t["html_url"],
+                                        github_user: t["owner"]["login"],
+                                        imported: nil })
       end
     end
   end
@@ -74,13 +72,14 @@ module GithubHelper
       @issues[t["title"]] = t["html_url"]
       if encounter || campaign
         if !Record.find_by description: t["title"], url: t["html_url"]
-          new_issue = Quest.new
-          new_issue.campaign_id = campaign.id
-          new_issue.name = t["title"]
-          new_issue.description = t["html_url"]
-          new_issue.user_id = current_user.id
-          new_issue.status = "Open"
-          new_issue.save
+
+          new_issue = Quest.create({campaign_id: campaign.id,
+                                    name:t["title"],
+                                    description: t["html_url"],
+                                    user_id: current_user.id,
+                                    status: "Open" ,
+                                    parent: campaign})
+
           create_round( new_issue, action_name, campaign)
 
         end
@@ -98,15 +97,14 @@ module GithubHelper
         @commits[t["commit"]["message"]] = t["html_url"]
         if encounter && campaign
           if !Record.find_by sha: t["sha"]
-            new_commit = Commit.new
-            new_commit.encounter_id = encounter.id
-            new_commit.quest_id = campaign.id
-            new_commit.description = t["commit"]["message"]
-            new_commit.url = t["html_url"]
-            new_commit.github_projectname = projectname
-            new_commit.github_username= username
-            new_commit.sha = t["sha"]
-            new_commit.save
+            new_commit = Commit.create({ encounter_id: encounter.id,
+                                         quest_id: campaign.id,
+                                         description: t["commit"]["message"],
+                                         url: t["html_url"],
+                                         github_projectname: projectname,
+                                         github_username: username,
+                                         sha: t["sha"]})
+
             create_round(new_commit, action_name, campaign)
           end
         end
