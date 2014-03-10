@@ -41,8 +41,8 @@ class User < ActiveRecord::Base
 
   def new_user_setup
     self.create_timer
-    cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", user_id: self.id})
-    q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, user_id: self.id})
+    cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", user_id: self.id}, status: "Open")
+    q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, user_id: self.id}, status: "Open")
     self.active_quest=q
     self.save
     self.reload

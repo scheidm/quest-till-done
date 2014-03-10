@@ -6,10 +6,13 @@
   %strong Description:
   =@quest.description || "None"
 %p
+  %strong Status:
+  = @quest.status
+%p
   %strong Campaign:
   = link_to @quest.campaign.name, @quest.campaign.to_link
 %p
-  %strong Campaign:
+  %strong Parent:
   = link_to @quest.parent.name, @quest.parent.to_link
 %p
   %strong Deadline:

@@ -4,6 +4,9 @@
 %p
   %strong Description:
   = @campaign.description
+%p
+  %strong Status:
+  = @campaign.status
 
 //= link_to new_quest_path(:id => @campaign.id), :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Add Quest' do
 //%span.glyphicon.glyphicon-plus
