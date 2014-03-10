@@ -97,7 +97,7 @@
                 %button#resetBtn.btn.btn-danger{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Reset Encounter"}
                   %span.glyphicon.glyphicon-stop
     .container.special
-      .row.fill
+      .row
         .fill{style: "padding-top: 110px"}
           - flash.each do |key, value|
             %div{class: "#{flash_class(key)} fade in"}

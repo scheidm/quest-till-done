@@ -41,6 +41,7 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to the new quest page
   def create
     @quest = Quest.new(quest_params)
+    @quest.user_id = current_user.id
     @quest.status = 'Open'
     respond_to do |format|
       if @quest.save

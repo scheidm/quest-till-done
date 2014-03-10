@@ -12,7 +12,7 @@ class EncountersController < ApplicationController
 
   def get_user_timeline
     @encounters = Encounter.where(:user_id => current_user.id)
-    render :text => generateTree(@encounters)
+    render :text => generateTree(@encounters, nil)
   end
 
   # Create new encounter

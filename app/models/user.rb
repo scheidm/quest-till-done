@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   @group = Hash.new 
   has_one :group, as: :user_group
   has_one :timer
-  has_many :encounter
+  has_many :encounters
   has_and_belongs_to_many :groups
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :new_user_setup
@@ -45,6 +45,12 @@ class User < ActiveRecord::Base
     q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, user_id: self.id})
     self.active_quest=q
     self.save
+    self.reload
+    enc = Encounter.create({ user: self})
+    enc.end_time = Time.now.utc
+    enc.rounds << Round.create({ type: 'Campaign', event_id: cam.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
+    enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
+    enc.save
   end
 
   def self.addGroup(groupName, isAdmin)

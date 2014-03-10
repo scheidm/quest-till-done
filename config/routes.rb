@@ -29,7 +29,7 @@ QuestTillDone::Application.routes.draw do
   end
   resources :campaigns do
     collection do
-      get 'getTree'
+      get 'getTree', 'get_campaign_timeline', 'timeline'
     end
   end
 

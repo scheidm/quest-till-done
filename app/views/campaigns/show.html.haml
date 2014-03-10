@@ -13,6 +13,8 @@
   %span.glyphicon.glyphicon-pencil
 = link_to campaigns_path, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
   %span.glyphicon.glyphicon-share-alt
+= link_to campaign_timeline_path(@campaign), :remote => true, :class => 'btn btn-success pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
+  %span.glyphicon.glyphicon-list-alt
 
 #tree-container{data: {campaign_id: @campaign.id}}
 #edit-campaign-modal.modal.fade
@@ -30,6 +32,13 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Quest
       .modal-body.a-unique-class
+#campaign-timeline-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title Timeline
+      .modal-body.campaign-timeline-unique-class
 :javascript
   $(document).ready(function () {
      var treeId =  { id: $('#tree-container').data('campaign-id')};

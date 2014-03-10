@@ -1,5 +1,4 @@
-%h2 Time Line
-#treeView
+#treeView{ 'data-id' => @campaign.id}
 
 :javascript
   $(document).ready(function(){
@@ -9,10 +8,7 @@
               themes : { "theme" : "apple", "icons" : true, "dots": true },
               "json_data": {
                   "ajax" : {
-                      "url" : "/encounters/get_user_timeline",
-                      "data" : function(m) {
-                          return { id: m.attr ? m.attr("id") : 0 };
-                      }
+                      "url" : "/campaigns/get_campaign_timeline?id=" + $('#treeView').attr('data-id')
                   }
               },
               "types" : {
@@ -64,6 +60,7 @@
               {
                   window.location= data.rslt.obj.attr("href");
               }
-          );
+          ).bind("loaded.jstree", function (event, data) {
+                       $(this).jstree("open_all");
+          }) ;
       });
-

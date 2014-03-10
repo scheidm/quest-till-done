@@ -39,11 +39,10 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Quest
       .modal-body.a-unique-class
-
-#tree-container{data: {quest_id: @quest.id} }
-
+%br
+%br
 #accordion.panel-group
-  .panel.panel-default.panel-info
+  .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
         %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseNote"}
@@ -56,11 +55,8 @@
             = note.created_at.strftime("%m/%d/%Y %I:%M%p")
           %p.list-group-item-text
             = note.description
-%br
-%br
-
 #accordion.panel-group
-  .panel.panel-default.panel-warning
+  .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
         %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseLink"}
@@ -72,7 +68,10 @@
           %h4.list-group-item-heading
             = link.created_at.strftime("%m/%d/%Y %I:%M%p")
           %p.list-group-item-text{href: link.url}
-            = link.url
+            = link.description
+          %p.list-group-item-text{href: link.url}= link.url
+
+#tree-container{data: {quest_id: @quest.id} }
 
 :javascript
   $(document).ready(function () {

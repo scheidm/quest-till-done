@@ -237,7 +237,10 @@
 }
 
 html,body {height:100%;}
-.special,.special .jumbotron {height:100%;}
+.special,.special .jumbotron {
+    min-height:100%;
+    /*height: auto !important;*/
+}
 
 /************** Loading screen **************/
 #fadingBarsG{
