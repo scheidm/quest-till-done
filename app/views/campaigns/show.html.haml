@@ -9,6 +9,8 @@
   = @campaign.status
 
 %p
+  %strong Progress:
+%p
   .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Progress"}
     .progress-bar{role: "progressbar", style: "width: #{@campaign.progress}%;"}
 %p
