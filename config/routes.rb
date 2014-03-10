@@ -1,15 +1,12 @@
 QuestTillDone::Application.routes.draw do
 
-
+  devise_for :users
   resources :users do
     collection do
-      get 'github_list', 'github_project_import', 'github_project_del', 'restart_countdown'
+      get 'github_list', 'github_project_import', 'github_project_del', 'restart_countdown', 'index', 'show'
     end
   end
-
-
   get 'welcome/index'
-  devise_for :users
   resources :encounters do
     collection do
       get 'get_user_timeline'

@@ -1,4 +1,4 @@
-class CreateGithubRepo < ActiveRecord::Migration
+class CreateGithubrepos < ActiveRecord::Migration
   def change
     create_table :github_repos do |t|
       t.belongs_to :user
