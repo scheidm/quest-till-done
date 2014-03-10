@@ -79,6 +79,7 @@ module GithubHelper
           new_issue.name = t["title"]
           new_issue.description = t["html_url"]
           new_issue.user_id = current_user.id
+          new_issue.status = "Open"
           new_issue.save
           create_round( new_issue, action_name, campaign)
 
