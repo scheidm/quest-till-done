@@ -20,7 +20,6 @@ class CampaignsController < ApplicationController
   def show
     @campaign = Campaign.find(params[:id])
   end
-
   # Create new campaign
   # @return [Html] New campaign page
   def new
