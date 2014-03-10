@@ -43,6 +43,7 @@ class QuestsController < ApplicationController
     @quest = Quest.new(quest_params)
     @quest.user_id = current_user.id
     @quest.status = 'Open'
+    @quest.description = nil if @quest.description==""
     respond_to do |format|
       if @quest.save
         create_round(@quest, action_name, @quest.campaign)

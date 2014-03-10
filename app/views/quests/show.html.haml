@@ -3,11 +3,17 @@
   %strong Name:
   = @quest.name
 %p
-  %strong Description
-  =@quest.description
+  %strong Description:
+  =@quest.description || "None"
 %p
-  %strong Deadline
-  =@quest.deadline
+  %strong Campaign:
+  = link_to @quest.campaign.name, @quest.campaign.to_link
+%p
+  %strong Campaign:
+  = link_to @quest.parent.name, @quest.parent.to_link
+%p
+  %strong Deadline:
+  =@quest.deadline || "None"
 
   %p#quest_id.hidden
     = @quest.id
