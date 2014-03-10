@@ -8,6 +8,10 @@
   %strong Status:
   = @campaign.status
 
+%p
+  .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Progress"}
+    .progress-bar{role: "progressbar", style: "width: #{@campaign.progress}%;"}
+%p
 //= link_to new_quest_path(:id => @campaign.id), :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Add Quest' do
 //%span.glyphicon.glyphicon-plus
 = link_to new_quest_path(:id => @campaign.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do

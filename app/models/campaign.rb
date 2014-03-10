@@ -6,6 +6,10 @@ class Campaign < Quest
   has_many :quests
   scope :search_import, -> { includes(:records, :quests) }
 
+  def progress
+    Float(self.quests.where('status = (?)',"Closed").count)/Float(self.quests.count)*100 
+  end
+
   def search_data
     attributes.merge(
       records: self.records.map(&:description),
