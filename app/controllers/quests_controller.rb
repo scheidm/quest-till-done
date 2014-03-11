@@ -42,6 +42,7 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(quest_params)
     @quest.status = 'Open'
+    @quest.user=@user
     respond_to do |format|
       if @quest.save
         create_round(@quest, action_name, @quest.campaign)
@@ -67,6 +68,14 @@ class QuestsController < ApplicationController
   def update
     @quest = Quest.find(params[:id])
     respond_to do |format|
+    if @quest.save
+      if params['quest']['status']=="Closed"
+        if @quest.id==@user.active_quest.id
+          @user.active_quest=Quest.where( 'user_id = (?)', @quest.user_id).where('name = (?)','Unsorted Musings').first
+          @user.save
+        end
+      end
+    end
       if @quest.update(quest_params)
         create_round(@quest, action_name, @quest.campaign)
         format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
