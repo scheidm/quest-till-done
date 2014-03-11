@@ -44,7 +44,7 @@ module JsonGenerator
       data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s}}
       data[:children] = children = []
       campaign.quests.each {|quest|
-        children << generateChildTree(quest) if quest.status=="Open"
+        children << generateChildTree(quest) if quest.status!="Closed"
       }
 
       return data.to_json
