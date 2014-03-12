@@ -58,6 +58,7 @@ class User < ActiveRecord::Base
       encounter_duration: 25,
       short_break_duration: 5,
       extended_break_duration: 15,
+      encounter_extend_duration: 5,
       timezone_name: "US/Eastern",
       utc_time_offset: -14400
     })

@@ -8,6 +8,7 @@ class CreateUserConfig < ActiveRecord::Migration
       t.integer :encounter_duration
       t.integer :short_break_duration
       t.integer :extended_break_duration
+      t.integer :encounter_extend_duration
 
       t.timestamps
     end

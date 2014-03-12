@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.integer  "encounter_duration"
     t.integer  "short_break_duration"
     t.integer  "extended_break_duration"
+    t.integer  "encounter_extend_duration"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

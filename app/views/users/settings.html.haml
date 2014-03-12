@@ -1,2 +1,17 @@
-=@user.username
-%p= @config.timezone_name
+.row
+  .col-md-6
+    %h2 General Settings
+    %h4 Email
+    = @user.email
+    %h4 Timezone
+    = @config.timezone_name
+  .col-md-6
+    %h2 Timer Settings
+    %h4 Encounter Duration
+    =@config.encounter_duration
+    %h4 Short Break Duration
+    =@config.short_break_duration
+    %h4 Extended Break Duration
+    =@config.extended_break_duration
+    %h4 Encounter Extend Duration
+    =@config.encounter_extend_duration
