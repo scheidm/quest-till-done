@@ -20,3 +20,5 @@
 //= require d3
 //= require layout.js
 //= require jasny-bootstrap
+//= require jquery-ui
+//= require autocomplete-rails
