@@ -242,6 +242,17 @@ html,body {height:100%;}
     /*height: auto !important;*/
 }
 
+/**************** Campaign/Quest Status ***********/
+.label-Open {
+    background-color: #428bca;
+}
+.label-Closed {
+    background-color: #999;
+}
+.label-InProgress {
+    background-color: #5cb85c;
+}
+
 /************** Loading screen **************/
 #fadingBarsG{
     position:relative;
