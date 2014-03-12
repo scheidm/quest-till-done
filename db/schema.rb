@@ -173,7 +173,6 @@ ActiveRecord::Schema.define(version: 20140308173901) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
-    t.string   "github_token"
     t.text     "github_access_token"
     t.text     "github_username"
   end
