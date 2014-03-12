@@ -1,4 +1,4 @@
-class CreateUserConfigs < ActiveRecord::Migration
+class CreateUserConfig < ActiveRecord::Migration
   def change
     create_table :user_configs do |t|
       t.belongs_to :user
