@@ -51,6 +51,17 @@ class User < ActiveRecord::Base
     enc.rounds << Round.create({ type: 'Campaign', event_id: cam.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.save
+
+    UserConfig.create({
+      user_id: self.id,
+      auto_timer: true,
+      encounter_duration: 25,
+      short_break_duration: 5,
+      extended_break_duration: 15,
+      encounter_extend_duration: 5,
+      timezone_name: "US/Eastern",
+      utc_time_offset: -14400
+    })
   end
 
   def self.addGroup(groupName, isAdmin)

@@ -19,6 +19,10 @@ class UsersController < ApplicationController
 
   end
 
+  def settings
+   @config=UserConfig.where('user_id = (?)',@user.id).first
+  end
+
   # destroy avatar
   def destroy_avatar
 
