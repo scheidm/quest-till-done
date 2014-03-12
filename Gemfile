@@ -86,3 +86,5 @@ gem 'github_api'
 gem 'searchkick'
 gem 'rails3-jquery-autocomplete'
 gem 'jquery-ui-rails'
+# experiment with autocomplete ,JSON parser
+gem 'yajl-ruby'
