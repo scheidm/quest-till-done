@@ -27,9 +27,15 @@
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
         = f.hidden_field :type, :value => 'Note'
         = f.hidden_field :quest_id
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
         %br
         .actions
         = f.submit :class => "btn btn-primary pull-right"
+
     = form_for @record, :html => {:id => 'link-form', :class => 'new_record record-form-hidden'} do |f|
       -if @record.errors.any?
         = render 'errors'
