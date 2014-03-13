@@ -52,4 +52,15 @@ class Quest < ActiveRecord::Base
   def set_status
     self.status = 'Open' if self.status.nil?
   end
+
+  def is_ancestor(quest)
+    if(quest.parent != nil)
+      if(self == quest.parent)
+        return true
+      else
+        is_ancestor(quest.parent)
+      end
+    end
+    return false
+  end
 end
