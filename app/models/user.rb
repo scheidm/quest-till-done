@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_one :timer
+  has_one :config, class_name: "UserConfig"
   has_many :skill_pointses
   @group = Hash.new 
   has_one :group, as: :user_group

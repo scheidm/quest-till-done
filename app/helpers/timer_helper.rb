@@ -33,7 +33,7 @@ module TimerHelper
       encounter.close
     end
     t = Timer.where(:user_id => current_user.id).first
-    t.current_time = t.setting_time
+    t.current_time = @config.encounter_duration
     t.save
   end
 
