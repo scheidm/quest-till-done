@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
     if(user_signed_in?)
       @user = User.find(current_user.id)
       @config = @user.config
+      @timer = @user.timer
       active_quest = @user.active_quest
       if(active_quest.nil?)
          @active_quest_model = nil
