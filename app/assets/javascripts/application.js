@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require bootstrap
 //= require flipclock
 //= require d3
@@ -20,3 +21,5 @@
 //= require d3
 //= require layout.js
 //= require jasny-bootstrap
+//= require autocomplete-rails
+//= require twitter/typeahead

@@ -24,7 +24,6 @@ class NotificationService
   def project_was_moved(project)
     recipients = project.team.members
     recipients = reject_muted_users(recipients, project)
-
     recipients.each do |recipient|
       mailer.project_was_moved_email(project.id, recipient.id)
     end
