@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
   def github_update
     login
-
+    update_project params[:github_user], params[:repo_name]
   end
 
 
