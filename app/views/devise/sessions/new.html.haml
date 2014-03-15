@@ -1,0 +1,14 @@
+%h2.devise-form-header.text-centered Sign In
+= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .field
+    .form-group.centered
+      = f.text_field :username, :autofocus => true, :class => 'form-control', :placeholder => 'Username', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Your username, not your email address"
+      %br
+      = f.password_field :password, :class => 'form-control', :placeholder => 'Password', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Your password"
+      %br
+      %div= f.submit "Sign in", :class => 'btn btn-primary', :style => 'width:100%'
+      - if devise_mapping.rememberable?
+        %div
+          = f.check_box :remember_me
+          = f.label :remember_me, :class => 'control-label'
+    = render "devise/shared/links"

@@ -229,6 +229,65 @@ html,body {height:100%;}
     /*height: auto !important;*/
 }
 
+.wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text-centered {
+    text-align: center;
+}
+.devise-header-top{
+    margin-top: 100px;
+    height: 100px;
+}
+.devise-content {
+    background-color: #f7f7f7;
+    padding: 20px 25px 20px;
+    margin: 30 auto 30px;
+    width: 300px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 1px solid #BFBFBF;
+    -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+}
+.devise-form-header {
+    font-family:"Times New Roman",Times,Serif;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0.5em;
+    color: #555;
+}
+
+.panel {
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+}
+
+
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    -webkit-text-fill-color: #555;
+}
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    -webkit-text-fill-color: #555;
+}
+
 /**************** Campaign/Quest Status ***********/
 .label-Open {
     background-color: #428bca;

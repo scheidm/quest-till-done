@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.datetime "updated_at"
   end
 
-  create_table "github_accounts", force: true do |t|
+  create_table "github_repos", force: true do |t|
     t.integer  "user_id"
     t.string   "github_user"
     t.string   "project_name"
