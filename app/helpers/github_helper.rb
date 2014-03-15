@@ -120,7 +120,7 @@ module GithubHelper
 
         # set for latest commit check
 
-        GithubRepo.find_by(github_projectname: projectname, github_user: username).latest_commit = t["sha"]
+        GithubRepo.find_by(project_name: projectname, github_user: username).latest_commit = t["sha"]
 
       end
 
