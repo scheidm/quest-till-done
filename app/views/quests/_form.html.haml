@@ -8,6 +8,8 @@
     = f.text_field :name, :class => 'form-control', :required => 'true'
     = f.label :description, :class => 'control-label'
     = f.text_field :description, :class => 'control-label', :class => 'form-control'
+    = f.label 'Parent Quest', :class => 'control-label'
+    = f.collection_select :parent_id, Quest.where('(campaign_id = ? or id = ?) and id != ?',@quest.campaign_id, @quest.campaign_id, @quest.id).select { |q| !@quest.is_ancestor(q)}, :id, :name, {:include_blank => "Please select"}, :class => 'form-control'
     = f.label 'Owner', :class => 'control-label'
     = f.collection_select :user_id, User.all, :id, :username, {:include_blank => "Please select"}, :class => 'form-control'
     = f.label 'Status', :class => 'control-label'
@@ -16,7 +18,6 @@
     = f.date_field :deadline, :class => 'form-control'
     = f.label 'Is Important?', :class => 'control-label'
     = f.check_box :importance
-    = f.hidden_field :parent_id
     = f.hidden_field :campaign_id
 
   .actions

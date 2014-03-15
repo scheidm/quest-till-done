@@ -41,10 +41,10 @@ module JsonGenerator
       if (!campaign.is_a?(Campaign))
         raise 'Expected argument to be a campaign'
       end
-      data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s}}
+      data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
       data[:children] = children = []
       campaign.quests.each {|quest|
-        children << generateChildTree(quest) if quest.status=="Open"
+        children << generateChildTree(quest) if quest.status!="Closed"
       }
 
       return data.to_json
@@ -67,7 +67,7 @@ module JsonGenerator
     # @return [JSON] JSON formatted tree data
     def generateChildTree(quest)
 
-      data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s}}
+      data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
       if(quest.quests.size == 0)
          return data
       else
