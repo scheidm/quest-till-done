@@ -2,6 +2,8 @@
 # Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
 
+  searchkick
+
   scope :search_import, -> { includes(:records) }
   acts_as_taggable
   acts_as_taggable_on :skills

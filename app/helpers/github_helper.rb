@@ -48,7 +48,7 @@ module GithubHelper
                            project_name: t["name"],
                            url: t["html_url"],
                            github_user: t["owner"]["login"],
-                           created_at: t['created_at'] ,
+                           created_at: t['created_at'],
                            updated_at: t['updated_at'],
                            imported: nil
                           })
@@ -92,6 +92,9 @@ module GithubHelper
       end
     end
 
+    # set for latest issue check
+    GithubRepo.find_by(github_projectname: projectname, github_user: username).latest_issue =  issueobj.first.created_at
+
   end
 
   # Get commits from a project
@@ -114,9 +117,15 @@ module GithubHelper
             create_round(new_commit, action_name, campaign)
           end
         end
+
+        # set for latest commit check
+
+        GithubRepo.find_by(github_projectname: projectname, github_user: username).latest_commit = t["sha"]
+
       end
 
     end
+
 
   end
 
@@ -158,8 +167,9 @@ module GithubHelper
   # Update Issues and Commits
   def update_project(username, projectname)
     #handle issues
-
+    list_issues username, projectname, Encounter.last, Campaign.last
     #handle commits
+    list_commits username, projectname,Encounter.last, Campaign.last
   end
 
   # Delete Project From QTD
