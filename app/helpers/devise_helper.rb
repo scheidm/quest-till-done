@@ -17,7 +17,7 @@ module DeviseHelper
     html.html_safe
   end
 
-  def flash_class(level)
+  def flash_class_devise(level)
     case level
       when :notice then "alert alert-info devise-alert centered"
       when :success then "alert alert-success devise-alert centered"
