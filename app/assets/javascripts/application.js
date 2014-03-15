@@ -22,3 +22,4 @@
 //= require layout.js
 //= require jasny-bootstrap
 //= require autocomplete-rails
+//= require twitter/typeahead

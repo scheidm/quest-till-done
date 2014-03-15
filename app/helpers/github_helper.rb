@@ -1,7 +1,7 @@
 module GithubHelper
 
   def authorize
-    @github  = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
+    @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
     # TODO we need a working url
     address = @github.authorize_url redirect_uri: 'http://khuang.org/abc', scope: 'repo'
     redirect_to address
@@ -12,7 +12,7 @@ module GithubHelper
     authorization_code = params['11e5c37e512925d7de8f']
     access_token = github.get_token authorization_code
     #store this value to user
-    access_token.token   # => returns token value
+    access_token.token # => returns token value
     # ??NO current user anymore
     @user.update_attribute(:github_token, access_token)
   end
@@ -23,7 +23,7 @@ module GithubHelper
     #@github_ = Github.new(:oauth_token => @user.github_token)
 
     #@github = Github.new login:'x', password:'x'
-    @github = Github.new oauth_token:'6f4956e20567870877bf184f03386d5e05a66eb6', client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995', login:'codingsnippets'
+    @github = Github.new oauth_token: '6f4956e20567870877bf184f03386d5e05a66eb6', client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995', login: 'codingsnippets'
 
   end
 
@@ -40,15 +40,18 @@ module GithubHelper
   # List Projects
   # @return [Hash] The full list of projects
   def list_projects
-    @repos =  Hash.new
-    JSON.parse(@github.repos.list.to_json).each do |t|
+    @repos = Hash.new
+    @github.repos.list.each do |t|
       @repos[(t["name"])] = t["html_url"]
       if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"]
-        new_github = GithubRepo.create({user: current_user,
-                                        project_name: t["name"],
-                                        url: t["html_url"],
-                                        github_user: t["owner"]["login"],
-                                        imported: nil })
+        GithubRepo.create({user: current_user,
+                           project_name: t["name"],
+                           url: t["html_url"],
+                           github_user: t["owner"]["login"],
+                           created_at: t['created_at'] ,
+                           updated_at: t['updated_at'],
+                           imported: nil
+                          })
       end
     end
   end
@@ -67,20 +70,23 @@ module GithubHelper
   # @return [Hash] The full list of issues
   def list_issues(username, projectname, encounter, campaign)
     @issues = Hash.new
-    issueobj =  @github.issues.list :user => username, :repo => projectname
+    issueobj = @github.issues.list :user => username, :repo => projectname
     issueobj.each do |t|
-      @issues[t["title"]] = t["html_url"]
+      @issues[t['title']] = t['html_url']
       if encounter || campaign
-        if !Record.find_by description: t["title"], url: t["html_url"]
+        if !Record.find_by description: t['title'], url: t['html_url']
 
           new_issue = Quest.create({campaign_id: campaign.id,
-                                    name:t["title"],
-                                    description: t["html_url"],
+                                    name: t['title'],
+                                    description: t['html_url'],
                                     user_id: current_user.id,
-                                    status: "Open" ,
-                                    parent: campaign})
+                                    status: 'Open',
+                                    parent: campaign,
+                                    created_at: t['created_at'],
+                                    updated_at: t['updated_at']
+                                   })
 
-          create_round( new_issue, action_name, campaign)
+          create_round(new_issue, action_name, campaign)
 
         end
       end
@@ -93,17 +99,17 @@ module GithubHelper
     @commits = Hash.new
     list_branches username, projectname
     @branches.each do |branch_name, branch_sha|
-      @github.repos.commits.list( username,projectname, :sha => branch_sha).each do |t|
+      @github.repos.commits.list(username, projectname, :sha => branch_sha).each do |t|
         @commits[t["commit"]["message"]] = t["html_url"]
         if encounter && campaign
           if !Record.find_by sha: t["sha"]
-            new_commit = Commit.create({ encounter_id: encounter.id,
-                                         quest_id: campaign.id,
-                                         description: t["commit"]["message"],
-                                         url: t["html_url"],
-                                         github_projectname: projectname,
-                                         github_username: username,
-                                         sha: t["sha"]})
+            new_commit = Commit.create({encounter_id: encounter.id,
+                                        quest_id: campaign.id,
+                                        description: t["commit"]["message"],
+                                        url: t["html_url"],
+                                        user_id: current_user.id,
+                                        sha: t["sha"]
+                                       })
 
             create_round(new_commit, action_name, campaign)
           end
@@ -132,19 +138,16 @@ module GithubHelper
       end
 
       # new encounter
-      import_campaign = Campaign.new
-      import_campaign.name = projectname
-      import_campaign.description = "Imported Project for #{projectname}"
-      import_campaign.user_id = current_user.id
-      import_campaign.save
+      import_campaign = Campaign.create({name: projectname,
+                                         description: "Imported Project for #{projectname}",
+                                         user_id: current_user.id
+                                        })
 
       create_round(import_campaign, action_name, import_campaign)
-
 
       # import commits & issues
       list_commits username, projectname, Encounter.last, import_campaign
       list_issues username, projectname, Encounter.last, import_campaign
-
 
 
     end
@@ -152,6 +155,12 @@ module GithubHelper
 
   end
 
+  # Update Issues and Commits
+  def update_project(username, projectname)
+    #handle issues
+
+    #handle commits
+  end
 
   # Delete Project From QTD
   # @param username     Github User Name
@@ -162,7 +171,7 @@ module GithubHelper
     project.save
 
 
-    target_campaign = Quest.find_by(type: 'Campaign',  name: projectname, campaign_id:nil)
+    target_campaign = Quest.find_by(type: 'Campaign', name: projectname, campaign_id: nil)
     #destroy all Rounds
     Round.destroy_all(campaign_id: target_campaign.id)
     #destroy all Quests related to campaign
@@ -172,7 +181,7 @@ module GithubHelper
 
     #destroy all Commits
 
-    Record.destroy_all(type:'Commit', github_username: username, github_projectname: projectname)
+    Record.destroy_all(type: 'Commit', github_username: username, github_projectname: projectname)
 
     #make sure there is an encounter there
     create_round(project, action_name, Campaign.last)

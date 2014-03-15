@@ -121,4 +121,7 @@ class QuestsController < ApplicationController
   def quest_params
     params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline)
   end
+
+
+
 end
