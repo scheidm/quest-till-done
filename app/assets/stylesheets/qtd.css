@@ -260,6 +260,10 @@ html,body {height:100%;}
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
     background-color: #ffffff;
 }
+.devise-alert {
+    margin-top: 30px;
+    width: 500px;
+}
 .devise-form-header {
     font-family:"Times New Roman",Times,Serif;
     -webkit-margin-before: 0em;

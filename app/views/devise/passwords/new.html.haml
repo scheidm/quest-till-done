@@ -1,6 +1,5 @@
 %h2.devise-form-header.text-centered Forgot your password?
 = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-  = devise_error_messages!
   .field
     .form-group.centered
       = f.email_field :email, :class => 'form-control', :placeholder => 'Email', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Your email address to send the reset instruction"
