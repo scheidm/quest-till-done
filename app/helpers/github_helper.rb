@@ -93,7 +93,7 @@ module GithubHelper
     end
 
     # set for latest issue check
-    GithubRepo.find_by(github_projectname: projectname, github_user: username).latest_issue =  issueobj.first.created_at
+    #GithubRepo.find_by(project_name: projectname, github_user: username).latest_issue =  issueobj.first.created_at
 
   end
 
@@ -120,7 +120,7 @@ module GithubHelper
 
         # set for latest commit check
 
-        GithubRepo.find_by(project_name: projectname, github_user: username).latest_commit = t["sha"]
+        #GithubRepo.find_by(project_name: projectname, github_user: username).latest_commit = t["sha"]
 
       end
 

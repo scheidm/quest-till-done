@@ -6,6 +6,7 @@
       %th Project Name
       %th Project Owner
       %th Import
+      %th Update
 
   %tbody
     - @projects.each do |t|
@@ -24,4 +25,5 @@
           %td
             = link_to "Import",  { :action => 'github_project_import', :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
 
-
+        %td
+          = link_to "Manual Update" , { :action => 'github_update',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
