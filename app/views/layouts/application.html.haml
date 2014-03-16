@@ -36,7 +36,7 @@
                 %img#avatar.img-rounded.img-responsive{src: "/assets/Avatar.jpg"}/
               .col-md-7.qtd-col
                 %div
-                  %a{href: "/users/"}
+                  %a{href: user_index_path }
                     =@user.username
                   %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"} 3
                 %div{style: "color:#999999"}
@@ -104,7 +104,7 @@
           = yield
     / /row
     %footer
-      %p © Quest Till Done 2013
+      %p © Quest Till Done 2014
     / /container
 #userPopContent.hide
   %p

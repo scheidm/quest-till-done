@@ -1,7 +1,7 @@
 %p#notice= notice
 %p
   %strong Name:
-  = @record.description
+  = auto_link(@record.description)
 %p
   %strong Encounter ID:
   = @record.encounter_id
@@ -11,7 +11,7 @@
 
 %p
   %strong Link:
-  = @record.url
+  = auto_link(@record.url)
 
 
 = link_to 'Edit', edit_record_path(@record)
