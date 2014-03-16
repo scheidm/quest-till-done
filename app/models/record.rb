@@ -4,7 +4,7 @@ class Record < ActiveRecord::Base
 
   searchkick
   extend FriendlyId
-  friendly_id :name, use: [:slugged, :history]
+  friendly_id :description, use: [:slugged, :history]
 
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
