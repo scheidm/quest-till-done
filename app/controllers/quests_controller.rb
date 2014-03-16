@@ -15,12 +15,18 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] Quest detail page with that id
   def show
-    @quest = Quest.find(params[:id])
+    @quest = Quest.friendly.find(params[:id])
     @user = User.find(current_user.id)
     if(!@user.active_quest.nil?&&User.find(current_user.id).active_quest.id == @quest.id)
       @active_quest = true
     else
       @active_quest = false
+    end
+
+    #reverse history but direct to new
+
+    if request.path != quest_path(@quest)
+      redirect_to @quest, status: :moved_permanently
     end
   end
 
@@ -60,14 +66,14 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] Quest's editing page
   def edit
-    @quest = Quest.find(params[:id])
+    @quest = Quest.friendly.find(params[:id])
   end
 
   # Update quest changes and save the changes
   # @param quest_params [quest_params] field input from creation page
   # @return [Html] redirect back to quest's campaign page
   def update
-    @quest = Quest.find(params[:id])
+    @quest = Quest.friendly.find(params[:id])
     respond_to do |format|
       if @quest.update(quest_params)
         create_round(@quest, action_name, @quest.campaign)
@@ -96,14 +102,14 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [JSON] quest's information in JSON format
   def getTree
-    quest = Quest.find(params[:id])
+    quest = Quest.friendly.find(params[:id])
     render :text => generateQuestTree(quest)
   end
 
   # Set quest as user's current active quest
   # @param id [Integer] Quest's id
   def set_active
-    quest = Quest.find(params[:id])
+    quest = Quest.friendly.find(params[:id])
     user = User.find(current_user.id)
     user.active_quest_id = quest.id
     user.save

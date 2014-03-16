@@ -1,7 +1,11 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
 
+
   searchkick
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history]
+
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
   belongs_to :quest
@@ -35,6 +39,7 @@ class Record < ActiveRecord::Base
   def self.child_classes
     @child_classes
   end
+
 
 
 

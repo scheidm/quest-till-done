@@ -90,5 +90,6 @@ gem 'jquery-ui-rails'
 # experiment with autocomplete ,JSON parser
 gem 'yajl-ruby'
 
+gem 'friendly_id'
 
 gem 'twitter-typeahead-rails'
