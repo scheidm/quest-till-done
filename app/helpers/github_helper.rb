@@ -72,7 +72,7 @@ module GithubHelper
     issueobj.each do |t|
       @issues[t['title']] = t['html_url']
       if encounter || campaign
-        if !Record.find_by description: t['title'], url: t['html_url']
+        unless Record.find_by description: t['title'], url: t['html_url']
 
           new_issue = Quest.create({campaign_id: campaign.id,
                                     name: t['title'],
