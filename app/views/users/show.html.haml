@@ -1,19 +1,28 @@
-%h1 Show data pulled
-%h2 Repos
-%ul
--@repos.each do |key,value|
+%ul#myTab.nav.nav-tabs
+  %li
+    %a{ id: "profile", href: "index"} Profile
+  %li.active
+    %a{ id: "github", href: "show"} Github
+  %li
+    %a{"data-toggle" => "tab", href: "#messages"} Social
+  %li
+    %a{ id: "settings", href: "settings"} Settings
+.tab-content
+  %h2 Repos
+  %ul
+  -@repos.each do |key,value|
     %li
-        %a{ :href=>value }=key
+      %a{ :href=>value }=key
 
 
-%h2 Issues for QTD
-%ul
--@issues.each do |key,value|
+  %h2 Issues for QTD
+  %ul
+  -@issues.each do |key,value|
     %li
-        %a{ :href=>value }=key
+      %a{ :href=>value }=key
 
-%h2 Commits
-%ul
--@commits.each do |key,value|
+  %h2 Commits
+  %ul
+  -@commits.each do |key,value|
     %li
-        %a{ :href=>value }=key
+      %a{ :href=>value }=key
