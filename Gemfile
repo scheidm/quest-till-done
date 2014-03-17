@@ -84,3 +84,12 @@ gem 'will_paginate'
 gem 'attr_encrypted'
 gem 'github_api'
 gem 'searchkick'
+
+gem 'rails4-autocomplete'
+gem 'jquery-ui-rails'
+# experiment with autocomplete ,JSON parser
+gem 'yajl-ruby'
+
+gem 'friendly_id'
+
+gem 'twitter-typeahead-rails'

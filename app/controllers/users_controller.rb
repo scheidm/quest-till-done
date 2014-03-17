@@ -53,5 +53,10 @@ class UsersController < ApplicationController
     del_project params[:github_user], params[:repo_name]
   end
 
+  def github_update
+    login
+    update_project params[:github_user], params[:repo_name]
+  end
+
 
 end

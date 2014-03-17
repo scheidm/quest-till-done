@@ -25,11 +25,20 @@
         = f.label :description, "Note", :class => 'control-label'
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
+
+        = f.label :quest_name, "Set Note to a Quest", :class => 'control-label'
+        %br
+        = f.autocomplete_field :quest_name, quest_autocomplete_searches_path
+
+        -#= f.hidden_field :quest_id, :value => Quest.find_by(quest_name)
         = f.hidden_field :type, :value => 'Note'
-        = f.hidden_field :quest_id
         %br
         .actions
         = f.submit :class => "btn btn-primary pull-right"
+
+
+
+
     = form_for @record, :html => {:id => 'link-form', :class => 'new_record record-form-hidden'} do |f|
       -if @record.errors.any?
         = render 'errors'
@@ -48,6 +57,10 @@
         %br
         .actions
         = f.submit :class => "btn btn-primary pull-right"
+
+
+
+
 
     = form_for @record, :html => {:id => 'image-form', :class => 'new_record record-form-hidden'} do |f|
       -if @record.errors.any?

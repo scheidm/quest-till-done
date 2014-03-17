@@ -6,4 +6,5 @@ class Commit < Record
   def self.model_name
     Record.model_name
   end
+
 end

@@ -18,7 +18,12 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] the campaign detail with that id
   def show
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.friendly.find(params[:id])
+    #reverse history but direct to new
+
+    if request.path != campaign_path(@campaign)
+      redirect_to @campaign, status: :moved_permanently
+    end
   end
   # Create new campaign
   # @return [Html] New campaign page
@@ -57,14 +62,14 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] Campaign editing page
   def edit
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.friendly.find(params[:id])
   end
 
   # Update campaign changes and save the changes
   # @param campaign_params [campaign_params] field input from creation page
   # @return [Html] redirect back to campaigns index page
   def update
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.friendly.find(params[:id])
     respond_to do |format|
       if @campaign.update(campaign_params)
         create_round(@campaign, action_name, @campaign)
@@ -93,7 +98,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign'id to be viewed
   # @return [Html] partial view of the timeline
   def timeline
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.friendly.find(params[:id])
   end
 
   # Get the current timeline for the campaign

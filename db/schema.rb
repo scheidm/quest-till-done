@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312133308) do
+ActiveRecord::Schema.define(version: 20140316143212) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -36,6 +36,19 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.integer  "user_id"
   end
 
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
   create_table "friends", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -49,6 +62,8 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.boolean  "imported"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "lastest_issue"
+    t.string   "lastest_commit"
   end
 
   create_table "groups", force: true do |t|
@@ -72,7 +87,10 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.datetime "updated_at"
     t.boolean  "importance",     default: false
     t.string   "type"
+    t.string   "slug"
   end
+
+  add_index "quests", ["slug"], name: "index_quests_on_slug"
 
   create_table "records", force: true do |t|
     t.string   "type"
@@ -87,7 +105,10 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.text     "github_projectname"
     t.text     "sha"
     t.integer  "user_id"
+    t.string   "slug"
   end
+
+  add_index "records", ["slug"], name: "index_records_on_slug"
 
   create_table "rounds", force: true do |t|
     t.string   "type"
@@ -186,7 +207,6 @@ ActiveRecord::Schema.define(version: 20140312133308) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
-    t.string   "github_token"
     t.text     "github_access_token"
     t.text     "github_username"
   end

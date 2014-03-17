@@ -3,7 +3,7 @@ QuestTillDone::Application.routes.draw do
   devise_for :users
   resources :users do
     collection do
-      get 'github_list', 'github_project_import', 'github_project_del', 'restart_countdown', 'index', 'show', 'settings'
+      get 'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings'
     end
   end
   get 'welcome/index'
@@ -13,7 +13,9 @@ QuestTillDone::Application.routes.draw do
       post 'setState'
     end
   end
-  resources :records
+  resources :records do
+    get :autocomplete_quest_name, :on => :collection
+  end
   resources :timers do
     collection do
       get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown'
