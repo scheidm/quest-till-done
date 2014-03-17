@@ -72,7 +72,7 @@ module GithubHelper
     issueobj.each do |t|
       @issues[t['title']] = t['html_url']
       if encounter || campaign
-        unless Record.find_by description: t['title'], url: t['html_url']
+        unless Quest.find_by description: t['html_url']
 
           new_issue = Quest.create({campaign_id: campaign.id,
                                     name: t['title'],
@@ -104,21 +104,19 @@ module GithubHelper
 
         @commits[t["commit"]["message"]] = t["html_url"]
 
-       # if encounter && campaign
-          unless Record.find_by sha: t["sha"]
-            new_commit = Commit.create({encounter_id: encounter.id,
-                                        quest_id: campaign.id,
-                                        description: t["commit"]["message"],
-                                        url: t["html_url"],
-                                        user_id: current_user.id,
-                                        sha: t["sha"]
-                                       })
+        # if encounter && campaign
+        unless Record.find_by sha: t["sha"]
+          new_commit = Commit.create({encounter_id: encounter.id,
+                                      quest_id: campaign.id,
+                                      description: t["commit"]["message"],
+                                      url: t["html_url"],
+                                      user_id: current_user.id,
+                                      sha: t["sha"]
+                                     })
 
-            create_round(new_commit, action_name, campaign)
-          end
-       # end
-        # set for latest commit check
-        #GithubRepo.find_by(project_name: projectname, github_user: username).latest_commit = t["sha"]
+          create_round(new_commit, action_name, campaign)
+        end
+        # end
       end
     end
   end
@@ -162,7 +160,7 @@ module GithubHelper
   def update_project(username, projectname)
 
     #handle commits
-    list_commits username, projectname,Encounter.last, Campaign.last
+    list_commits username, projectname, Encounter.last, Campaign.last
     #handle issues
     list_issues username, projectname, Encounter.last, Campaign.last
   end
