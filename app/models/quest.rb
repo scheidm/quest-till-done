@@ -1,7 +1,11 @@
 # A specific, actionable task to complete in given project.
 # Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
+
   searchkick
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history]
+
   scope :search_import, -> { includes(:records) }
   acts_as_taggable
   acts_as_taggable_on :skills
@@ -63,4 +67,6 @@ class Quest < ActiveRecord::Base
     end
     return false
   end
+
+
 end

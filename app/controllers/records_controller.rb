@@ -15,7 +15,7 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] Record detail page with the id
   def show
-    @record = Record.find(params[:id])
+    @record = Record.friendly.find(params[:id])
   end
 
   # Create new record for a quest
@@ -51,7 +51,7 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def destroy
-    @record= Record.find { params[:id]}.destroy
+    @record= Record.friendly.find { params[:id]}.destroy
   end
 
   # Define allowed parameter for a record model
@@ -61,4 +61,10 @@ class RecordsController < ApplicationController
   def record_params
     params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url)
   end
+
+  def quest_autocomplete
+    render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
+  end
+
+
 end

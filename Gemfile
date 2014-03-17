@@ -84,3 +84,7 @@ gem 'will_paginate'
 gem 'attr_encrypted'
 gem 'github_api'
 gem 'searchkick'
+
+# Friendly URL
+gem 'friendly_id'
+

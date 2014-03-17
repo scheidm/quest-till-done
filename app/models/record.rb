@@ -1,8 +1,12 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
-  searchkick
 
-  attr_accessor :encounter, :quest
+
+  searchkick
+  extend FriendlyId
+  friendly_id :description, use: [:slugged, :history]
+
+  attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
   belongs_to :quest
   # Record belongs to a encounter
@@ -35,6 +39,9 @@ class Record < ActiveRecord::Base
   def self.child_classes
     @child_classes
   end
+
+
+
 
   def to_link
     self.quest.to_link

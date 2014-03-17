@@ -106,4 +106,13 @@ class User < ActiveRecord::Base
   def last_encounter
     Encounter.where(:user_id => self.id).last
   end
+
+  
+  
+  def github
+    @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
+  end
+
+
+  
 end
