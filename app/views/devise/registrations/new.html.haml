@@ -1,0 +1,15 @@
+%h2.devise-form-header.text-centered Sign Up
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  .field
+    .form-group.centered
+      = f.text_field :username, :autofocus => true, :class => 'form-control', :placeholder => 'Username', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Unique Username"
+      %br
+      = f.email_field :email, :class => 'form-control', :placeholder => 'Email', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Your email address"
+      %br
+      = f.password_field :password, :class => 'form-control', :placeholder => 'Password', :style => 'margin-bottom:10px;', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Minimum 6 characters"
+      = f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Confirm Password', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Confirm your password"
+      %br
+      %div= f.submit "Sign up", :class => 'btn btn-primary', :style => 'width:100%'
+    = render "devise/shared/links"
+
+

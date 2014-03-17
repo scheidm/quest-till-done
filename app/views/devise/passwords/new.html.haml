@@ -1,0 +1,9 @@
+%h2.devise-form-header.text-centered Forgot your password?
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+  .field
+    .form-group.centered
+      = f.email_field :email, :class => 'form-control', :placeholder => 'Email', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Your email address to send the reset instruction"
+      %br
+      %div= f.submit "Send reset instruction", :class => 'btn btn-primary', :style => 'width:100%'
+    %br
+    = render "devise/shared/links"
