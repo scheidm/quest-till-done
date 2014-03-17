@@ -26,11 +26,11 @@
         .panel-heading Timer Settings
         .panel-body
           %h4 Encounter Duration
-          =@config.encounter_duration
+          ="#{@config.encounter_duration/60} minutes"
           %h4 Short Break Duration
-          =@config.short_break_duration
+          ="#{@config.short_break_duration/60} minutes"
           %h4 Extended Break Duration
-          =@config.extended_break_duration
+          ="#{@config.extended_break_duration/60} minutes"
           %h4 Encounter Extend Duration
-          =@config.encounter_extend_duration
+          ="#{@config.encounter_extend_duration/60} minutes"
 
