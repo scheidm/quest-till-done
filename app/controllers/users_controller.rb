@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def github_authorize
-    authorize
+    redirect_to authorize
   end
 
   def github_callback
