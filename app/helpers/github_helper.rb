@@ -2,7 +2,7 @@ module GithubHelper
 
   def authorize
     @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
-    redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:3000/user/github_callback", scope: 'repo'
+    redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:3000/users/github_callback", scope: 'repo'
   end
 
   # Get Access Token
