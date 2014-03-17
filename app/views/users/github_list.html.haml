@@ -1,29 +1,39 @@
-%h2 Projects
+%ul#myTab.nav.nav-tabs
+  %li
+    %a{ id: "profile", href: "index"} Profile
+  %li.active
+    %a{ id: "github", href: "show"} Github
+  %li
+    %a{"data-toggle" => "tab", href: "#messages"} Social
+  %li
+    %a{ id: "settings", href: "settings"} Settings
+.tab-content
+  %h2 Github Projects
 
-%table{:class => "table table-hover"}
-  %thead
-    %tr
-      %th Project Name
-      %th Project Owner
-      %th Import
-      %th Update
-
-  %tbody
-    - @projects.each do |t|
+  %table{:class => "table table-hover"}
+    %thead
       %tr
-        %td
-          =link_to(t.project_name, t.url )
-        %td
-          =t.github_user
+        %th Project Name
+        %th Project Owner
+        %th Import
+        %th Update
 
-        - if t.imported
+    %tbody
+      - @projects.each do |t|
+        %tr
           %td
-            = link_to "Delete" , { :action => 'github_project_del',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
-
-
-        - else
+            =link_to(t.project_name, t.url )
           %td
-            = link_to "Import",  { :action => 'github_project_import', :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+            =t.github_user
 
-        %td
-          = link_to "Manual Update" , { :action => 'github_update',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+          - if t.imported
+            %td
+              = link_to "Delete" , { :action => 'github_project_del',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+
+
+          - else
+            %td
+              = link_to "Import",  { :action => 'github_project_import', :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+
+          %td
+            = link_to "Manual Update" , { :action => 'github_update',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
