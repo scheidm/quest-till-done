@@ -4,6 +4,22 @@ class UsersController < ApplicationController
   include RoundHelper
   include GithubHelper
 
+
+  def authorize
+    @github = current_user.github
+    redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:8080/users/github_callback", scope: 'repo'
+  end
+
+    # Get Access Token
+  def callback         
+    @github = current_user.github
+    token = (@github.get_token params['code']).token
+    #store this value to user table
+    current_user.github_access_token = token
+    current_user.save
+  end
+
+
   def index
     @user = current_user
   end
@@ -40,10 +56,11 @@ class UsersController < ApplicationController
       github_list
     end
 
+
   end
 
   def github_authorize
-    redirect_to authorize
+      authorize
   end
 
   def github_callback

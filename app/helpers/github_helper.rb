@@ -1,25 +1,20 @@
 module GithubHelper
 
-  def authorize
-    @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
-    @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:8080/users/github_callback", scope: 'repo'
-  end
 
-  # Get Access Token
-  def callback
-    authorization_code = params['access_token']
-    @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
-    access_token = @github.get_token authorization_code
-    #store this value to user table
-    current_user.update_attribute(:github_access_token, access_token.token)
-  end
+
+  # # Get Access Token
+  # def callback  
+  #   (@github.get_token params['access_token']).token
+  #   #store this value to user table
+  #   current_user.github_access_token =  access_token.token
+  # end
+
+  
 
   # Login for github information
   # @return [Github] Github Session
   def login
-
     @github = Github.new oauth_token: current_user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
-
   end
 
   # Check if login is sucessful

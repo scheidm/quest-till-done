@@ -62,8 +62,8 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.boolean  "imported"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "lastest_commit"
     t.datetime "lastest_issue"
-    t.string   "lastest_commit"
   end
 
   create_table "groups", force: true do |t|
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
+    t.string   "github_token"
     t.text     "github_access_token"
     t.text     "github_username"
   end
