@@ -5,8 +5,6 @@ class RecordsController < ApplicationController
   include JsonGenerator::QuestModule
   include RoundHelper
 
-  autocomplete :record, :quest_name, :full => true
-
   # Show all records belongs to a user
   # @return [Html] All records belong to a user
   def index

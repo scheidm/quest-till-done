@@ -26,11 +26,8 @@
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
 
-        = f.label :quest_name, "Set Note to a Quest", :class => 'control-label'
-        %br
-        = f.autocomplete_field :quest_name, quest_autocomplete_searches_path
 
-        -#= f.hidden_field :quest_id, :value => Quest.find_by(quest_name)
+        = f.hidden_field :quest_id
         = f.hidden_field :type, :value => 'Note'
         %br
         .actions
