@@ -8,18 +8,16 @@ module TimerHelper
       encounter.user_id = current_user.id
       encounter.save
     end
-    t = Timer.where(:user_id => current_user.id).first
-    t.updated_at = Time.now
-    t.save
+    @timer.updated_at = Time.now
+    @timer.save
     current_user.timer.set_state(true)
   end
 
   # pause timer
   def stop_timer
     current_time = params[:current_time]
-    t = Timer.where(:user_id => current_user.id).first
-    t.current_time = current_time
-    t.save
+    @timer.current_time = current_time
+    @timer.save
     current_user.timer.set_state(false)
   end
 
@@ -32,9 +30,8 @@ module TimerHelper
     elsif(encounter.end_time.nil?)
       encounter.close
     end
-    t = Timer.where(:user_id => current_user.id).first
-    t.current_time = t.setting_time
-    t.save
+    @timer.current_time = @config.encounter_duration
+    @timer.save
   end
 
   # get remaining time

@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_one :timer
+  has_one :config, class_name: "UserConfig"
   has_many :skill_pointses
   @group = Hash.new 
   has_one :group, as: :user_group
@@ -55,10 +56,10 @@ class User < ActiveRecord::Base
     UserConfig.create({
       user_id: self.id,
       auto_timer: true,
-      encounter_duration: 25,
-      short_break_duration: 5,
-      extended_break_duration: 15,
-      encounter_extend_duration: 5,
+      encounter_duration: 25*60,
+      short_break_duration: 5*60,
+      extended_break_duration: 15*60,
+      encounter_extend_duration: 5*60,
       timezone_name: "US/Eastern",
       utc_time_offset: -14400
     })
