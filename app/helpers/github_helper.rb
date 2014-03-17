@@ -8,6 +8,7 @@ module GithubHelper
   # Get Access Token
   def callback
     authorization_code = params['access_token']
+    @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
     access_token = @github.get_token authorization_code
     #store this value to user table
     current_user.update_attribute(:github_access_token, access_token.token)
