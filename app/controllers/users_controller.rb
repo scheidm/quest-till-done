@@ -34,9 +34,21 @@ class UsersController < ApplicationController
     #list_branches 'scheidm', 'quest-till-done'
     #list_issues 'scheidm', 'quest-till-done', nil, nil
     #list_commits 'scheidm', 'quest-till-done', nil, nil
-    github_list
+    if current_user.github_access_token.nil?
+      github_authorize
+    else
+      github_list
+    end
+
   end
 
+  def github_authorize
+    authorize
+  end
+
+  def github_callback
+    callback
+  end
 
   def github_list
     login

@@ -2,26 +2,22 @@ module GithubHelper
 
   def authorize
     @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
-    # TODO we need a working url
-    address = @github.authorize_url redirect_uri: 'http://khuang.org/abc', scope: 'repo'
-    redirect_to address
+    redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:3000/user/github_callback", scope: 'repo'
   end
 
   # Get Access Token
   def callback
-    authorization_code = params['11e5c37e512925d7de8f']
+    authorization_code = params['access_token']
     access_token = github.get_token authorization_code
-    #store this value to user
-    access_token.token # => returns token value
-    # ??NO current user anymore
-    @user.update_attribute(:github_token, access_token)
+    #store this value to user table
+    current_user.update_attribute(:github_access_token, access_token.token)
   end
 
   # Login for github information
   # @return [Github] Github Session
   def login
 
-    @github = Github.new oauth_token: '6f4956e20567870877bf184f03386d5e05a66eb6', client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995', login: 'codingsnippets'
+    @github = Github.new oauth_token: current_user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
 
   end
 
