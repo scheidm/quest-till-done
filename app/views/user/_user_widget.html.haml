@@ -4,7 +4,7 @@
 		= current_user.username
 	
 	%p 
-		= link_to 'Log Out', destroy_user_session_path, :method => :delete 
-- else 
-	= link_to 'Login', new_user_session_path
+		= link_to 'Log Out', destroy_user_session_path, :method => :delete
+-#- else
+-#	= link_to 'Login', new_user_session_path
 
