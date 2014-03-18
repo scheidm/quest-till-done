@@ -11,25 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125001130) do
-
-  create_table "admins", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+ActiveRecord::Schema.define(version: 20140316143212) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -47,31 +29,164 @@ ActiveRecord::Schema.define(version: 20140125001130) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
-  create_table "nodes", force: true do |t|
-    t.integer  "pomodoro_id"
+  create_table "encounters", force: true do |t|
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "friendly_id_slugs", force: true do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "friends", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "notes", force: true do |t|
+  create_table "github_repos", force: true do |t|
+    t.integer  "user_id"
+    t.string   "github_user"
+    t.string   "project_name"
+    t.string   "url"
+    t.boolean  "imported"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "lastest_commit"
+    t.datetime "lastest_issue"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "quests", force: true do |t|
+    t.string   "name",                           null: false
+    t.string   "status"
+    t.string   "priority"
     t.text     "description"
-    t.integer  "pomodoro_id"
+    t.integer  "estimated_cost"
+    t.integer  "current_cost"
+    t.integer  "parent_id"
+    t.integer  "campaign_id"
+    t.date     "deadline"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "importance",     default: false
+    t.string   "type"
+    t.string   "slug"
+  end
+
+  add_index "quests", ["slug"], name: "index_quests_on_slug"
+
+  create_table "records", force: true do |t|
+    t.string   "type"
+    t.text     "description",        null: false
+    t.string   "url"
+    t.integer  "encounter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quest_id"
+    t.text     "quote"
+    t.text     "github_username"
+    t.text     "github_projectname"
+    t.text     "sha"
+    t.integer  "user_id"
+    t.string   "slug"
+  end
+
+  add_index "records", ["slug"], name: "index_records_on_slug"
+
+  create_table "rounds", force: true do |t|
+    t.string   "type"
+    t.integer  "event_id"
+    t.string   "event_description"
+    t.integer  "encounter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "campaign_id"
+  end
+
+  create_table "sessions", force: true do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "pomodoros", force: true do |t|
-    t.date     "end_time"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "skill_points", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "level"
+    t.integer  "exp"
+    t.integer  "user_id_id"
   end
+
+  create_table "skills", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "achievements"
+    t.string   "description"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
 
   create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  create_table "timers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "setting_time"
+    t.integer  "current_time"
+    t.boolean  "enabled"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "state"
+    t.string   "mode"
+  end
+
+  create_table "user_configs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "timezone_name"
+    t.boolean  "auto_timer"
+    t.integer  "utc_time_offset"
+    t.integer  "encounter_duration"
+    t.integer  "short_break_duration"
+    t.integer  "extended_break_duration"
+    t.integer  "encounter_extend_duration"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
+    t.string   "username",               default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -84,11 +199,25 @@ ActiveRecord::Schema.define(version: 20140125001130) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "username"
+    t.integer  "active_quest_id"
+    t.integer  "notification_level",     default: 1,  null: false
+    t.integer  "adventure_level"
+    t.integer  "recent_level"
+    t.text     "achievements"
+    t.integer  "level"
+    t.integer  "exp"
+    t.integer  "group_id"
+    t.string   "github_token"
+    t.text     "github_access_token"
+    t.text     "github_username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "users_groups", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
 
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+panda: {
+  name: panda,
+  id: 2,
+  description: don't touch!,
+  campaign_id: 1
+}
+genma: {
+  name: genma,
+  type: Campaign,
+  id: 1,
+  description: old man!
+}

@@ -1,0 +1,47 @@
+%h2 Notes Based off Encounter
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Description
+      %th Date
+      %th Encounter
+      %th Type
+
+  %tbody
+    - @records.group_by{ |m| m.encounter_id }.each do |record|
+      %tr
+        - record[1].each_index do |s|
+          %tr
+          %td=record[1][s].description
+          %td{:rowspan => record.size}=record[1][s].created_at
+          %td=record[1][s].type
+        %th{:rowspan => record.size}=record[0]
+
+
+
+%table
+  %thead "Break down by Dates"
+  %tr
+    %th Date
+    %th Description
+    %th Encounter
+
+  %tbody
+
+  - @records.group_by{ |m| m.created_at.strftime("%Y-%d-%m") }.each do |date|
+    %tr
+      %td=date[0]
+      %td
+        - date[1].each do |record|
+          %ul
+            %li=record.description
+      %td
+        - date[1].each do |record|
+          %ul
+            %li=record.encounter_id
+
+
+
+
+
+= link_to 'New record', new_record_path
