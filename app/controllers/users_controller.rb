@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
+    @recent_activities = Round.all.order(id: :desc).limit(10)
   end
   def getFriends
     @friends = current_user.getFriends
@@ -87,6 +88,9 @@ class UsersController < ApplicationController
     login
     update_project params[:github_user], params[:repo_name]
   end
+
+
+
 
 
 end

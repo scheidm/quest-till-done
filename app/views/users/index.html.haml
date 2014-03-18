@@ -60,5 +60,14 @@
   .panel.panel-success{style: 'margin-left:300px'}
     .panel-heading
       %h3.panel-title Recent Activity
+      %ul
+        - @recent_activities.each do |t|
+          %li
+            = t.updated_at
+            = t.event_description
+            = t.type + " for "
+            = Campaign.find(t.campaign_id).name
+
+
     .panel-body
 
