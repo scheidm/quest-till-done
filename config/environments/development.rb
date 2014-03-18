@@ -1,4 +1,4 @@
-Quest::Application.configure do
+QuestTillDone::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -26,6 +26,7 @@ Quest::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.encounter_length=60
 
   # defualt URL
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }

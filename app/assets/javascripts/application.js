@@ -12,6 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require bootstrap
+//= require flipclock
+//= require d3
 //= require jstree
 //= require_tree .
+//= require d3
+//= require layout.js
+//= require jasny-bootstrap
+

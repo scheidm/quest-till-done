@@ -1,0 +1,22 @@
+%h2 Search Result:
+
+%h2
+  =render_result_count(@results)
+%br
+%br
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Item
+      %th Description
+  %tbody
+  - @results.each do |result|
+    %tr
+      %td
+        = result.class.name
+      %td
+        %a{href: result.to_link}
+          = result.to_s
+        = render_status_tag(result)
+
+= will_paginate @results, :renderer => 'SearchesHelper::LinkRenderer'

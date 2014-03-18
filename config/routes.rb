@@ -1,13 +1,54 @@
-Quest::Application.routes.draw do
-  get "welcome/index"
-  devise_for :admins
+QuestTillDone::Application.routes.draw do
+
   devise_for :users
-  resources :pomodoros do
+  resources :users do
     collection do
-      get :getTree
+      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings'
     end
   end
-  resources :notes
+  get 'welcome/index'
+  resources :encounters do
+    collection do
+      get 'get_user_timeline'
+      post 'setState'
+    end
+  end
+  resources :records do
+    get :autocomplete_quest_name, :on => :collection
+  end
+  resources :timers do
+    collection do
+      get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown'
+      post 'start_countdown', 'pause_countdown'
+    end
+  end
+
+  resources :quests do
+    collection do
+      get 'getTree'
+      post 'set_active'
+    end
+  end
+  resources :campaigns do
+    collection do
+      get 'getTree', 'get_campaign_timeline', 'timeline'
+    end
+  end
+
+  resources :priorities do
+    collection do
+      get 'get_priorities'
+    end
+  end
+
+  resources :searches do
+    collection do
+      get 'quest_autocomplete'
+    end
+  end
+
+  #get '/project', to: redirect('/')
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -62,4 +103,36 @@ Quest::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  #
+  # Profiles
+  #
+  resource :profile, only: [:show, :update] do
+    member do
+      get :history
+      get :design
+
+      put :reset_private_token
+      put :update_username
+    end
+
+    scope module: :profiles do
+      resource :account, only: [:show, :update]
+      resource :notifications, only: [:show, :update]
+      resource :password, only: [:new, :create, :edit, :update] do
+        member do
+          put :reset
+        end
+      end
+      resources :keys
+      resources :groups, only: [:index] do
+        member do
+          delete :leave
+        end
+      end
+      resource :avatar, only: [:destroy]
+    end
+  end
+
+ # match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
+
 end

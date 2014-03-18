@@ -1,4 +1,4 @@
-Quest::Application.configure do
+QuestTillDone::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -77,4 +77,5 @@ Quest::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  config.encounter_length=25*60
 end

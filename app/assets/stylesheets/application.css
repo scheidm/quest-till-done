@@ -9,5 +9,14 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require bootstrap
+ *= require flipclock
  *= require_tree .
+ *= require jasny-bootstrap
  */
+
+/*@media (min-width: 1200px) {*/
+    .container {
+        width: 1370px;
+    }
+/*}*/

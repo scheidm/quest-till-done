@@ -1,0 +1,73 @@
+%ul#myTab.nav.nav-tabs
+  %li.active
+    %a{ id: "profile", href: "index"} Profile
+  %li
+    %a{ id: "github", href: "show"} Github
+  %li
+    %a{"data-toggle" => "tab", href: "#messages"} Social
+  %li
+    %a{ id: "settings", href: "settings"} Settings
+.tab-content
+  %h2 User Profile
+
+  %p
+  .panel.panel-info
+    .panel-heading
+      %h3.panel-title User Details
+    .panel-body
+      %p
+        %strong User Name:
+        = @user.username
+        %p
+        %strong Member Since:
+        = @user.created_at
+
+        %p
+        %strong Level:
+        = @user.recent_level
+
+        %p
+        %strong Title:
+        = 'C# Guru'
+
+        %p
+        %strong Experience:
+        = @user.exp
+        .progress.progress-mini.progress-striped.active{style: 'width:250px'}
+          .progress-bar{style: "width:60%"}
+  .panel.panel-info.pull-left
+    .panel-heading
+      %h3.panel-title Skill Point
+    .panel-body
+      %p
+        %h5
+          C#
+          %span.label.label-primary 3
+        .progress.progress-mini{style: 'width:250px;margin-top:10px;margin-left:10px'}
+          .progress-bar{style: "width:65%"}
+        %p
+          %h5
+            Java
+            %span.label.label-success 1
+          .progress.progress-mini{style: 'width:250px;margin-top:10px;margin-left:10px'}
+            .progress-bar.progress-bar-success{style: "width:25%"}
+        %p
+          %h5
+            Rails
+            %span.label.label-warning 7
+          .progress.progress-mini{style: 'width:250px;margin-top:10px;margin-left:10px'}
+            .progress-bar.progress-bar-warning{style: "width:75%"}
+  .panel.panel-success{style: 'margin-left:300px'}
+    .panel-heading
+      %h3.panel-title Recent Activity
+      %ul
+        - @recent_activities.each do |t|
+          %li
+            = t.updated_at
+            = t.event_description
+            = t.type + " for "
+            = Campaign.find(t.campaign_id).name
+
+
+    .panel-body
+

@@ -1,0 +1,37 @@
+%h2
+  Edit #{resource_name.to_s.humanize}
+.panel.panel-info
+  .panel-heading User Profile
+  .panel-body
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+      = devise_error_messages!
+      .form-horizontal
+        .form-group
+          = f.label :email, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.email_field :email, :autofocus => true, :class => 'form-control', :placeholder => 'Email'
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %div
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .form-group.centered
+          = f.label :password, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.password_field :password, :autocomplete => "off", :class => 'form-control', :placeholder => 'Password', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "Leave it blank if you don't want ot change it"
+        .form-group.centered
+          = f.label :password_confirmation, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.password_field :password_confirmation, :class => 'form-control', :placeholder => 'Confirm Password'
+        .form-group.centered
+          = f.label :current_password, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.password_field :current_password, :class => 'form-control', :placeholder => 'Current Password', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "We need your current password to update the changes"
+        %br
+        %div= f.submit "Update", :class => 'btn btn-primary pull-right'
+.panel.panel-danger
+  .panel-heading Account Cancellation
+  .panel-body
+    %p
+      Once account is cancelled, all data will be removed and future recovery is not possible! #{button_to "Cancel my account", registration_path(resource_name), :class => 'btn btn-danger', :data => { :confirm => "Are you sure?" }, :method => :delete}
+  %br
+= link_to "Back", :back, :class => 'btn btn-default'
+
