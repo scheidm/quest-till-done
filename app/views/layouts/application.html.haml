@@ -54,12 +54,12 @@
                   %td
                     %span{style: "float: right;color:#ffffff"} Active Quest:
                   %td
-                    = link_to @active_quest_name, @active_quest_url
+                    = link_to( trunc(@active_quest_name), @active_quest_url)
                 %tr
                   %td
                     %span{style: "float: right;color:#ffffff"} Campaign:
                   %td
-                    = link_to @active_quest_campaign_name, @active_quest_campaign_url
+                    = link_to( trunc(@active_quest_campaign_name), @active_quest_campaign_url)
           .col-md-7.qtd-col
             .col-md-4.qtd-col
               = form_tag searches_path, :method => 'get', :role => 'search', :class => 'navbar-form navbar-left' do |f|
