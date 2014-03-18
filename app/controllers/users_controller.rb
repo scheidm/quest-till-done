@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
+    @recent_activities = Round.all.order(id: :desc).limit(10)
   end
   def getFriends
     @friends = current_user.getFriends
@@ -108,5 +109,8 @@ class UsersController < ApplicationController
   def user_config_params
     params.require(:user_config).permit(:id, :encounter_duration, :short_break_duration, :extended_break_duration, :encounter_extend_duration, :user_id, :status, :importance, :deadline)
   end
+
+
+
 
 end

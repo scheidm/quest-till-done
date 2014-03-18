@@ -218,6 +218,10 @@
     color: #fff;
 }
 
+.panel-deadline a {
+    color: #000;
+}
+
 .fill{
     height:100%;
     min-height:100%;
