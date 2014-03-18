@@ -9,7 +9,11 @@
     = f.label :description, :class => 'control-label'
     = f.text_field :description, :class => 'control-label', :class => 'form-control'
     = f.label 'Parent Quest', :class => 'control-label'
-    = f.collection_select :parent_id, Quest.where('(campaign_id = ? or id = ?) and id != ?',@quest.campaign_id, @quest.campaign_id, @quest.id).select { |q| !@quest.is_ancestor(q)}, :id, :name, :class => 'form-control'
+    - if(@quest.id.nil?)
+      - parent_quest = Quest.where('campaign_id = ? or id = ?', @quest.campaign_id, @quest.campaign_id).order('name ASC')
+    - else
+      - parent_quest = Quest.where('(campaign_id = ? or id = ?) and id != ?',@quest.campaign_id, @quest.campaign_id, @quest.id).order('name ASC').select { |q| !@quest.is_ancestor(q)}
+    = f.collection_select :parent_id, parent_quest, :id, :name,  {}, :class => 'form-control'
     = f.label 'Owner', :class => 'control-label'
     = f.collection_select :user_id, User.all, :id, :username, {:include_blank => "Please select"}, :class => 'form-control'
     = f.label 'Status', :class => 'control-label'

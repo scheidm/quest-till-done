@@ -68,7 +68,7 @@ function buildTree(treeData) {
     node.append("svg:foreignObject")
         .attr("y",8)
         .attr("x", function(d) { return d.children ? -50 : 10; })
-        .attr("width", 155)
+        .attr("width", 70)
         .attr("height", 22)
         .attr("class", "text")
         .append("xhtml:body")
