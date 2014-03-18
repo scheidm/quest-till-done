@@ -27,6 +27,30 @@
             = f.password_field :current_password, :class => 'form-control', :placeholder => 'Current Password', 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', title: "We need your current password to update the changes"
         %br
         %div= f.submit "Update", :class => 'btn btn-primary pull-right'
+.panel.panel-success
+  .panel-heading Timer Setting
+  .panel-body
+    = form_for(@user.config,  :url => { :action=> 'update'}) do |f|
+      .form-horizontal
+        .form-group
+          = f.label :encounter_duration, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.text_field :encounter_duration, :autofocus => true, :class => 'form-control', :placeholder => 'Duration in minutes'
+        .form-group.centered
+          = f.label :short_break_duration, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.text_field :short_break_duration, :class => 'form-control', :placeholder => 'Duration in minutes'
+        .form-group.centered
+          = f.label :extended_break_duration, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.text_field :extended_break_duration, :class => 'form-control', :placeholder => 'Duration in minutes'
+        .form-group.centered
+          = f.label :encounter_extend_duration, :class => 'col-sm-2 control-label'
+          .col-sm-6
+            = f.text_field :encounter_extend_duration, :class => 'form-control', :placeholder => 'Duration in minutes'
+        =f.hidden_field :id
+        %br
+        %div= f.submit "Update", :class => 'btn btn-primary pull-right'
 .panel.panel-danger
   .panel-heading Account Cancellation
   .panel-body

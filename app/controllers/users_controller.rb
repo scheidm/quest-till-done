@@ -89,6 +89,26 @@ class UsersController < ApplicationController
     update_project params[:github_user], params[:repo_name]
   end
 
+  def update
+    @user_config = UserConfig.find(params[:id])
+    respond_to do |format|
+      if @user_config.update(user_config_params)
+        format.html { redirect_to @user, notice: 'Profile was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render user: 'setting' }
+        format.json { render json: @user_config.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def user_config_path
+    return 'update'
+  end
+
+  def user_config_params
+    params.require(:user_config).permit(:id, :encounter_duration, :short_break_duration, :extended_break_duration, :encounter_extend_duration, :user_id, :status, :importance, :deadline)
+  end
 
 
 
