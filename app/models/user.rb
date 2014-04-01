@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
 
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  
+         :recoverable, :rememberable, :trackable, :validatable, :timeoutable, :timeout_in => 60.minutes
+
   attr_accessor :login
 
   has_one :timer
