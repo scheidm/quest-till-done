@@ -5,7 +5,8 @@ panda: {
   name: panda,
   id: 2,
   description: don't touch!,
-  campaign_id: 1
+  campaign_id: 1,
+  parent_id: 1
 }
 genma: {
   name: genma,
