@@ -25,7 +25,7 @@ class Campaign < Quest
   # @return [collection] first page of encounters preceeding end_time
   # 
   def timeline( end_time=Time.now )
-    rounds=Rounds.where('campaign_id = (?)',self.id).where('created_at <= (?)', end_time).order(created_at: :desc).pluck(:encounter_id)
+    rounds=Round.where('campaign_id = (?)',self.id).where('created_at <= (?)', end_time).order(created_at: :desc).pluck(:encounter_id)
     Encounter.where('id in (?)',rounds)
   end
 
