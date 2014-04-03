@@ -1,0 +1,5 @@
+timer1: {
+    id:             1,
+    setting_time:   1800,
+    current_time:   1800,
+}
