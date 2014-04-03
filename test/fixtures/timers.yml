@@ -1,0 +1,9 @@
+default_timer: {
+  id: 1,
+  user_id: 1,
+  setting_time: 1800,
+  current_time: 1800,
+  enabled: t,
+  state: f,
+  mode: auto
+}

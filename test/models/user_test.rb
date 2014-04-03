@@ -1,7 +1,7 @@
 
 class UserTest < ActiveSupport::TestCase
    def setup
-     @user= User.find(1)
+     @user= User.find(2)
    end
 
    test "models created successfully for new user" do

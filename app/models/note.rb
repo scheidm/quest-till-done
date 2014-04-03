@@ -6,8 +6,4 @@ class Note < Record
   validates :quote, absence: true
 
   belongs_to :quest
-
-  def self.model_name
-    Record.model_name
-  end
 end
