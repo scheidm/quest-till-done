@@ -3,7 +3,7 @@
 # a scope on quest, a Quest.where('campaign_id = NULL')
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
-  # has_many :quests
+  has_many :quests
   scope :search_import, -> { includes(:records, :quests) }
 
   def progress
