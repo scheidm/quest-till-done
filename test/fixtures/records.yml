@@ -3,17 +3,35 @@ panda_link: {
   quote: "like a rose, with a stem and pointy thorns",
   encounter_id: 1,
   quest_id: 2,
-  created_at: 1393875463,
-  updated_at: 1393875463,
+  created_at: "2014-03-09 19:17:20.000000",
+  updated_at: "2014-03-09 19:17:20.000000",
   type: Link,
-  id: 1
+  id: 2
 }
 panda_note: {
   type: Note,
   description: "Because squirrels make me happy",
   encounter_id: 1,
   quest_id: 2,
-  created_at: 1393875463,
-  updated_at: 1393875463,
-  id: 2
+  created_at: "2014-03-09 19:17:20.000000",
+  updated_at: "2014-03-09 19:17:20.000000",
+  id: 1
+}
+panda_image: {
+  type: Image,
+  description: "Smiley face",
+  encounter_id: 1,
+  quest_id: 2,
+  created_at: "2014-03-09 19:17:20.000000",
+  updated_at: "2014-03-09 19:17:20.000000",
+  id: 3
+}
+panda_commit: {
+  type: Commit,
+  description: "Awesome commit from Github",
+  encounter_id: 1,
+  quest_id: 2,
+  created_at: "2014-03-09 19:17:20.000000",
+  updated_at: "2014-03-09 19:17:20.000000",
+  id: 4
 }
