@@ -39,7 +39,8 @@ class RecordsControllerTest < ActionController::TestCase
       delete :destroy, id: @record.id
     end
 
-    assert_response :found  end
+    assert_response :found
+  end
 
   def initialize_record
     @record = Record.find(1)
