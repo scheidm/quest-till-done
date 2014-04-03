@@ -5,6 +5,8 @@ class QuestTest < ActiveSupport::TestCase
     Quest.reindex
     Campaign.reindex
     Record.reindex
+    @one=Quest.find(1)
+    @two=Quest.find(2)
   end
 
   test "Search quest fields verbatim" do
@@ -37,5 +39,20 @@ class QuestTest < ActiveSupport::TestCase
   test "Search related note description" do
     x=Quest.search "squirrel"
     assert_equal 1, x.results.length
+  end
+
+  test "distinguish quest from campaign" do
+    assert_equal true, @one.campaign?
+    assert_equal false, @two.campaign?
+  end
+
+  test "accurately return campaign" do
+    assert_equal @one, @two.get_campaign
+    assert_equal @one, @one.get_campaign
+  end
+
+  test "accurately determine ancestors" do
+    assert_equal false, @two.is_ancestor(@one)
+    assert_equal  true, @one.is_ancestor(@two)
   end
 end
