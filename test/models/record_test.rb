@@ -14,6 +14,7 @@ class RecordTest < ActiveSupport::TestCase
 
   test "Assign encounter id" do
     x = Record.new
+    x.user_id = User.first.id
     x.description = 'test'
     x.assign_encounter
     x.save
