@@ -91,4 +91,8 @@ gem 'friendly_id'
 # Local_time convert UTC to user local
 gem 'local_time'
 
+#display response time
+
+gem 'rack-mini-profiler'
+
 
