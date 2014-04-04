@@ -1,11 +1,17 @@
 require 'test_helper'
-include Devise::TestHelpers
+Devise::TestHelpers
 require 'test/unit'
 
-class MyTest < ActionController::TestCase
+class EncountersControllerTest < ActionController::TestCase
 
   def setup
-    # Do nothing
+    sign_in User.first
+  end
+
+  test 'Encounter Should Get Index' do
+    get :index
+    assert_response :success
+
   end
 
 
