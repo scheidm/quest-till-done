@@ -17,6 +17,8 @@ Users can show off their achievements on their profiles in a social environment.
   * $git clone https://github.com/scheidm/quest-till-done.git  
   * $cd quest-till-done  
   * $rails s
+* Setup Searching:
+  * install [elasticsearch](http://www.elasticsearch.org/overview/elkdownloads/)
 
 ##Depolyment
 There are many solutions, we suggest using Apache and Passenger Phusion
