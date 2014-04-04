@@ -15,7 +15,7 @@ class RoundTest < ActiveSupport::TestCase
     quest_me.created_at= Time.now
     quest_me.event_description = "create"
     quest_me.type = "Quest"
-    assert !quest_me.save
+    assert !quest_me.save , "Saved Round without encounter"
   end
 
   test "Round must have campaign" do
@@ -24,7 +24,8 @@ class RoundTest < ActiveSupport::TestCase
     quest_me.created_at= Time.now
     quest_me.event_description = "create"
     quest_me.type = "Quest"
-    assert !quest_me.save  end
+    assert !quest_me.save, "Saved Round without campaign"
+  end
 
   test "Round must have type" do
     quest_me = Round.new
@@ -32,7 +33,7 @@ class RoundTest < ActiveSupport::TestCase
     quest_me.encounter_id = 1
     quest_me.created_at= Time.now
     quest_me.event_description = "create"
-    assert !quest_me.save
+    assert !quest_me.save, "Saved Round without type"
   end
 
   test "Round must have event description" do
@@ -41,7 +42,7 @@ class RoundTest < ActiveSupport::TestCase
     quest_me.campaign_id = 1
     quest_me.created_at= Time.now
     quest_me.type = "Quest"
-    assert !quest_me.save
+    assert !quest_me.save, "Saved Round without description"
   end
 
 
