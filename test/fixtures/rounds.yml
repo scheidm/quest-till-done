@@ -10,8 +10,8 @@ panda_round: {
 }
 
 campaign_round: {
-  id: 1,
-  event_id: 1,
+  id: 2,
+  event_id: 2,
   event_description: create,
   encounter_id: 1,
   campaign_id: 1,
@@ -19,8 +19,8 @@ campaign_round: {
 }
 
 quest_round: {
-  id: 2,
-  event_id: 2,
+  id: 3,
+  event_id: 3,
   event_description: create,
   encounter_id: 1,
   campaign_id: 1,

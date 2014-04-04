@@ -19,7 +19,7 @@ class TimerTest < ActiveSupport::TestCase
   end
 
   test "Timer state is not empty" do
-    assert @timer.state
+    assert !@timer.state.nil?
   end
 
 

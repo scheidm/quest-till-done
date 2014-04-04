@@ -20,7 +20,7 @@ class RoundTest < ActiveSupport::TestCase
 
   test "Round must have campaign" do
     quest_me = Round.new
-    quest_me.quest_id = 1
+    quest_me.encounter_id = 1
     quest_me.created_at= Time.now
     quest_me.event_description = "create"
     quest_me.type = "Quest"
@@ -28,8 +28,8 @@ class RoundTest < ActiveSupport::TestCase
 
   test "Round must have type" do
     quest_me = Round.new
-    quest_me.quest_id = 1
     quest_me.campaign_id = 1
+    quest_me.encounter_id = 1
     quest_me.created_at= Time.now
     quest_me.event_description = "create"
     assert !quest_me.save
@@ -37,15 +37,12 @@ class RoundTest < ActiveSupport::TestCase
 
   test "Round must have event description" do
     quest_me = Round.new
-    quest_me.quest_id = 1
+    quest_me.encounter_id = 1
     quest_me.campaign_id = 1
     quest_me.created_at= Time.now
     quest_me.type = "Quest"
     assert !quest_me.save
   end
-
-
-  # TODO test for generateTree of related_object and related_link
 
 
 
