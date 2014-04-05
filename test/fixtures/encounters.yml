@@ -3,17 +3,5 @@ panda_encounter1: {
   created_at: 1393875463,
   updated_at: 1393875463,
   end_time: 1393875463,
-<<<<<<< HEAD
-  user_id: 1
-}
-
-panda_encounter1: {
-  id: 2,
-  created_at: 1393875463,
-  updated_at: 1393875463,
-  end_time: 1393875763,
-=======
-  id: 1,
->>>>>>> 52f04cb35db0ac4fdab83024286c5c57de622622
   user_id: 1
 }
