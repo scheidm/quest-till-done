@@ -72,7 +72,7 @@ group :test do
 end
 
 gem 'devise'
-gem 'cancan'
+gem 'cancancan'
 gem 'role_model'
 gem 'flipclockjs-rails', "~> 0.4.0b"
 gem 'acts-as-taggable-on'
@@ -87,4 +87,8 @@ gem 'searchkick'
 
 # Friendly URL
 gem 'friendly_id'
+
+# Local_time convert UTC to user local
+gem 'local_time'
+
 

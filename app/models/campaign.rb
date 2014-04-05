@@ -3,7 +3,7 @@
 # a scope on quest, a Quest.where('campaign_id = NULL')
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
-  # has_many :quests
+  has_many :quests
   scope :search_import, -> { includes(:records, :quests) }
 
   def progress
@@ -25,7 +25,7 @@ class Campaign < Quest
   # @return [collection] first page of encounters preceeding end_time
   # 
   def timeline( end_time=Time.now )
-    rounds=Rounds.where('campaign_id = (?)',self.id).where('created_at <= (?)', end_time).order(created_at: :desc).pluck(:encounter_id)
+    rounds=Round.where('campaign_id = (?)',self.id).where('created_at <= (?)', end_time).order(created_at: :desc).pluck(:encounter_id)
     Encounter.where('id in (?)',rounds)
   end
 

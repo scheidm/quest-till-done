@@ -21,7 +21,7 @@ class Record < ActiveRecord::Base
   scope :note, ->{where(type: "Note")}
 
   def assign_encounter
-    self.encounter_id = Encounter.last.id
+    self.encounter_id = Encounter.where(:user_id => self.user.id).last.id
     self.save
   end
   

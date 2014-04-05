@@ -22,6 +22,7 @@ module QuestTillDone
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.assets.paths << Rails.root.join("vendor","assets", "fonts")
     config.autoload_paths += Dir[ Rails.root.join("app","concerns","{**/}") ]
+    config.i18n.enforce_available_locales = true
     config.to_prepare do
       Devise::SessionsController.layout "devise"
       Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application" : "devise" }

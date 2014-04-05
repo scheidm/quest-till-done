@@ -1,0 +1,10 @@
+default_user: {
+  username: default,
+  email: default@default.com,
+  id: 1
+}
+sam: {
+   username: Sam,
+   id: 2,
+   email: sam@shire.com
+}

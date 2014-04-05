@@ -6,11 +6,33 @@ panda: {
   id: 2,
   description: don't touch!,
   campaign_id: 1,
-  parent_id: 1
+  parent_id: 1,
+  status:  In Progress
 }
 genma: {
   name: genma,
   type: Campaign,
   id: 1,
-  description: old man!
+  description: old man!,
+  status: Open
 }
+
+akane: {
+  name: akane,
+  id: 3,
+  description: violent prude,
+  campaign_id: 1,
+  parent_id: 1,
+  Status: Closed
+}
+
+shampoo: {
+  name: shampoo, 
+  id: 4,
+  description: Chinese Amazon,
+  campaign_id: 1,
+  parent_id: 1,
+  Status: Open
+}
+
+ 

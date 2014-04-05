@@ -31,6 +31,7 @@ class RecordsController < ApplicationController
   # @return [Html] redirect back to records index page
   def create
     @record = Record.new(record_params)
+    @record.quest = Quest.find(@record.quest_id)
     @record.created_at = DateTime.now
     @record.user_id = current_user.id
     @user = User.find(current_user.id)
@@ -52,6 +53,9 @@ class RecordsController < ApplicationController
   # @return [Html] redirect back to record index page
   def destroy
     @record= Record.friendly.find { params[:id]}.destroy
+    respond_to do |format|
+      format.html { redirect_to :records, notice: 'Record was successfully deleted.'}
+    end
   end
 
   # Define allowed parameter for a record model
