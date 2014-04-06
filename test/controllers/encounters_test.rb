@@ -1,8 +1,8 @@
 require 'test_helper'
-Devise::TestHelpers
 require 'test/unit'
 
 class EncountersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
 
   def setup
     sign_in User.first

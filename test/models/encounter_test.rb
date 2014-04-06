@@ -1,38 +1,26 @@
 require 'test/unit'
 
-class MyTest < Test::Unit::TestCase
+class EncounterTest <  ActiveSupport::TestCase
 
   # Called before every test method runs. Can be used
   # to set up fixture information.
   def setup
     # Do nothing
+    @encounter = Encounter.create(:user_id => 1)
     @encounter1 = Encounter.find(1)
     @encounter2 = Encounter.find(2)
 
   end
 
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
-  end
-
-  # Fake test
-  def test_fail
-
-    fail('Not implemented')
-  end
 
   test "Encounter created" do
     assert !@encounter.nil?
   end
 
   test "Encounter end time is bigger than start time" do
-    assert @encounter2.end_time >= @encounter2.created_at
+    assert_not_equal(@encounter2.end_time, @encounter2.created_at, 'Start and end time for encounters should not be the same')
   end
 
-  #TODO Test on Associations, needs more fixtures on other data types
 
 
 
