@@ -9,6 +9,7 @@ class RoundHelperTest < ActionView::TestCase
   # to set up fixture information.
   def setup
     @campaign = Quest.find(1)
+    @timer = current_user.timer
   end
 
   test 'Can create a new Round' do
