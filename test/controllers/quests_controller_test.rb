@@ -1,4 +1,3 @@
-
 class QuestsControllerTest < ActionController::TestCase
   def setup
     @quest = Quest.find(2)
@@ -43,4 +42,12 @@ class QuestsControllerTest < ActionController::TestCase
 #
     #assert_response :found
   #end
+  #
+
+  test "can successfully set active quest" do
+    @active=@user.active_quest
+    post( :set_active, {id: @quest.id})
+    @user.reload
+    assert_not_same(@active, @user.active_quest)
+ end
 end
