@@ -12,7 +12,7 @@ class EncounterTest <  ActiveSupport::TestCase
   end
 
   test "Encounter created" do
-    assert !!@encounterA
+    assert !!@encounter1
   end
 
   test "Encounter end time is bigger than start time" do
