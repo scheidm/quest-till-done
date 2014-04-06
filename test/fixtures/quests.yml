@@ -23,7 +23,7 @@ akane: {
   description: violent prude,
   campaign_id: 1,
   parent_id: 1,
-  Status: Closed
+  status: Closed
 }
 
 shampoo: {
@@ -32,7 +32,7 @@ shampoo: {
   description: Chinese Amazon,
   campaign_id: 1,
   parent_id: 1,
-  Status: Open
+  status: Open
 }
 
  

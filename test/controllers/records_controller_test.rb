@@ -44,6 +44,5 @@ class RecordsControllerTest < ActionController::TestCase
 
   def initialize_record
     @record = Record.find(1)
-    y = @record
   end
 end

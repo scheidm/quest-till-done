@@ -88,3 +88,6 @@ gem 'searchkick'
 # Friendly URL
 gem 'friendly_id'
 
+# Postgresql
+gem 'pg'
+
