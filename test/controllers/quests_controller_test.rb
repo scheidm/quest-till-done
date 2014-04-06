@@ -1,7 +1,46 @@
-require 'test_helper'
 
 class QuestsControllerTest < ActionController::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @quest = Quest.find(2)
+    @campaign = @quest.campaign
+    @user=User.first
+    Rails::logger.info @quest.inspect
+    Rails::logger.info @campaign.inspect
+    Rails::logger.info @quest.inspect
+    sign_in @user
+    request.env["HTTP_REFERER"] = "/quests/testing"
+  end
+
+  def teardown
+    @quest = nil
+  end
+
+  test "Get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:quests)
+  end
+
+  test "Get show" do
+    get :show, id: @quest.id
+    assert_response :success
+    assert_not_nil assigns(:quest)
+  end
+
+  test "Test create quest" do
+    assert_difference('Quest.count') do
+      post :create, quest: {name: 'Test', description: 'Testing',user_id: @user.id, status: 'Open', campaign_id: 1, parent_id: 1}
+    end
+
+    assert_redirected_to campaign_path(1)
+    assert_not_nil(Quest.find_by(description: 'Testing'))
+  end
+
+  #test "Test delete quest" do
+    #assert_difference('Quest.count', -1) do
+      #delete :destroy, id: @quest.id
+    #end
+#
+    #assert_response :found
+  #end
 end
