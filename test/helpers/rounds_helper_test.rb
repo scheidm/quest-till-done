@@ -2,6 +2,8 @@ require 'test/unit'
 
 class RoundHelperTest < ActionView::TestCase
   include Devise::TestHelpers
+  include RoundHelper
+  include TimerHelper
 
   # Called before every test method runs. Can be used
   # to set up fixture information.

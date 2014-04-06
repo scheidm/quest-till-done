@@ -37,7 +37,7 @@ class TimerHelperTest< ActionView::TestCase
   end
 
   test 'Timer get timer status' do
-    assert !!get_timer_state, 'Cannot get timer status from current user'
+    assert !get_timer_state, 'Cannot get timer status from current user'
   end
 
 
