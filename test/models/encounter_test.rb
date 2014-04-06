@@ -1,6 +1,6 @@
 require 'test/unit'
 
-class MyTest < Test::Unit::TestCase
+class EncounterTest <  ActiveSupport::TestCase
 
   # Called before every test method runs. Can be used
   # to set up fixture information.
@@ -15,7 +15,7 @@ class MyTest < Test::Unit::TestCase
   end
 
   test "Encounter end time is bigger than start time" do
-    assert @encounterB.end_time >= @encounter2.created_at
+    assert @encounterB.end_time >= @encounterB.created_at
   end
 
   # Called after every test method runs. Can be used to tear
@@ -25,9 +25,4 @@ class MyTest < Test::Unit::TestCase
     # Do nothing
   end
 
-  # Fake test
-  def test_fail
-
-    fail('Not implemented')
-  end
 end
