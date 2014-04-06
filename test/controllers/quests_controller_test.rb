@@ -1,3 +1,5 @@
+require 'test_helper'
+
 class QuestsControllerTest < ActionController::TestCase
   def setup
     @quest = Quest.find(2)
