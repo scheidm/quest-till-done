@@ -86,6 +86,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] redirect back to campaigns index page
   def destroy
+    @campaign = Campaign.friendly.find{ params[:id]}
     create_round(@campaign, action_name, @campaign)
     @campaign.destroy
     respond_to do |format|
