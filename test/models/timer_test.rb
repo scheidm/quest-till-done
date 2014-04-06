@@ -10,16 +10,16 @@ class TimerTest < ActiveSupport::TestCase
     @timer.init
   end
 
-  test "Timer is on" do
+  test 'Timer is on' do
     assert @timer.enabled
   end
 
-  test "Timer mode is auto" do
-    assert @timer.mode == "auto"
+  test 'Timer mode is auto' do
+    assert @timer.mode == 'auto'
   end
 
-  test "Timer state is not empty" do
-    assert !@timer.state.nil?
+  test 'Timer state is not empty' do
+    assert !@timer.state
   end
 
 

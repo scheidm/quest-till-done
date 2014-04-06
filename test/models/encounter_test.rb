@@ -6,8 +6,9 @@ class EncounterTest <  ActiveSupport::TestCase
   # to set up fixture information.
   def setup
     # Do nothing
-    @encounterA = Encounter.new
-    @encounterB = Encounter.find(1)
+    @encounter = Encounter.create(:user_id => 1)
+    @encounter1 = Encounter.find(1)
+    @encounter2 = Encounter.find(2)
   end
 
   test "Encounter created" do
@@ -15,14 +16,8 @@ class EncounterTest <  ActiveSupport::TestCase
   end
 
   test "Encounter end time is bigger than start time" do
-    assert @encounterB.end_time >= @encounterB.created_at
+    assert @encounter1.end_time >= @encounter1.created_at
   end
 
-  # Called after every test method runs. Can be used to tear
-  # down fixture information.
-
-  def teardown
-    # Do nothing
-  end
 
 end
