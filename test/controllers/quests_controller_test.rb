@@ -1,3 +1,5 @@
+require 'test_helper'
+include Devise::TestHelpers
 
 class QuestsControllerTest < ActionController::TestCase
   def setup
@@ -36,11 +38,19 @@ class QuestsControllerTest < ActionController::TestCase
     assert_not_nil(Quest.find_by(description: 'Testing'))
   end
 
-  #test "Test delete quest" do
-    #assert_difference('Quest.count', -1) do
-      #delete :destroy, id: @quest.id
-    #end
-#
-    #assert_response :found
-  #end
+  test "Test delete quest" do
+    assert_difference('Quest.count', -1) do
+      delete :destroy, id: @quest.id
+    end
+
+    assert_response :found
+  end
+
+
+  test "can successfully set active quest" do
+    @active=@user.active_quest
+    post( :set_active, {id: @quest.id})
+    @user.reload
+    assert_not_same(@active, @user.active_quest)
+ end
 end

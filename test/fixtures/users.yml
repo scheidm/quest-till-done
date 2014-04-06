@@ -1,7 +1,8 @@
 default_user: {
   username: default,
   email: default@default.com,
-  id: 1
+  id: 1,
+  active_quest_id: 3
 }
 sam: {
    username: Sam,
