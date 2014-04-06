@@ -9,6 +9,8 @@ class Round < ActiveRecord::Base
   self.inheritance_column = nil
 
   def self.create_event(model, operation, campaign)
+    raise ArgumentError, 'campaign id is nil' if campaign.id.nil?
+    raise ArgumentError, 'operation is empty' if operation.empty?
     round = Round.new
     round.encounter = Encounter.last
     if(model.id.nil?)
