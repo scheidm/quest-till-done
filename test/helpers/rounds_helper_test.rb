@@ -13,7 +13,7 @@ class RoundHelperTest < ActionView::TestCase
   end
 
   test 'Can create a new Round' do
-    assert !create_round(Record.find(1), 'create', @campaign), 'Cannot create round properly'
+    assert !!create_round(Record.find(1), 'create', @campaign), 'Cannot create round properly'
   end
 
 
