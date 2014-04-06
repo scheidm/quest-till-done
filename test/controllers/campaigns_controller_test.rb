@@ -1,4 +1,5 @@
 require 'test_helper'
+include Devise::TestHelpers
 
 class CampaignsControllerTest < ActionController::TestCase
   def setup
@@ -22,7 +23,7 @@ class CampaignsControllerTest < ActionController::TestCase
 
   test "Get show" do
     get :show, id: @campaign.id
-    assert_response :success
+    assert_response :redirect
     assert_not_nil assigns(:campaign)
   end
 

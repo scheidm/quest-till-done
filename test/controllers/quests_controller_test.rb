@@ -25,7 +25,7 @@ class QuestsControllerTest < ActionController::TestCase
 
   test "Get show" do
     get :show, id: @quest.id
-    assert_response :success
+    assert_response :redirect
     assert_not_nil assigns(:quest)
   end
 
@@ -34,7 +34,7 @@ class QuestsControllerTest < ActionController::TestCase
       post :create, quest: {name: 'Test', description: 'Testing',user_id: @user.id, status: 'Open', campaign_id: 1, parent_id: 1}
     end
 
-    assert_redirected_to campaign_path(1)
+    assert_redirected_to campaign_path(Campaign.find(1).slug)
     assert_not_nil(Quest.find_by(description: 'Testing'))
   end
 
