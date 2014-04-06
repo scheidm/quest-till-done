@@ -1,0 +1,7 @@
+first_user_config: {
+  id: 1,
+  user_id: 1,
+  timezone_name: EST,
+  encounter_duration: 1800
+
+}
