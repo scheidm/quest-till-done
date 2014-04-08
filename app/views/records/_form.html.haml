@@ -16,6 +16,19 @@
           %span Image
 .record-panel-right.pull-right
   .record-panel-right-content
+
+    %div
+      %label.control-label Quest:
+      %div
+        .col-md-6{:style => 'padding-left:0px'}
+          %input#record_quests.form-control{ :value => @record.quest.name}
+        .col-md-6
+          #record_quest_status
+            %h3{style: "margin-top:0px;margin-bottom:0px"}>
+              %span.label{ :class => "label-" + @record.quest.status.gsub(/\s+/, "") }
+                = @record.quest.status
+    %br
+    %br
     = form_for @record, :html => {:id => 'note-form'} do |f|
       -if @record.errors.any?
         = render 'errors'
@@ -56,9 +69,6 @@
         = f.submit :class => "btn btn-primary pull-right"
 
 
-
-
-
     = form_for @record, :html => {:id => 'image-form', :class => 'new_record record-form-hidden'} do |f|
       -if @record.errors.any?
         = render 'errors'
@@ -78,29 +88,10 @@
         .actions
         = f.submit :class => "btn btn-primary pull-right"
 
+:css
+  ul.ui-autocomplete {
+      z-index: 1100;
+  }
+= javascript_include_tag "record"
 
-
-:javascript
-  $('#note').click(function(e){
-    e.preventDefault();
-    $('.new_record').addClass('record-form-hidden');
-    $('.record-type-item').removeClass('record-type-selected');
-    $('#note-form').removeClass('record-form-hidden');
-
-    $('#note').addClass('record-type-selected')
-  });
-  $('#link').click(function(e){
-    e.preventDefault();
-    $('.new_record').addClass('record-form-hidden');
-    $('.record-type-item').removeClass('record-type-selected');
-    $('#link-form').removeClass('record-form-hidden');
-    $('#link').addClass('record-type-selected')
-  });
-  $('#image').click(function(e){
-    e.preventDefault();
-    $('.new_record').addClass('record-form-hidden');
-    $('.record-type-item').removeClass('record-type-selected');
-    $('#image-form').removeClass('record-form-hidden');
-    $('#image').addClass('record-type-selected')
-  });
 

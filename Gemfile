@@ -95,4 +95,7 @@ gem 'local_time'
 
 gem 'rack-mini-profiler'
 
+# jquery ui
+gem 'jquery-ui-rails'
+
 
