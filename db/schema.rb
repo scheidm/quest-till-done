@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316143212) do
+ActiveRecord::Schema.define(version: 20140410202224) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -64,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "updated_at"
     t.text     "lastest_commit"
     t.datetime "lastest_issue"
+    t.integer  "campaign_id"
   end
 
   create_table "groups", force: true do |t|
@@ -88,6 +92,8 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.boolean  "importance",     default: false
     t.string   "type"
     t.string   "slug"
+    t.integer  "issue_no"
+    t.boolean  "vcs"
   end
 
   add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
