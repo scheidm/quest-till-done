@@ -1,7 +1,6 @@
 module GithubHelper
 
 
-
   # # Get Access Token
   # def callback  
   #   (@github.get_token params['access_token']).token
@@ -9,12 +8,20 @@ module GithubHelper
   #   current_user.github_access_token =  access_token.token
   # end
 
-  
 
   # Login for github information
   # @return [Github] Github Session
   def login
     @github = Github.new oauth_token: current_user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
+  end
+
+  #initialize github session
+  def github_init(username, projectname)
+    login unless login?
+    # @github:user => username, :repo => projectname
+    @github.user = username
+    @github.repo = projectname
+    return @github
   end
 
   # Check if login is sucessful
@@ -40,6 +47,7 @@ module GithubHelper
                            github_user: t["owner"]["login"],
                            created_at: t['created_at'],
                            updated_at: t['updated_at'],
+
                            imported: nil
                           })
       end
@@ -73,11 +81,29 @@ module GithubHelper
                                     status: 'Open',
                                     parent: campaign,
                                     created_at: t['created_at'],
-                                    updated_at: t['updated_at']
+                                    updated_at: t['updated_at'],
+                                    issue_no: t.number.to_i
+
                                    })
+
 
           create_round(new_issue, action_name, campaign)
 
+          if t.comments - 1 >= 0
+            @github.issues.comments.all(:repo => projectname, :user => username, :issue_id => t.number).each do |f|
+              new_record = Record.create({
+                                             type: 'Note',
+                                             description: f.body + "<br>" + f.issue_url,
+                                             encounter_id: encounter.id,
+                                             created_at: f.created_at,
+                                             updated_at: f.updated_at,
+                                             quest_id: new_issue.id,
+                                             user_id: current_user.id
+
+                                         })
+              create_round(new_record, action_name, campaign)
+            end
+          end
         end
       end
     end
@@ -121,8 +147,8 @@ module GithubHelper
 
     if project.imported.nil? || !project.imported
 
+
       project.imported = 1
-      project.save
 
 
       # encounter stop
@@ -135,6 +161,9 @@ module GithubHelper
                                          description: "Imported Project for #{projectname}",
                                          user_id: current_user.id
                                         })
+      project.campaign_id =  import_campaign.id
+      project.save
+
 
       create_round(import_campaign, action_name, import_campaign)
 
@@ -180,6 +209,36 @@ module GithubHelper
 
     #make sure there is an encounter there
     create_round(project, action_name, Campaign.last)
+  end
+
+
+  # Push Note as comments to Github Issue
+  def push_comment(username, projectname, issue_no, comment)
+    @github  = github_init(username, projectname)
+    @new_comment = @github.issues.comments.create :repo_name=> projectname, :user_name => username , :issue_id => issue_no ,:body => comment
+  end
+
+  #Close Issue from a closed quest
+  def close_issue(username, projectname, issue_no)
+    @github  = github_init(username, projectname)
+    @github.issues.edit(:number => issue_no, :state => 'closed')
+  end
+
+  #Open Issue from a created quest
+  def open_issue(username, projectname, quest)
+    @github  = github_init(username, projectname)
+    @github.issues.create(
+      :title => quest.name,
+      :body => quest.description,
+      :state => 'open',
+      # "assignee" => "octocat",
+      # "milestone" => 1,
+      :labels => [
+        'QTD'
+      ]
+    )
+
+
   end
 
 end
