@@ -1,0 +1,5 @@
+panda_slug: {
+  slug: panda,
+  sluggable_id: 2,
+  sluggable_type: Quest
+}

@@ -8,7 +8,8 @@ panda: {
   campaign_id: 1,
   parent_id: 1,
   status:  In Progress,
-  slug: panda
+  slug: panda,
+  user_id: 1
 }
 genma: {
   name: genma,
