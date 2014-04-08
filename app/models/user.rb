@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_one :timer
+  has_one :wrapper_group, class_name: "Group"
   has_one :config, class_name: "UserConfig"
   has_many :skill_pointses
   @group = Hash.new 
@@ -21,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :encounters
   has_many :campaigns
   has_and_belongs_to_many :groups
+  has_and_belongs_to_many :groups_where_admin, class_name: "Group", join_table: "admins_groups"
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :new_user_setup
   #validates :username,
