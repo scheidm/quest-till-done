@@ -72,7 +72,7 @@ group :test do
 end
 
 gem 'devise'
-gem 'cancan'
+gem 'cancancan'
 gem 'role_model'
 gem 'flipclockjs-rails', "~> 0.4.0b"
 gem 'acts-as-taggable-on'
@@ -90,4 +90,12 @@ gem 'friendly_id'
 
 # Postgresql
 gem 'pg'
+# Local_time convert UTC to user local
+gem 'local_time'
 
+#display response time
+
+gem 'rack-mini-profiler'
+
+# jquery ui
+gem 'jquery-ui-rails'

@@ -99,6 +99,7 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] redirect back to quest's campaign page
   def destroy
+    @quest = Quest.friendly.find(params[:id])
     create_round(@quest, action_name, @quest.campaign)
     @quest.destroy
     respond_to do |format|

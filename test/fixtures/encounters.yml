@@ -5,3 +5,11 @@ panda_encounter: {
   id: 1,
   user_id: 1
 }
+
+bana_encounter: {
+  id: 2,
+  created_at: '2014-03-09 19:17:20.000000',
+  updated_at: '2014-03-09 19:17:20.000000',
+  end_time: '2014-03-09 19:17:20.000000',
+  user_id: 1
+}

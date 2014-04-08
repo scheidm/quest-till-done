@@ -7,14 +7,18 @@ panda: {
   description: don't touch!,
   campaign_id: 1,
   parent_id: 1,
-  status:  In Progress
+  status:  In Progress,
+  slug: panda,
+  user_id: 1
 }
 genma: {
   name: genma,
   type: Campaign,
   id: 1,
+  user_id: 1,
   description: old man!,
-  status: Open
+  status: Open,
+  slug: genma campaign
 }
 
 akane: {
@@ -23,7 +27,8 @@ akane: {
   description: violent prude,
   campaign_id: 1,
   parent_id: 1,
-  status: Closed
+  status: Closed,
+  slug: akane
 }
 
 shampoo: {
@@ -32,7 +37,8 @@ shampoo: {
   description: Chinese Amazon,
   campaign_id: 1,
   parent_id: 1,
-  status: Open
+  status: Open,
+  slug: shampoo
 }
 
  
