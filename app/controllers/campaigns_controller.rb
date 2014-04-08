@@ -1,5 +1,6 @@
 # Controller for Campaign
 class CampaignsController < ApplicationController
+  power :crud => :campaigns
 
   require 'json_generator'
   include JsonGenerator::QuestModule
@@ -11,7 +12,7 @@ class CampaignsController < ApplicationController
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
   def index
-    @campaigns = Campaign.where( :user_id =>  current_user.id)
+    @campaigns = current_power.campaigns
   end
 
   # Show the detail of a campaign

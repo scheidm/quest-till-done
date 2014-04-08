@@ -1,5 +1,7 @@
 # Default controller in Rails, from which all other users inherit
 class ApplicationController < ActionController::Base
+  include Consul::Controller
+  require_power_check
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -9,6 +11,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  current_power do
+    Power.new(current_user)
+  end
 
   # Once a user is signed in, the application uses this to ensure that the
   # header displays the correct information for the active task of the current

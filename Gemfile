@@ -95,4 +95,4 @@ gem 'local_time'
 
 gem 'rack-mini-profiler'
 
-
+gem 'consul'
