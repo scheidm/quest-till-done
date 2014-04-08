@@ -46,11 +46,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    #login
-    #list_projects
-    #list_branches 'scheidm', 'quest-till-done'
-    #list_issues 'scheidm', 'quest-till-done', nil, nil
-    #list_commits 'scheidm', 'quest-till-done', nil, nil
     if current_user.github_access_token.nil?
       github_authorize
     else

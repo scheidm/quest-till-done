@@ -4,6 +4,7 @@ class QuestsController < ApplicationController
   require 'json_generator'
   include JsonGenerator::QuestModule
   include RoundHelper
+  include GithubHelper
 
   # Show all of user's quests
   # @return [Html] A list of quests of the user
@@ -17,7 +18,7 @@ class QuestsController < ApplicationController
   def show
     @quest = Quest.friendly.find(params[:id])
     @user = User.find(current_user.id)
-    if(!@user.active_quest.nil?&&User.find(current_user.id).active_quest.id == @quest.id)
+    if (!@user.active_quest.nil?&&User.find(current_user.id).active_quest.id == @quest.id)
       @active_quest = true
     else
       @active_quest = false
@@ -35,7 +36,7 @@ class QuestsController < ApplicationController
   def new
     @quest = Quest.new()
     parent = params[:id]
-    if(parent != nil)
+    if (parent != nil)
       @quest.parent_id = parent
       parent_quest = Quest.find(parent)
       @quest.campaign_id = parent_quest.campaign_id || parent_quest.id
@@ -57,10 +58,18 @@ class QuestsController < ApplicationController
         format.html { redirect_to campaign_path(@quest.campaign), notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
-        format.html { render action: 'new'}
+        format.html { render action: 'new' }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
+
+    # Sync with Github
+    quest_parent = Campaign.find(@quest.campaign_id)
+    if quest_parent.vcs
+      githubinfo = GithubRepo.where(campaign_id: quest_parent.id).first
+      open_issue(githubinfo.github_user, githubinfo.project_name, @quest)
+    end
+
   end
 
   # Edit existing quest
@@ -76,14 +85,23 @@ class QuestsController < ApplicationController
   def update
     @quest = Quest.friendly.find(params[:id])
     respond_to do |format|
-    if @quest.save
-      if params['quest']['status']=="Closed"
-        if @quest.id==@user.active_quest.id
-          @user.active_quest=Quest.where( 'user_id = (?)', @quest.user_id).where('name = (?)','Unsorted Musings').first
-          @user.save
+      if @quest.save
+        if params['quest']['status']=="Closed"
+          #sync with github
+          parent_campaign = Campaign.find(@quest.campaign_id)
+          if parent_campaign.vcs
+            github_info = GithubRepo.where(campaign_id: parent_campaign.id).first
+            close_issue(github_info.github_user, github_info.project_name, @quest.issue_no)
+          end
+          if @quest.id==@user.active_quest.id
+            @user.active_quest=Quest.where('user_id = (?)', @quest.user_id).where('name = (?)', 'Unsorted Musings').first
+            @user.save
+          end
         end
       end
-    end
+
+
+
       if @quest.update(quest_params)
         create_round(@quest, action_name, @quest.campaign)
         format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
@@ -137,7 +155,6 @@ class QuestsController < ApplicationController
   def quest_params
     params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline)
   end
-
 
 
 end
