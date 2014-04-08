@@ -11,6 +11,7 @@ class SearchesController < ApplicationController
 
   # auto complete search for quest
   def quest_autocomplete
-    render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
+    quest = Quest.search params[:query], where: { :user_id => current_user.id}
+    render json:  quest #Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
   end
 end

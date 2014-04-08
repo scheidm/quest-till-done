@@ -12,11 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require bootstrap
 //= require flipclock
 //= require d3
 //= require jstree
 //= require_tree .
+//= stub record
 //= require d3
 //= require layout.js
 //= require jasny-bootstrap
