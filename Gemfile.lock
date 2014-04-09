@@ -170,6 +170,7 @@ GEM
       multi_xml (~> 0.5)
       rack (~> 1.2)
     orm_adapter (0.5.0)
+    pg (0.17.1)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
     rack (1.5.2)
@@ -311,6 +312,7 @@ DEPENDENCIES
   jquery-ui-rails
   jstree-rails!
   local_time
+  pg
   rack-mini-profiler
   rails (= 4.0.0)
   role_model
