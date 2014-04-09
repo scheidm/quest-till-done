@@ -24,6 +24,7 @@ class RecordsController < ApplicationController
   def new
     @record = Record.new()
     @record.quest_id = params[:quest_id]
+    @record.quest = Quest.find(params[:quest_id])
   end
 
   # Save new record

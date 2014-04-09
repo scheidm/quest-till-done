@@ -88,6 +88,8 @@ gem 'searchkick'
 # Friendly URL
 gem 'friendly_id'
 
+# Postgresql
+gem 'pg'
 # Local_time convert UTC to user local
 gem 'local_time'
 
@@ -96,3 +98,5 @@ gem 'local_time'
 gem 'rack-mini-profiler'
 
 gem 'consul'
+# jquery ui
+gem 'jquery-ui-rails'
