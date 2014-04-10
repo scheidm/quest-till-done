@@ -46,7 +46,6 @@ class QuestsControllerTest < ActionController::TestCase
     assert_response :found
   end
 
-
   test "can successfully set active quest" do
     @active=@user.active_quest
     post( :set_active, {id: @quest.id})
