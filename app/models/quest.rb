@@ -23,6 +23,11 @@ class Quest < ActiveRecord::Base
   belongs_to :group
   before_save :set_status
 
+
+  def user_id
+    self.group.user_id
+  end
+
   def search_data
     attributes.merge(
       records: self.records.map(&:description),

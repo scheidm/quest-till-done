@@ -42,10 +42,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def groups_where_member
+    self.groups.reject {|g| g.id==self.wrapper_group.id}
+  end
+  
 
   def new_user_setup
     self.create_timer
-    g = Group.create( {name: self.username})
+    self.groups.create( {name: self.username})
+    g=self.groups.first
+    self.wrapper_group=g
     cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", group_id: g.id, status: "Open"})
     q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     self.active_quest=q
@@ -111,12 +117,8 @@ class User < ActiveRecord::Base
     Encounter.where(:user_id => self.id).last
   end
 
-  
-  
   def github
     @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
   end
 
-
-  
 end
