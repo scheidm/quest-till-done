@@ -1,6 +1,6 @@
 panda_round: {
-  created_at: 1393875463,
-  updated_at: 1393875463,
+  created_at: '2014-03-09 19:17:20.000000',
+  updated_at: '2014-03-09 19:17:20.000000',
   type: Quest,
   event_id: 1,
   event_description: create,

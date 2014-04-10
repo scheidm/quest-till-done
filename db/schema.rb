@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "encounters", force: true do |t|
     t.datetime "end_time"
@@ -44,10 +44,10 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "friends", force: true do |t|
     t.datetime "created_at"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.string   "slug"
   end
 
-  add_index "quests", ["slug"], name: "index_quests_on_slug"
+  add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
 
   create_table "records", force: true do |t|
     t.string   "type"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.string   "slug"
   end
 
-  add_index "records", ["slug"], name: "index_records_on_slug"
+  add_index "records", ["slug"], name: "index_records_on_slug", using: :btree
 
   create_table "rounds", force: true do |t|
     t.string   "type"
@@ -127,8 +127,8 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
-  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "skill_points", force: true do |t|
     t.datetime "created_at"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
     t.string "name"
@@ -212,8 +212,8 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.text     "github_username"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_groups", id: false, force: true do |t|
     t.integer "user_id"
