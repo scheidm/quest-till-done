@@ -43,7 +43,9 @@ class User < ActiveRecord::Base
   end
 
   def groups_where_member
-    self.groups.reject {|g| g.id==self.wrapper_group.id}
+    ids=[ self.wrapper_group.id ]
+    self.groups_where_admin.each { |g| ids.push g.id }
+    self.groups.reject {|g| ids.include? g.id}
   end
 
   def new_user_setup
