@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   # Display the group page for the specified group, presuming the user has
   # access rights granted to them.
   def show
-    @group = Group.find_by_path(params[:id])
+    @group = Group.find(params[:id])
     redirect_to groups_path unless current_power.group? @group
   end
 
