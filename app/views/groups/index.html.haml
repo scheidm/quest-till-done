@@ -1,5 +1,6 @@
 %h2 Groups
 
+%h4 Member Group
 %table{:class => "table table-hover"}
   %thead
     %tr
@@ -7,6 +8,19 @@
       %th Created At
   %tbody
     - @member_groups.each do |group|
+      %tr
+        %td
+          %a{href: group_path(group)}= group.name
+        %td= group.created_at
+
+%h4 Admin Group
+%table{:class => "table table-hover"}
+  %thead
+    %tr
+      %th Name
+      %th Created At
+  %tbody
+    - @admin_groups.each do |group|
       %tr
         %td
           %a{href: group_path(group)}= group.name
