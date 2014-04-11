@@ -21,12 +21,9 @@ class Quest < ActiveRecord::Base
   has_many :quests, :foreign_key => 'parent_id'
   # Belongs to a user/owner
   belongs_to :group
+  delegate :user, to: :group
   before_save :set_status
 
-
-  def user_id
-    self.group.user_id
-  end
 
   def search_data
     attributes.merge(

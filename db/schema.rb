@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410180415) do
+ActiveRecord::Schema.define(version: 20140410185656) do
 
   create_table "admins_groups", id: false, force: true do |t|
     t.integer "group_id"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 20140410180415) do
     t.text     "github_username"
     t.text     "github_projectname"
     t.text     "sha"
-    t.integer  "user_id"
+    t.integer  "group_id"
     t.string   "slug"
   end
 

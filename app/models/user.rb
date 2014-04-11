@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
 
   has_one :timer
   has_one :wrapper_group, class_name: "Group"
+  has_many :campaigns, through: :wrapper_group
   has_one :config, class_name: "UserConfig"
   has_many :skill_pointses
   @group = Hash.new 
   has_one :group, as: :user_group
   has_one :timer
   has_many :encounters
-  has_many :campaigns
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :groups_where_admin, class_name: "Group", join_table: "admins_groups"
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
@@ -45,13 +45,13 @@ class User < ActiveRecord::Base
   def groups_where_member
     self.groups.reject {|g| g.id==self.wrapper_group.id}
   end
-  
 
   def new_user_setup
     self.create_timer
     self.groups.create( {name: self.username})
     g=self.groups.first
     self.wrapper_group=g
+    self.groups_where_admin.push g
     cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", group_id: g.id, status: "Open"})
     q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     self.active_quest=q

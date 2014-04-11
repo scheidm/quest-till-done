@@ -12,7 +12,8 @@ class Record < ActiveRecord::Base
   # Record belongs to a encounter
   belongs_to :encounter
   # Record belongs to a user
-  belongs_to :user
+  belongs_to :group
+  delegate :user, to: :group
 
   validates_associated :encounter
 
@@ -39,9 +40,6 @@ class Record < ActiveRecord::Base
   def self.child_classes
     @child_classes
   end
-
-
-
 
   def to_link
     self.quest.to_link

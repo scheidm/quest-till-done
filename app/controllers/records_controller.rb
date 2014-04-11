@@ -34,7 +34,7 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
     @record.quest = Quest.find(@record.quest_id)
     @record.created_at = DateTime.now
-    @record.user_id = current_user.id
+    @record.group_id = current_user.wrapper_group.id
     @user = User.find(current_user.id)
 
     respond_to do |format|

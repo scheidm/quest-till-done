@@ -14,5 +14,20 @@ class Power
     Campaign.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
   end
 
+  power :quests, :creatable_quests, :updatable_quests  do
+    Quest.where( 'group_id in (?) ', @user.groups.pluck(:id))
+  end
+
+  power :destroyable_quests do
+    Quest.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
+  end
+
+  power :records, :creatable_records do
+    Records.where( 'group_id in (?)', @user.groups.pluck(:id))
+  end
+
+  power :updatable_records, :destroyable_records do
+    Records.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
+  end
 
 end
