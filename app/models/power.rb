@@ -26,8 +26,12 @@ class Power
     Record.where( 'group_id in (?)', @user.groups.pluck(:id))
   end
 
-  power :updatable_records, :destroyable_records do
+  power :destroyable_records do
     Record.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
+  end
+
+  power :updatable_records do
+    Record.where( 'encounter_id in (?)', @user.encounters.limit(100) )
   end
 
   power :groups, :creatable_groups do
