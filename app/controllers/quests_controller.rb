@@ -16,8 +16,7 @@ class QuestsController < ApplicationController
   # @return [Html] Quest detail page with that id
   def show
     @quest = Quest.friendly.find(params[:id])
-    @user = User.find(current_user.id)
-    if(!@user.active_quest.nil?&&User.find(current_user.id).active_quest.id == @quest.id)
+    if(!@user.active_quest.nil?&&User.find(@user.id).active_quest.id == @quest.id)
       @active_quest = true
     else
       @active_quest = false
@@ -47,7 +46,7 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to the new quest page
   def create
     @quest = Quest.new(quest_params)
-    @quest.group_id = current_user.wrapper_group.id
+    @quest.group_id = @user.wrapper_group.id
     @quest.status = 'Open'
     @quest.description = nil if @quest.description==""
     @quest.user=@user
@@ -120,7 +119,7 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   def set_active
     quest = Quest.friendly.find(params[:id])
-    user = User.find(current_user.id)
+    user = User.find(@user.id)
     user.active_quest_id = quest.id
     user.save
     render :nothing => true

@@ -2,7 +2,7 @@
 class PrioritiesController < ApplicationController
 
   def index
-    @campaigns = Campaign.where( :group_id =>  current_user.wrapper_group.id)
+    @campaigns = Campaign.where( :group_id =>  @user.wrapper_group.id)
   end
 
   def get_priorities

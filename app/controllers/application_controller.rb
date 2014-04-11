@@ -8,11 +8,16 @@ class ApplicationController < ActionController::Base
   before_filter  :configure_permitted_parameters, if: :devise_controller?
   before_filter :load_user
   before_filter :authenticate_user!
+  before_filter :user_variable
 
   protected
 
+  def user_variable
+    @user=current_user
+  end
+
   current_power do
-    Power.new(current_user)
+    Power.new(@user)
   end
 
   # Once a user is signed in, the application uses this to ensure that the
@@ -20,7 +25,6 @@ class ApplicationController < ActionController::Base
   # user
   def load_user
     if(user_signed_in?)
-      @user = User.find(current_user.id)
       @config = @user.config
       @timer = @user.timer
       active_quest = @user.active_quest
@@ -52,7 +56,7 @@ class ApplicationController < ActionController::Base
   # into the program
   def check_password_expiration
     # check inactive mins
-    if current_user && current_user.password_expires_at && current_user.password_expires_at < Time.now
+    if @user && @user.password_expires_at && @user.password_expires_at < Time.now
       redirect_to new_profile_password_path and return
     end
   end
