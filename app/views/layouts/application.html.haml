@@ -64,7 +64,7 @@
             .col-md-4.qtd-col
               = form_tag searches_path, :method => 'get', :role => 'search', :class => 'navbar-form navbar-left' do |f|
                 .form-group
-                  = text_field_tag :query, params[:query], :placeholder => 'Search', :class => 'form-control'
+                  = text_field_tag :query, params[:query], :placeholder => 'Search', :class => 'form-control', :id => 'search-bar'
                 = button_tag :type=> 'submit', :class => 'btn btn-default' do
                   %span.glyphicon.glyphicon-search
               -#%form.navbar-form.navbar-left{role: "search"}
@@ -129,4 +129,7 @@
   }
   .nav > li > a {
     padding: 10px 10px;
+  }
+  ul.ui-autocomplete {
+      z-index: 1100;
   }

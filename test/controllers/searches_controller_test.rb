@@ -50,4 +50,12 @@ class SearchesControllerTest < ActionController::TestCase
     assert body.size > 0
     assert body[0]["name"].to_s.include?("panda")
   end
+
+  test "Get all complete" do
+    get :all_autocomplete, :format => :json, :query => "squirrel"
+    body = JSON.parse(response.body)
+
+    assert_response :success
+    assert body.size == 2
+  end
 end
