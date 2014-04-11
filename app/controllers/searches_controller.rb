@@ -4,9 +4,12 @@ class SearchesController < ApplicationController
   # Show all search result
   # @return [Html] All result
   def index
-    recs=Record.search params[:query], where: {:user_id => current_user.id}
-    quests=Quest.search params[:query], where: { :user_id => current_user.id}
-    @results = (recs.results + quests.results).paginate page: params[:page], per_page: 10
+    if params.has_key? 'type'
+      model = params[:type].constantize
+    end
+    @type = 'All'
+    @record_type = 'All'
+    @results = get_search_result(model, params[:query]).paginate page: params[:page], per_page: 10
   end
 
   # auto complete search for quest
@@ -36,5 +39,28 @@ class SearchesController < ApplicationController
       }
     end
     list.to_json
+  end
+
+  def get_search_result(model, query)
+    if model.nil?
+      quests = Quest.search(query, where: { :user_id => current_user.id})
+      recs = Record.search(query, where: { :user_id => current_user.id})
+      results = quests.results + recs.results
+      @type = 'All';
+    elsif (model == Record || Record.child_classes.include?(model))
+      results = model.search(query, where: { :user_id => current_user.id}).results
+      @type = 'Record'
+      @record_type = (model == Record)? 'All': model.to_s
+    elsif model == Campaign
+      results = Campaign.search(query, where: { :user_id => current_user.id}).results
+      @type = 'Campaign'
+    elsif model == Quest
+      results = Quest.search(query, where: { :user_id => current_user.id, :campaign_id => {:not =>nil} }).results
+      @type = 'Quest'
+    else
+      results = []
+      @type = 'All'
+    end
+    return results
   end
 end

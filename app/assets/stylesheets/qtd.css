@@ -296,6 +296,10 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: #555;
 }
 
+.hidden {
+    display: none;
+}
+
 /**************** Campaign/Quest Status ***********/
 .label-Open {
     background-color: #428bca;

@@ -1,0 +1,89 @@
+
+Type:
+.btn-group
+  %button#model-filter.btn.btn-default{type: "button"}
+    =@type
+  %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+    %span.caret
+    %span.sr-only Toggle Dropdown
+  %ul.dropdown-menu{role: "menu"}
+    %li
+      %a{href: '#', class: 'model-select'} All
+    %li
+      %a{href: '#', class: 'model-select'} Campaign
+    %li
+      %a{href: '#', class: 'model-select'} Quest
+    %li
+      %a{href: '#', class: 'model-select'} Record
+
+%span#record-filter-div.hidden
+  Record:
+  .btn-group
+    %button#record-filter.btn.btn-default{type: "button"}
+      =@record_type
+    %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+      %span.caret
+      %span.sr-only Toggle Dropdown
+    %ul.dropdown-menu{role: "menu"}
+      %li
+        %a{href: '#', class: 'record-select'} All
+      %li
+        %a{href: '#', class: 'record-select'} Note
+      %li
+        %a{href: '#', class: 'record-select'} Link
+      %li
+        %a{href: '#', class: 'record-select'} Image
+      %li
+        %a{href: '#', class: 'record-select'} Commit
+      %li
+        %a{href: '#', class: 'record-select'} Issue
+
+Sort:
+.btn-group
+  %button#sort-filter.btn.btn-default{type: "button"} All
+  %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+    %span.caret
+    %span.sr-only Toggle Dropdown
+  %ul.dropdown-menu{role: "menu"}
+    %li
+      %a{href: '#', class: 'sort-select'} Name
+    %li
+      %a{href: '#', class: 'sort-select'} Type
+    %li
+      %a{href: '#', class: 'sort-select'} Date
+
+%button#search-filter.btn.btn-primary{type: "button"} Search
+
+:javascript
+  $(document).ready(function() {
+   if( $.trim($('#model-filter').text()) == 'Record')
+      $('#record-filter-div').removeClass('hidden');
+   $(".model-select").click(function () {
+      $('#model-filter').text(this.innerHTML);
+      if(this.innerHTML == 'Record')
+        $('#record-filter-div').removeClass('hidden');
+      else
+        $('#record-filter-div').addClass('hidden');
+    });
+    $(".record-select").click(function () {
+          $('#record-filter').text(this.innerHTML);
+      });
+    $(".sort-select").click(function () {
+        $('#sort-filter').text(this.innerHTML);
+    });
+    $("#search-filter").click(function () {
+        var type = $.trim($('#model-filter').text());
+        if(type == 'All')
+          type = '';
+        else if (type == 'Record')
+        {
+          var s = $.trim($('#record-filter').text());
+          if(s != 'All')
+            type = s;
+        }
+
+        window.location.href = '/searches?utf8=✓'
+        + "&query=" + escape($.trim($("#search-bar").val()))
+        + "&type=" + escape($.trim(type));
+    });
+  });
