@@ -73,9 +73,7 @@ Sort:
     });
     $("#search-filter").click(function () {
         var type = $.trim($('#model-filter').text());
-        if(type == 'All')
-          type = '';
-        else if (type == 'Record')
+        if (type == 'Record')
         {
           var s = $.trim($('#record-filter').text());
           if(s != 'All')

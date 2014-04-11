@@ -5,7 +5,9 @@ class SearchesController < ApplicationController
   # @return [Html] All result
   def index
     if params.has_key? 'type'
-      model = params[:type].constantize
+      if(params[:type] != 'All' && is_valid_model(params[:type]))
+        model = params[:type].constantize
+      end
     end
     @type = 'All'
     @record_type = 'All'
@@ -46,7 +48,7 @@ class SearchesController < ApplicationController
       quests = Quest.search(query, where: { :user_id => current_user.id})
       recs = Record.search(query, where: { :user_id => current_user.id})
       results = quests.results + recs.results
-      @type = 'All';
+      @type = 'All'
     elsif (model == Record || Record.child_classes.include?(model))
       results = model.search(query, where: { :user_id => current_user.id}).results
       @type = 'Record'
@@ -62,5 +64,15 @@ class SearchesController < ApplicationController
       @type = 'All'
     end
     return results
+  end
+
+  def is_valid_model(model)
+    valid = [Record.to_s, Campaign.to_s, Quest.to_s]
+    valid.concat Record.child_classes.collect{|i| i.to_s}
+    if(valid.include? model)
+      return true
+    else
+      return false
+    end
   end
 end
