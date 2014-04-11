@@ -1,7 +1,6 @@
 # Controller for the group page
 class GroupsController < ApplicationController
   power :crud => :campaigns
-  layout "profile"
 
   # Display a list of all groups for the current user
   def index
