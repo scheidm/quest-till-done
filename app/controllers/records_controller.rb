@@ -39,7 +39,7 @@ class RecordsController < ApplicationController
     respond_to do |format|
       if @record.save
         create_round(@record, action_name, @record.quest.get_campaign)
-        @record.assign_encounter
+        @record.assign_encounter @user
         format.html { redirect_to :back, notice: 'Record was successfully created.'}
       else
         format.html { render action: 'new'}

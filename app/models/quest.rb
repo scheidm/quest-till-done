@@ -21,7 +21,6 @@ class Quest < ActiveRecord::Base
   has_many :quests, :foreign_key => 'parent_id'
   # Belongs to a user/owner
   belongs_to :group
-  delegate :user, to: :group
   before_save :set_status
 
 

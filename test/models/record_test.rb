@@ -16,7 +16,7 @@ class RecordTest < ActiveSupport::TestCase
     x = Record.new
     x.group_id = Group.first.id
     x.description = 'test'
-    x.assign_encounter
+    x.assign_encounter User.first
     x.save
     assert_not_nil x.encounter_id
   end
