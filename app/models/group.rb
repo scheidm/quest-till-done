@@ -2,6 +2,7 @@
 # timelines
 class Group < ActiveRecord::Base
   belongs_to :user
+  has_many :campaigns
   has_and_belongs_to_many :users
   has_and_belongs_to_many :admins, class_name: "User", join_table: "admins_groups"
   # Leave the group while preventing orphan groups. If the user is the last

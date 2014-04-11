@@ -34,6 +34,10 @@ class Power
     Groups.where( 'group_id in (?)', @user.groups.pluck(:id))
   end
 
+  power :leave_groups do
+    Groups.where( 'group_id in (?)', @user.groups_less_wrapper.pluck(:id) )
+  end
+  
   power :updatable_groups, :destroyable_groups do
     Groups.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
   end

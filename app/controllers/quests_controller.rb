@@ -49,7 +49,6 @@ class QuestsController < ApplicationController
     @quest.group_id = @user.wrapper_group.id
     @quest.status = 'Open'
     @quest.description = nil if @quest.description==""
-    @quest.user=@user
     respond_to do |format|
       if @quest.save
         create_round(@quest, action_name, @quest.campaign)

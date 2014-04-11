@@ -43,9 +43,11 @@ class User < ActiveRecord::Base
   end
 
   def groups_where_member
-    ids=[ self.wrapper_group.id ]
-    self.groups_where_admin.each { |g| ids.push g.id }
-    self.groups.reject {|g| ids.include? g.id}
+    self.groups-self.groups_where_admin
+  end
+
+  def groups_less_wrapper( collection )
+    collection - [ self.wrapper_group ]
   end
 
   def new_user_setup

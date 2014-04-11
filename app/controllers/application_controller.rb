@@ -8,13 +8,8 @@ class ApplicationController < ActionController::Base
   before_filter  :configure_permitted_parameters, if: :devise_controller?
   before_filter :load_user
   before_filter :authenticate_user!
-  before_filter :user_variable
 
   protected
-
-  def user_variable
-    @user=current_user
-  end
 
   current_power do
     Power.new(@user)
@@ -25,6 +20,7 @@ class ApplicationController < ActionController::Base
   # user
   def load_user
     if(user_signed_in?)
+      @user = User.find(current_user.id)
       @config = @user.config
       @timer = @user.timer
       active_quest = @user.active_quest
