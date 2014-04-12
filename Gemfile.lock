@@ -232,6 +232,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
+    single_test (0.6.0)
+      rake
     spork (1.0.0rc4)
     spork-rails (4.0.0)
       rails (>= 3.0.0, < 5)
@@ -327,6 +329,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   searchkick
+  single_test
   spork-rails
   sqlite3
   sunspot_rails
