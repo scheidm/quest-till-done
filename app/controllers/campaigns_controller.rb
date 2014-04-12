@@ -40,6 +40,7 @@ class CampaignsController < ApplicationController
     render :text => generateCampaignTree(campaign)
   end
 
+
   # Save new campaign
   # @param campaign_params [campaign_params] field input from creation page
   # @return [Html] redirect back to the new campaign page
