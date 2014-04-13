@@ -1,14 +1,5 @@
 module GithubHelper
 
-
-  # # Get Access Token
-  # def callback  
-  #   (@github.get_token params['access_token']).token
-  #   #store this value to user table
-  #   current_user.github_access_token =  access_token.token
-  # end
-
-
   # Login for github information
   # @return [Github] Github Session
   def login
@@ -17,7 +8,7 @@ module GithubHelper
 
   #initialize github session
   def github_init(username, projectname)
-    login unless login?
+   login unless login?
     # @github:user => username, :repo => projectname
     @github.user = username
     @github.repo = projectname
@@ -37,6 +28,7 @@ module GithubHelper
   # List Projects
   # @return [Hash] The full list of projects
   def list_projects
+    # This function will pull all users' github repositories and check against known repos and update the list
     @repos = Hash.new
     @github.repos.list.each do |t|
       @repos[(t["name"])] = t["html_url"]
@@ -47,21 +39,21 @@ module GithubHelper
                            github_user: t["owner"]["login"],
                            created_at: t['created_at'],
                            updated_at: t['updated_at'],
-
-                           imported: nil
+                           imported: false
                           })
       end
     end
+    return @repos
   end
 
   #List Branches
   def list_branches(username, projectname)
-    @github.repos.user = username
-    @github.repos.repo = projectname
+    @github = github_init(username, projectname)
     @branches = Hash.new()
     @github.repos.branches.each do |t|
       @branches[t["name"]] = t["commit"]["sha"]
     end
+    return @branches
   end
 
   # List Issues
@@ -71,8 +63,9 @@ module GithubHelper
     issueobj = @github.issues.list :user => username, :repo => projectname
     issueobj.each do |t|
       @issues[t['title']] = t['html_url']
-      if encounter || campaign
+      if encounter && campaign
         unless Quest.find_by description: t['html_url']
+          # if Quest.find_by
 
           new_issue = Quest.create({campaign_id: campaign.id,
                                     name: t['title'],
@@ -83,7 +76,6 @@ module GithubHelper
                                     created_at: t['created_at'],
                                     updated_at: t['updated_at'],
                                     issue_no: t.number.to_i
-
                                    })
 
 
@@ -93,7 +85,7 @@ module GithubHelper
             @github.issues.comments.all(:repo => projectname, :user => username, :issue_id => t.number).each do |f|
               new_record = Record.create({
                                              type: 'Note',
-                                             description: f.body + "<br>" + f.issue_url,
+                                             description: f.body + '\n' + f.issue_url,
                                              encounter_id: encounter.id,
                                              created_at: f.created_at,
                                              updated_at: f.updated_at,
@@ -106,6 +98,7 @@ module GithubHelper
           end
         end
       end
+      return issueobj
     end
 
     # set for latest issue check
@@ -134,9 +127,9 @@ module GithubHelper
 
           create_round(new_commit, action_name, campaign)
         end
-        # end
       end
     end
+    return @commits
   end
 
   # Import a project to QTD
@@ -184,6 +177,19 @@ module GithubHelper
     list_commits username, projectname, Encounter.last, Campaign.last
     #handle issues
     list_issues username, projectname, Encounter.last, Campaign.last
+  end
+
+  def github_update_all_projects
+    #get all projects
+    @repo_list = list_projects
+    @repo_list.each do |t|
+      if t.imported?
+        update_project(t.github_user, t.project_name)
+      end
+    end
+
+    #TODO think about if we update project campaing is easily determined as imported campaign, what about encounters???
+
   end
 
   # Delete Project From QTD
@@ -237,8 +243,6 @@ module GithubHelper
         'QTD'
       ]
     )
-
-
   end
 
 end
