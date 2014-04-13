@@ -22,13 +22,16 @@ class GroupsController < ApplicationController
 
   def kick
     @group = Group.find(params[:id])
-    if @group.admins.includes? @user
+    if @group.admins.include? @user
       @target = User.find( params[:user_id] )
-      if @group.admins.includes? @target
+      if @group.admins.include? @target
         #NOTIFICATION NEEDED
       else
         @group.users.delete User.find( params[:user_id] )
       end
+    end
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), notice: 'Member removed successfully.' }
     end
   end
 
@@ -37,7 +40,14 @@ class GroupsController < ApplicationController
   end
 
   def invite_user
-    #NOTIFICATION NEEDED
+    @group = Group.find(params[:id])
+    user = User.find( params[:user_id] )
+    if ! @group.users.include? user
+      @group.users.push user
+    end
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), notice: 'Member added successfully.' }
+    end
   end
 
   def accept_user

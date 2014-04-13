@@ -48,8 +48,15 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
+  resource :groups do
+    collection do
+      get ':id/kick' => 'groups#kick'
+      get ':id/invite_user' => 'groups#invite_user'
+    end
+  end
   resources :groups do
-
+    collection do
+    end
   end
 
   #get '/project', to: redirect('/')
