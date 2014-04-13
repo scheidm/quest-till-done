@@ -5,3 +5,11 @@ first_user_config: {
   encounter_duration: 1800
 
 }
+
+first_user_config: {
+  id: 2,
+  user_id: 3,
+  timezone_name: EST,
+  encounter_duration: 1800
+
+}
