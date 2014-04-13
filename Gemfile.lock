@@ -295,7 +295,6 @@ DEPENDENCIES
   cucumber-rails
   d3_rails (~> 3.4.1)
   database_cleaner
-  delayed_job
   delayed_job_active_record
   devise
   execjs
