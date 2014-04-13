@@ -73,12 +73,8 @@ end
 
 gem 'devise'
 gem 'cancancan'
-gem 'role_model'
 gem 'flipclockjs-rails', "~> 0.4.0b"
 gem 'acts-as-taggable-on'
-gem 'foreman'
-gem 'sunspot_rails'
-gem 'sunspot_solr'
 gem 'yard'
 gem 'will_paginate'
 gem 'attr_encrypted'
