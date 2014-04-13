@@ -48,14 +48,15 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
-  resource :groups do
+  resources :groups do
+    collection do
+    end
+  end
+
+  resource :group do
     collection do
       get ':id/kick' => 'groups#kick'
       get ':id/invite_user' => 'groups#invite_user'
-    end
-  end
-  resources :groups do
-    collection do
     end
   end
 

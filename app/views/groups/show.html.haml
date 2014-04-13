@@ -19,7 +19,7 @@
               %td
                 = render_promote(user.id)
                 = render_remove(user.id)
-      = link_to 'Add Member', '#add-member-modal', :class => 'btn btn-primary pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add new members'
+      = render_add_member
 
 .col-md-6
   .panel.panel-info{:style => 'height:400px'}
@@ -62,7 +62,7 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title Add New Member
       .modal-body
-        = form_tag '/groups/'+@group.id.to_s+'/invite_user', :method => 'get' do |f|
+        = form_tag invite_user_path, :method => 'get' do |f|
           .form-group
             = select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
           = button_tag 'Add', :type=> 'submit', :class => 'btn btn-default'

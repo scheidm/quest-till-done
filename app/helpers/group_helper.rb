@@ -29,4 +29,14 @@ module GroupHelper
       return 'Member'
     end
   end
+
+  def render_add_member
+    if @group.admins.include? @user
+      link_to 'Add Member', '#add-member-modal', :class => 'btn btn-primary pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add new members'
+    end
+  end
+
+  def invite_user_path
+    '/group/' + @group.id.to_s + '/invite_user'
+  end
 end

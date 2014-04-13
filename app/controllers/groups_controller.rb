@@ -46,7 +46,7 @@ class GroupsController < ApplicationController
       @group.users.push user
     end
     respond_to do |format|
-      format.html { redirect_to group_path(@group), notice: 'Member added successfully.' }
+      format.html { redirect_to group_path(@group), :flash => { :success =>'Member added successfully.' }}
     end
   end
 
