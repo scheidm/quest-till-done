@@ -20,21 +20,6 @@ class GroupsController < ApplicationController
     @group.leave
   end
 
-  def kick
-    @group = Group.find(params[:id])
-    if @group.admins.include? @user
-      @target = User.find( params[:user_id] )
-      if @group.admins.include? @target
-        #NOTIFICATION NEEDED
-      else
-        @group.users.delete User.find( params[:user_id] )
-      end
-    end
-    respond_to do |format|
-      format.html { redirect_to group_path(@group), notice: 'Member removed successfully.' }
-    end
-  end
-
   def join
     #NOTIFICATION NEEDED
   end
