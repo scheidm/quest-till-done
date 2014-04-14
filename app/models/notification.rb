@@ -8,6 +8,10 @@ class Notification < ActiveRecord::Base
     self.target_type.singularize.classify.constantize.find(self.target_id)
   end
 
+  def admin
+    User.find self.authorization_id
+  end
+
   def link_models( source, target )
     self.source_id = source.id
     self.source_type = source.class.name
