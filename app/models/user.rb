@@ -1,4 +1,3 @@
-require 'role_model'
 # User class as handled through the devise gem
 class User < ActiveRecord::Base
 
