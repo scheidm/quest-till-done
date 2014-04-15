@@ -11,6 +11,7 @@
       = f.label :description, :class => 'control-label'
       .controls
         = f.text_field :description, :class => 'form-control'
+      = f.hidden_field :group_id
   %br
   .actions
     = f.submit :class => 'btn btn-primary pull-right'

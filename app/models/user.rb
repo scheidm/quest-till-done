@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     promote_in_group group
   end
 
+  def remove_group(group)
+    self.groups.destroy group 
+  end
+
   def new_user_setup
     self.create_timer
     self.groups.create( {name: self.username})

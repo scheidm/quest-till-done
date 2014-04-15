@@ -46,7 +46,11 @@ class CampaignsController < ApplicationController
   # @return [Html] redirect back to the new campaign page
   def create
     @campaign = Campaign.new(campaign_params)
-    @campaign.group = @user.wrapper_group
+    if params[:group_id]
+      @campaign.group_id = params[:group_id]
+    else
+      @campaign.group_id = @user.wrapper_group.id
+    end
 
     respond_to do |format|
       if @campaign.save
