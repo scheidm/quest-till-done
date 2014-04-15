@@ -20,8 +20,9 @@ class Quest < ActiveRecord::Base
   # A quest could have many immediate children quest
   has_many :quests, :foreign_key => 'parent_id'
   # Belongs to a user/owner
-  belongs_to :user
+  belongs_to :group
   before_save :set_status
+
 
   def search_data
     attributes.merge(

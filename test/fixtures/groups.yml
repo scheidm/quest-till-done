@@ -1,0 +1,5 @@
+goose: {
+  name: goose,
+  user_id: 1,
+  id: 1
+}

@@ -35,13 +35,12 @@ class RecordsController < ApplicationController
     @record = Record.new(record_params)
     @record.quest = Quest.find(@record.quest_id)
     @record.created_at = DateTime.now
-    @record.user_id = current_user.id
-    @user = User.find(current_user.id)
+    @record.group_id = @user.wrapper_group.id
 
     respond_to do |format|
       if @record.save
         create_round(@record, action_name, @record.quest.get_campaign)
-        @record.assign_encounter
+        @record.assign_encounter @user
         format.html { redirect_to :back, notice: 'Record was successfully created.'}
       else
         format.html { render action: 'new'}
