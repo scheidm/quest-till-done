@@ -9,3 +9,12 @@ sam: {
    id: 2,
    email: sam@shire.com
 }
+
+github_user: {
+#TODO remove the github authentication !!!
+ id: 3,
+ username: github,
+ email: github@test.com,
+ github_access_token: '35729663ed7c049136101e3c83a6c3e51a735acf'
+
+}

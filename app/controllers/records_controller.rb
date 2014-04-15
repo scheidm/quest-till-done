@@ -4,6 +4,7 @@ class RecordsController < ApplicationController
   require 'json_generator'
   include JsonGenerator::QuestModule
   include RoundHelper
+  include GithubHelper
 
   # Show all records belongs to a user
   # @return [Html] All records belong to a user
@@ -45,6 +46,12 @@ class RecordsController < ApplicationController
         format.html { render action: 'new'}
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
+    end
+
+    @quest = Quest.find(@record.quest_id)
+    unless @quest.issue_no.nil?
+      accounts = GithubRepo.where(campaign_id: @quest.campaign_id).first
+      push_comment(accounts.github_user, accounts.project_name, @quest.issue_no, @record.description)
     end
   end
 

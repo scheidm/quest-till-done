@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:8080/users/github_callback", scope: 'repo'
   end
 
-    # Get Access Token
+  # Get Github Access Token
   def callback         
     @github = @user.github
     token = (@github.get_token params['code']).token
@@ -45,11 +45,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    #login
-    #list_projects
-    #list_branches 'scheidm', 'quest-till-done'
-    #list_issues 'scheidm', 'quest-till-done', nil, nil
-    #list_commits 'scheidm', 'quest-till-done', nil, nil
     if @user.github_access_token.nil?
       github_authorize
     else
@@ -109,6 +104,12 @@ class UsersController < ApplicationController
     params.require(:user_config).permit(:id, :encounter_duration, :short_break_duration, :extended_break_duration, :encounter_extend_duration, :user_id, :status, :importance, :deadline)
   end
 
+  def github_background_jobs
+    login? || login
+    github_update_all_projects
+  end
+
+  handle_asynchronously :github_background_jobs
 
 
 

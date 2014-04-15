@@ -50,15 +50,13 @@ gem 'therubyracer'
 
 gem 'haml'
 
-gem 'delayed_job_active_record'
-
 gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 
 gem 'd3_rails', "~> 3.4.1"
 
 gem 'jasmine', github: 'pivotal/jasmine-gem', ref: 'e810540'
 gem 'jasmine-core', '1.3.1'
-gem 'delayed_job'
+gem 'delayed_job_active_record'
 gem 'spork-rails'
 gem 'high_voltage'
 

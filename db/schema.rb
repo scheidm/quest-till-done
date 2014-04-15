@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412105426) do
+ActiveRecord::Schema.define(version: 20140412134842) do
 
   create_table "admins_groups", id: false, force: true do |t|
     t.integer "group_id"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140412105426) do
     t.datetime "updated_at"
     t.text     "lastest_commit"
     t.datetime "lastest_issue"
+    t.integer  "campaign_id"
   end
 
   create_table "groups", force: true do |t|
@@ -113,6 +114,8 @@ ActiveRecord::Schema.define(version: 20140412105426) do
     t.boolean  "importance",     default: false
     t.string   "type"
     t.string   "slug"
+    t.integer  "issue_no"
+    t.boolean  "vcs"
   end
 
   add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
@@ -239,5 +242,10 @@ ActiveRecord::Schema.define(version: 20140412105426) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_groups", id: false, force: true do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+  end
 
 end

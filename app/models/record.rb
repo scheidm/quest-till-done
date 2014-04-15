@@ -41,6 +41,11 @@ class Record < ActiveRecord::Base
     @child_classes
   end
 
+
+  def normalize_friendly_id(string)
+    super[0..139]
+  end
+
   def to_link
     self.quest.to_link
   end
