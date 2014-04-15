@@ -16,8 +16,27 @@ class GroupsController < ApplicationController
       unless current_power.group? @group
   end
 
+  def group_params
+    params.require(:group).permit(:id, :name)
+  end
+
   def new
     @group = Group.new()
+  end
+
+  def create
+    @group = Group.new(group_params)
+    respond_to do |format|
+      if @group.save
+        @group.admins.push @user
+        @group.users.push @user
+        format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @quest.campaign }
+      else
+        format.html { render action: 'new'}
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def leave
