@@ -1,32 +1,71 @@
 # Controller for the group page
 class GroupsController < ApplicationController
-  layout "profile"
+  power :crud => :groups
 
   # Display a list of all groups for the current user
   def index
-    @user_groups = current_user.users_groups.page(params[:page]).per(20)
+    @member_groups = @user.groups_where_member
+    @admin_groups = @user.groups_where_admin
   end
 
   # Display the group page for the specified group, presuming the user has
   # access rights granted to them.
   def show
-      @group ||= Group.find_by_path(params[:id])
+    @group = Group.find(params[:id])
+    redirect_to groups_path, :flash => { :warning =>"Permission Denied"}\
+      unless current_power.group? @group
+  end
+
+  def group_params
+    params.require(:group).permit(:id, :name)
+  end
+
+  def new
+    @group = Group.new()
+  end
+
+  def create
+    @group = Group.new(group_params)
+    respond_to do |format|
+      if @group.save
+        @group.admins.push @user
+        @group.users.push @user
+        format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @quest.campaign }
+      else
+        format.html { render action: 'new'}
+        format.json { render json: @group.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def leave
-    @users_group = group.users_groups.where(user_id: current_user.id).first
+    @group = Group.find(params[:id])
+    @group.leave
+  end
 
-    if group.last_owner?(current_user)
-      redirect_to(profile_groups_path, alert: "You can't leave group. You must add at least one more owner to it.")
-    else
-      @users_group.destroy
-      redirect_to(profile_groups_path, info: "You left #{group.name} group.")
+  def join
+    #NOTIFICATION NEEDED
+  end
+
+  def invite_user
+    @group = Group.find(params[:id])
+    user = User.find( params[:user_id] )
+    if ! @group.users.include? user
+      @group.users.push user
     end
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>'Member added successfully.' }}
+    end
+  end
+
+  def accept_user
+    #NOTIFICATION NEEDED
   end
 
   private
 
   def group
-    @group ||= Group.find_by_path(params[:id])
+    @group ||= Group.find(params[:id])
   end
 end

@@ -3,4 +3,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+require 'single_test/tasks'
+
 QuestTillDone::Application.load_tasks

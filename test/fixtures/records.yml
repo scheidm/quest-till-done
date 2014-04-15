@@ -6,7 +6,8 @@ panda_link: {
   created_at: "2014-03-09 19:17:20.000000",
   updated_at: "2014-03-09 19:17:20.000000",
   type: Link,
-  id: 2
+  id: 2,
+  group_id: 1
 }
 panda_note: {
   type: Note,
@@ -16,7 +17,7 @@ panda_note: {
   created_at: "2014-03-09 19:17:20.000000",
   updated_at: "2014-03-09 19:17:20.000000",
   id: 1,
-  user_id: 1
+  group_id: 1
 }
 panda_image: {
   type: Image,
@@ -25,7 +26,8 @@ panda_image: {
   quest_id: 2,
   created_at: "2014-03-09 19:17:20.000000",
   updated_at: "2014-03-09 19:17:20.000000",
-  id: 3
+  id: 3,
+  group_id: 1
 }
 panda_commit: {
   type: Commit,
@@ -34,5 +36,6 @@ panda_commit: {
   quest_id: 2,
   created_at: "2014-03-09 19:17:20.000000",
   updated_at: "2014-03-09 19:17:20.000000",
-  id: 4
+  id: 4,
+  group_id: 1
 }

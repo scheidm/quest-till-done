@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316143212) do
+ActiveRecord::Schema.define(version: 20140415162549) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "admins_groups", id: false, force: true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -64,10 +72,31 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "updated_at"
     t.text     "lastest_commit"
     t.datetime "lastest_issue"
+    t.integer  "campaign_id"
   end
 
   create_table "groups", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "groups_users", id: false, force: true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.string   "message_type"
+    t.boolean  "dismissed"
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.string   "body"
+    t.string   "action_type"
+    t.integer  "authorization_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,18 +111,22 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.integer  "parent_id"
     t.integer  "campaign_id"
     t.date     "deadline"
-    t.integer  "user_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "importance",     default: false
     t.string   "type"
     t.string   "slug"
+    t.integer  "issue_no"
+    t.boolean  "vcs"
+    t.integer  "user_id"
   end
 
   add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
 
   create_table "records", force: true do |t|
     t.string   "type"
+    t.integer  "user_id"
     t.text     "description",        null: false
     t.string   "url"
     t.integer  "encounter_id"
@@ -104,7 +137,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.text     "github_username"
     t.text     "github_projectname"
     t.text     "sha"
-    t.integer  "user_id"
+    t.integer  "group_id"
     t.string   "slug"
   end
 
@@ -214,10 +247,5 @@ ActiveRecord::Schema.define(version: 20140316143212) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users_groups", id: false, force: true do |t|
-    t.integer "user_id"
-    t.integer "group_id"
-  end
 
 end

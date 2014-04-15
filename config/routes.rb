@@ -44,7 +44,19 @@ QuestTillDone::Application.routes.draw do
 
   resources :searches do
     collection do
-      get 'quest_autocomplete'
+      get 'quest_autocomplete', 'all_autocomplete'
+    end
+  end
+
+  resources :groups do
+    collection do
+    end
+  end
+
+  resource :group do
+    collection do
+      get ':id/kick' => 'groups#kick'
+      get ':id/invite_user' => 'groups#invite_user'
     end
   end
 

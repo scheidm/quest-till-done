@@ -90,4 +90,40 @@ $(document).ready(function(){
             }
         });
     });
+
+    /***************** Search *******************/
+    $( "#search-bar" ).autocomplete({
+        source: function( request, response ) {
+            $.ajax({
+                url: "/searches/all_autocomplete",
+                dataType: "json",
+                data: {
+                    featureClass: "P",
+                    style: "full",
+                    maxRows: 12,
+                    query: request.term
+                },
+                success: function( data ) {
+                    response( $.map( data, function( item ) {
+                        return {
+                            label: item.label,
+                            value: item.value,
+                            class: item.class
+                        }
+                    }));
+                }
+            });
+        },
+        select: function(event, ui) {
+            event.preventDefault();
+            $("#search-bar").val(ui.item.label);
+        }
+    }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        var s = item.label;
+        if(item.label.length > 18)
+            s = item.label.substring(0, 18) + "...";
+        return $( "<li>" )
+            .append( "<a>" + s + " <span class='label label-"+item.class+"'>"+item.class+"</span></a>" )
+            .appendTo( ul );
+    };
 });
