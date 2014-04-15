@@ -296,6 +296,10 @@ input:-webkit-autofill:focus {
     -webkit-text-fill-color: #555;
 }
 
+.hidden {
+    display: none;
+}
+
 /**************** Campaign/Quest Status ***********/
 .label-Open {
     background-color: #428bca;
@@ -304,6 +308,24 @@ input:-webkit-autofill:focus {
     background-color: #999;
 }
 .label-InProgress {
+    background-color: #5cb85c;
+}
+.label-Note {
+    background-color: #5bc0de;
+}
+.label-Link {
+    background-color: #5bc0de;
+}
+.label-Image {
+    background-color: #5bc0de;
+}
+.label-Commit {
+    background-color: #5bc0de;
+}
+.label-Quest {
+    background-color: #428bca;
+}
+.label-Campaign {
     background-color: #5cb85c;
 }
 
