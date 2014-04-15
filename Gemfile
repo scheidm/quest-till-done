@@ -65,6 +65,7 @@ gem 'high_voltage'
 # session db gem
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
+gem 'single_test'
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
@@ -93,5 +94,6 @@ gem 'local_time'
 
 gem 'rack-mini-profiler'
 
+gem 'consul'
 # jquery ui
 gem 'jquery-ui-rails'

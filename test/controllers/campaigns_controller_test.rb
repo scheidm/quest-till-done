@@ -29,7 +29,7 @@ class CampaignsControllerTest < ActionController::TestCase
 
   test "Test create campaign" do
     assert_difference('Campaign.count') do
-      post :create, campaign: {name: 'Test', description: 'Testing',user_id: @user.id, status: 'Open'}
+      post :create, campaign: {name: 'Test', description: 'Testing',group_id: @user.wrapper_group.id, status: 'Open'}
     end
 
     assert_redirected_to campaign_path(assigns(:campaign))
