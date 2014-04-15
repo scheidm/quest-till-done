@@ -224,10 +224,10 @@ module GithubHelper
     @new_comment = @github.issues.comments.create :repo_name=> projectname, :user_name => username , :issue_id => issue_no ,:body => comment
   end
 
-  #Close Issue from a closed quest
-  def close_issue(username, projectname, issue_no)
+  #Update Issue Status from a closed quest
+  def update_issue_status(username, projectname, issue_no, status)
     @github  = github_init(username, projectname)
-    @github.issues.edit(:number => issue_no, :state => 'closed')
+    @github.issues.edit(:number => issue_no, :state => status)
   end
 
   #Open Issue from a created quest

@@ -1,5 +1,5 @@
 %h2 Projects Listing
-= link_to 'Back', users_path, :class => "btn"
+= link_to 'Back', user_index_path, :class => "btn"
 
 
 %table{:class => "table table-hover" , :id=>'myTab.nav.nav-tabs'}
@@ -21,12 +21,12 @@
 
         - if t.imported
           %td
-            = link_to "Delete" , { :action => 'github_project_del',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+            = link_to "Delete" , { controller: 'user', :action => 'github_project_del',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
 
 
         - else
           %td
-            = link_to "Import",  { :action => 'github_project_import', :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+            = link_to "Import",  { controller: 'user', :action => 'github_project_import', :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
 
         %td
-          = link_to "Manual Update" , { :action => 'github_update',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+          = link_to "Manual Update" , { controller: 'user', :action => 'github_update',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }

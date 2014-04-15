@@ -84,15 +84,26 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def update
     @quest = Quest.friendly.find(params[:id])
+    status = params['quest']['status'] || nil
+
+
+    #sync with github
+    unless status.nil?
+      parent_campaign = Campaign.find(@quest.campaign_id)
+
+      if parent_campaign.vcs
+        github_info = GithubRepo.where(campaign_id: parent_campaign.id).first
+        if status == 'Closed'
+          update_issue_status(github_info.github_user, github_info.project_name, @quest.issue_no, "closed")
+        else
+          update_issue_status(github_info.github_user, github_info.project_name, @quest.issue_no, "open")
+        end
+      end
+    end
+
     respond_to do |format|
       if @quest.save
         if params['quest']['status']=="Closed"
-          #sync with github
-          parent_campaign = Campaign.find(@quest.campaign_id)
-          if parent_campaign.vcs
-            github_info = GithubRepo.where(campaign_id: parent_campaign.id).first
-            close_issue(github_info.github_user, github_info.project_name, @quest.issue_no)
-          end
           if @quest.id==@user.active_quest.id
             @user.active_quest=Quest.where('user_id = (?)', @quest.user_id).where('name = (?)', 'Unsorted Musings').first
             @user.save
