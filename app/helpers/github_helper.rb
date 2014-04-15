@@ -14,7 +14,7 @@ module GithubHelper
   # Login for github information
   # @return [Github] Github Session
   def login
-    @github = Github.new oauth_token: current_user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
+    @github = Github.new oauth_token: @user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
   end
 
   # Check if login is sucessful
@@ -34,7 +34,7 @@ module GithubHelper
     @github.repos.list.each do |t|
       @repos[(t["name"])] = t["html_url"]
       if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"]
-        GithubRepo.create({user: current_user,
+        GithubRepo.create({user: @user,
                            project_name: t["name"],
                            url: t["html_url"],
                            github_user: t["owner"]["login"],
@@ -69,7 +69,7 @@ module GithubHelper
           new_issue = Quest.create({campaign_id: campaign.id,
                                     name: t['title'],
                                     description: t['html_url'],
-                                    user_id: current_user.id,
+                                    user_id: @user.id,
                                     status: 'Open',
                                     parent: campaign,
                                     created_at: t['created_at'],
@@ -102,7 +102,7 @@ module GithubHelper
                                       quest_id: campaign.id,
                                       description: t["commit"]["message"],
                                       url: t["html_url"],
-                                      user_id: current_user.id,
+                                      user_id: @user.id,
                                       sha: t["sha"]
                                      })
 
@@ -117,7 +117,7 @@ module GithubHelper
   # Note: this should be run only when first time import is initiated
   def initial_import(username, projectname)
     # set import status
-    project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user.id)
+    project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: @user.id)
 
     if project.imported.nil? || !project.imported
 
@@ -133,7 +133,7 @@ module GithubHelper
       # new encounter
       import_campaign = Campaign.create({name: projectname,
                                          description: "Imported Project for #{projectname}",
-                                         user_id: current_user.id
+                                         user_id: @user.id
                                         })
 
       create_round(import_campaign, action_name, import_campaign)
@@ -161,7 +161,7 @@ module GithubHelper
   # @param username     Github User Name
   # @param projectname  Github Project Name
   def del_project(username, projectname)
-    project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user)
+    project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: @user.id)
     project.imported = false
     project.save
 
