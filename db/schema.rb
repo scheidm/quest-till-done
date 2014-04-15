@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140410185656) do
+ActiveRecord::Schema.define(version: 20140412134842) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +85,20 @@ ActiveRecord::Schema.define(version: 20140410185656) do
   create_table "groups_users", id: false, force: true do |t|
     t.integer "group_id"
     t.integer "user_id"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.string   "message_type"
+    t.boolean  "dismissed"
+    t.integer  "source_id"
+    t.string   "source_type"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.string   "body"
+    t.string   "action_type"
+    t.integer  "authorization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "quests", force: true do |t|

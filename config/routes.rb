@@ -1,6 +1,6 @@
 QuestTillDone::Application.routes.draw do
 
-  devise_for :user, :controllers => { :registrations => 'qtdregistrations' }
+  devise_for :users, :controllers => { :registrations => 'qtdregistrations' }
   resources :user do
       get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings'
       post 'update_config'
