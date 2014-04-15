@@ -44,7 +44,7 @@ QuestTillDone::Application.routes.draw do
 
   resources :searches do
     collection do
-      get 'quest_autocomplete'
+      get 'quest_autocomplete', 'all_autocomplete'
     end
   end
 
