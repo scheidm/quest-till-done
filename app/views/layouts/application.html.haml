@@ -37,6 +37,7 @@
               .col-md-7.qtd-col
                 %div
                   =link_to @user.username, user_index_path(@user)
+
                   %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"} 3
                 %div{style: "color:#999999"}
                   C# Guru
@@ -103,7 +104,7 @@
           = yield
     / /row
     %footer
-      %p © Quest Till Done 2014
+      %p © Quest Till Done 2013
     / /container
 #userPopContent.hide
   %p

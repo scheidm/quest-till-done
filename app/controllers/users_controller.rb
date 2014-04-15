@@ -1,5 +1,5 @@
 
-class UserController < ApplicationController
+class UsersController < ApplicationController
 
   include RoundHelper
   include GithubHelper
