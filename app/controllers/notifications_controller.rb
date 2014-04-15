@@ -32,6 +32,9 @@ class NotificationsController < ApplicationController
     unless @group.admins.include? user
       @group.admins.push user
     end
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), notice: 'Member promoted successfully.' }
+    end
   end
 
 end

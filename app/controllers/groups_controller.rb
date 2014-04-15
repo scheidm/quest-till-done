@@ -1,6 +1,6 @@
 # Controller for the group page
 class GroupsController < ApplicationController
-  power :crud => :campaigns
+  power :crud => :groups
 
   # Display a list of all groups for the current user
   def index
@@ -12,7 +12,12 @@ class GroupsController < ApplicationController
   # access rights granted to them.
   def show
     @group = Group.find(params[:id])
-    redirect_to groups_path unless current_power.group? @group
+    redirect_to groups_path, :flash => { :warning =>"Permission Denied"}\
+      unless current_power.group? @group
+  end
+
+  def new
+    @group = Group.new()
   end
 
   def leave

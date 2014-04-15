@@ -1,4 +1,3 @@
-require 'role_model'
 # User class as handled through the devise gem
 class User < ActiveRecord::Base
 
@@ -22,7 +21,7 @@ class User < ActiveRecord::Base
   has_one :timer
   has_many :encounters
   has_and_belongs_to_many :groups
-  has_and_belongs_to_many :groups_where_admin, class_name: "Group", join_table: "admins_groups"
+  has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :new_user_setup
   #validates :username,
@@ -43,11 +42,15 @@ class User < ActiveRecord::Base
   end
 
   def groups_where_member
-    self.groups-self.groups_where_admin
+    self.groups-self.groups_where_admin_and_wrapper
   end
 
-  def groups_less_wrapper( collection )
-    collection - [ self.wrapper_group ]
+  def groups_where_admin
+    self.groups_where_admin_and_wrapper - [ self.wrapper_group ]
+  end
+
+  def groups_less_wrapper
+    self.groups - [ self.wrapper_group ]
   end
 
   def new_user_setup

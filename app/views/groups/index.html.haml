@@ -10,7 +10,7 @@
     - @member_groups.each do |group|
       %tr
         %td
-          %a{href: group_path(group)}= group.name
+          =link_to group.name, group
         %td= group.created_at
 
 %h4 Admin Group
@@ -23,5 +23,5 @@
     - @admin_groups.each do |group|
       %tr
         %td
-          %a{href: group_path(group)}= group.name
+          =link_to group.name, "/groups/#{group.id}/" 
         %td= group.created_at

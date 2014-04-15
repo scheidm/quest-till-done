@@ -11,7 +11,7 @@ class Power
   end
 
   power :destroyable_campaigns do
-    Campaign.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
+    Campaign.where( 'group_id in (?)', @user.groups_where_admin_and_wrapper.pluck(:id))
   end
 
   power :quests, :creatable_quests, :updatable_quests  do
@@ -19,7 +19,7 @@ class Power
   end
 
   power :destroyable_quests do
-    Quest.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
+    Quest.where( 'group_id in (?)', @user.groups_where_admin_and_wrapper.pluck(:id))
   end
 
   power :records, :creatable_records do
@@ -27,23 +27,18 @@ class Power
   end
 
   power :destroyable_records do
-    Record.where( 'group_id in (?)', @user.groups_where_admin.pluck(:id))
+    Record.where( 'group_id in (?)', @user.groups_where_admin_and_wrapper.pluck(:id))
   end
 
   power :updatable_records do
     Record.where( 'encounter_id in (?)', @user.encounters.limit(100) )
   end
 
-  power :groups, :creatable_groups do
-    Group.where( 'id in (?)', @user.groups.pluck(:id))
-  end
-
-  power :leave_groups do
-    Group.where( 'id in (?)', @user.groups_less_wrapper.pluck(:id) )
+  power :groups, :creatable_groups, :leave_groups do
+    @user.groups_less_wrapper
   end
   
   power :updatable_groups, :destroyable_groups do
-    Group.where( 'id in (?)', @user.groups_where_admin.pluck(:id))
+    user.groups_where_admin_and_wrapper
   end
-
 end
