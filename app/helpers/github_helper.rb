@@ -152,7 +152,8 @@ module GithubHelper
       # new encounter
       import_campaign = Campaign.create({name: projectname,
                                          description: "Imported Project for #{projectname}",
-                                         user_id: current_user.id
+                                         user_id: current_user.id,
+                                         vcs: true
                                         })
       project.campaign_id =  import_campaign.id
       project.save
