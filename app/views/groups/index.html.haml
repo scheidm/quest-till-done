@@ -1,27 +1,43 @@
 %h2 Groups
 
-%h4 Member Group
-%table{:class => "table table-hover"}
-  %thead
-    %tr
-      %th Name
-      %th Created At
-  %tbody
-    - @member_groups.each do |group|
-      %tr
-        %td
-          =link_to group.name, group
-        %td= group.created_at
+%br
+%br
+= link_to 'New Group', new_group_path, :class=> 'btn btn-primary'
+%br
+%br
+.panel.panel-info
+  .panel-heading Group Joined
+  .panel-body.fill
+    %table{:class => "table table-hover" }
+      %thead
+        %tr
+          %th Name
+          %th Role
+      %tbody
+        - @member_groups.each do |group|
+          %tr
+            %td
+              =link_to group.name, group
+            %td
+              = render_role(group, current_user)
+            %td
+              = link_to 'Leave', {:action => :leave, :id => group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Leave group'
 
-%h4 Admin Group
-%table{:class => "table table-hover"}
-  %thead
-    %tr
-      %th Name
-      %th Created At
-  %tbody
-    - @admin_groups.each do |group|
-      %tr
-        %td
-          =link_to group.name, "/groups/#{group.id}/" 
-        %td= group.created_at
+.panel.panel-success
+  .panel-heading Your Group
+  .panel-body.fill
+    %table{:class => "table table-hover" }
+      %thead
+        %tr
+          %th Name
+          %th Role
+      %tbody
+        - @admin_groups.each do |group|
+          %tr
+            %td
+              =link_to group.name, group
+            %td
+              = render_role(group, current_user)
+            %td
+              = link_to 'Leave', {:action => :leave, :id => group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Leave group'
+

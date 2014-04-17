@@ -12,8 +12,8 @@ class GroupsController < ApplicationController
   # access rights granted to them.
   def show
     @group = Group.find(params[:id])
-    redirect_to groups_path, :flash => { :warning =>"Permission Denied"}\
-      unless current_power.group? @group
+  redirect_to groups_path, :flash => { :warning =>"Permission Denied"}\
+    unless current_power.group? @group
   end
 
   def group_params

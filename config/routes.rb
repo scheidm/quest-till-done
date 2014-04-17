@@ -57,6 +57,7 @@ QuestTillDone::Application.routes.draw do
     collection do
       get ':id/kick' => 'groups#kick'
       get ':id/invite_user' => 'groups#invite_user'
+      get ':id/leave' => 'groups#leave'
     end
   end
 

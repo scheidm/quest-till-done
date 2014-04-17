@@ -22,8 +22,8 @@ module GroupHelper
     return html.html_safe
   end
 
-  def render_role(user)
-    if @group.admins.include? user
+  def render_role(group, user)
+    if group.admins.include? user
       return 'Admin'
     else
       return 'Member'

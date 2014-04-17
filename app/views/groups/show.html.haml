@@ -11,15 +11,18 @@
             %th Name
             %th Role
         %tbody
-          - @group.users.each do |user|
+          - @group.users.paginate(page: params[:page], per_page: 4).each do |user|
             %tr
               %td= user.username
               %td
-                = render_role(user)
+                = render_role(@group, user)
               %td
                 = render_promote(user.id)
                 = render_remove(user.id)
+      = will_paginate @group.users.paginate(page: params[:page], per_page: 2)
+      %br
       = render_add_member
+
 
 .col-md-6
   .panel.panel-info{:style => 'height:400px'}

@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
   # admin before leaving. If the user is the last member in the group, the
   # function will delete the group and associated campaigns from the database
   def leave
-    if self.admins.includes? @user
+    if self.admins.include? @user
       if self.admins.length==1
         users=self.users-[@user]
         self.admins.push users.first
