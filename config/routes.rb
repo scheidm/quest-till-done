@@ -38,7 +38,7 @@ QuestTillDone::Application.routes.draw do
 
   resources :priorities do
     collection do
-      get 'get_priorities'
+      get 'get_priorities', 'get_all_priorities'
     end
   end
 

@@ -329,6 +329,20 @@ input:-webkit-autofill:focus {
     background-color: #5cb85c;
 }
 
+/************** Priority view ***************/
+.ul-dual-column {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+.ul-dual-column li {
+    display: inline-block;
+    width: 45%;
+    margin: 0;
+    padding: 10px;
+    vertical-align: top; /* In case multi-word categories form two lines */
+}
+
 /************** Loading screen **************/
 #fadingBarsG{
     position:relative;
