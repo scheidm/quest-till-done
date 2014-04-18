@@ -5,80 +5,6 @@ var duration = 750;
 var diagonal;
 var length;
 
-function buildTree2(treeData) {
-    var i = 0, duration = 750;
-    // Create a svg canvas
-    var height = 800;
-    var width = 800;
-    svg = d3.select("#tree-container").append("svg:svg")
-       // .attr("width", width)
-        //.attr("height", height)
-        .append("g")
-        .attr("transform", "translate(100, 0)"); // shift everything to the right
-
-    // Create a tree "canvas"
-    tree = d3.layout.tree()
-        .size([height,width])
-
-    diagonal = d3.svg.diagonal()
-        .projection(function(d) { return [d.y, d.x]; });
-
-
-    // Preparing the data for the tree layout, convert data into an array of nodes
-    var nodes = tree.nodes(treeData);
-    // Create an array with all the links
-    var links = tree.links(nodes);
-
-    var link = svg.selectAll(".link")
-        .data(links)
-        .enter().append("svg:path")
-        .attr("class", "link")
-        .attr("d", diagonal)
-
-    var node = svg.selectAll(".node")
-        .data(nodes)
-        .enter().append("svg:g")
-        .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
-
-    // Add the dot at every node
-    node.append("svg:circle")
-        .attr("r", 5.5);
-
-    // place the name atribute left or right depending if children
-    node.append("svg:text")
-        .attr("dx", function(d) { return d.children ? -8 : 8; })
-        .attr("dy", 3)
-        .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
-        .attr("cursor", "pointer")
-        .text(function(d) { return d.attr.name; })
-        //.on("click", nodeClick)
-        .each(function(d)
-        {
-            $(this).popover({
-                'trigger': 'click',
-                'html': true,
-                'title': '<a href='+ d.attr.url +'>'+d.attr.name + '</a>',
-                'content': renderQuestDetail(d),
-                'container': '#tree-container'
-            });
-        });
-
-    node.append("svg:foreignObject")
-        .attr("y",8)
-        .attr("x", function(d) { return d.children ? -50 : 10; })
-        .attr("width", 300)
-        .attr("height", 300)
-        .attr("class", "text")
-        .append("xhtml:body")
-        .html(function(d) {
-            if(d.attr.status != "undefined" && d.attr.status != null) {
-                var css = d.attr.status.toString().trim().replace(/ /g,'');
-                return "<span class='label label-"+ css+"'>"+ d.attr.status +"</span>";
-            }
-        });
-}
-
 function buildTree(treeData)
 {
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
@@ -104,6 +30,13 @@ function buildTree(treeData)
 
     update(root);
 
+    setTimeout(function(){
+            var nodes = d3.selectAll(".node");
+            nodes.each(function(d) {
+                renderDetailBox(this, d);
+            });
+        }
+        , duration + 100);
     //d3.select(self.frameElement).style("height", "500px");
 }
 
@@ -132,21 +65,12 @@ function update(source) {
         .on("click", click);
 
     nodeEnter.append("text")
-        .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
+        .attr("x", function(d) { return d.children || d._children ? -15 : 15; })
         .attr("dy", ".35em")
-        .attr("text-anchor", function(d) { return d.children ? "end" : "start"; })
+        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
         .attr("cursor", "pointer")
-        .text(function(d) { return d.attr.name; })
-        .each(function(d)
-        {
-            $(this).popover({
-                'trigger': 'click',
-                'html': true,
-                'title': '<a href='+ d.attr.url +'>'+d.attr.name + '</a>',
-                'content': renderQuestDetail(d),
-                'container': '#tree-container'
-            });
-        });
+        .style("fill-opacity", 1e-6)
+        .text(function(d) { return ""; });//d.attr.name; })
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
@@ -215,17 +139,27 @@ function click(d) {
         d._children = null;
     }
     update(d);
+    setTimeout(function(){
+            var nodes = d3.selectAll(".node");
+            nodes.each(function(d) {
+                renderDetailBox(this, d);
+            });
+        }
+        , duration + 100);
 }
 
-function nodeClick(d) {
-    if (d.children) {
-        d._children = d.children;
-        d.children = null;
-    } else {
-        d.children = d._children;
-        d._children = null;
-    }
-    update(d);
+function renderDetailBox(svg, d)
+{
+    var placement = d.children ? "left" : "right";
+    $(svg).popover('destroy');
+    $(svg).popover({
+        'trigger': 'manual',
+        'html': true,
+        'title': '<a href='+ d.attr.url +'>'+d.attr.name + '</a>',
+        'content': renderQuestDetail(d),
+        'placement': placement,
+        'container': '#tree-container'
+    }).popover('show');
 }
 
 function renderQuestDetail(d) {
