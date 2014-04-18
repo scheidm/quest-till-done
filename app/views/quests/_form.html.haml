@@ -16,8 +16,6 @@
     = f.collection_select :parent_id, parent_quest, :id, :name,  {}, :class => 'form-control'
     = f.label 'Owner', :class => 'control-label'
     = f.collection_select :user_id, @user.peers.uniq, :id, :username, {:include_blank => "Please select"}, :class => 'form-control'
-    = f.label 'Group', :class => 'control-label'
-    = f.collection_select :group_id, @user.groups, :id, :name, {:include_blank => "Please select"}, :class => 'form-control'
     = f.label 'Status', :class => 'control-label'
     = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'], ['Closed', 'Closed']], @quest.status), {}, html_options = {:class => 'form-control'}
     = f.label 'Deadline', :class => 'control-label'

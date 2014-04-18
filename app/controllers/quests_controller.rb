@@ -34,6 +34,7 @@ class QuestsController < ApplicationController
   # @return [Html] New quest page
   def new
     @quest = Quest.new()
+    @quest.group_id=params[:group_id]||@user.wrapper_group.id
     parent = params[:id]
     if (parent != nil)
       @quest.parent_id = parent

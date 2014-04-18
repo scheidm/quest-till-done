@@ -48,7 +48,7 @@
                 %a.btn.btn-primary{:style => 'background-color: #999;border-color: #999'}
                   Closed
                   = render_quest_count(campaign, 'Closed')
-      =link_to "Add Campaign", controller: "campaigns", action: "new", group_id: @group.id
+      =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
 
 .col-md-6
   .panel.panel-info{:style => 'height:400px'}
