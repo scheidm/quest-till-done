@@ -11,7 +11,8 @@
       = f.label :description, :class => 'control-label'
       .controls
         = f.text_field :description, :class => 'form-control'
-      = f.hidden_field :group_id
+      = f.label 'Group', :class => 'control-label'
+      = f.collection_select :group_id, @user.groups, :id, :name, {:include_blank => "Please select"}, :class => 'form-control'
   %br
   .actions
     = f.submit :class => 'btn btn-primary pull-right'

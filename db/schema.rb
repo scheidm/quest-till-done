@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140412134842) do
+ActiveRecord::Schema.define(version: 20140418121305) do
 
   create_table "admins_groups", id: false, force: true do |t|
     t.integer "group_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20140412134842) do
     t.string   "slug"
     t.integer  "issue_no"
     t.boolean  "vcs"
+    t.integer  "user_id"
   end
 
   add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
