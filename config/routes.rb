@@ -48,6 +48,19 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
+  resources :groups do
+    collection do
+    end
+  end
+
+  resource :group do
+    collection do
+      get ':id/kick' => 'groups#kick'
+      get ':id/invite_user' => 'groups#invite_user'
+      get ':id/leave' => 'groups#leave'
+    end
+  end
+
   #get '/project', to: redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.

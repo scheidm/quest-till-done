@@ -1,5 +1,6 @@
 # Controller for Campaign
 class CampaignsController < ApplicationController
+  power :crud => :campaigns
 
   require 'json_generator'
   include JsonGenerator::QuestModule
@@ -11,7 +12,7 @@ class CampaignsController < ApplicationController
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
   def index
-    @campaigns = Campaign.where( :user_id =>  current_user.id)
+    @campaigns = @user.campaigns
   end
 
   # Show the detail of a campaign
@@ -29,6 +30,7 @@ class CampaignsController < ApplicationController
   # @return [Html] New campaign page
   def new
     @campaign = Campaign.new()
+    @campaign.group_id=params[:group_id]||@user.wrapper_group.id
   end
 
   # Get Json for generating tree view
@@ -39,12 +41,12 @@ class CampaignsController < ApplicationController
     render :text => generateCampaignTree(campaign)
   end
 
+
   # Save new campaign
   # @param campaign_params [campaign_params] field input from creation page
   # @return [Html] redirect back to the new campaign page
   def create
     @campaign = Campaign.new(campaign_params)
-    @campaign.user = current_user
 
     respond_to do |format|
       if @campaign.save
@@ -106,15 +108,15 @@ class CampaignsController < ApplicationController
   # @param campaign [Campaign] Campaign
   # @return [JSON] JSON of the timeline details
   def get_campaign_timeline
-    @encounters = Encounter.where(:user_id => current_user.id)
-    render :text => generateTree(@encounters, params[:id])
+    @campaign = Campaign.friendly.find(params[:id])
+    render :text => generateTree(@campaign.rounds.limit(100), params[:id])
   end
 
   # Import a QTD specific format Campaign to generate a campaign
   # @param path [String] file path
   def import
     encounter = Encounter.new
-    encounter.rounds = Encounter.where(:user_id => current_user.id, :campaign_id => params[:id])
+    encounter.rounds = Encounter.where(:user_id => @user.id, :campaign_id => params[:id])
 
   end
 
@@ -136,6 +138,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name)
+    params.require(:campaign).permit(:description, :name, :group_id)
   end
 end

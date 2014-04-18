@@ -16,7 +16,7 @@ class SearchesController < ApplicationController
 
   # auto complete search for quest
   def quest_autocomplete
-    render json: Quest.search(params[:query], where: { :user_id => current_user.id})
+    render json: Quest.search(params[:query], where: { :group_id => @user.wrapper_group.id})
   end
 
   # auto complete search for record, quest and campaign

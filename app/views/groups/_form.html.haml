@@ -1,0 +1,11 @@
+= form_for( @group ) do |f|
+  -if @group.errors.any?
+    = render 'errors'
+
+  .field
+    .form-group
+    = f.label :name, :class => 'control-label'
+    = f.text_field :name, :class => 'form-control', :required => 'true'
+
+  .actions
+    = f.submit :class => 'btn btn-primary pull-right'

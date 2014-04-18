@@ -12,14 +12,18 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_one :timer
+  has_one :wrapper_group, class_name: "Group"
+  has_many :campaigns, through: :wrapper_group
   has_one :config, class_name: "UserConfig"
   has_many :skill_pointses
   @group = Hash.new 
   has_one :group, as: :user_group
   has_one :timer
   has_many :encounters
-  has_many :campaigns
+  has_many :rounds, through: :encounters
   has_and_belongs_to_many :groups
+  has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
+  has_many :peers, through: :groups, source: :users
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   after_create :new_user_setup
   #validates :username,
@@ -39,11 +43,43 @@ class User < ActiveRecord::Base
     end
   end
 
+  def groups_where_member
+    self.groups-self.groups_where_admin_and_wrapper
+  end
+
+  def groups_where_admin
+    self.groups_where_admin_and_wrapper - [ self.wrapper_group ]
+  end
+
+  def groups_less_wrapper
+    self.groups - [ self.wrapper_group ]
+  end
+
+  def add_group_as_member(group)
+    self.groups.push group
+  end 
+  
+  def promote_in_group( group )
+    self.groups_where_admin_and_wrapper.push group
+  end
+
+  def add_group_as_admin(group)
+    add_group_as_member group
+    promote_in_group group
+  end
+
+  def remove_group(group)
+    self.groups.destroy group 
+  end
 
   def new_user_setup
     self.create_timer
-    cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", user_id: self.id, status: "Open"})
-    q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, user_id: self.id, status: "Open"})
+    self.groups.create( {name: self.username})
+    g=self.groups.first
+    self.wrapper_group=g
+    self.promote_in_group g
+    cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", group_id: g.id, status: "Open"})
+    q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     self.active_quest=q
     self.save
     self.reload
@@ -107,12 +143,8 @@ class User < ActiveRecord::Base
     Encounter.where(:user_id => self.id).last
   end
 
-  
-  
   def github
     @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
   end
 
-
-  
 end

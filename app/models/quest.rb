@@ -18,10 +18,11 @@ class Quest < ActiveRecord::Base
   # Belongs to a immediate parent quest
   belongs_to :parent, :class_name => 'Quest'
   # A quest could have many immediate children quest
-  has_many :quests, :foreign_key => 'parent_id'
+  has_many :child_quests, :class_name => 'Quest', :foreign_key => 'parent_id'
   # Belongs to a user/owner
-  belongs_to :user
+  belongs_to :group
   before_save :set_status
+
 
   def search_data
     attributes.merge(

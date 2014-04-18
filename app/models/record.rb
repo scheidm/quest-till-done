@@ -12,7 +12,8 @@ class Record < ActiveRecord::Base
   # Record belongs to a encounter
   belongs_to :encounter
   # Record belongs to a user
-  belongs_to :user
+  belongs_to :group
+  delegate :user, to: :encounter
 
   validates_associated :encounter
 
@@ -20,8 +21,8 @@ class Record < ActiveRecord::Base
   scope :link, ->{where(type: "Link")}
   scope :note, ->{where(type: "Note")}
 
-  def assign_encounter
-    self.encounter_id = Encounter.where(:user_id => self.user.id).last.id
+  def assign_encounter( user )
+    self.encounter_id = Encounter.where(:user_id => user.id).last.id
     self.save
   end
   
