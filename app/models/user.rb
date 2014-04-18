@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_one :group, as: :user_group
   has_one :timer
   has_many :encounters
+  has_many :rounds, through: :encounters
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
   has_many :peers, through: :groups, source: :users
