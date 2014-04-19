@@ -6,6 +6,9 @@ class SearchesControllerTest < ActionController::TestCase
 
   def setup
     sign_in User.first
+    Campaign.reindex
+    Record.reindex
+    Quest.reindex
   end
 
   def teardown
@@ -14,6 +17,7 @@ class SearchesControllerTest < ActionController::TestCase
 
   test "Get index with quest" do
     get :index, :query => "panda"
+    Rails.logger.info assigns(:results)
     assert_response :success
     assert_not_nil assigns(:results)
     assert assigns(:results).size > 0
@@ -24,6 +28,7 @@ class SearchesControllerTest < ActionController::TestCase
 
   test "Get index with record and parent quest" do
     get :index, :query => "squirrel"
+    Rails.logger.info assigns(:results)
     assert_response :success
     assert_not_nil assigns(:results)
     assert assigns(:results).size > 1
@@ -36,6 +41,7 @@ class SearchesControllerTest < ActionController::TestCase
 
   test "Get index with quest and type" do
     get :index, :query => "squirrel", :type => "Note"
+    Rails.logger.info assigns(:results)
     assert_response :success
     assert_not_nil assigns(:results)
     assert assigns(:results).size == 1

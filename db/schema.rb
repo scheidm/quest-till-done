@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140418121305) do
+ActiveRecord::Schema.define(version: 20140419134200) do
 
   create_table "admins_groups", id: false, force: true do |t|
     t.integer "group_id"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20140418121305) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "campaign_id"
+    t.integer  "group_id"
   end
 
   create_table "sessions", force: true do |t|

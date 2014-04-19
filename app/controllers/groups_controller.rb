@@ -71,6 +71,11 @@ class GroupsController < ApplicationController
     #NOTIFICATION NEEDED
   end
 
+  def timeline
+    @group = Group.find(params[:id])
+    render :text => generateTimeline(@group.rounds.limit(100))
+  end
+
   private
 
   def group

@@ -18,6 +18,7 @@ class Round < ActiveRecord::Base
       model.reload
     end
     round.campaign_id = campaign.id
+    round.group=campaign.group
     round.event_id = model.id
     round.type = model.class.name.demodulize
     round.event_description = operation.gsub("_"," ")
