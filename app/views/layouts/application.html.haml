@@ -91,16 +91,7 @@
               #clock.clock
               .btn-group.btn-group-sm
                 = render_timer_button
-                -#%button#startBtn.btn.btn-success{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Start Encounter"}
-                -#  %span.glyphicon.glyphicon-play
-                -#%button#stopBtn.btn.btn-warning{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Stop Encounter"}
-                -#  %span.glyphicon.glyphicon-pause
-                -#%button#resetBtn.btn.btn-danger{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Reset Encounter"}
-                -#  %span.glyphicon.glyphicon-stop
-                -#%button#extendBtn.btn.btn-primary{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Extend Encounter"}
-                -#  %span.glyphicon.glyphicon-plus
-                -#%button#breakBtn.btn.btn-info{"data-placement" => "bottom", "data-toggle" => "tooltip", title: "Take a break"} Break
-              %button.btn.btn-info.btn-xs.dropdown-toggle{"data-toggle" => "dropdown", type: "button", style: "border-radius: 50%"}
+              %button#timerConfigBtn.btn-timer-setting.btn-xs{style: "border-radius: 50%"}
                 %span.glyphicon.glyphicon-wrench
     .container.special
       .row
@@ -119,6 +110,9 @@
     = link_to 'Edit Profile', edit_user_registration_path
   %p
     = link_to 'Log Out', destroy_user_session_path, :method => :delete
+
+#timerPopContent.hide
+  = render_timer_mode
 
 #new-record-modal.modal.fade
   .modal-dialog{:style=> 'width: 800px;'}

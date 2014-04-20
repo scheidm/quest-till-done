@@ -62,4 +62,12 @@ class TimersController < ApplicationController
     start_break
     render :text => get_current_time.to_json
   end
+
+  # Ajax set timer to auto/manual
+  # @param mode [String] Mode to change to
+  def change_mode
+    @timer.mode = params[:mode];
+    @timer.save
+    render :nothing => true
+  end
 end

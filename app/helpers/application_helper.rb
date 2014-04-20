@@ -42,4 +42,15 @@ module ApplicationHelper
       end
     end
   end
+
+  def render_timer_mode
+    auto_class = 'mode-toggle btn btn-sm'
+    auto_class << ((@timer.mode == 'auto') ? ' btn-primary' : ' btn-default')
+    manual_class = 'mode-toggle btn btn-sm'
+    manual_class << ((@timer.mode == 'manual') ? ' btn-primary' : ' btn-default')
+    content_tag :div, :class => 'btn-group btn-toggle', :id => 'mode-toggle-group' do
+        concat button_tag 'Auto', :id => 'autoModeBtn', :class => auto_class, :value => 'auto'
+        concat button_tag 'Manual', :id => 'manualModeBtn', :class => manual_class, :value =>'manual'
+    end
+  end
 end

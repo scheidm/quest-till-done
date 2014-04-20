@@ -20,7 +20,7 @@ QuestTillDone::Application.routes.draw do
   resources :timers do
     collection do
       get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown', 'extend_countdown', 'break_countdown'
-      post 'start_countdown', 'pause_countdown'
+      post 'start_countdown', 'pause_countdown', 'change_mode'
     end
   end
 
