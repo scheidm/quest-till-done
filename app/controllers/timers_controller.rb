@@ -52,12 +52,14 @@ class TimersController < ApplicationController
   # Pause the timer and create a new timer for break
   # @return [JSON] break_timer
   def break_countdown
-    render :text => start_break.to_json
+    start_break
+    render :text => get_break_time.to_json
   end
 
   # Extend the current break
   # @return [JSON] Updated break_timer
   def extend_break
-
+    start_break
+    render :text => get_current_time.to_json
   end
 end

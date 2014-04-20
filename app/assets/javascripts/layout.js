@@ -87,7 +87,6 @@ $(document).ready(function(){
             url: "/timers/reset_countdown",
             success: function(result) {
                 clock.setTime(result.setting_time);
-                clock.start();
             }
         });
     });
@@ -113,6 +112,8 @@ $(document).ready(function(){
             url: "/timers/break_countdown",
             success: function(result) {
                 clock.setTime(result.break_time);
+                clock.start();
+                $('#clock').popover('show');
             }
         });
     });

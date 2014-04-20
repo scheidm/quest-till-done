@@ -75,6 +75,11 @@ module TimerHelper
     return current_user.timer.get_state
   end
 
+  # get break default time
+  def get_break_time
+    return {break_time: @config.short_break_duration}
+  end
+
   # extend the current time
   def extend_timer
     if(@user.timer.mode == 'manual')
@@ -89,11 +94,20 @@ module TimerHelper
   # start break duration
   def start_break
     if(@user.timer.mode == 'manual')
-      reset_timer
-      start_timer
-      return get_current_time.merge get_setting_time
-    else
-      return {state: get_timer_state}
+      encounter = current_user.last_encounter
+      if(encounter.nil?)
+        return
+      elsif(encounter.end_time.nil?)
+        encounter.close
+      end
+      encounter = Encounter.new
+      encounter.user_id = current_user.id
+      encounter.break_flag = true
+      encounter.save
+      @timer.current_time = @config.short_break_duration
+      @timer.updated_at = Time.now
+      @timer.save
+      current_user.timer.set_state(true)
     end
   end
 end

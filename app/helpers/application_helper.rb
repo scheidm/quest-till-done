@@ -30,9 +30,9 @@ module ApplicationHelper
       state = false
     end
     #container = content_tag :div, :class => 'btn-group btn-group-sm'
-    play = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-play'), :id => 'startBtn', :class => 'btn btn-success', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Start Encounter"
-    pause = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-pause'), :id => 'stopBtn', :class => 'btn btn-warning', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Pause Encounter"
-    stop = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-stop'), :id => 'resetBtn', :class => 'btn btn-danger', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Reset Encounter"
+    play = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-play'), :id => 'startBtn', :class => 'btn btn-success', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Start countdown"
+    pause = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-pause'), :id => 'stopBtn', :class => 'btn btn-warning', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Pause countdown"
+    stop = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-stop'), :id => 'resetBtn', :class => 'btn btn-danger', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Reset countdown"
     extend = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-plus'), :id => 'extendBtn', :class => 'btn btn-info', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Extend Encounter", :disabled => state
     rest = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-bell'), :id => 'restBtn', :class => 'btn btn-primary', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Take a break", :disabled => state
     arr = [play, pause, stop, extend, rest]
