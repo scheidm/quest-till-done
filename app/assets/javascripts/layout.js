@@ -87,6 +87,32 @@ $(document).ready(function(){
             url: "/timers/reset_countdown",
             success: function(result) {
                 clock.setTime(result.setting_time);
+                clock.start();
+            }
+        });
+    });
+    $('#extendBtn').click(function()
+    {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/timers/extend_countdown",
+            data: "current_time=" + clock.getTime(),
+            success: function(result) {
+                clock.setTime(result.new_time);
+                //clock.start();
+            }
+        });
+    });
+    $('#restBtn').click(function()
+    {
+        clock.stop();
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/timers/break_countdown",
+            success: function(result) {
+                clock.setTime(result.break_time);
             }
         });
     });

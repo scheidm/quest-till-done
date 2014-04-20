@@ -23,4 +23,23 @@ module ApplicationHelper
           #link_to '', '', :class => 'btn btn-success', :'data-placement' => 'bottom', :title => 'No active Quest', 'disabled' => true
       end
   end
+
+  def render_timer_button
+    state = true
+    if(@user.timer.mode == 'manual')
+      state = false
+    end
+    #container = content_tag :div, :class => 'btn-group btn-group-sm'
+    play = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-play'), :id => 'startBtn', :class => 'btn btn-success', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Start Encounter"
+    pause = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-pause'), :id => 'stopBtn', :class => 'btn btn-warning', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Pause Encounter"
+    stop = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-stop'), :id => 'resetBtn', :class => 'btn btn-danger', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Reset Encounter"
+    extend = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-plus'), :id => 'extendBtn', :class => 'btn btn-info', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Extend Encounter", :disabled => state
+    rest = button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-bell'), :id => 'restBtn', :class => 'btn btn-primary', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Take a break", :disabled => state
+    arr = [play, pause, stop, extend, rest]
+    content_tag :div, :class => 'btn-group btn-group-sm' do
+      arr.each do |content|
+        concat content
+      end
+    end
+  end
 end

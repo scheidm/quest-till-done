@@ -36,8 +36,8 @@ module TimerHelper
 
   # get remaining time
   def get_current_time
-    remain_time = current_user.timer.current_time
-    setting_time = current_user.timer.setting_time
+    remain_time = @timer.current_time
+    setting_time = @config.encounter_duration
     encounter = current_user.last_encounter
     state = get_timer_state
     if(!encounter.nil? && state)
@@ -67,15 +67,33 @@ module TimerHelper
 
   # get setting default time
   def get_setting_time
-    setting_time = current_user.timer.setting_time
-    data = {setting_time: setting_time}
-    return data
+    return {setting_time: @config.encounter_duration}
   end
-
-
 
   # get current state of the timer
   def get_timer_state
     return current_user.timer.get_state
+  end
+
+  # extend the current time
+  def extend_timer
+    if(@user.timer.mode == 'manual')
+      current_time = params[:current_time]
+      new_time = current_time.to_i + @user.config.encounter_extend_duration.to_i
+      @timer.current_time = new_time
+      @timer.save
+      return {new_time: new_time}
+    end
+  end
+
+  # start break duration
+  def start_break
+    if(@user.timer.mode == 'manual')
+      reset_timer
+      start_timer
+      return get_current_time.merge get_setting_time
+    else
+      return {state: get_timer_state}
+    end
   end
 end
