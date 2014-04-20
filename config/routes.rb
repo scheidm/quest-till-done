@@ -4,7 +4,7 @@ QuestTillDone::Application.routes.draw do
   resources :users do
     collection do
       get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings'
-      post 'update_config'
+      put 'update_config'
     end
   end
   get 'welcome/index'
