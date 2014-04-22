@@ -1,4 +1,3 @@
-
 class UsersController < ApplicationController
 
   include RoundHelper
@@ -82,10 +81,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    x = 3
-    v = 2
   end
-
+  
+  # Update timer config for the user
+  # @param id [Integer] User config id
+  # @return [Html] User index page
   def update_config
     @user_config = UserConfig.find(params[:id])
     respond_to do |format|
