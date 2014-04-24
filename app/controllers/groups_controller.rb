@@ -44,7 +44,7 @@ class GroupsController < ApplicationController
   def leave
     @group = Group.find(params[:id])
     @group.leave @user
-    redirect_to group_path(@group)
+    redirect_to groups_path
   end
 
   def kick
