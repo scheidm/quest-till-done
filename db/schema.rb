@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20140420065418) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "campaign_id"
+    t.integer  "group_id"
   end
 
   create_table "sessions", force: true do |t|

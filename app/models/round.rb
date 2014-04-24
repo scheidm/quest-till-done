@@ -6,7 +6,7 @@
 class Round < ActiveRecord::Base
   belongs_to :encounter
   belongs_to :campaign
-  delegate :group, to: :campaign
+  belongs_to :group
   self.inheritance_column = nil
 
   def self.create_event(model, operation, campaign)
@@ -18,6 +18,7 @@ class Round < ActiveRecord::Base
       model.reload
     end
     round.campaign_id = campaign.id
+    round.group=campaign.group
     round.event_id = model.id
     round.type = model.class.name.demodulize
     round.event_description = operation.gsub("_"," ")
