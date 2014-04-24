@@ -50,7 +50,7 @@ QuestTillDone::Application.routes.draw do
 
   resources :groups do
     collection do
-      get 'getTree', 'get_timeline', 'timeline'
+      get 'promote', 'timeline', 'demote'
     end
   end
 

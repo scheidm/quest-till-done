@@ -18,8 +18,9 @@
                 = render_role(@group, user)
               %td
                 = render_promote(user.id)
+                = render_demote(user.id)
                 = render_remove(user.id)
-      = will_paginate @group.users.paginate(page: params[:page], per_page: 2)
+      = will_paginate @group.users.paginate(page: params[:page], per_page: 4)
       %br
       = render_add_member
 
@@ -50,14 +51,10 @@
                   = render_quest_count(campaign, 'Closed')
       =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
 
-.col-md-6
+.col-md-12
   .panel.panel-info{:style => 'height:400px'}
     .panel-heading Activity
     .panel-body#treeView{ 'data-id' => @group.id}
-.col-md-6
-  .panel.panel-info{:style => 'height:400px'}
-    .panel-heading Metrics
-    .panel-body
 
 #add-member-modal.modal.fade
   .modal-dialog

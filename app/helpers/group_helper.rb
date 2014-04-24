@@ -4,7 +4,9 @@ module GroupHelper
       if @user.id==user_id
         link_to 'Leave', {:action => :leave, :id => @group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove member from group'
       else
-        link_to 'Remove', {:action => :kick, :id => @group.id, :user_id => user_id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove member from group'
+        unless @group.admins.include? User.find(user_id)
+          link_to 'Remove', {:action => :kick, :id => @group.id, :user_id => user_id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove member from group'
+        end
       end
     end
   end
@@ -13,10 +15,14 @@ module GroupHelper
     target = User.find(user_id)
     if @group.admins.include? @user
       if !(@group.admins.include? target)
-        link_to 'Promote', "#", :remote => true, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Remove member from group'
-      else
-        link_to 'Promote', "#", :remote => true, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Remove member from group', 'disabled' => true
+        link_to 'Promote', {:action => :promote, :id => @group.id, :user_id => user_id}, :class => 'btn btn-default', :'data-placement' => 'bottom', :title => 'Promote member to admin'
       end
+    end
+  end
+
+  def render_demote(user_id)
+    if @user.id==user_id&&@group.admins.include?(@user)
+      link_to 'Demote', {:action => :demote, :id => @group.id, :user_id => user_id}, :class => 'btn btn-default', :'data-placement' => 'bottom', :title => 'Promote member to admin'
     end
   end
 

@@ -52,8 +52,28 @@ class GroupsController < ApplicationController
   def kick
     @group = Group.find(params[:id])
     @target = User.find(params[:user_id])
-    @target.remove_group @group
-    redirect_to group_path(@group)
+    @group.leave @target unless @group.admins.include? @target
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>"Removed member #{@target.username}" }}
+    end
+  end
+
+  def promote
+    @group = Group.find(params[:id])
+    @target = User.find(params[:user_id])
+    @target.promote_in_group @group
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>"Promoted member #{@target.username}" }}
+    end
+  end
+
+  def demote
+    @group = Group.find(params[:id])
+    @target = User.find(params[:user_id])
+    @group.demote @target
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>"Demoted member #{@target.username}" }}
+    end
   end
 
   def join
