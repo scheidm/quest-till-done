@@ -2,6 +2,8 @@
 class GroupsController < ApplicationController
   power :crud => :groups
 
+  include JsonGenerator::TimelineModule
+  
   # Display a list of all groups for the current user
   def index
     @member_groups = @user.groups_where_member
@@ -41,8 +43,8 @@ class GroupsController < ApplicationController
 
   def leave
     @group = Group.find(params[:id])
-    @group.leave
-    redirect_to group_path(@group)
+    @group.leave @user
+    redirect_to groups_path
   end
 
   def kick
@@ -69,6 +71,11 @@ class GroupsController < ApplicationController
 
   def accept_user
     #NOTIFICATION NEEDED
+  end
+
+  def timeline
+    @group = Group.find(params[:id])
+    render :text => generateTimeline(@group.rounds.limit(100))
   end
 
   private
