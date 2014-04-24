@@ -85,7 +85,7 @@ module JsonGenerator
       end
       data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
       data[:children] = children = []
-      campaign.quests.each {|quest|
+      campaign.child_quests.each {|quest|
         children << generateChildTree(quest)
       }
 
@@ -110,11 +110,11 @@ module JsonGenerator
     def generateChildTree(quest)
 
       data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
-      if(quest.quests.size == 0)
+      if(quest.child_quests.size == 0)
          return data
       else
         data[:children] = children = []
-        quest.quests.each {|quest|
+        quest.child_quests.each {|quest|
           children << generateChildTree(quest)
         }
       end
