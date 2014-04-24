@@ -57,12 +57,12 @@ class UsersController < ApplicationController
   def github_list
     login
     list_projects
-    @projects = GithubRepo.where(user_id: @user)
+    @projects = GithubRepo.where("group_id=?", @user.wrapper_group)
   end
 
   def github_project_import
     login
-    initial_import params[:github_user], params[:repo_name]
+    initial_import params[:github_user], params[:repo_name] , nil
   end
 
   def github_project_del
