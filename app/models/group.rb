@@ -9,14 +9,14 @@ class Group < ActiveRecord::Base
   # admin, the function will automatically promote the oldest member to group
   # admin before leaving. If the user is the last member in the group, the
   # function will delete the group and associated campaigns from the database
-  def leave
-    if self.admins.include? @user
+  def leave user
+    if self.admins.include? user
       if self.admins.length==1
-        users=self.users-[@user]
+        users=self.users-[user]
         self.admins.push users.first
       end
-      self.admins.destroy @user
+      self.admins.destroy user
     end
-    self.users.destroy @user
+    self.users.destroy user
   end
 end
