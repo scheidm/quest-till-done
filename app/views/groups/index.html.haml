@@ -37,18 +37,6 @@
             %td
               = link_to 'Leave', {:action => :leave, :id => group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Leave group'
 
-%h4 Admin Group
-%table{:class => "table table-hover"}
-  %thead
-    %tr
-      %th Name
-      %th Created At
-  %tbody
-    - @admin_groups.each do |group|
-      %tr
-        %td
-          =link_to group.name, "/groups/#{group.id}/" 
-        %td= group.created_at
 %br
 %br
 = link_to 'New Group', new_group_path, :class=> 'btn btn-primary'
