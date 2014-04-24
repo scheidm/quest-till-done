@@ -1,3 +1,4 @@
+require 'test_helper'
 require 'test/unit'
 require 'timer_helper'
 
