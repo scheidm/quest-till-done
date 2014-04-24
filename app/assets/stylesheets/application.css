@@ -14,6 +14,7 @@
  *= require flipclock
  *= require_tree .
  *= require jasny-bootstrap
+ *= require bootstrap-switch
  */
 
 /*@media (min-width: 1200px) {*/

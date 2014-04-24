@@ -21,6 +21,7 @@ class Encounter < ActiveRecord::Base
 
   def before_save
     @is_new_record = new_record?
+    self.break_flag ||= false
     return true
   end
   # Clean empty encounter
