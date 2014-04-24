@@ -5,6 +5,9 @@ include Devise::TestHelpers
 class SearchesControllerTest < ActionController::TestCase
 
   def setup
+    Record.reindex
+    Quest.reindex
+    Campaign.reindex
     sign_in User.first
   end
 

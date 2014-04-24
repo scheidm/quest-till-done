@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'test_helper'
 
 class GithubHelperTest < ActionView::TestCase
   include GithubHelper

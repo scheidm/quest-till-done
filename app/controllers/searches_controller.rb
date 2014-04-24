@@ -45,19 +45,19 @@ class SearchesController < ApplicationController
 
   def get_search_result(model, query)
     if model.nil?
-      quests = Quest.search(query, where: { :user_id => current_user.id})
-      recs = Record.search(query, where: { :user_id => current_user.id})
+      quests = Quest.search(query, where: { :group_id => @user.wrapper_group.id})
+      recs = Record.search(query, where: { :group_id => @user.wrapper_group.id})
       results = quests.results + recs.results
       @type = 'All'
     elsif (model == Record || Record.child_classes.include?(model))
-      results = model.search(query, where: { :user_id => current_user.id}).results
+      results = model.search(query, where: { :group_id => @user.wrapper_group.id}).results
       @type = 'Record'
       @record_type = (model == Record)? 'All': model.to_s
     elsif model == Campaign
-      results = Campaign.search(query, where: { :user_id => current_user.id}).results
+      results = Campaign.search(query, where: { :group_id => @user.wrapper_group.id}).results
       @type = 'Campaign'
     elsif model == Quest
-      results = Quest.search(query, where: { :user_id => current_user.id, :campaign_id => {:not =>nil} }).results
+      results = Quest.search(query, where: { :group_id => @user.wrapper_group.id, :campaign_id => {:not =>nil} }).results
       @type = 'Quest'
     else
       results = []
