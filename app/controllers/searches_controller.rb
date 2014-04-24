@@ -21,8 +21,8 @@ class SearchesController < ApplicationController
 
   # auto complete search for record, quest and campaign
   def all_autocomplete
-    quests = Quest.search(params[:query], where: { :user_id => current_user.id})
-    recs = Record.search(params[:query], where: { :user_id => current_user.id})
+    quests = Quest.search(params[:query], where: { :group_id => @user.wrapper_group.id})
+    recs = Record.search(params[:query], where: { :group_id => @user.wrapper_group.id})
     render json: search_json(quests.results + recs.results)
   end
 

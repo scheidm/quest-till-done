@@ -12,7 +12,7 @@ class CampaignsController < ApplicationController
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
   def index
-    @campaigns = current_power.campaigns
+    @campaigns = @user.campaigns
   end
 
   # Show the detail of a campaign
@@ -30,6 +30,7 @@ class CampaignsController < ApplicationController
   # @return [Html] New campaign page
   def new
     @campaign = Campaign.new()
+    @campaign.group_id=params[:group_id]||@user.wrapper_group.id
   end
 
   # Get Json for generating tree view
@@ -46,11 +47,6 @@ class CampaignsController < ApplicationController
   # @return [Html] redirect back to the new campaign page
   def create
     @campaign = Campaign.new(campaign_params)
-    if params[:group_id]
-      @campaign.group_id = params[:group_id]
-    else
-      @campaign.group_id = @user.wrapper_group.id
-    end
 
     respond_to do |format|
       if @campaign.save
@@ -112,8 +108,8 @@ class CampaignsController < ApplicationController
   # @param campaign [Campaign] Campaign
   # @return [JSON] JSON of the timeline details
   def get_campaign_timeline
-    @encounters = Encounter.where(:user_id => @user.id)
-    render :text => generateTree(@encounters, params[:id])
+    @campaign = Campaign.friendly.find(params[:id])
+    render :text => generateTree(@campaign.rounds.limit(100), params[:id])
   end
 
   # Import a QTD specific format Campaign to generate a campaign
@@ -142,6 +138,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name)
+    params.require(:campaign).permit(:description, :name, :group_id)
   end
 end
