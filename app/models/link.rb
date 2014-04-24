@@ -1,4 +1,4 @@
-# A record that represents a web reference, the path field holding the url of
+# A record that will represent a web reference. The path field will hold the url of
 # the website in question
 class Link < Record
   # has_many :quotes, dependent: :destroy

@@ -6,10 +6,14 @@ class Campaign < Quest
   has_many :rounds
   scope :search_import, -> { includes(:records, :quests) }
 
+  #Will generate a float value representing the completion percentage of the
+  #given campaign, for display on the campaign show page.
   def progress
     Float(self.quests.where('status = (?)',"Closed").count)/Float(self.quests.count)*100 
   end
 
+  #Will define additional relational data for the purpose of deep searching, as
+  #specified through the searchkick gem
   def search_data
     attributes.merge(
       records: self.records.map(&:description),
@@ -19,15 +23,8 @@ class Campaign < Quest
     )
   end
 
-  # Generates a paginated collection encounters for the campaign
-  # @param end_time [datetime] last time included in list of encounters
-  # end_time defaults to the current time.
-  # @return [collection] first page of encounters preceeding end_time
-  # 
-  def timeline( end_time=Time.now )
-    Encounter.where('id in (?)',self.rounds.pluck(:encounter_id))
-  end
-
+  #Will define the link generated in the timeline when interacting with this
+  #model.
   def to_link
     '/campaigns/' + self.id.to_s
   end

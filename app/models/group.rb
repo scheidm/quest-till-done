@@ -5,7 +5,7 @@ class Group < ActiveRecord::Base
   has_many :rounds, through: :campaigns
   has_and_belongs_to_many :users
   has_and_belongs_to_many :admins, class_name: "User", join_table: "admins_groups"
-  # Leave the group while preventing orphan groups. If the user is the last
+  # Will leave the group while preventing orphan groups. If the user is the last
   # admin, the function will automatically promote the oldest member to group
   # admin before leaving. If the user is the last member in the group, the
   # function will delete the group and associated campaigns from the database

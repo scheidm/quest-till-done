@@ -23,7 +23,9 @@ class Quest < ActiveRecord::Base
   belongs_to :group
   before_save :set_status
 
-
+  
+  #Will define additional relational data for the purpose of deep searching, as
+  #specified through the searchkick gem
   def search_data
     attributes.merge(
       records: self.records.map(&:description),
@@ -33,14 +35,17 @@ class Quest < ActiveRecord::Base
     )
   end
 
+  #Will report whether this quest is also a campaign
   def campaign?
     self.type=="Campaign"
   end
 
+  #Will report whether this quest is also a campaign
   def get_campaign
     return self.campaign || self
   end
 
+  #Will generate a list of campaigns related to quests found for the given query
   def self.meta_search query
     quests=Quest.search(query).results.map(&:campaign_id)
     Campaign.where('id in (?)',quests)
@@ -50,14 +55,20 @@ class Quest < ActiveRecord::Base
     self.name
   end
 
+  #Will define the link generated in the timeline when interacting with this
+  #model.
   def to_link
     '/quests/' + self.id.to_s
   end
 
+  #Will ensure that a new quest has a status
   def set_status
     self.status = 'Open' if self.status.nil?
   end
 
+
+  #Will report whether the provided quest is an ancestor of the current quest
+  #@param quest [Quest] 
   def is_ancestor(quest)
     if(quest.parent != nil)
       if(self == quest.parent)
@@ -68,6 +79,4 @@ class Quest < ActiveRecord::Base
     end
     return false
   end
-
-
 end

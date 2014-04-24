@@ -1,4 +1,4 @@
-# A record that contains a simple text note
+# A record that will contain a simple text note
 class Note < Record
   # Validate presence of description, disallow null
   validates_presence_of :description, :allow_blank => false

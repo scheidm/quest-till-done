@@ -12,18 +12,19 @@ class Encounter < ActiveRecord::Base
   before_save :before_save
   after_save :clean
 
-  # Set the end time for the encounter when called, using the current time on
-  # the server as the end point
+  # Will set the end time for the encounter when called, using the current time on
+  # the server as the end point.
   def close
     self.end_time = Time.now.utc if self.end_time.nil?
     save
   end
 
+  #Will allow the determination of whether the encounter is empty or not. 
   def before_save
     @is_new_record = new_record?
     return true
   end
-  # Clean empty encounter
+  # Will remove encounter if empty of data
   def clean
     if(@is_new_record == false && self.rounds.size == 0 && self.records.size == 0)
       destroy

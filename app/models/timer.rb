@@ -5,7 +5,7 @@ class Timer < ActiveRecord::Base
   # Initialize default value before creation
   before_create :init
 
-  # Set default value for each value in the setting table
+  # Will set default value for each value in the setting table
   def init
     self.current_time ||= 1800
     self.setting_time ||= 1800
@@ -14,13 +14,13 @@ class Timer < ActiveRecord::Base
     self.mode ||= 'auto'
   end
 
-  # set the current state
+  #Will set the current state of the timer
   def set_state(state)
     self.state = state
     self.save
   end
 
-  # get the current state
+  #Will return the current state of the timer
   def get_state
     return self.state == 't' || self.state == true
   end
