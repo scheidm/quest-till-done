@@ -22,12 +22,7 @@ class UsersController < ApplicationController
   def index
     @recent_activities = Round.all.order(id: :desc).limit(10)
   end
-  def getFriends
-    @friends = @user.getFriends
-  end
-  def getGroups
-    @groups = @user.getGroups
-  end
+
   # define avatar by default value
   # @return [Binary] image file
   def show_avatar
