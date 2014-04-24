@@ -3,7 +3,8 @@ module JsonGenerator
   # Module for Encounter
   module EncounterModule
     include ActionView::Helpers::DateHelper
-    # Generate a tree JSON for a user's encounter
+    # Will generate a tree JSON for a user's encounter
+    # This will allow a proper timeline display
     # @param user [User] User to generate encounter JSON for
     # @return [JSON] JSON formatted data
     def generateTree(rounds, campaign_id)
@@ -18,7 +19,8 @@ module JsonGenerator
 
   # Module for Quest and Campaigns
   module QuestModule
-    # Generate a Campaign tree JSON for a campaign
+    # Will generate a Campaign tree JSON for a campaign
+    # This will allow a proper timeline display
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
     def generateCampaignTree (campaign)
@@ -34,7 +36,8 @@ module JsonGenerator
       return data.to_json
     end
 
-    # Generate a Quest tree JSON for a quest
+    # Will generate a Quest tree JSON for a quest
+    # This will allow a proper timeline display
     # @param quest [Quest] Quest to generate JSON
     # @return [JSON] JSON formatted tree data
     def generateQuestTree (quest)
@@ -46,7 +49,7 @@ module JsonGenerator
       return data.to_json
     end
 
-    # Recursive function to generate json for all quest underneath a quest
+    # Will recursively generate json for all quests underneath the specified quest
     # @param quest [Quest] Quest to generate JSON
     # @return [JSON] JSON formatted tree data
     def generateChildTree(quest)

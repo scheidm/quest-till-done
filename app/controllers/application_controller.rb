@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     Power.new(@user)
   end
 
-  # Once a user is signed in, the application uses this to ensure that the
+  # Once a user is signed in, the application will use this to ensure that the
   # header displays the correct information for the active task of the current
   # user
   def load_user
@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Limits parameters to those valid for devise user control, to prevent
+  # Will limit parameters to those valid for devise user control, to prevent
   # parameter injection from influencing the security of the site
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
-  # Ensures that password timeouts are followed up with prompts for logging back
+  # Will ensure that password timeouts are followed up with prompts for logging back
   # into the program
   def check_password_expiration
     # check inactive mins
@@ -58,11 +58,16 @@ class ApplicationController < ActionController::Base
   end
 
 
-
+  # Will generate JSON results for a record search for use in generating
+  # autocomplete forms
   def record_autocomplete
     render json:  Record.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
   end
 
+  # Will generate aggregate search results from recor and quest searches
+  # against a specified query
+  # @param query [String] search string specified in SQL-like format specified
+  # by the Searchkick gem
   def full_search query
     recs=Records.search query
     quests=Quest.search query
