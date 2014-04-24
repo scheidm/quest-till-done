@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140420065418) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins_groups", id: false, force: true do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -61,7 +64,8 @@ ActiveRecord::Schema.define(version: 20140420065418) do
   end
 
   create_table "github_repos", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "assigned_user"
     t.string   "github_user"
     t.string   "project_name"
     t.string   "url"
@@ -148,7 +152,7 @@ ActiveRecord::Schema.define(version: 20140420065418) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "campaign_id"
-    t.integer  "group_id"
+    t.string   "group_id"
   end
 
   create_table "sessions", force: true do |t|
