@@ -44,7 +44,9 @@ class GroupsController < ApplicationController
   def leave
     @group = Group.find(params[:id])
     @group.leave @user
-    redirect_to groups_path
+    respond_to do |format|
+      format.html { redirect_to groups_path, :flash => { :success =>"Left group #{@group.name}" }}
+    end
   end
 
   def kick
