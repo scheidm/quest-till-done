@@ -2,6 +2,8 @@
 class GroupsController < ApplicationController
   power :crud => :groups
 
+  include JsonGenerator::TimelineModule
+  
   # Display a list of all groups for the current user
   def index
     @member_groups = @user.groups_where_member

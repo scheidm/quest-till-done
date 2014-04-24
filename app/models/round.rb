@@ -6,7 +6,7 @@
 class Round < ActiveRecord::Base
   belongs_to :encounter
   belongs_to :campaign
-  delegate :group, to: :campaign
+  belongs_to :group
   self.inheritance_column = nil
 
   def self.create_event(model, operation, campaign)
