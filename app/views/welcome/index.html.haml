@@ -155,9 +155,14 @@
           $(this).siblings(".popover").on("mouseleave", function() {
             $(_this).popover('hide');
           });
+          var thisPopover = "#td-popover-" + d.id;
+          $(thisPopover).parent().parent().mouseleave(function() {
+            $(_this).popover('hide');
+          });
         }).on("mouseleave", function() {
           var _this = this;
           setTimeout(function() {
+            var thisPopover = "#td-popover-" + d.id;
             if (!$(".popover:hover").length) {
               $(_this).popover("hide")
             }
@@ -167,8 +172,8 @@
 
   function renderQuestDetail2(d) {
       var css = d.attr.status.toString().trim().replace(/ /g,'');
-      var html = "Description: " + d.attr.status + "</br>" +
-                 "Status: <span class='label label-"+ css+"'>"+ d.attr.status +"</span>"
+      var html = "<div id='td-popover-" + d.id + "'>Description: " + d.attr.status + "</br>" +
+                 "Status: <span class='label label-"+ css+"'>"+ d.attr.status +"</span></div>";
       return html;
   }
 
