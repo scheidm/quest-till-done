@@ -93,7 +93,7 @@ module JsonGenerator
       data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
       data[:children] = children = []
       campaign.quests.each {|quest|
-        children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/campaigns/' + quest.id.to_s, :status => quest.status}}
+        children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
       }
       return data
     end
