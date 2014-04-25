@@ -110,9 +110,21 @@
             .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
             .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
             .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+
+        $('#tower-defense .popover').remove();
+        setTimeout(function(){
+                    var nodes = svg.selectAll("circle");
+                    nodes.on('mouseout', function(d){
+                       if(d.id != 0)
+                        renderDetailBox2(this, d);
+                    });
+                }
+                , duration + 100);
       }
 
       function zoomTo(v) {
+
+
         var k = diameter / v[2]; view = v;
         node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
         circle.attr("r", function(d) { return d.r * k; });
@@ -120,5 +132,31 @@
     //});
 
     d3.select(self.frameElement).style("height", diameter + "px");
+    var nodes = svg.selectAll("circle");
+    nodes.each(function(d) {
+        if(d.id != 0)
+          renderDetailBox2(this, d);
+    });
+  }
+
+  function renderDetailBox2(svg, d)
+  {
+      var placement = d.children ? "left" : "right";
+      $(svg).popover('destroy');
+      $(svg).popover({
+          'trigger': 'hover',
+          'html': true,
+          'title': '<a href='+ d.attr.url +'>'+d.attr.name + '</a>',
+          'content': renderQuestDetail2(d),
+          'placement': placement,
+          'container': '#tower-defense'
+      });
+  }
+
+  function renderQuestDetail2(d) {
+      var css = d.attr.status.toString().trim().replace(/ /g,'');
+      var html = "Description: " + d.attr.status + "</br>" +
+                 "Status: <span class='label label-"+ css+"'>"+ d.attr.status +"</span>"
+      return html;
   }
 
