@@ -69,7 +69,7 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def modify
-    @record= Record.friendly.find { params[:record_id]}
+    @record= Record.find(params[:record_id])
   end
 
   # Define allowed parameter for a record model
