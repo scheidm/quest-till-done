@@ -36,6 +36,7 @@ class RecordsController < ApplicationController
     @record.quest = Quest.find(@record.quest_id)
     @record.created_at = DateTime.now
     @record.group_id = @user.wrapper_group.id
+    @record.tag_list.add(params[:tag_list])
 
     respond_to do |format|
       if @record.save
@@ -70,7 +71,7 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :tag_list)
   end
 
   def quest_autocomplete
