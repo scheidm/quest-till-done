@@ -1,6 +1,12 @@
 # Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
 
+  has_attached_file :code,
+                    :path => ":rails_root/uploads/:class/:id/:basename.:extension",
+                    :url => "/sources/:id/download"
+
+  validates_attachment_content_type :code, :content_type => ["image/jpg", "image/jpeg", "image/png", "application/zip", "application/x-zip", "application/x-zip-compressed", "application/pdf", "application/x-pdf"]
+
 
   searchkick
   extend FriendlyId

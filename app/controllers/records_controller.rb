@@ -70,11 +70,16 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :code)
   end
 
   def quest_autocomplete
     render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
+  end
+
+  def download
+    @record = Record.find(params[:id])
+    send_file @record.code.path, :type => @record.code_content_type, :disposition => 'inline'
   end
 
 
