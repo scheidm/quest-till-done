@@ -14,9 +14,12 @@ QuestTillDone::Application.routes.draw do
       post 'setState'
     end
   end
+
   resources :records do
     get :autocomplete_quest_name, :on => :collection
+    get 'modify'
   end
+
   resources :timers do
     collection do
       get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown', 'extend_countdown', 'break_countdown'

@@ -1,21 +1,21 @@
-%h2 Notes Based off Encounter
-%table{:class => "table table-hover"}
-  %thead
-    %tr
-      %th Description
-      %th Date
-      %th Encounter
-      %th Type
-
-  %tbody
-    - @records.group_by{ |m| m.encounter_id }.each do |record|
-      %tr
-        - record[1].each_index do |s|
-          %tr
-          %td=record[1][s].description
-          %td{:rowspan => record.size}=record[1][s].created_at
-          %td=record[1][s].type
-        %th{:rowspan => record.size}=record[0]
+-#%h2 Notes Based off Encounter
+-#%table{:class => "table table-hover"}
+-#  %thead
+-#    %tr
+-#      %th Description
+-#      %th Date
+-#      %th Encounter
+-#      %th Type
+-#
+-#  %tbody
+-#    - @records.group_by{ |m| m.encounter_id }.each do |record|
+-#      %tr
+-#        - record[1].each_index do |s|
+-#          %tr
+-#          %td=record[1][s].description
+-#          %td{:rowspan => record.size}=record[1][s].created_at
+-#          %td=record[1][s].type
+-#        %th{:rowspan => record.size}=record[0]
 
 
 
@@ -25,23 +25,34 @@
     %th Date
     %th Description
     %th Encounter
+    %th Modify
+    %th Delete
 
-  %tbody
 
-  - @records.group_by{ |m| m.created_at.strftime("%Y-%d-%m") }.each do |date|
+  - @records.group_by{ |m| m.created_at.strftime("%Y-%d-%m") }.each do |date, record|
     %tr
-      %td=date[0]
+      %td{:rowspan => record.size + 1  }
+        = date
       %td
-        - date[1].each do |record|
-          %ul
-            %li=record.description
+        =record.first.description
       %td
-        - date[1].each do |record|
-          %ul
-            %li=record.encounter_id
+        =record.first.encounter_id
+      %td
+        =link_to " Modify ", record_modify_path(record.first.id)
+      %td
+        = button_to " x ", {:controller => :records,
+                             :action => 'destroy', :id => record.first.id }, :method => :delete
+    -record.each do |t|
 
-
-
+      %tr
+        %td
+          =t.description
+        %td
+          =t.encounter_id
+        %td
+          =link_to " Modify ",  record_modify_path(t.id)
+        %td
+          = button_to " x ", {:controller => :records, :action => 'destroy', :id => t.id }, :method => :delete
 
 
 = link_to 'New record', new_record_path
