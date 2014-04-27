@@ -76,6 +76,28 @@ module JsonGenerator
 
   # Module for Quest and Campaigns
   module QuestModule
+    # Generate a JSON for all campaigns
+    # @param campaign [Campaign] Campaign to generate JSON for
+    # @return [JSON] JSON formatted tree data
+    def generateTDJSON(user)
+      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#'}}
+      data[:children] = children = []
+      user.campaigns.each {|campaigns|
+        children << generateTDQuestJSON(campaigns)
+      }
+
+      return data.to_json
+    end
+
+    def generateTDQuestJSON(campaign)
+      data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
+      data[:children] = children = []
+      campaign.quests.each {|quest|
+        children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
+      }
+      return data
+    end
+
     # Generate a Campaign tree JSON for a campaign
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
@@ -85,7 +107,7 @@ module JsonGenerator
       end
       data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
       data[:children] = children = []
-      campaign.quests.each {|quest|
+      campaign.child_quests.each {|quest|
         children << generateChildTree(quest)
       }
 
@@ -110,11 +132,11 @@ module JsonGenerator
     def generateChildTree(quest)
 
       data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
-      if(quest.quests.size == 0)
+      if(quest.child_quests.size == 0)
          return data
       else
         data[:children] = children = []
-        quest.quests.each {|quest|
+        quest.child_quests.each {|quest|
           children << generateChildTree(quest)
         }
       end

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  require 'json_generator'
+  include JsonGenerator::QuestModule
   include RoundHelper
   include GithubHelper
 
@@ -109,6 +111,11 @@ class UsersController < ApplicationController
 
   handle_asynchronously :github_background_jobs
 
+
+
+  def get_td_json
+    render :text => generateTDJSON(@user)
+  end
 
 
 end

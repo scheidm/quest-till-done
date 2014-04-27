@@ -69,5 +69,14 @@ class Quest < ActiveRecord::Base
     return false
   end
 
+  def descendants
+    children = []
+    self.child_quests.each do |cq|
+      children.concat cq.descendants
+      children.push cq
+    end
+    return children
+  end
+
 
 end
