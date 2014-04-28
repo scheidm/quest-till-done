@@ -95,3 +95,8 @@ gem 'rack-mini-profiler'
 gem 'consul'
 # jquery ui
 gem 'jquery-ui-rails'
+
+
+#attachment
+gem 'paperclip'
+

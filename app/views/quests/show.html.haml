@@ -64,11 +64,24 @@
             = note.created_at.strftime("%m/%d/%Y %I:%M%p")
           %p.list-group-item-text
             = note.description
-#accordion.panel-group
   .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseLink"}
+        %a{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseImage"}
+          Images
+    #collapseImage.panel-collapse.collapse
+      %ul.list-group
+      - @quest.images.each do |image|
+        %a.list-group-item
+          %h4.list-group-item-heading
+            = image.created_at.strftime("%m/%d/%Y %I:%M%p")
+          %p.list-group-item-text{href: image.code.url}
+            = image.description
+          %p.list-group-item-text{href: image.code.url}= image.code.url
+  .panel.panel-default.panel-primary
+    .panel-heading
+      %h4.panel-title
+        %a{"data-parent" => "#accordion3", "data-toggle" => "collapse", href: "#collapseLink"}
           Links
     #collapseLink.panel-collapse.collapse
       %ul.list-group
@@ -80,22 +93,6 @@
             = link.description
           %p.list-group-item-text{href: link.url}= link.url
 
-#accordion.panel-group
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseCommit"}
-          Commits
-    #collapseLink.panel-collapse.collapse
-      %ul.list-group
-      -#  TODO Broken with commits from quest
-      -#- @quest.commits.each do |commit|
-      -#  %a.list-group-item
-      -#    %h4.list-group-item-heading
-      -#      = commit.created_at.strftime("%m/%d/%Y %I:%M%p")
-      -#    %p.list-group-item-text{href: commit.url}
-      -#      = commit.description
-      -#    %p.list-group-item-text{href: commit.url}= commit.url
 
 #tree-container{data: {quest_id: @quest.id} }
 

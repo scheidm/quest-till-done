@@ -3,11 +3,12 @@ QuestTillDone::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'qtdregistrations' }
   resources :users do
     collection do
-      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings'
+      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings', 'get_td_json'
       put 'update_config'
     end
   end
   get 'welcome/index'
+
   resources :encounters do
     collection do
       get 'get_user_timeline'
@@ -18,6 +19,7 @@ QuestTillDone::Application.routes.draw do
   resources :records do
     get :autocomplete_quest_name, :on => :collection
     get 'modify'
+    get 'download', on: :member
   end
 
   resources :timers do

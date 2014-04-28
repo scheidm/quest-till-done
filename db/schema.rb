@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140420065418) do
+ActiveRecord::Schema.define(version: 20140426022401) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "admins_groups", id: false, force: true do |t|
     t.integer "group_id"
@@ -61,7 +64,8 @@ ActiveRecord::Schema.define(version: 20140420065418) do
   end
 
   create_table "github_repos", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "assigned_user"
     t.string   "github_user"
     t.string   "project_name"
     t.string   "url"
@@ -136,6 +140,10 @@ ActiveRecord::Schema.define(version: 20140420065418) do
     t.text     "sha"
     t.integer  "group_id"
     t.string   "slug"
+    t.string   "code_file_name"
+    t.string   "code_content_type"
+    t.integer  "code_file_size"
+    t.datetime "code_updated_at"
   end
 
   add_index "records", ["slug"], name: "index_records_on_slug", using: :btree
@@ -148,7 +156,7 @@ ActiveRecord::Schema.define(version: 20140420065418) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "campaign_id"
-    t.integer  "group_id"
+    t.string   "group_id"
   end
 
   create_table "sessions", force: true do |t|

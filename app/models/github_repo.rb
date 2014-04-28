@@ -1,5 +1,5 @@
 class GithubRepo < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :group
 
   def to_link
     return '#'

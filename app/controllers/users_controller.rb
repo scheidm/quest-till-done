@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  require 'json_generator'
+  include JsonGenerator::QuestModule
   include RoundHelper
   include GithubHelper
 
@@ -22,12 +24,7 @@ class UsersController < ApplicationController
   def index
     @recent_activities = Round.all.order(id: :desc).limit(10)
   end
-  def getFriends
-    @friends = @user.getFriends
-  end
-  def getGroups
-    @groups = @user.getGroups
-  end
+
   # define avatar by default value
   # @return [Binary] image file
   def show_avatar
@@ -62,12 +59,12 @@ class UsersController < ApplicationController
   def github_list
     login
     list_projects
-    @projects = GithubRepo.where(user_id: @user)
+    @projects = GithubRepo.where("group_id=?", @user.wrapper_group)
   end
 
   def github_project_import
     login
-    initial_import params[:github_user], params[:repo_name]
+    initial_import params[:github_user], params[:repo_name] , nil
   end
 
   def github_project_del
@@ -114,6 +111,11 @@ class UsersController < ApplicationController
 
   handle_asynchronously :github_background_jobs
 
+
+
+  def get_td_json
+    render :text => generateTDJSON(@user)
+  end
 
 
 end

@@ -16,7 +16,7 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] Record detail page with the id
   def show
-    @record = Record.friendly.find(params[:id])
+    @record = Record.find(params[:id])
   end
 
   # Create new record for a quest
@@ -36,16 +36,23 @@ class RecordsController < ApplicationController
     @record.quest = Quest.find(@record.quest_id)
     @record.created_at = DateTime.now
     @record.group_id = @user.wrapper_group.id
-
+    @record.assign_encounter @user
+    if @record.save
+      create_round(@record, action_name, @record.quest.get_campaign)
+      success=true
+    else
+      Rails.logger.warn "HOLY THE CRAP WE GOT THESE ERRORS!!!!!11!!!11!!!!!!!1111!11"
+      Rails.logger.warn @record.errors.
+      success=false
+    end
     respond_to do |format|
-      if @record.save
-        create_round(@record, action_name, @record.quest.get_campaign)
-        @record.assign_encounter @user
+      if success
         format.html { redirect_to :back, notice: 'Record was successfully created.'}
       else
-        format.html { render action: 'new'}
+        format.html { redirect_to :back, notice: 'Error! Record not created!'}
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
+
     end
 
     @quest = Quest.find(@record.quest_id)
@@ -59,7 +66,7 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def destroy
-    @record= Record.friendly.find { params[:id]}.destroy
+    @record= Record.find { params[:id]}.destroy
     respond_to do |format|
       format.html { redirect_to :records, notice: 'Record was successfully deleted.'}
     end
@@ -77,11 +84,16 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :code)
   end
 
   def quest_autocomplete
     render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
+  end
+
+  def download
+    @record = Record.find(params[:id])
+    send_file @record.code.path, :type => @record.code_content_type, :disposition => 'inline'
   end
 
 
