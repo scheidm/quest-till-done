@@ -17,6 +17,7 @@ QuestTillDone::Application.routes.draw do
   end
   resources :records do
     get :autocomplete_quest_name, :on => :collection
+    get 'download', on: :member
   end
   resources :timers do
     collection do

@@ -3,14 +3,15 @@ class Record < ActiveRecord::Base
 
   has_attached_file :code,
                     :path => ":rails_root/uploads/:class/:id/:basename.:extension",
-                    :url => "/sources/:id/download"
+                    :url => "/records/:id/download"
+
+
 
   validates_attachment_content_type :code, :content_type => ["image/jpg", "image/jpeg", "image/png", "application/zip", "application/x-zip", "application/x-zip-compressed", "application/pdf", "application/x-pdf"]
 
-
   searchkick
-  extend FriendlyId
-  friendly_id :description, use: [:slugged, :history]
+  # extend FriendlyId
+  # friendly_id :description, use: [:slugged, :history]
 
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
