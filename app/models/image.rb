@@ -4,7 +4,7 @@ class Image < Record
   # Validate presence of description and url
 
 
- # validates_attachment_presence :code
+  validates_attachment_presence :code
 
 
 

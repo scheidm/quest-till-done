@@ -41,15 +41,13 @@ class RecordsController < ApplicationController
       create_round(@record, action_name, @record.quest.get_campaign)
       success=true
     else
-      Rails.logger.warn "HOLY THE CRAP WE GOT THESE ERRORS!!!!!11!!!11!!!!!!!1111!11"
-      Rails.logger.warn @record.errors.
       success=false
     end
     respond_to do |format|
       if success
         format.html { redirect_to :back, notice: 'Record was successfully created.'}
       else
-        format.html { redirect_to :back, notice: 'Error! Record not created!'}
+        format.html { redirect_to :back, notice: "Error! Record not created! Error: #{@record.errors.inspect}" }
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
 
@@ -75,8 +73,8 @@ class RecordsController < ApplicationController
   # Modify record
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
-  def modify
-    @record= Record.find(params[:record_id])
+  def edit
+    @record= Record.find(params[:id])
   end
 
   # Define allowed parameter for a record model
