@@ -80,7 +80,10 @@ class RecordsController < ApplicationController
   def record_params
     params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :tag_list)
   end
-
+  
+  # Will render auto complete for quests
+  # @param query [String] Query to search for auto complete
+  # @return [JSON] Search result in JSON
   def quest_autocomplete
     render json:  Quest.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
   end
