@@ -14,13 +14,15 @@ class Timer < ActiveRecord::Base
     self.mode ||= 'auto'
   end
 
-  #Will set the current state of the timer
+  # Will set the current state of the timer
+  # @param state [Boolean] state to set to for the timer
   def set_state(state)
     self.state = state
     self.save
   end
 
-  #Will return the current state of the timer
+  # Will return the current state of the timer
+  # @return [Boolean] state of the timer, true for enabled
   def get_state
     return self.state == 't' || self.state == true
   end
