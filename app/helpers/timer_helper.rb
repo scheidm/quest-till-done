@@ -14,6 +14,7 @@ module TimerHelper
   end
 
   # Will pause the timer
+  # @param current_time [Integer] Current countdown remaining time in seconds
   def stop_timer
     current_time = params[:current_time]
     @timer.current_time = current_time
@@ -35,6 +36,7 @@ module TimerHelper
   end
 
   # Will get remaining time on the timer
+  # @return [hash] data containing current remaining time and timer mode
   def get_current_time
     remain_time = @timer.current_time
     setting_time = @config.encounter_duration
@@ -55,6 +57,7 @@ module TimerHelper
   end
 
   # Will try to reset time if in auto mode
+  # @return [Hash] Default time for timer and timer mode
   def restart_timer
     if(current_user.timer.mode == 'auto')
       reset_timer
@@ -66,21 +69,25 @@ module TimerHelper
   end
 
   # Will get default time from user configuration settings
+  # @return [Hash] hash containing setting time
   def get_setting_time
     return {setting_time: @config.encounter_duration}
   end
 
   # Will get current state of the timer
+  # @return [Hash] hash containing timer mode
   def get_timer_state
     return current_user.timer.get_state
   end
 
   # Will get the default time for a short break from user configuration
+  # @return [Hash] hash containing short break time
   def get_break_time
     return {break_time: @config.short_break_duration}
   end
 
   # Will extend the current time on the timer
+  # @return [Hash] hash containing extended time
   def extend_timer
     if(@user.timer.mode == 'manual')
       current_time = params[:current_time]
