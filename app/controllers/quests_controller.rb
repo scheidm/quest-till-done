@@ -1,4 +1,3 @@
-# Controller for Quest
 class QuestsController < ApplicationController
 
   require 'json_generator'
@@ -30,7 +29,7 @@ class QuestsController < ApplicationController
     end
   end
 
-  # Will create a new quest
+  # Will allow input for a new quest
   # @return [Html] New quest page
   def new
     @quest = Quest.new()
@@ -41,9 +40,10 @@ class QuestsController < ApplicationController
       parent_quest = Quest.find(parent)
       @quest.campaign_id = parent_quest.campaign_id || parent_quest.id
     end
+    @quest.tag_list.add(params[:tag_list])
   end
 
-  # Save new quest
+  # Will save new quest
   # @param quest_params [quest_params] field input from creation page
   # @return [Html] redirect back to the new quest page
   def create
@@ -78,7 +78,7 @@ class QuestsController < ApplicationController
     @quest = Quest.friendly.find(params[:id])
   end
 
-  # Will update quest changes and save the changes
+  # Will update quest and save the changes
   # @param quest_params [quest_params] field input from creation page
   # @return [Html] redirect back to quest's campaign page
   def update
@@ -152,7 +152,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline, :tag_list)
   end
 
 

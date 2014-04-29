@@ -19,7 +19,7 @@ class RecordsController < ApplicationController
     @record = Record.friendly.find(params[:id])
   end
 
-  # Will create a new record for a quest
+  # Will allow a user to define a new record for a quest
   # @param id [Integer] Record id
   # @return [Html] New record creation page
   def new
@@ -36,6 +36,7 @@ class RecordsController < ApplicationController
     @record.quest = Quest.find(@record.quest_id)
     @record.created_at = DateTime.now
     @record.group_id = @user.wrapper_group.id
+    @record.tag_list.add(params[:tag_list])
 
     respond_to do |format|
       if @record.save
@@ -65,7 +66,7 @@ class RecordsController < ApplicationController
     end
   end
 
-  # Modify record
+  # Will modify a record
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def modify
@@ -77,7 +78,7 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :tag_list)
   end
 
   def quest_autocomplete
