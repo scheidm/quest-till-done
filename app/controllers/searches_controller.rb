@@ -1,8 +1,9 @@
 # Controller for Record
 class SearchesController < ApplicationController
 
-  # Show all search result
-  # @return [Html] All result
+  # Will all search result for the spefied query
+  # @param query [String] SQL like as specified by Searchkick
+  # @return [Html] All results
   def index
     if params.has_key? 'type'
       if(params[:type] != 'All' && is_valid_model(params[:type]))

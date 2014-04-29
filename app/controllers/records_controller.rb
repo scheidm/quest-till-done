@@ -6,20 +6,20 @@ class RecordsController < ApplicationController
   include RoundHelper
   include GithubHelper
 
-  # Show all records belongs to a user
+  # Will show all records belongs to a user
   # @return [Html] All records belong to a user
   def index
     @records = Record.all
   end
 
-  # Show record detail
+  # Will show all details for a record
   # @param id [Integer] record id
-  # @return [Html] Record detail page with the id
+  # @return [Html] Record detail page based on the id
   def show
     @record = Record.friendly.find(params[:id])
   end
 
-  # Create new record for a quest
+  # Will create a new record for a quest
   # @param id [Integer] Record id
   # @return [Html] New record creation page
   def new
@@ -28,7 +28,7 @@ class RecordsController < ApplicationController
     @record.quest = Quest.find(params[:quest_id])
   end
 
-  # Save new record
+  # Will save a new record as specified by the params
   # @param record_params[record_params] field input from creation page
   # @return [Html] redirect back to records index page
   def create
@@ -55,7 +55,7 @@ class RecordsController < ApplicationController
     end
   end
 
-  # Delete record
+  # Will delete the specified record
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def destroy
@@ -72,7 +72,7 @@ class RecordsController < ApplicationController
     @record= Record.find(params[:record_id])
   end
 
-  # Define allowed parameter for a record model
+  # Will restrict parameters to those formally specified
   # @param description [String] Record's description
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
