@@ -22,6 +22,40 @@ $(document).ready(function(){
         }
     });
 
+    $('#timerConfigBtn').popover({
+        html: true,
+        placement: "bottom",
+        container: $(this).attr('id'),
+        trigger: "click",
+        content: function () {
+            return $('#timerPopContent').html();
+        }
+    });
+
+    $(document).on("click", ".mode-toggle", function() {
+        $('.mode-toggle').toggleClass('btn-primary');
+        $('.mode-toggle').toggleClass('btn-default');
+        var mode = $('.mode-toggle.btn-primary').attr('value');
+        $.ajax({
+            type: "POST",
+            url: "/timers/change_mode",
+            data: "mode=" + mode,
+            success: function(result) {
+                if(mode == 'auto')
+                {
+                    $('#extendBtn').prop('disabled', true);
+                    $('#restBtn').prop('disabled', true);
+                }
+                else
+                {
+                    $('#extendBtn').prop('disabled', false);
+                    $('#restBtn').prop('disabled', false);
+                }
+
+            }
+        });
+    });
+
     $('#avatar').popover({
         html: true,
         placement: "bottom",
@@ -87,6 +121,33 @@ $(document).ready(function(){
             url: "/timers/reset_countdown",
             success: function(result) {
                 clock.setTime(result.setting_time);
+            }
+        });
+    });
+    $('#extendBtn').click(function()
+    {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/timers/extend_countdown",
+            data: "current_time=" + clock.getTime(),
+            success: function(result) {
+                clock.setTime(result.new_time);
+                //clock.start();
+            }
+        });
+    });
+    $('#restBtn').click(function()
+    {
+        clock.stop();
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/timers/break_countdown",
+            success: function(result) {
+                clock.setTime(result.break_time);
+                clock.start();
+                $('#clock').popover('show');
             }
         });
     });

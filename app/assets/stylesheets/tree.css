@@ -5,6 +5,11 @@
     fill: #fff;
     stroke: steelblue;
     stroke-width: 1.5px;
+    cursor: pointer;
+}
+
+.node text {
+    font: 12px sans-serif;
 }
 
 .node {

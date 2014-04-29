@@ -6,7 +6,7 @@ first_user_config: {
 
 }
 
-first_user_config: {
+second_user_config: {
   id: 2,
   user_id: 3,
   timezone_name: EST,

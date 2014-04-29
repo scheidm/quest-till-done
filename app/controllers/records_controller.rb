@@ -65,6 +65,13 @@ class RecordsController < ApplicationController
     end
   end
 
+  # Modify record
+  # @param id [Integer] record id
+  # @return [Html] redirect back to record index page
+  def modify
+    @record= Record.find(params[:record_id])
+  end
+
   # Define allowed parameter for a record model
   # @param description [String] Record's description
   # @param encounter_id [Integer] Record's encounter_id

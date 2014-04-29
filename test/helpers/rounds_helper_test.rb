@@ -1,3 +1,4 @@
+require 'test_helper'
 require 'test/unit'
 
 class RoundHelperTest < ActionView::TestCase

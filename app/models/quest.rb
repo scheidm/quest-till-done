@@ -18,7 +18,7 @@ class Quest < ActiveRecord::Base
   # Belongs to a immediate parent quest
   belongs_to :parent, :class_name => 'Quest'
   # A quest could have many immediate children quest
-  has_many :quests, :foreign_key => 'parent_id'
+  has_many :child_quests, :class_name => 'Quest', :foreign_key => 'parent_id'
   # Belongs to a user/owner
   belongs_to :group
   before_save :set_status
@@ -79,4 +79,15 @@ class Quest < ActiveRecord::Base
     end
     return false
   end
+
+  def descendants
+    children = []
+    self.child_quests.each do |cq|
+      children.concat cq.descendants
+      children.push cq
+    end
+    return children
+  end
+
+
 end

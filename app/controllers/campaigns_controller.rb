@@ -3,7 +3,7 @@ class CampaignsController < ApplicationController
 
   require 'json_generator'
   include JsonGenerator::QuestModule
-  include JsonGenerator::EncounterModule
+  include JsonGenerator::TimelineModule
   include RoundHelper
 
   helper_method :campaign_timeline_path
@@ -109,7 +109,7 @@ class CampaignsController < ApplicationController
   # @return [JSON] JSON of the timeline details
   def get_campaign_timeline
     @campaign = Campaign.friendly.find(params[:id])
-    render :text => generateTree(@campaign.rounds.limit(100), params[:id])
+    render :text => generateTimeline(@campaign.rounds.limit(100))
   end
 
   # Will import a QTD specific format Campaign to generate a campaign

@@ -300,6 +300,25 @@ input:-webkit-autofill:focus {
     display: none;
 }
 
+/**************** Button **************************/
+
+.btn-timer-setting {
+    background-color: hsl(0, 0%, 51%) !important;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ededed", endColorstr="#828282");
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#ededed), to(#828282));
+    background-image: -moz-linear-gradient(top, #ededed, #828282);
+    background-image: -ms-linear-gradient(top, #ededed, #828282);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ededed), color-stop(100%, #828282));
+    background-image: -webkit-linear-gradient(top, #ededed, #828282);
+    background-image: -o-linear-gradient(top, #ededed, #828282);
+    background-image: linear-gradient(#ededed, #828282);
+    border-color: #828282 #828282 hsl(0, 0%, 40.5%);
+    color: #333 !important;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.69);
+    -webkit-font-smoothing: antialiased;
+}
+
 /**************** Campaign/Quest Status ***********/
 .label-Open {
     background-color: #428bca;
@@ -327,6 +346,20 @@ input:-webkit-autofill:focus {
 }
 .label-Campaign {
     background-color: #5cb85c;
+}
+
+/************** Priority view ***************/
+.ul-dual-column {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+.ul-dual-column li {
+    display: inline-block;
+    width: 45%;
+    margin: 0;
+    padding: 10px;
+    vertical-align: top; /* In case multi-word categories form two lines */
 }
 
 /************** Loading screen **************/

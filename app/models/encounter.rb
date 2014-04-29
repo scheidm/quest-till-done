@@ -22,6 +22,7 @@ class Encounter < ActiveRecord::Base
   #Will allow the determination of whether the encounter is empty or not. 
   def before_save
     @is_new_record = new_record?
+    self.break_flag ||= false
     return true
   end
   # Will remove encounter if empty of data

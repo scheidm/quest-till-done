@@ -2,6 +2,8 @@
 class GroupsController < ApplicationController
   power :crud => :groups
 
+  include JsonGenerator::TimelineModule
+  
   # Will display a list of all groups for the current user
   def index
     @member_groups = @user.groups_where_member
@@ -46,8 +48,10 @@ class GroupsController < ApplicationController
   # @param id [Integer] The id of the group
   def leave
     @group = Group.find(params[:id])
-    @group.leave
-    redirect_to group_path(@group)
+    @group.leave @user
+    respond_to do |format|
+      format.html { redirect_to groups_path, :flash => { :success =>"Left group #{@group.name}" }}
+    end
   end
 
   # Will remove another user from the group specified, presuming the current
@@ -57,8 +61,28 @@ class GroupsController < ApplicationController
   def kick
     @group = Group.find(params[:id])
     @target = User.find(params[:user_id])
-    @target.remove_group @group
-    redirect_to group_path(@group)
+    @group.leave @target unless @group.admins.include? @target
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>"Removed member #{@target.username}" }}
+    end
+  end
+
+  def promote
+    @group = Group.find(params[:id])
+    @target = User.find(params[:user_id])
+    @target.promote_in_group @group
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>"Promoted member #{@target.username}" }}
+    end
+  end
+
+  def demote
+    @group = Group.find(params[:id])
+    @target = User.find(params[:user_id])
+    @group.demote @target
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash => { :success =>"Demoted member #{@target.username}" }}
+    end
   end
 
   # Will generate a notification for admins of the group. Any admin will then be
@@ -78,6 +102,15 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>'Member added successfully.' }}
     end
+  end
+
+  def accept_user
+    #NOTIFICATION NEEDED
+  end
+
+  def timeline
+    @group = Group.find(params[:id])
+    render :text => generateTimeline(@group.rounds.limit(100))
   end
 
   private

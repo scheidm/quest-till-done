@@ -1,4 +1,3 @@
-
 class UsersController < ApplicationController
 
   include RoundHelper
@@ -50,8 +49,6 @@ class UsersController < ApplicationController
     else
       github_list
     end
-
-
   end
 
   def github_authorize
@@ -84,10 +81,16 @@ class UsersController < ApplicationController
   end
 
   def update
+  end
+  
+  # Update timer config for the user
+  # @param id [Integer] User config id
+  # @return [Html] User index page
+  def update_config
     @user_config = UserConfig.find(params[:id])
     respond_to do |format|
       if @user_config.update(user_config_params)
-        format.html { redirect_to @user, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to users_path, :flash => {:success => 'Timer setting was successfully updated.' }}
         format.json { head :no_content }
       else
         format.html { render user: 'setting' }
