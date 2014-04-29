@@ -54,6 +54,8 @@ module SearchesHelper
   end
 
   # Will format the status for results of the quest and campaign classes
+  # @param result [String] class object
+  # @return [Html] status tag for quest/campaigns
   def render_status_tag(result)
     if ['Quest', 'Campaign'].include? result.class.name
       status = ''
@@ -66,6 +68,9 @@ module SearchesHelper
     end
   end
 
+  # Will return css class for the result
+  # @param result [String] class name
+  # @return [String] css class
   def render_row_class(result)
     case result.class.name
       when 'Quest' then 'info'
@@ -74,6 +79,9 @@ module SearchesHelper
     end
   end
 
+  # Will return count for search result of the result
+  # @param result [String] class item
+  # @return [String] count of search result
   def render_result_count(results)
     record = quest = campaign = 0
     results.each do |result|
