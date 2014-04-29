@@ -1,7 +1,7 @@
 # Helper for handling timer
 module TimerHelper
 
-  # start timer and create encounter
+  # Will start timer and create an encounter if neccessary
   def start_timer
     if(current_user.last_encounter.nil? || !current_user.last_encounter.end_time.nil?)
       encounter = Encounter.new
@@ -13,7 +13,7 @@ module TimerHelper
     current_user.timer.set_state(true)
   end
 
-  # pause timer
+  # Will pause the timer
   def stop_timer
     current_time = params[:current_time]
     @timer.current_time = current_time
@@ -21,7 +21,7 @@ module TimerHelper
     current_user.timer.set_state(false)
   end
 
-  # reset timer
+  # Will reset the timer
   def reset_timer
     current_user.timer.set_state(false)
     encounter = current_user.last_encounter
@@ -34,7 +34,7 @@ module TimerHelper
     @timer.save
   end
 
-  # get remaining time
+  # Will get remaining time on the timer
   def get_current_time
     remain_time = @timer.current_time
     setting_time = @config.encounter_duration
@@ -54,7 +54,7 @@ module TimerHelper
     return data
   end
 
-  # try to reset time if auto mode
+  # Will try to reset time if in auto mode
   def restart_timer
     if(current_user.timer.mode == 'auto')
       reset_timer
@@ -65,22 +65,22 @@ module TimerHelper
     end
   end
 
-  # get setting default time
+  # Will get default time from user configuration settings
   def get_setting_time
     return {setting_time: @config.encounter_duration}
   end
 
-  # get current state of the timer
+  # Will get current state of the timer
   def get_timer_state
     return current_user.timer.get_state
   end
 
-  # get break default time
+  # Will get the default time for a short break from user configuration
   def get_break_time
     return {break_time: @config.short_break_duration}
   end
 
-  # extend the current time
+  # Will extend the current time on the timer
   def extend_timer
     if(@user.timer.mode == 'manual')
       current_time = params[:current_time]
@@ -91,7 +91,7 @@ module TimerHelper
     end
   end
 
-  # start break duration
+  # Will start a short break
   def start_break
     if(@user.timer.mode == 'manual')
       encounter = current_user.last_encounter

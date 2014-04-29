@@ -1,12 +1,12 @@
 module GithubHelper
 
-  # Login for github information
+  # Will generate the authentication token used for manipulating API activity
   # @return [Github] Github Session
   def login
     @github = Github.new oauth_token: current_user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
   end
 
-  #initialize github session
+  # Will initiate a connection to github based on a user's security token
   def github_init(username, projectname)
    login unless login?
     # @github:user => username, :repo => projectname
@@ -15,7 +15,7 @@ module GithubHelper
     return @github
   end
 
-  # Check if login is sucessful
+  # Will check if login is sucessful
   # @return [bool] Logged in or not
   def login?
     if login
@@ -25,7 +25,7 @@ module GithubHelper
     end
   end
 
-  # List Projects
+  # Will list all projects attached to the user's github credentials
   # @return [Hash] The full list of projects
   def list_projects
     # This function will pull all users' github repositories and check against known repos and update the list
@@ -46,7 +46,10 @@ module GithubHelper
     return @repos
   end
 
-  #List Branches
+  # Will list all branches for the specified project under a specified user
+  # using the permissions of the active user's github authentication
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
   def list_branches(username, projectname)
     @github = github_init(username, projectname)
     @branches = Hash.new()
@@ -56,7 +59,12 @@ module GithubHelper
     return @branches
   end
 
-  # List Issues
+  # Will list all issues for the specified project
+  # using the permissions of the active user's github authentication
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
+  # @param encounter [Encounter] user's currently active encounter
+  # @param campaign [Campaign] the local campaign linked to the remote project
   # @return [Hash] The full list of issues
   def list_issues(username, projectname, encounter, campaign)
     @issues = Hash.new
@@ -106,7 +114,13 @@ module GithubHelper
 
   end
 
-  # Get commits from a project
+  # Will get commits from a project
+  # using the permissions of the active user's github authentication
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
+  # @param encounter [Encounter] user's currently active encounter
+  # @param campaign [Campaign] the local campaign linked to the remote project
+  # @return [Commits] A list of commits found for the specified project
   def list_commits(username, projectname, encounter, campaign)
     @commits = Hash.new
     list_branches username, projectname
@@ -132,8 +146,10 @@ module GithubHelper
     return @commits
   end
 
-  # Import a project to QTD
+  # Will import a project to QTD 
   # Note: this should be run only when first time import is initiated
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
   def initial_import(username, projectname)
     # set import status
     project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user.id)
@@ -170,7 +186,9 @@ module GithubHelper
 
   end
 
-  # Update Issues and Commits
+  # Will synchronize Issues and Commits to the Github repo associated with it
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
   def update_project(username, projectname)
 
     #handle commits
@@ -179,6 +197,8 @@ module GithubHelper
     list_issues username, projectname, Encounter.last, Campaign.last
   end
 
+
+  # Will synchronize accross all projects associated with the current user
   def github_update_all_projects
     #get all projects
     @repo_list = list_projects
@@ -192,9 +212,9 @@ module GithubHelper
 
   end
 
-  # Delete Project From QTD
-  # @param username     Github User Name
-  # @param projectname  Github Project Name
+  # Will delete Project From QTD
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
   def del_project(username, projectname)
     project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user)
     project.imported = false
@@ -218,19 +238,26 @@ module GithubHelper
   end
 
 
-  # Push Note as comments to Github Issue
+  # Will push local Notes as comments to Github Issue
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
   def push_comment(username, projectname, issue_no, comment)
     @github  = github_init(username, projectname)
     @new_comment = @github.issues.comments.create :repo_name=> projectname, :user_name => username , :issue_id => issue_no ,:body => comment
   end
 
-  #Close Issue from a closed quest
+  #Will close Issue matching a locally closed quest
+  # @param username [String] username of the project
+  # @param projectname [String] project name on github
+  # @param issue_no [integer] number of issue on Github
   def close_issue(username, projectname, issue_no)
     @github  = github_init(username, projectname)
     @github.issues.edit(:number => issue_no, :state => 'closed')
   end
 
-  #Open Issue from a created quest
+  #Will open an Issue on GitHub from a locally created quest
+  # @param username     Github User Name
+  # @param projectname  Github Project Name
   def open_issue(username, projectname, quest)
     @github  = github_init(username, projectname)
     @github.issues.create(

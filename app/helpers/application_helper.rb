@@ -10,10 +10,17 @@ module ApplicationHelper
     end
   end
 
+  # Will truncate a given string to the specified length, visually displaying
+  # the effect with an elipsis representing the area removed
+  # @param string [String] the string to be truncated
+  # @param length [Integer] the size to reduce the string to, defaults to 25
   def trunc(string, length = 25)
     string.size > length+5 ? [string[0,length],string[-5,5]].join("...") : string
   end
 
+  # Will generate a modal dialog to add a record to a quest, disabling the
+  # button if there is no active quest for the user as an error handling setting
+  # @param active_quest [Quest] the current active quest
   def new_record_link(active_quest)
       if(active_quest)
         link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => active_quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-record-modal.modal'
@@ -24,6 +31,8 @@ module ApplicationHelper
       end
   end
 
+  # Will display the timer to the headerbar, as configured based on the user's
+  # user_config values
   def render_timer_button
     state = true
     if(@user.timer.mode == 'manual')
@@ -43,6 +52,8 @@ module ApplicationHelper
     end
   end
 
+  # Will display the timer mode toggle modal dialog, to switch current timer
+  # mode without effecting permanant user settings
   def render_timer_mode
     auto_class = 'mode-toggle btn btn-sm'
     auto_class << ((@timer.mode == 'auto') ? ' btn-primary' : ' btn-default')

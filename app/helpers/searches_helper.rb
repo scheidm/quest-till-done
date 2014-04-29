@@ -1,6 +1,9 @@
 module SearchesHelper
   class LinkRenderer < WillPaginate::ActionView::LinkRenderer
     protected
+    # Will link to the specified page, unless the page is the same as the
+    # current page
+    # @param page [Integer] the page to find the link
     def page_number(page)
       unless page == current_page
         link(page, page, :rel => rel_value(page))
@@ -8,14 +11,20 @@ module SearchesHelper
         link(page, "#", :class => 'active')
       end
     end
+
+    # Will define a list item based on the pagination
     def gap
       text = @template.will_paginate_translate(:page_gap) { '&hellip;' }
       %(<li class="disabled"><a>#{text}</a></li>)
     end
+
+    # Will generate a button for the next page based on current pagination data
     def next_page
       num = @collection.current_page < @collection.total_pages && @collection.current_page + 1
       previous_or_next_page(num, @options[:next_label], 'next')
     end
+
+
     def previous_or_next_page(page, text, classname)
       if page
         link(text, page, :class => classname)
@@ -23,6 +32,9 @@ module SearchesHelper
         link(text, "#", :class => classname + ' disabled')
       end
     end
+
+    # Will create a paginated container for specified html
+    # @param html [String] an html-formatted string
     def html_container(html)
       tag(:ul, html, :class => 'pagination')
     end
@@ -41,6 +53,7 @@ module SearchesHelper
     end
   end
 
+  # Will format the status for results of the quest and campaign classes
   def render_status_tag(result)
     if ['Quest', 'Campaign'].include? result.class.name
       status = ''

@@ -1,4 +1,5 @@
 module DeviseHelper
+  # Will generate a list of error messages for display when having login issues
   def devise_error_messages!
     return '' if resource.errors.empty?
 
@@ -17,6 +18,7 @@ module DeviseHelper
     html.html_safe
   end
 
+  # Will appropriately format user login notifications
   def flash_class_devise(level)
     case level
       when :notice then "alert alert-info devise-alert centered"
