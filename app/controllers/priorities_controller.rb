@@ -7,7 +7,9 @@ class PrioritiesController < ApplicationController
     @campaigns = Campaign.where( :group_id =>  @user.wrapper_group.id)
   end
 
-  # Will define priority items for the given user for display on index
+  # Will define priority items for the given campaign for display on index
+  # @param id [Integer] Campaign's id
+  # @return [JSON] Json data contains all prioritized quest in a campaign
   def get_priorities
     @campaign = Campaign.find(params[:id])
     quests = @campaign.all_quests.where.not( :status => 'Closed')
@@ -19,6 +21,8 @@ class PrioritiesController < ApplicationController
     render :text => data.to_json
   end
 
+  # Will define priority items for the all campaigns for display 
+  # @return [JSON] Json data contains all prioritized quest in all campaign belongs to the user
   def get_all_priorities
     campaigns = @user.campaigns
     data = []
