@@ -80,3 +80,15 @@ class Quest < ActiveRecord::Base
     return false
   end
 end
+
+  #Will recursively generate a list of all a quests descendants through their
+  #direct children and their children's children.
+  #@return [ActiveRecord::Relation] list of descendants
+  def descendants
+    children = []
+    self.child_quests.each do |cq|
+        children.concat cq.descendants
+        children.push cq
+      end
+    return children
+  end

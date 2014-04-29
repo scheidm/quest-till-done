@@ -42,6 +42,15 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Will generate a list of quests from all campaigns in a user's groups, with
+  # the deadline closer to the current time than the specified number of days.
+  # @param days_in_future [integer] Max days out to get deadlines
+  # @return [ActiveRecord::Relation] List of relevant quests
+  def pending_deadlines(days_in_future=7)
+    Quest.where( 'campaign_id in (?)', self.campaigns.pluck(:id) ).where('deadline < (?)', days_in_future.days.from_now ).order(deadline: :desc)
+  end
+
+
   # Will return only groups where the user does not have admin privileges
   def groups_where_member
     self.groups-self.groups_where_admin_and_wrapper

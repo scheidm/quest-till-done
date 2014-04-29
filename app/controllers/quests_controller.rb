@@ -6,13 +6,13 @@ class QuestsController < ApplicationController
   include RoundHelper
   include GithubHelper
 
-  # Show all of user's quests
+  # Will show all of user's quests
   # @return [Html] A list of quests of the user
   def index
     @quests = Quest.all
   end
 
-  # Show the detail of a quest
+  # Will show the detail of a quest
   # @param id [Integer] Quest's id
   # @return [Html] Quest detail page with that id
   def show
@@ -30,7 +30,7 @@ class QuestsController < ApplicationController
     end
   end
 
-  # Create new quest
+  # Will create a new quest
   # @return [Html] New quest page
   def new
     @quest = Quest.new()
@@ -71,14 +71,14 @@ class QuestsController < ApplicationController
 
   end
 
-  # Edit existing quest
+  # Will allow user to edit existing quest
   # @param id [Integer] Quest's id
   # @return [Html] Quest's editing page
   def edit
     @quest = Quest.friendly.find(params[:id])
   end
 
-  # Update quest changes and save the changes
+  # Will update quest changes and save the changes
   # @param quest_params [quest_params] field input from creation page
   # @return [Html] redirect back to quest's campaign page
   def update
@@ -112,7 +112,7 @@ class QuestsController < ApplicationController
     end
   end
 
-  # Delete quest and all the records it associated with
+  # Will delete quest and all the records it associated with
   # @param id [Integer] Quest's id
   # @return [Html] redirect back to quest's campaign page
   def destroy
@@ -125,7 +125,7 @@ class QuestsController < ApplicationController
     end
   end
 
-  # Get Json for generating tree view
+  # Will generate JSON to display tree relations for a quest
   # @param id [Integer] Quest's id
   # @return [JSON] quest's information in JSON format
   def getTree
@@ -133,7 +133,7 @@ class QuestsController < ApplicationController
     render :text => generateQuestTree(quest)
   end
 
-  # Set quest as user's current active quest
+  # Will set a specified quest as user's current active quest
   # @param id [Integer] Quest's id
   def set_active
     quest = Quest.friendly.find(params[:id])
@@ -143,7 +143,7 @@ class QuestsController < ApplicationController
     render :nothing => true
   end
 
-  # Define allowed parameter for a Campaign model
+  # Will restrict parameters to those formally specified
   # @param id [Integer] Quest's id
   # @param description [String] Quest's description
   # @param parent_id [Integer] Quest's parent quest id
