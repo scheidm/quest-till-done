@@ -14,8 +14,6 @@ class Record < ActiveRecord::Base
   # friendly_id :description, use: [:slugged, :history]
   acts_as_taggable
   acts_as_taggable_on :skills
-  extend FriendlyId
-  # friendly_id :description, use: [:slugged, :history]
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
   belongs_to :quest
