@@ -43,6 +43,7 @@ class RecordsController < ApplicationController
     else
       success=false
     end
+    @record.tag_list.add(params[:tag_list])
 
     respond_to do |format|
       if success
@@ -86,7 +87,7 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :code, :id)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :code, :id, :tag_list)
   end
 
   def quest_autocomplete
