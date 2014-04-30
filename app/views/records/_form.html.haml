@@ -38,14 +38,10 @@
         = f.label :description, "Note", :class => 'control-label'
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
-<<<<<<< HEAD
-=======
         = f.label :tag_list, "Tags (separated by commas)"
         %br
         = f.text_field :tag_list
         %br
-
->>>>>>> e0651f07b029dc6d3a550aea9bcfca7ffc08a86c
         = f.hidden_field :quest_id
         = f.hidden_field :type, :value => 'Note'
 
@@ -90,20 +86,15 @@
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
         %br
-<<<<<<< HEAD
-        -#= f.label :attachement, "Upload Image", :class => 'control-label'
-        -#= f.file_field(:logo)
+
         = f.label :code , "Upload Image", :class => 'control-label'
         %br/
         = f.file_field :code
-=======
-        = f.label :attachement, "Upload Image", :class => 'control-label'
-        = f.file_field(:logo)
+
         = f.label :tag_list, "Tags (separated by commas)"
         %br
         = f.text_field :tag_list
         %br
->>>>>>> e0651f07b029dc6d3a550aea9bcfca7ffc08a86c
         = f.hidden_field :quest_id
         = f.hidden_field :type, :value => 'Image'
 
