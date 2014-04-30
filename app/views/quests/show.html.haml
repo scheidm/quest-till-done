@@ -66,7 +66,7 @@
                 %h4.list-group-item-heading
                   = note.created_at.strftime("%m/%d/%Y %I:%M%p")
                 %p.list-group-item-text
-                  = note.description
+                  = auto_link(note.description)
               %td{:float => "right"}
                 = button_to " x ", {:controller => :records,
                                            :action => 'destroy', :id => note.id }, :method => :delete, :confirm => "Are you sure?"
@@ -87,7 +87,7 @@
                 %h4.list-group-item-heading
                   = image.created_at.strftime("%m/%d/%Y %I:%M%p")
                 %p.list-group-item-text
-                  = image.description
+                  = auto_link(image.description)
                 %p
                   =image_tag image.code.url(image.code.url)
               %td{:float => "right"}
@@ -111,7 +111,7 @@
                 %h4.list-group-item-heading
                   = link.created_at.strftime("%m/%d/%Y %I:%M%p")
                 %p.list-group-item-text
-                  = link.description
+                  = auto_link(link.description)
               %td{:float => "right"}
                 = button_to " x ", {:controller => :records,
                                     :action => 'destroy', :id => link.id }, :method => :delete, :confirm => "Are you sure?"

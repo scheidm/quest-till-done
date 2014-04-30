@@ -100,3 +100,6 @@ gem 'jquery-ui-rails'
 #attachment
 gem 'paperclip'
 
+#link
+gem 'rails_autolink'
+
