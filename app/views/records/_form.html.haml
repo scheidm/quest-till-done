@@ -38,7 +38,10 @@
         = f.label :description, "Note", :class => 'control-label'
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
-
+        = f.label :tag_list, "Tags (separated by commas)"
+        %br
+        = f.text_field :tag_list
+        %br
 
         = f.hidden_field :quest_id
         = f.hidden_field :type, :value => 'Note'
@@ -61,6 +64,10 @@
         = f.label :description, "Description", :class => 'control-label'
         %br
         = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
+        = f.label :tag_list, "Tags (separated by commas)"
+        %br
+        = f.text_field :tag_list
+        %br
         = f.hidden_field :type, :value => 'Link'
         = f.hidden_field :quest_id
 
@@ -81,6 +88,10 @@
         %br
         = f.label :attachement, "Upload Image", :class => 'control-label'
         = f.file_field(:logo)
+        = f.label :tag_list, "Tags (separated by commas)"
+        %br
+        = f.text_field :tag_list
+        %br
         = f.hidden_field :quest_id
         = f.hidden_field :type, :value => 'Image'
 

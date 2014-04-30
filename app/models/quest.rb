@@ -24,6 +24,7 @@ class Quest < ActiveRecord::Base
   before_save :set_status
 
 
+
   def search_data
     attributes.merge(
       records: self.records.map(&:description),
