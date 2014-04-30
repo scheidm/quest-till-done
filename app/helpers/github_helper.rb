@@ -64,7 +64,7 @@ module GithubHelper
     issueobj = @github.issues.list :user => username, :repo => projectname
     issueobj.each do |t|
       # @issues[t['title']] = t['html_url']
-      if !Quest.find_by description: t['html_url'], name: t['title']
+      if !Quest.find_by description: t['html_url'], name: t['title'], group_id:@user.id
         new_issue = Quest.create({
                                   campaign_id: campaign.id,
                                   name: t['title'],
