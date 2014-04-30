@@ -70,7 +70,8 @@
               %td{:float => "right"}
                 = button_to " x ", {:controller => :records,
                                            :action => 'destroy', :id => note.id }, :method => :delete, :confirm => "Are you sure?"
-
+              %td
+                =link_to " Modify ", edit_record_path(note.id)
   .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
@@ -92,7 +93,8 @@
               %td{:float => "right"}
                 = button_to " x ", {:controller => :records,
                                            :action => 'destroy', :id => image.id }, :method => :delete, :confirm => "Are you sure?"
-
+              %td
+                =link_to " Modify ", edit_record_path(image.id)
 
   .panel.panel-default.panel-primary
     .panel-heading
@@ -113,6 +115,8 @@
               %td{:float => "right"}
                 = button_to " x ", {:controller => :records,
                                     :action => 'destroy', :id => link.id }, :method => :delete, :confirm => "Are you sure?"
+              %td
+                =link_to " Modify ", edit_record_path(link.id)
 
 
 

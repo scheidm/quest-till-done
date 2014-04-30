@@ -43,11 +43,12 @@ class RecordsController < ApplicationController
     else
       success=false
     end
+
     respond_to do |format|
       if success
-        format.html { redirect_to :back, notice: 'Record was successfully created.'}
+        format.html { redirect_to : , notice: "#{@record.type} \"#{@record.description.to_s[0..30].gsub(/\s\w+$/,'...')}\"  was successfully created."}
       else
-        format.html { redirect_to :back, notice: "Error! Record not created! Error: #{@record.errors.inspect}" }
+        format.html { redirect_to :back, notice: "Error! #{@record.type} not created! Error: #{@record.errors.inspect}" }
         format.json { render json: @record.errors, status: :unprocessable_entity }
       end
 
@@ -73,7 +74,7 @@ class RecordsController < ApplicationController
 
   end
 
-  # Modify record
+  # Edit record
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def edit
