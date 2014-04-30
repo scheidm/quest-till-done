@@ -32,7 +32,7 @@ module GithubHelper
     @repos = Hash.new
     @github.repos.list.each do |t|
       @repos[(t["name"])] = t["html_url"]
-      if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"]
+      if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"], group_id: @user.warapper_group.id
         GithubRepo.create({
                            group_id: @user.wrapper_group.id,
                            project_name: t["name"],
