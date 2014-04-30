@@ -60,10 +60,17 @@
       %ul.list-group
       - @quest.notes.each do |note|
         %a.list-group-item
-          %h4.list-group-item-heading
-            = note.created_at.strftime("%m/%d/%Y %I:%M%p")
-          %p.list-group-item-text
-            = note.description
+          %table
+            %tr
+              %td
+                %h4.list-group-item-heading
+                  = note.created_at.strftime("%m/%d/%Y %I:%M%p")
+                %p.list-group-item-text
+                  = note.description
+              %td{:float => "right"}
+                = button_to " x ", {:controller => :records,
+                                           :action => 'destroy', :id => note.id }, :method => :delete, :confirm => "Are you sure?"
+
   .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
@@ -73,11 +80,20 @@
       %ul.list-group
       - @quest.images.each do |image|
         %a.list-group-item
-          %h4.list-group-item-heading
-            = image.created_at.strftime("%m/%d/%Y %I:%M%p")
-          %p.list-group-item-text{href: image.code.url}
-            = image.description
-          %p.list-group-item-text{href: image.code.url}= image.code.url
+          %table
+            %tr
+              %td
+                %h4.list-group-item-heading
+                  = image.created_at.strftime("%m/%d/%Y %I:%M%p")
+                %p.list-group-item-text
+                  = image.description
+                %p
+                  =image_tag image.code.url(image.code.url)
+              %td{:float => "right"}
+                = button_to " x ", {:controller => :records,
+                                           :action => 'destroy', :id => image.id }, :method => :delete, :confirm => "Are you sure?"
+
+
   .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
@@ -87,11 +103,17 @@
       %ul.list-group
       - @quest.links.each do |link|
         %a.list-group-item
-          %h4.list-group-item-heading
-            = link.created_at.strftime("%m/%d/%Y %I:%M%p")
-          %p.list-group-item-text{href: link.url}
-            = link.description
-          %p.list-group-item-text{href: link.url}= link.url
+          %table
+            %tr
+              %td
+                %h4.list-group-item-heading
+                  = link.created_at.strftime("%m/%d/%Y %I:%M%p")
+                %p.list-group-item-text
+                  = link.description
+              %td{:float => "right"}
+                = button_to " x ", {:controller => :records,
+                                    :action => 'destroy', :id => link.id }, :method => :delete, :confirm => "Are you sure?"
+
 
 
 #tree-container{data: {quest_id: @quest.id} }

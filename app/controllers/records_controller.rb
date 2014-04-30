@@ -64,10 +64,13 @@ class RecordsController < ApplicationController
   # @param id [Integer] record id
   # @return [Html] redirect back to record index page
   def destroy
-    @record= Record.find { params[:id]}.destroy
-    respond_to do |format|
-      format.html { redirect_to :records, notice: 'Record was successfully deleted.'}
-    end
+
+
+    @record= Record.find(params[:id]).destroy
+
+    flash[:notice] = "#{@record.type} \"#{@record.description.to_s[0..30].gsub(/\s\w+$/,'...')}\" was successfully deleted."
+    redirect_to(:back)
+
   end
 
   # Modify record
@@ -82,7 +85,7 @@ class RecordsController < ApplicationController
   # @param encounter_id [Integer] Record's encounter_id
   # @param encounter [Encounter] Record's encounter
   def record_params
-    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :code)
+    params.require(:record).permit(:description, :encounter_id, :encounter, :quest_id, :type, :url, :code, :id)
   end
 
   def quest_autocomplete
