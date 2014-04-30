@@ -5,7 +5,7 @@ class SkillPointsController < ApplicationController
   # @param [String] skillName
   # @param [user] @user
   # @param [skill_point] skillpoint
-  def add(skillName, @user, skillpoint)
+  def add(skillName, user, skillpoint)
 
   end
 
@@ -13,7 +13,7 @@ class SkillPointsController < ApplicationController
   # @param [String] skillName
   # @param [user] @user
   # @param [skill_point] skillpoint
-  def subtract(skillName, @user, skillpoint)
+  def subtract(skillName, user, skillpoint)
 
   end
 
