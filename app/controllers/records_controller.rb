@@ -46,7 +46,7 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       if success
-        format.html { redirect_to : , notice: "#{@record.type} \"#{@record.description.to_s[0..30].gsub(/\s\w+$/,'...')}\"  was successfully created."}
+        format.html { redirect_to :back , notice: "#{@record.type} \"#{@record.description.to_s[0..30].gsub(/\s\w+$/,'...')}\"  was successfully created."}
       else
         format.html { redirect_to :back, notice: "Error! #{@record.type} not created! Error: #{@record.errors.inspect}" }
         format.json { render json: @record.errors, status: :unprocessable_entity }
