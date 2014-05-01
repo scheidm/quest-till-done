@@ -31,7 +31,8 @@ class Quest < ActiveRecord::Base
       records: self.records.map(&:description),
       notes: self.notes.map(&:description),
       quotes: self.links.map(&:quote),
-      sites: self.links.map(&:url)
+      sites: self.links.map(&:url),
+      tags: self.tags.map(&:name)
     )
   end
 
