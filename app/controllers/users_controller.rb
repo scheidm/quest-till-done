@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   end
 
   def github_revoke
-    # @user.github_access_token = nil
+    @user.github_access_token = nil
     flash[:notice] = 'Your Github authentiation have been stopped. You need manually revoke from Github website'
     redirect_to :back
   end
