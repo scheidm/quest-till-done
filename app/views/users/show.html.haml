@@ -2,6 +2,10 @@
 = link_to 'Back', users_path, :class => "btn"
 
 
+%p
+  =link_to "Revoke My Github Account", {:action=> 'github_revoke'}
+
+
 %table{:class => "table table-hover" , :id=>'myTab.nav.nav-tabs'}
   %thead
     %tr
@@ -30,3 +34,4 @@
 
         %td
           = link_to "Manual Update" , { :action => 'github_update',  :github_user=>t.github_user, :repo_name=>t.project_name }, { :class => "btn btn-primary" }
+

@@ -3,13 +3,14 @@ class User < ActiveRecord::Base
   acts_as_taggable_on :skills
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-
+  acts_as_messageable
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :timeoutable, :timeout_in => 60.minutes
 
   attr_accessor :login
 
+  has_many :notifications, dependent: :destroy
   has_one :timer
   has_one :wrapper_group, class_name: "Group"
   has_many :campaigns, through: :wrapper_group
@@ -155,6 +156,15 @@ class User < ActiveRecord::Base
   # Will return an authentication token for github access
   def github
     @github = Github.new client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
+  end
+
+  # Will Setup message username
+  def message_user
+    return self.username
+  end
+
+  def message_email
+    return self.email
   end
 
 end

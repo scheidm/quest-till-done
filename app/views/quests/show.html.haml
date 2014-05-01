@@ -60,42 +60,65 @@
       %ul.list-group
       - @quest.notes.each do |note|
         %a.list-group-item
-          %h4.list-group-item-heading
-            = note.created_at.strftime("%m/%d/%Y %I:%M%p")
-          %p.list-group-item-text
-            = note.description
-#accordion.panel-group
+          %table
+            %tr
+              %td
+                %h4.list-group-item-heading
+                  = note.created_at.strftime("%m/%d/%Y %I:%M%p")
+                %p.list-group-item-text
+                  = auto_link(note.description)
+              %td{:float => "right"}
+                = button_to " x ", {:controller => :records,
+                                           :action => 'destroy', :id => note.id }, :method => :delete, :confirm => "Are you sure?"
+              %td
+                =link_to " Modify ", edit_record_path(note.id)
   .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseLink"}
+        %a{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseImage"}
+          Images
+    #collapseImage.panel-collapse.collapse
+      %ul.list-group
+      - @quest.images.each do |image|
+        %a.list-group-item
+          %table
+            %tr
+              %td
+                %h4.list-group-item-heading
+                  = image.created_at.strftime("%m/%d/%Y %I:%M%p")
+                %p.list-group-item-text
+                  = auto_link(image.description)
+                %p
+                  =image_tag image.code.url(image.code.url)
+              %td{:float => "right"}
+                = button_to " x ", {:controller => :records,
+                                           :action => 'destroy', :id => image.id }, :method => :delete, :confirm => "Are you sure?"
+              %td
+                =link_to " Modify ", edit_record_path(image.id)
+
+  .panel.panel-default.panel-primary
+    .panel-heading
+      %h4.panel-title
+        %a{"data-parent" => "#accordion3", "data-toggle" => "collapse", href: "#collapseLink"}
           Links
     #collapseLink.panel-collapse.collapse
       %ul.list-group
       - @quest.links.each do |link|
         %a.list-group-item
-          %h4.list-group-item-heading
-            = link.created_at.strftime("%m/%d/%Y %I:%M%p")
-          %p.list-group-item-text{href: link.url}
-            = link.description
-          %p.list-group-item-text{href: link.url}= link.url
+          %table
+            %tr
+              %td
+                %h4.list-group-item-heading
+                  = link.created_at.strftime("%m/%d/%Y %I:%M%p")
+                %p.list-group-item-text
+                  = auto_link(link.description)
+              %td{:float => "right"}
+                = button_to " x ", {:controller => :records,
+                                    :action => 'destroy', :id => link.id }, :method => :delete, :confirm => "Are you sure?"
+              %td
+                =link_to " Modify ", edit_record_path(link.id)
 
-#accordion.panel-group
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseCommit"}
-          Commits
-    #collapseLink.panel-collapse.collapse
-      %ul.list-group
-      -#  TODO Broken with commits from quest
-      -#- @quest.commits.each do |commit|
-      -#  %a.list-group-item
-      -#    %h4.list-group-item-heading
-      -#      = commit.created_at.strftime("%m/%d/%Y %I:%M%p")
-      -#    %p.list-group-item-text{href: commit.url}
-      -#      = commit.description
-      -#    %p.list-group-item-text{href: commit.url}= commit.url
+
 
 #tree-container{data: {quest_id: @quest.id} }
 

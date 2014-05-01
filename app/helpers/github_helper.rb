@@ -32,8 +32,9 @@ module GithubHelper
     @repos = Hash.new
     @github.repos.list.each do |t|
       @repos[(t["name"])] = t["html_url"]
-      if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"]
-        GithubRepo.create({user: current_user,
+      if !GithubRepo.find_by github_user: t["owner"]["login"], url: t["html_url"], group_id: @user.wrapper_group.id
+        GithubRepo.create({
+                           group_id: @user.wrapper_group.id,
                            project_name: t["name"],
                            url: t["html_url"],
                            github_user: t["owner"]["login"],
@@ -59,47 +60,47 @@ module GithubHelper
   # List Issues
   # @return [Hash] The full list of issues
   def list_issues(username, projectname, encounter, campaign)
-    @issues = Hash.new
+    # @issues = Hash.new
     issueobj = @github.issues.list :user => username, :repo => projectname
     issueobj.each do |t|
-      @issues[t['title']] = t['html_url']
-      if encounter && campaign
-        unless Quest.find_by description: t['html_url']
-          # if Quest.find_by
+      # @issues[t['title']] = t['html_url']
+      if !Quest.find_by description: t['html_url'], name: t['title'], group_id:@user.id
+        new_issue = Quest.create({
+                                  campaign_id: campaign.id,
+                                  name: t['title'],
+                                  description: t['html_url'],
+                                  status: 'Open',
+                                  parent: campaign,
+                                  created_at: t['created_at'],
+                                  updated_at: t['updated_at'],
+                                  issue_no: t.number.to_i,
+                                  group_id: campaign.group_id
 
-          new_issue = Quest.create({campaign_id: campaign.id,
-                                    name: t['title'],
-                                    description: t['html_url'],
-                                    user_id: current_user.id,
-                                    status: 'Open',
-                                    parent: campaign,
-                                    created_at: t['created_at'],
-                                    updated_at: t['updated_at'],
-                                    issue_no: t.number.to_i
-                                   })
+                                 })
 
 
-          create_round(new_issue, action_name, campaign)
+        create_round(new_issue, action_name, campaign)
 
-          if t.comments - 1 >= 0
-            @github.issues.comments.all(:repo => projectname, :user => username, :issue_id => t.number).each do |f|
-              new_record = Record.create({
-                                             type: 'Note',
-                                             description: f.body + '\n' + f.issue_url,
-                                             encounter_id: encounter.id,
-                                             created_at: f.created_at,
-                                             updated_at: f.updated_at,
-                                             quest_id: new_issue.id,
-                                             user_id: current_user.id
+        if t.comments - 1 >= 0
+          @github.issues.comments.all(:repo => projectname, :user => username, :issue_id => t.number).each do |f|
+            new_record = Record.create({
+                                           type: 'Note',
+                                           description: f.body + '\n' + f.issue_url,
+                                           encounter_id: encounter.id,
+                                           created_at: f.created_at,
+                                           updated_at: f.updated_at,
+                                           quest_id: new_issue.id,
+                                           group_id: campaign.group_id
 
-                                         })
-              create_round(new_record, action_name, campaign)
-            end
+                                       })
+            create_round(new_record, action_name, campaign)
           end
         end
       end
-      return issueobj
+
     end
+
+    return issueobj
 
     # set for latest issue check
     #GithubRepo.find_by(project_name: projectname, github_user: username).latest_issue =  issueobj.first.created_at
@@ -115,13 +116,12 @@ module GithubHelper
 
         @commits[t["commit"]["message"]] = t["html_url"]
 
-        # if encounter && campaign
         unless Record.find_by sha: t["sha"]
           new_commit = Commit.create({encounter_id: encounter.id,
                                       quest_id: campaign.id,
                                       description: t["commit"]["message"],
                                       url: t["html_url"],
-                                      user_id: current_user.id,
+                                      group_id: campaign.group_id,
                                       sha: t["sha"]
                                      })
 
@@ -134,9 +134,12 @@ module GithubHelper
 
   # Import a project to QTD
   # Note: this should be run only when first time import is initiated
-  def initial_import(username, projectname)
+  def initial_import(username, projectname, group)
+    if group.nil?
+      group = @user.wrapper_group
+    end
     # set import status
-    project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user.id)
+    project = GithubRepo.find_by(github_user: username, project_name: projectname, group_id: group.id)
 
     if project.imported.nil? || !project.imported
 
@@ -152,7 +155,8 @@ module GithubHelper
       # new encounter
       import_campaign = Campaign.create({name: projectname,
                                          description: "Imported Project for #{projectname}",
-                                         user_id: current_user.id
+                                         group_id: @user.wrapper_group.id,
+                                         vcs: true
                                         })
       project.campaign_id =  import_campaign.id
       project.save
@@ -196,7 +200,7 @@ module GithubHelper
   # @param username     Github User Name
   # @param projectname  Github Project Name
   def del_project(username, projectname)
-    project = GithubRepo.find_by(github_user: username, project_name: projectname, user_id: current_user)
+    project = GithubRepo.find_by(github_user: username, project_name: projectname, group_id: @user.wrapper_group.id)
     project.imported = false
     project.save
 

@@ -107,6 +107,8 @@
     / /container
 #userPopContent.hide
   %p
+    = link_to 'Home', root_url
+  %p
     = link_to 'Edit Profile', edit_user_registration_path
   %p
     = link_to 'Log Out', destroy_user_session_path, :method => :delete

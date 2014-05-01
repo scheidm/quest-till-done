@@ -1,0 +1,179 @@
+%h2 Welcome!!
+%p This is the index page
+
+#tower-defense
+
+:css
+  .node {
+    cursor: pointer;
+  }
+
+  .node:hover {
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
+
+  .node--leaf {
+    fill: white;
+  }
+
+  .label {
+    font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+  }
+
+  /*.label,*/
+  /*.node--root,*/
+  /*.node--leaf {*/
+  /*}*/
+:javascript
+
+    $(document).ready(function () {
+       $.ajax({
+         type: "GET",
+         url: "/users/get_td_json",
+         success: function(data) {
+          var jsonData = JSON.parse(data);
+
+          buildTD(jsonData);
+         }
+       });
+    });
+
+  function buildTD(jsonData)
+  {
+
+    var margin = 20,
+        diameter = 960;
+
+    var color = d3.scale.linear()
+        .domain([-1, 5])
+        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+        .interpolate(d3.interpolateHcl);
+
+    var pack = d3.layout.pack()
+        .padding(2)
+        .size([diameter - margin, diameter - margin])
+        .value(function(d) { return 1000; })
+
+    var svg = d3.select("#tower-defense").append("svg")
+        .attr("width", diameter)
+        .attr("height", diameter)
+      .append("g")
+        .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+
+    //d3.json(flare, function(error, root) {
+      //if (error) return console.error(error);
+
+      root = jsonData;
+      var focus = root,
+          nodes = pack.nodes(root),
+          view;
+
+      var circle = svg.selectAll("circle")
+          .data(nodes)
+        .enter().append("circle")
+          .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+          .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+          .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
+      var text = svg.selectAll("text")
+          .data(nodes)
+        .enter().append("text")
+          .attr("class", "label")
+          .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+          .style("display", function(d) { return d.parent === root ? null : "none"; })
+          .text(function(d) { return d.attr.name; });
+
+      var node = svg.selectAll("circle,text");
+
+      d3.select("#tower-defense")
+          .style("background", color(-1))
+          .on("click", function() { zoom(root); });
+
+      zoomTo([root.x, root.y, root.r * 2 + margin]);
+
+      function zoom(d) {
+        var focus0 = focus; focus = d;
+
+        var transition = d3.transition()
+            .duration(d3.event.altKey ? 7500 : 750)
+            .tween("zoom", function(d) {
+              var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+              return function(t) { zoomTo(i(t)); };
+            });
+
+        transition.selectAll("text")
+          .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+            .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+            .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+            .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+
+        $('#tower-defense .popover').remove();
+        setTimeout(function(){
+                    var nodes = svg.selectAll("circle");
+                    nodes.on('mousein', function(d){
+                       if(d.id != 0)
+                        renderDetailBox2(this, d);
+                    });
+                }
+                , duration + 100);
+      }
+
+      function zoomTo(v) {
+
+
+        var k = diameter / v[2]; view = v;
+        node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+        circle.attr("r", function(d) { return d.r * k; });
+      }
+    //});
+
+    d3.select(self.frameElement).style("height", diameter + "px");
+    var nodes = svg.selectAll("circle");
+    nodes.each(function(d) {
+        if(d.id != 0)
+          renderDetailBox2(this, d);
+    });
+  }
+
+  function renderDetailBox2(svg, d)
+  {
+      var placement = d.children ? "left" : "right";
+      $(svg).popover('destroy');
+      $(svg).popover({
+          'trigger': 'manual',
+          'html': true,
+          'title': '<a href='+ d.attr.url +'>'+d.attr.name + '</a>',
+          'content': renderQuestDetail2(d),
+          'placement': placement,
+          'container': '#tower-defense'
+      }).on("mouseenter", function() {
+          var _this = this;
+          $(this).popover("show");
+          $(this).siblings(".popover").on("mouseleave", function() {
+            $(_this).popover('hide');
+          });
+          var thisPopover = "#td-popover-" + d.id;
+          $(thisPopover).parent().parent().mouseleave(function() {
+            $(_this).popover('hide');
+          });
+        }).on("mouseleave", function() {
+          var _this = this;
+          setTimeout(function() {
+            var thisPopover = "#td-popover-" + d.id;
+            if (!$(".popover:hover").length) {
+              $(_this).popover("hide")
+            }
+          }, 100);
+        });
+  }
+
+  function renderQuestDetail2(d) {
+      var css = d.attr.status.toString().trim().replace(/ /g,'');
+      var html = "<div id='td-popover-" + d.id + "'>Description: " + d.attr.status + "</br>" +
+                 "Status: <span class='label label-"+ css+"'>"+ d.attr.status +"</span></div>";
+      return html;
+  }
+

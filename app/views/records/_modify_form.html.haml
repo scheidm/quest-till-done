@@ -1,0 +1,6 @@
+= form_for @record do |f|
+  .field
+  =f.label "Description"
+  =f.text_field(:description)
+  .action
+  =f.submit :class => "btn btn-primary pull-right"
