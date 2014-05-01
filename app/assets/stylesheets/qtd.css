@@ -300,6 +300,11 @@ input:-webkit-autofill:focus {
     display: none;
 }
 
+.help-info {
+    font-size: 13px;
+    color: #999;
+    float: left;
+}
 /**************** Button **************************/
 
 .btn-timer-setting {
@@ -319,7 +324,7 @@ input:-webkit-autofill:focus {
     -webkit-font-smoothing: antialiased;
 }
 
-/**************** Campaign/Quest Status ***********/
+/**************** Campaign/Quest ***********/
 .label-Open {
     background-color: #428bca;
 }
@@ -346,6 +351,11 @@ input:-webkit-autofill:focus {
 }
 .label-Campaign {
     background-color: #5cb85c;
+}
+
+#tree-container {
+    margin-top: 30px;
+    border: 1px solid #ccc;
 }
 
 /************** Priority view ***************/
