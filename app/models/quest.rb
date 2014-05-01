@@ -12,6 +12,7 @@ class Quest < ActiveRecord::Base
   has_many :records
   has_many :links
   has_many :notes
+  has_many :images
   belongs_to :campaign, :class_name => 'Quest'
   # Has many quests underneath this quest's subtree
   has_many :all_quests, :class_name => 'Quest', :foreign_key => 'campaign_id'
@@ -22,6 +23,7 @@ class Quest < ActiveRecord::Base
   # Belongs to a user/owner
   belongs_to :group
   before_save :set_status
+
 
 
   def search_data

@@ -1,4 +1,6 @@
 class Notification < ActiveRecord::Base
+  belongs_to :user
+  belongs_to :group
 
   def source
     self.source_type.singularize.classify.constantize.find(self.event_id)
@@ -10,6 +12,18 @@ class Notification < ActiveRecord::Base
 
   def admin
     User.find self.authorization_id
+  end
+
+  def mark_read
+
+  end
+
+  def mark_dismissed
+
+  end
+
+  def mark_group_invite_accept
+
   end
 
   def link_models( source, target )

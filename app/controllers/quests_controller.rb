@@ -41,6 +41,7 @@ class QuestsController < ApplicationController
       parent_quest = Quest.find(parent)
       @quest.campaign_id = parent_quest.campaign_id || parent_quest.id
     end
+    @quest.tag_list.add(params[:tag_list])
   end
 
   # Save new quest
@@ -152,7 +153,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline, :tag_list)
   end
 
 
