@@ -1,11 +1,15 @@
-%h2 Welcome!!
-%p This is the index page
-
-#tower-defense
+%h1 Welcome!!
+#help
+  %h2 World View
+  %span.glyphicon.glyphicon-question-sign.help-info
+    Click the circles to zoom in/out
+#tower-defense{ :style => 'border: 1px solid #ccc; margin-top: 35px;'}
 
 :css
   .node {
     cursor: pointer;
+    stroke: #000;
+    stroke-width: 0.5px;
   }
 
   .node:hover {
@@ -53,9 +57,16 @@
         .interpolate(d3.interpolateHcl);
 
     var pack = d3.layout.pack()
-        .padding(2)
+        .padding(1)
         .size([diameter - margin, diameter - margin])
         .value(function(d) { return 1000; })
+
+    function getRadius(d) {
+      if(d.attr.radius != undefined)
+        return d.attr.radius;
+      else
+        return 1;
+    };
 
     var svg = d3.select("#tower-defense").append("svg")
         .attr("width", diameter)
@@ -72,24 +83,24 @@
           view;
 
       var circle = svg.selectAll("circle")
-          .data(nodes)
+        .data(nodes)
         .enter().append("circle")
-          .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-          .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-          .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+        .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+        .style("fill", function(d){ return d.attr.color; })
+        .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
       var text = svg.selectAll("text")
           .data(nodes)
         .enter().append("text")
-          .attr("class", "label")
+          .attr("class", "td-label")
           .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
           .style("display", function(d) { return d.parent === root ? null : "none"; })
           .text(function(d) { return d.attr.name; });
 
       var node = svg.selectAll("circle,text");
+      var leafnode = svg.selectAll(".node--leaf");
 
       d3.select("#tower-defense")
-          .style("background", color(-1))
           .on("click", function() { zoom(root); });
 
       zoomTo([root.x, root.y, root.r * 2 + margin]);
@@ -127,6 +138,7 @@
         var k = diameter / v[2]; view = v;
         node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
         circle.attr("r", function(d) { return d.r * k; });
+       // leafnode.attr("r",  function(d) {  return d.attr.radius * k; });
       }
     //});
 

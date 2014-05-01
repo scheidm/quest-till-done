@@ -26,6 +26,11 @@
   = link_to campaign_timeline_path(@campaign), :remote => true, :class => 'btn btn-success pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
     %span.glyphicon.glyphicon-list-alt
 
+  #help
+    %h2 Tree View
+    %span.glyphicon.glyphicon-question-sign.help-info
+      Press the circle to expand/collapse nodes
+
   #tree-container{data: {campaign_id: @campaign.id}}
   #edit-campaign-modal.modal.fade
     .modal-dialog
