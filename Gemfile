@@ -103,3 +103,9 @@ gem 'paperclip'
 #link
 gem 'rails_autolink'
 
+#db seed
+gem 'seed_dump'
+
+# messaging & notification
+gem 'mailboxer'
+
