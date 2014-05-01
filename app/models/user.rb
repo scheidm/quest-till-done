@@ -98,12 +98,16 @@ class User < ActiveRecord::Base
     self.promote_in_group g
     cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", group_id: g.id, status: "Open"})
     q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
+    enc = Encounter.create({ user: self})
+    enc.end_time = Time.now.utc
+    enc.rounds << Round.create({ type: 'Campaign', event_id: cam.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
+    enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
+    q=Quest.create({name: "To Do's", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     self.active_quest=q
     self.save
     self.reload
     enc = Encounter.create({ user: self})
     enc.end_time = Time.now.utc
-    enc.rounds << Round.create({ type: 'Campaign', event_id: cam.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.save
 
