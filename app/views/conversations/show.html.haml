@@ -1,4 +1,5 @@
 = conversation.subject
+= conversation.mark_as_read(@user)
 
 %br
 - conversation.participants.each do |participant|
@@ -24,7 +25,6 @@
 - conversation.receipts_for(@user) do |receipt|
   = receipt.message
   = message.sender.message_user
-  - receipt.mark_as_read
 
 %p
   Sent on
