@@ -80,7 +80,7 @@ module JsonGenerator
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
     def generateTDJSON(user)
-      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#'}}
+      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#', :color => '#fdd0a2'}}
       data[:children] = children = []
       user.campaigns.each {|campaigns|
         children << generateTDQuestJSON(campaigns)
@@ -90,10 +90,21 @@ module JsonGenerator
     end
 
     def generateTDQuestJSON(campaign)
-      data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
+      data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status, :color => '#c6dbef'}}
       data[:children] = children = []
       campaign.quests.each {|quest|
-        children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
+        color = '#29AB87'
+        radius = 45;
+        if quest.importance then
+          color = '#0A6F75'
+          radius = 60;
+        end
+        if (!quest.deadline.nil? && quest.deadline < 7.days.from_now) then
+          color = '#AF4D43'
+          radius = 45 + 40/7;
+        end
+
+        children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status, :color => color, :radius => radius}}
       }
       return data
     end

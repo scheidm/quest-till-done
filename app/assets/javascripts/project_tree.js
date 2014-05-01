@@ -7,9 +7,12 @@ var length;
 
 function buildTree(treeData)
 {
+    var c = calculateHeight(treeData);
+    var height = 800;
+    if(c > 1)
+        height = c * 200;
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
-        width = 960 - margin.right - margin.left,
-        height = 960 - margin.top - margin.bottom;
+        width = 960 - margin.right - margin.left;
 
     length = width / 3;
 
@@ -167,6 +170,35 @@ function renderQuestDetail(d) {
     var html = "Description: " + d.attr.status + "</br>" +
                "Status: <span class='label label-"+ css+"'>"+ d.attr.status +"</span>"
     return html;
+}
+
+function calculateHeight(treeData)
+{
+    if(treeData.children == undefined) return;
+    var max = treeData.children.length;
+    var data = treeData;
+    while(data.children != undefined && data.children.length != 0)
+    {
+        var arr = flattenCampaignTree(data);
+        max = Math.max(max, arr.length);
+        data = new Object;
+        data.children = [];
+        arr.forEach(function (item) {
+            if(item.children != undefined)
+                item.children.forEach(function (c){
+                    data.children.push(c);
+                });
+        });
+    }
+    return max;
+}
+
+function flattenCampaignTree(node)
+{
+    if(node.children == undefined) return [];
+    var arr  = [];
+    node.children.forEach(function (item) {arr.push(item);});
+    return arr;
 }
 
 function buildTreeRadial(treeData)
