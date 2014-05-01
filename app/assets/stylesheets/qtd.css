@@ -305,6 +305,12 @@ input:-webkit-autofill:focus {
     color: #999;
     float: left;
 }
+
+.td-label {
+    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-anchor: middle;
+    color: #ffffff;
+}
 /**************** Button **************************/
 
 .btn-timer-setting {
