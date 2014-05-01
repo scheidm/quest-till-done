@@ -112,6 +112,8 @@
                   = link.created_at.strftime("%m/%d/%Y %I:%M%p")
                 %p.list-group-item-text
                   = auto_link(link.description)
+                  %br
+                    = auto_link(link.url)
               %td{:float => "right"}
                 = button_to " x ", {:controller => :records,
                                     :action => 'destroy', :id => link.id }, :method => :delete, :confirm => "Are you sure?"
