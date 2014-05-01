@@ -109,3 +109,6 @@ gem 'seed_dump'
 # messaging & notification
 gem 'mailboxer'
 
+# pdf
+gem 'wkhtmltopdf-binary'
+gem 'pdfkit'

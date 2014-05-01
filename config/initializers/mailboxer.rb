@@ -4,11 +4,11 @@ Mailboxer.setup do |config|
   config.uses_emails = true
 
   #Configures the default from for the email sent for Messages and Notifications of Mailboxer
-  config.default_from = "no-reply@quest-till-done.com"
+  config.default_from = "no-reply@mailboxer.com"
 
   #Configures the methods needed by mailboxer
-  config.email_method = :mesage_email
-  config.name_method = :message_name
+  config.email_method = :message_email
+  config.name_method = :message_user
 
   #Configures if you use or not a search engine and wich one are you using
   #Supported enignes: [:solr,:sphinx]

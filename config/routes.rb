@@ -67,6 +67,10 @@ QuestTillDone::Application.routes.draw do
     end
   end
 
+  resources :notifications do
+    get 'reply', 'trashbin', 'group_kick', 'group_invite', 'group_promote'
+  end
+
   #get '/project', to: redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -150,6 +154,23 @@ QuestTillDone::Application.routes.draw do
         end
       end
       resource :avatar, only: [:destroy]
+    end
+  end
+
+  resources :messages do
+    member do
+      post :new
+    end
+  end
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+    collection do
+      get :trashbin
+      post :empty_trash
     end
   end
 

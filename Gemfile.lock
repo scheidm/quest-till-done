@@ -193,6 +193,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    pdfkit (0.6.2)
     pg (0.17.1)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -297,6 +298,7 @@ GEM
       selenium-webdriver (>= 2.18.0)
     websocket (1.0.7)
     will_paginate (3.0.5)
+    wkhtmltopdf-binary (0.9.9.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
     yard (0.8.7.3)
@@ -331,6 +333,7 @@ DEPENDENCIES
   local_time
   mailboxer
   paperclip
+  pdfkit
   pg
   rack-mini-profiler
   rails (= 4.0.0)
@@ -347,4 +350,5 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   watir-webdriver
   will_paginate
+  wkhtmltopdf-binary
   yard

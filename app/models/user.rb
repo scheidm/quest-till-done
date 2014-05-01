@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :login
 
-  has_many :notifications, dependent: :destroy
+  # has_many :conversations, dependent: :destroy
   has_one :timer
   has_one :wrapper_group, class_name: "Group"
   has_many :campaigns, through: :wrapper_group
@@ -163,8 +163,13 @@ class User < ActiveRecord::Base
     return self.username
   end
 
-  def message_email
-    return self.email
+  def message_email(object)
+    if instance_of? User
+      return object.email
+    else
+      return nil
+    end
+
   end
 
 end
