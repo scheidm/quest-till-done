@@ -38,7 +38,9 @@
                 %div
                   %a{href: "/users/"}
                     =@user.username
-                  %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"} 3
+                  %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"}
+                    = link_to "#{@user.mailbox.inbox(:unread => true).count(:id, :distinct => true)}" , conversations_path
+
                 %div{style: "color:#999999"}
                   C# Guru
                 .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Experience"}

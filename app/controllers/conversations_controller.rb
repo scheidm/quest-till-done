@@ -1,10 +1,10 @@
 
 class ConversationsController < ApplicationController
-  before_filter :authenticate_user!
+
   helper_method :mailbox, :conversation
 
   def index
-    @conversation = @user.mailbox.inbox.all
+    @conversations = @user.mailbox.inbox.all
   end
 
   def reply
@@ -67,7 +67,7 @@ class ConversationsController < ApplicationController
   private
 
   def mailbox
-    @mailbox ||= current_user.mailbox
+    @mailbox ||= @user.mailbox
   end
 
   def conversation

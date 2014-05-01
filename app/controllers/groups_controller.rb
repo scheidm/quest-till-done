@@ -34,6 +34,7 @@ class GroupsController < ApplicationController
         @group.users.push @user
         format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
+        @user.send_message(@user, 'You created a new group! Start adding members from your group page!', 'New Group Created')
       else
         format.html { render action: 'new'}
         format.json { render json: @group.errors, status: :unprocessable_entity }
@@ -46,7 +47,9 @@ class GroupsController < ApplicationController
     @group.leave @user
     respond_to do |format|
       format.html { redirect_to groups_path, :flash => { :success =>"Left group #{@group.name}" }}
+      @user.send_message(@user, "You left a group!", "You left group #{@group.name}")
     end
+
   end
 
   def kick
@@ -55,6 +58,7 @@ class GroupsController < ApplicationController
     @group.leave @target unless @group.admins.include? @target
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>"Removed member #{@target.username}" }}
+      @user.send(@target, "You have been kick from group #{@group.name}", "You no longer have access to #{@group.name} ")
     end
   end
 
@@ -64,6 +68,7 @@ class GroupsController < ApplicationController
     @target.promote_in_group @group
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>"Promoted member #{@target.username}" }}
+      @user.send_message(@target, "You have been promoted in group #{@group.name}", "Check you new privileges at group #{@group.name}")
     end
   end
 
@@ -73,6 +78,7 @@ class GroupsController < ApplicationController
     @group.demote @target
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>"Demoted member #{@target.username}" }}
+      @user.send_message(@target, "You have been demoted from group: #{@group.name}", "Your privileges have been demoted by yourself")
     end
   end
 

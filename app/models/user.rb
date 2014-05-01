@@ -169,7 +169,7 @@ class User < ActiveRecord::Base
 
   def message_email(object)
     if instance_of? User
-      return object.email
+      return self.email
     else
       return nil
     end
