@@ -115,8 +115,6 @@ class UsersController < ApplicationController
     github_update_all_projects
   end
 
-  handle_asynchronously :github_background_jobs
-
 
 
   def get_td_json

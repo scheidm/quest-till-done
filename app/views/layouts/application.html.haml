@@ -39,7 +39,7 @@
                   %a{href: "/users/"}
                     =@user.username
                   %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"}
-                    = link_to "#{@user.mailbox.inbox(:unread => true).count(:id, :distinct => true)}" , conversations_path
+                    = link_to "#{@user.mailbox.inbox(:unread => true).count(:id, :distinct => true)}" , conversations_path, :id => 'notifcation_count'
 
                 %div{style: "color:#999999"}
                   C# Guru

@@ -112,3 +112,12 @@ gem 'mailboxer'
 # pdf
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
+
+gem 'gritter'
+
+# background Job
+
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+gem 'whenever', :require => false

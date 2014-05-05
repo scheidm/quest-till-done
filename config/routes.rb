@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 QuestTillDone::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => 'qtdregistrations' }
@@ -70,6 +72,9 @@ QuestTillDone::Application.routes.draw do
   resources :notifications do
     get 'reply', 'trashbin', 'group_kick', 'group_invite', 'group_promote'
   end
+
+
+  mount Sidekiq::Web, at: '/jobs'
 
   #get '/project', to: redirect('/')
 

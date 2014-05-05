@@ -34,6 +34,7 @@ class GroupsController < ApplicationController
         @group.users.push @user
         format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
+        # send notification
         @user.send_message(@user, 'You created a new group! Start adding members from your group page!', 'New Group Created')
       else
         format.html { render action: 'new'}
@@ -47,7 +48,13 @@ class GroupsController < ApplicationController
     @group.leave @user
     respond_to do |format|
       format.html { redirect_to groups_path, :flash => { :success =>"Left group #{@group.name}" }}
-      @user.send_message(@user, "You left a group!", "You left group #{@group.name}")
+      # send notification
+      # send to user
+      @user.send_message(@user, "You left from group #{@group.name}!", "You left group #{@group.name}")
+      # send to group admin
+      @group.admins.each do |admin_user|
+        @user.send_message(admin_user, "Your group member #{@user.username} with email #{@user.email} has left your group, please reassign their tasks", 'You Left A Group')
+      end
     end
 
   end
@@ -58,7 +65,8 @@ class GroupsController < ApplicationController
     @group.leave @target unless @group.admins.include? @target
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>"Removed member #{@target.username}" }}
-      @user.send(@target, "You have been kick from group #{@group.name}", "You no longer have access to #{@group.name} ")
+      # send notification
+      @user.send(@target, "You have been kick from group #{@group.name}. <br> You no longer have access to #{@group.name}", 'You Have Been Kicked')
     end
   end
 
@@ -68,7 +76,7 @@ class GroupsController < ApplicationController
     @target.promote_in_group @group
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>"Promoted member #{@target.username}" }}
-      @user.send_message(@target, "You have been promoted in group #{@group.name}", "Check you new privileges at group #{@group.name}")
+      @user.send_message(@target, "You have been promoted in group #{@group.name}. Check you new privileges at group #{@group.name}", 'You Have Been Promoted')
     end
   end
 
@@ -78,7 +86,7 @@ class GroupsController < ApplicationController
     @group.demote @target
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => { :success =>"Demoted member #{@target.username}" }}
-      @user.send_message(@target, "You have been demoted from group: #{@group.name}", "Your privileges have been demoted by yourself")
+      @user.send_message(@target, "You have been demoted from group: #{@group.name}. Your privileges have been demoted by yourself" , 'You Have Been Demoted')
     end
   end
 
@@ -89,12 +97,19 @@ class GroupsController < ApplicationController
   def invite_user
     @group = Group.find(params[:id])
     user = User.find( params[:user_id] )
-    if ! @group.users.include? user
-      @group.users.push user
-    end
+
     respond_to do |format|
-      format.html { redirect_to group_path(@group), :flash => { :success =>'Member added successfully.' }}
+      format.html { redirect_to group_path(@group), :flash => { :success =>'Member invitation has been sent successfully, wait for user to response.' }}
     end
+
+    #notification
+    @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join?", 'Group Invitation')
+
+    #no direct add member anymore
+    # if ! @group.users.include? user
+    #   @group.users.push user
+    # end
+
   end
 
   def accept_user
