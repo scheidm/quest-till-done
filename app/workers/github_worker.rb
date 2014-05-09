@@ -5,7 +5,7 @@ class GithubWorker
 
   def perform(user)
     current_user = User.find(user)
-    login
+    login(current_user)
     github_update_all_projects(user)
   end
 
