@@ -1,4 +1,3 @@
-!!!
 %html{lang: "en"}
   %head
     %meta{charset: "utf-8"}/
@@ -39,7 +38,11 @@
                   %a{href: "/users/"}
                     =@user.username
                   %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"}
-                    = link_to "#{@user.mailbox.inbox(:unread => true).count(:id, :distinct => true)}" , conversations_path, :id => 'notifcation_count'
+                    = link_to "#{@notification_count}" , conversations_path, :id => 'notifcation_count'
+                    -if @notification_count - 1 > 0
+                      = js add_gritter("You have multiple unread notifications, view them <a href=#{conversations_path}>Here</a>", :title => 'Please Take Notice')
+                    -elsif @notification_count == 1
+                      = js add_gritter("You have one unread notification, view them <a href=#{conversations_path}>Here</a>")
 
                 %div{style: "color:#999999"}
                   C# Guru
@@ -139,3 +142,4 @@
   ul.ui-autocomplete {
       z-index: 1100;
   }
+

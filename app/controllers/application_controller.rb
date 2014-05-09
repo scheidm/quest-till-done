@@ -37,6 +37,7 @@ class ApplicationController < ActionController::Base
         @active_quest_campaign_name = active_quest.campaign.name
         @active_quest_campaign_url = campaign_path(active_quest.campaign)
       end
+      @notification_count = @user.mailbox.inbox(:unread => true).count(:id, :distinct => true)
     end
   end
 

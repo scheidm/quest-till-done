@@ -15,3 +15,4 @@
           = t.updated_at.strftime("%a, %m/%e/%Y %I:%M %p")
         %td
           = button_to "Trash It!", {:controller => "conversations", :action => "untrash", :id => t.id},  :title => "Move to Inbox", :method=>'post'
+
