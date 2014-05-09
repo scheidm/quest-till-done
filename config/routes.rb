@@ -59,6 +59,8 @@ QuestTillDone::Application.routes.draw do
     collection do
       get 'promote', 'timeline', 'demote'
     end
+    get ':user_id/accept' => 'groups#accept'
+    get ':user_id/reject' => 'groups#reject'
   end
 
   resource :group do
@@ -66,6 +68,7 @@ QuestTillDone::Application.routes.draw do
       get ':id/kick' => 'groups#kick'
       get ':id/invite_user' => 'groups#invite_user'
       get ':id/leave' => 'groups#leave'
+
     end
   end
 
@@ -178,6 +181,7 @@ QuestTillDone::Application.routes.draw do
       post :empty_trash
     end
   end
+
 
  # match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
 

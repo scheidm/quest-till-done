@@ -19,8 +19,39 @@ class GroupsController < ApplicationController
     unless current_power.group? @group
   end
 
-  def group_params
-    params.require(:group).permit(:id, :name)
+
+  def accept
+    group = Group.find(params[:group_id])
+    user = User.find(params[:user_id])
+    #check validity of this request
+    invitation = Groupinvitations.where("group_id = ? AND user_id =? and accept != ? AND expired != ?", group.id, user.id, false, false).first
+    puts "========================RUNING WELL+++======================"
+    puts invitation.to_s
+    if invitation
+
+      if ! @group.users.include? user
+        group.users.push user
+      end
+
+      redirect_to groups_path
+    else
+      gflash :now, :error => "Something went wrong. You should not see this page"
+      redirect_to conversations_path
+    end
+  end
+
+  def reject
+    group = Group.find(params[:group_id])
+    user = User.find(params[:user_id])
+    invitation = Groupinvitations.where("group_id = ? AND user_id =? and accept != ? AND expired != ?", group.id, user.id, false, false).first
+    if invitation
+      invitation.accept = false
+      invitation.expired = true
+      redirect_to conversations_path
+    else
+      gflash :now, :error => "Something went wrong. You should not see this page"
+      redirect_to conversations_path
+    end
   end
 
   def new
@@ -100,7 +131,7 @@ class GroupsController < ApplicationController
     user = User.find(params[:user_id])
 
 
-    unless !!Groupinvitations.where("user_id=? AND group_id=?", user.id, group.id)
+    if Groupinvitations.where("user_id=? AND group_id=?", user.id, group.id)
       invitation = Groupinvitations.create({
                                                group_id: @group.id,
                                                user_id: user.id,
@@ -110,7 +141,7 @@ class GroupsController < ApplicationController
                                            })
 
       #notification
-      @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='#{::Rails.root/group_path}'>Accept</a> <a href='#'>Reject</a> ", 'Group Invitation')
+      @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='http://#{request.host}:#{request.port}/groups/#{@group.id}/#{user.id}/accept'>Accept</a> <a href='http://#{request.host}:#{request.port}/groups/#{@group.id}/#{user.id}/reject'>Reject</a> ", 'Group Invitation')
 
       respond_to do |format|
         format.html { redirect_to group_path(@group), :flash => {:success => 'Member invitation has been sent successfully, wait for user to response.'} }
@@ -146,6 +177,10 @@ class GroupsController < ApplicationController
 
   def group
     @group ||= Group.find(params[:id])
+  end
+
+  def group_params
+    params.require(:group).permit(:id, :name, :user_id, :group_id)
   end
 
 

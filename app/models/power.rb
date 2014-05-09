@@ -41,4 +41,9 @@ class Power
   power :updatable_groups, :destroyable_groups do
     user.groups_where_admin_and_wrapper
   end
+
+  power :groupinvitations do
+    Groupinvitations.where("user_id = ? ", @user.id)
+  end
+
 end
