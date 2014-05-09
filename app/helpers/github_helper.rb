@@ -176,7 +176,6 @@ module GithubHelper
 
   # Update Issues and Commits
   def update_project(username, projectname)
-
     #handle commits
     list_commits username, projectname, Encounter.last, Campaign.last
     #handle issues

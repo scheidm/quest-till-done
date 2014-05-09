@@ -10,12 +10,15 @@
 #   rake "some:great:rake:task"
 # end
 #
+#
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
 
 # Learn more: http://github.com/javan/whenever
 
-every 15.minutes do
-  runner "UsersController.github_background_jobs"
+every 1.minutes do
+  command "bundle exec rake searchkick:reindex CLASS='Quest'"
+  command "bundle exec rake searchkick:reindex CLASS='Record'"
+  command "bundle exec rake searchkick:reindex CLASS='User'"
 end

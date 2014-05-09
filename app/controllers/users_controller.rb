@@ -110,12 +110,6 @@ class UsersController < ApplicationController
     params.require(:user_config).permit(:id, :encounter_duration, :short_break_duration, :extended_break_duration, :encounter_extend_duration, :user_id, :status, :importance, :deadline)
   end
 
-  def github_background_jobs
-    login? || login
-    github_update_all_projects
-  end
-
-
 
   def get_td_json
     render :text => generateTDJSON(@user)

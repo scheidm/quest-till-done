@@ -38,6 +38,7 @@ class ApplicationController < ActionController::Base
         @active_quest_campaign_url = campaign_path(active_quest.campaign)
       end
       @notification_count = @user.mailbox.inbox(:unread => true).count(:id, :distinct => true)
+      GithubWorker.perform_async(@user)
     end
   end
 
