@@ -3,7 +3,8 @@ class GroupsController < ApplicationController
   power :crud => :groups
 
   include JsonGenerator::TimelineModule
-  
+  include RoundHelper
+
   # Display a list of all groups for the current user
   def index
     @member_groups = @user.groups_where_member
@@ -14,7 +15,7 @@ class GroupsController < ApplicationController
   # access rights granted to them.
   def show
     @group = Group.find(params[:id])
-  redirect_to groups_path, :flash => { :warning =>"Permission Denied"}\
+    redirect_to groups_path, :flash => {:warning => "Permission Denied"}\
     unless current_power.group? @group
   end
 
@@ -37,7 +38,7 @@ class GroupsController < ApplicationController
         # send notification
         @user.send_message(@user, 'You created a new group! Start adding members from your group page!', 'New Group Created')
       else
-        format.html { render action: 'new'}
+        format.html { render action: 'new' }
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
@@ -47,7 +48,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group.leave @user
     respond_to do |format|
-      format.html { redirect_to groups_path, :flash => { :success =>"Left group #{@group.name}" }}
+      format.html { redirect_to groups_path, :flash => {:success => "Left group #{@group.name}"} }
       # send notification
       # send to user
       @user.send_message(@user, "You left from group #{@group.name}!", "You left group #{@group.name}")
@@ -64,7 +65,7 @@ class GroupsController < ApplicationController
     @target = User.find(params[:user_id])
     @group.leave @target unless @group.admins.include? @target
     respond_to do |format|
-      format.html { redirect_to group_path(@group), :flash => { :success =>"Removed member #{@target.username}" }}
+      format.html { redirect_to group_path(@group), :flash => {:success => "Removed member #{@target.username}"} }
       # send notification
       @user.send(@target, "You have been kick from group #{@group.name}. <br> You no longer have access to #{@group.name}", 'You Have Been Kicked')
     end
@@ -75,7 +76,7 @@ class GroupsController < ApplicationController
     @target = User.find(params[:user_id])
     @target.promote_in_group @group
     respond_to do |format|
-      format.html { redirect_to group_path(@group), :flash => { :success =>"Promoted member #{@target.username}" }}
+      format.html { redirect_to group_path(@group), :flash => {:success => "Promoted member #{@target.username}"} }
       @user.send_message(@target, "You have been promoted in group #{@group.name}. Check you new privileges at group #{@group.name}", 'You Have Been Promoted')
     end
   end
@@ -85,8 +86,8 @@ class GroupsController < ApplicationController
     @target = User.find(params[:user_id])
     @group.demote @target
     respond_to do |format|
-      format.html { redirect_to group_path(@group), :flash => { :success =>"Demoted member #{@target.username}" }}
-      @user.send_message(@target, "You have been demoted from group: #{@group.name}. Your privileges have been demoted by yourself" , 'You Have Been Demoted')
+      format.html { redirect_to group_path(@group), :flash => {:success => "Demoted member #{@target.username}"} }
+      @user.send_message(@target, "You have been demoted from group: #{@group.name}. Your privileges have been demoted by yourself", 'You Have Been Demoted')
     end
   end
 
@@ -96,14 +97,30 @@ class GroupsController < ApplicationController
 
   def invite_user
     @group = Group.find(params[:id])
-    user = User.find( params[:user_id] )
+    user = User.find(params[:user_id])
 
-    respond_to do |format|
-      format.html { redirect_to group_path(@group), :flash => { :success =>'Member invitation has been sent successfully, wait for user to response.' }}
+
+    unless !!Groupinvitations.where("user_id=? AND group_id=?", user.id, group.id)
+      invitation = Groupinvitations.create({
+                                               group_id: @group.id,
+                                               user_id: user.id,
+                                               accept: false,
+                                               created_at: Time.now,
+                                               expired: false
+                                           })
+
+      #notification
+      @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='#{::Rails.root/group_path}'>Accept</a> <a href='#'>Reject</a> ", 'Group Invitation')
+
+      respond_to do |format|
+        format.html { redirect_to group_path(@group), :flash => {:success => 'Member invitation has been sent successfully, wait for user to response.'} }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to group_path(@group), :flash => {:failure => 'You have already sent invitation please wait till user respond.'} }
+      end
     end
 
-    #notification
-    @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join?", 'Group Invitation')
 
     #no direct add member anymore
     # if ! @group.users.include? user
@@ -121,9 +138,15 @@ class GroupsController < ApplicationController
     render :text => generateTimeline(@group.rounds.limit(100))
   end
 
+  def confirm_invite
+    Groupinvitations.find_by_user_id(params[:user_id]).where("expired = ? AND group_id = ?", false, params[:group_id])
+  end
+
   private
 
   def group
     @group ||= Group.find(params[:id])
   end
+
+
 end

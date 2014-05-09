@@ -4,7 +4,7 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
 
   def index
-    @conversations = @user.mailbox.inbox.all
+    @conversations = @user.mailbox.inbox.all.sort
   end
 
   def reply

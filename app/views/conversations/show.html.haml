@@ -1,16 +1,16 @@
 %hr
 Subject :
 = conversation.subject
-= conversation.mark_as_read(@user)
+- conversation.mark_as_read(@user)
 
-%br
+
 - conversation.participants.each do |participant|
   - if participant != @user
     - @userself = participant.message_user.to_s
   - else
     - @otherself = participant.message_user.to_s
 %p
-  A conversation with
+  A conversation between
   -if @userself.nil?
     %b
       = @user.message_user.to_s
@@ -21,8 +21,9 @@ Subject :
   %b
     = @otherself
 
-
-= conversation.original_message.body
+%p
+  Body:
+=  conversation.original_message.body.html_safe
 
 
 - conversation.receipts_for(@user) do |receipt|
