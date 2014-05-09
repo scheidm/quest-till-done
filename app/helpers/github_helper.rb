@@ -182,7 +182,7 @@ module GithubHelper
     list_issues username, projectname, Encounter.last, Campaign.last
   end
 
-  def github_update_all_projects
+  def github_update_all_projects(user)
     #get all projects
     @repo_list = list_projects
     @repo_list.each do |t|

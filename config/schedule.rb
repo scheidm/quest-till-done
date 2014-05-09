@@ -18,7 +18,7 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.minutes do
-  command "bundle exec rake searchkick:reindex CLASS='Quest'"
-  command "bundle exec rake searchkick:reindex CLASS='Record'"
-  command "bundle exec rake searchkick:reindex CLASS='User'"
+  command "cd /project/qtd/myfork/ && bundle exec rake searchkick:reindex CLASS='Quest'"
+  command "cd /project/qtd/myfork/ && bundle exec rake searchkick:reindex CLASS='Record'"
+  command "cd /project/qtd/myfork/ && bundle exec rake searchkick:reindex CLASS='User'"
 end
