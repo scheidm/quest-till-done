@@ -32,155 +32,425 @@
   /*.node--leaf {*/
   /*}*/
 :javascript
+   var jsond = {
+       "id": 0,
+       "attr": {
+           "name": "World View",
+           "description": "World View",
+           "url": "#",
+           "radius": 1000
 
-    $(document).ready(function () {
+       },
+       "children": [{
+           "id": 3,
+           "attr": {
+               "name": "Outer Ring 1",
+               "description": "A collection of to-dos and notes that don't fit anywhere else",
+               "url": "/campaigns/3",
+               "status": "Open",
+               "radius": 500
+           },
+           "children": [{
+               "id": 5,
+               "attr": {
+                   "name": "Outer Ring 2",
+                   "description": null,
+                   "url": "/quests/5",
+                   "status": "Open",
+                   "radius": 45,
+               },
+               "children": [{
+                   "id": 3,
+                   "attr": {
+                       "name": "Outer Ring 3",
+                       "description": "A collection of to-dos and notes that don't fit anywhere else",
+                       "url": "/campaigns/3",
+                       "status": "Open",
+                       "radius": 500
+                   },
+                   "children": [{
+                       "id": 5,
+                       "attr": {
+                           "name": "Outer Ring 4",
+                           "description": null,
+                           "url": "/quests/5",
+                           "status": "Open",
+                           "radius": 45,
+                       },
+                       "children": [{
+                           "id": 3,
+                           "attr": {
+                               "name": "Outer Ring 5",
+                               "description": "A collection of to-dos and notes that don't fit anywhere else",
+                               "url": "/campaigns/3",
+                               "status": "Open",
+                               "radius": 500
+                           },
+                           "children": [{
+                               "id": 5,
+                               "attr": {
+                                   "name": "Outer Ring 6",
+                                   "description": null,
+                                   "url": "/quests/5",
+                                   "status": "Open",
+                                   "radius": 45,
+                               },
+                               "children": [{
+                                   "id": 5,
+                                   "attr": {
+                                       "name": "Campaign here",
+                                       "description": null,
+                                       "url": "/quests/5",
+                                       "status": "Open",
+                                       "color": "#29AB87",
+                                       "radius": 45,
+                                   }
+                               }]
+                           }]
+                       }, {
+                           "id": 44,
+                           "attr": {
+                               "name": "New Quest2",
+                               "description": null,
+                               "url": "/quests/6",
+                               "status": "Open",
+                               "color": "#29AB87",
+                               "radius": 45
+                           }
+                       }]
+                   }, {
+                       "id": 44,
+                       "attr": {
+                           "name": "New Quest2",
+                           "description": null,
+                           "url": "/quests/6",
+                           "status": "Open",
+                           "color": "#29AB87",
+                           "radius": 45
+                       }
+                   }]
+               }, {
+                   "id": 44,
+                   "attr": {
+                       "name": "New Quest2",
+                       "description": null,
+                       "url": "/quests/6",
+                       "status": "Open",
+                       "color": "#29AB87",
+                       "radius": 45
+                   }
+               }, {
+                   "id": 45,
+                   "attr": {
+                       "name": "New Quest2",
+                       "description": null,
+                       "url": "/quests/6",
+                       "status": "Open",
+                       "color": "#29AB87",
+                       "radius": 45
+                   }
+               }]
+           }, {
+               "id": 6,
+               "attr": {
+                   "name": "New Quest2",
+                   "description": null,
+                   "url": "/quests/6",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }, {
+               "id": 7,
+               "attr": {
+                   "name": "New Quest3",
+                   "description": null,
+                   "url": "/quests/7",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }]
+       }, {
+           "id": 24,
+           "attr": {
+               "name": "Test",
+               "description": "",
+               "url": "/campaigns/24",
+               "status": "Open",
+               "color": "#c6dbef",
+               "radius": 500
+           },
+           "children": [{
+               "id": 25,
+               "attr": {
+                   "name": "Q1",
+                   "description": null,
+                   "url": "/quests/25",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }, {
+               "id": 26,
+               "attr": {
+                   "name": "Q2",
+                   "description": null,
+                   "url": "/quests/26",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }, {
+               "id": 27,
+               "attr": {
+                   "name": "Q1Q",
+                   "description": null,
+                   "url": "/quests/27",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }, {
+               "id": 28,
+               "attr": {
+                   "name": "Q2Q",
+                   "description": null,
+                   "url": "/quests/28",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }, {
+               "id": 29,
+               "attr": {
+                   "name": "Q2Q2",
+                   "description": null,
+                   "url": "/quests/29",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }, {
+               "id": 30,
+               "attr": {
+                   "name": "Q2Q3",
+                   "description": null,
+                   "url": "/quests/30",
+                   "status": "Open",
+                   "color": "#29AB87",
+                   "radius": 45
+               }
+           }]
+       }, {
+           "id": 31,
+           "attr": {
+               "name": "Test3",
+               "description": "",
+               "url": "/campaigns/31",
+               "status": "Open",
+               "color": "#c6dbef",
+               "radius": 45
+           },
+           "children": []
+       }]
+   };
+
+   $(document).ready(function () {
        $.ajax({
-         type: "GET",
-         url: "/users/get_td_json",
-         success: function(data) {
-          var jsonData = JSON.parse(data);
+           type: "GET",
+           url: "/users/get_td_json",
+           success: function (data) {
+               var jsonData = JSON.parse(data);
 
-          buildTD(jsonData);
-         }
+               buildTD(jsond);
+           }
        });
-    });
+   });
 
-  function buildTD(jsonData)
-  {
+   function buildTD(jsonData) {
 
-    var margin = 20,
-        diameter = 960;
+       var margin = 20,
+           diameter = 960;
 
-    var color = d3.scale.linear()
-        .domain([-1, 5])
-        .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-        .interpolate(d3.interpolateHcl);
+       var color = d3.scale.linear()
+           .domain([-1, 5])
+           .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+           .interpolate(d3.interpolateHcl);
 
-    var pack = d3.layout.pack()
-        .padding(1)
-        .size([diameter - margin, diameter - margin])
-        .value(function(d) { return 1000; })
+       var pack = d3.layout.pack()
+           .padding(5)
+           .size([diameter - margin, diameter - margin])
+           .value(function (d) {
+               return 1000;
+           });
 
-    function getRadius(d) {
-      if(d.attr.radius != undefined)
-        return d.attr.radius;
-      else
-        return 1;
-    };
+       addPlaceholders(jsonData);
 
-    var svg = d3.select("#tower-defense").append("svg")
-        .attr("width", diameter)
-        .attr("height", diameter)
-      .append("g")
-        .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+       function getRadius(d) {
+           if (d.attr.radius != undefined)
+               return d.attr.radius;
+           else
+               return 1;
+       };
 
-    //d3.json(flare, function(error, root) {
-      //if (error) return console.error(error);
+       var svg = d3.select("#tower-defense").append("svg")
+           .attr("width", diameter)
+           .attr("height", diameter)
+           .append("g")
+           .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-      root = jsonData;
-      var focus = root,
-          nodes = pack.nodes(root),
-          view;
-
-      var circle = svg.selectAll("circle")
-        .data(nodes)
-        .enter().append("circle")
-        .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-        .style("fill", function(d){ return d.attr.color; })
-        .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
-
-      var text = svg.selectAll("text")
-          .data(nodes)
-        .enter().append("text")
-          .attr("class", "td-label")
-          .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-          .style("display", function(d) { return d.parent === root ? null : "none"; })
-          .text(function(d) { return d.attr.name; });
-
-      var node = svg.selectAll("circle,text");
-      var leafnode = svg.selectAll(".node--leaf");
-
-      d3.select("#tower-defense")
-          .on("click", function() { zoom(root); });
-
-      zoomTo([root.x, root.y, root.r * 2 + margin]);
-
-      function zoom(d) {
-        var focus0 = focus; focus = d;
-
-        var transition = d3.transition()
-            .duration(d3.event.altKey ? 7500 : 750)
-            .tween("zoom", function(d) {
-              var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-              return function(t) { zoomTo(i(t)); };
-            });
-
-        transition.selectAll("text")
-          .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-            .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-            .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-            .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-
-        $('#tower-defense .popover').remove();
-        setTimeout(function(){
-                    var nodes = svg.selectAll("circle");
-                    nodes.on('mousein', function(d){
-                       if(d.id != 0)
-                        renderDetailBox2(this, d);
-                    });
-                }
-                , duration + 100);
-      }
-
-      function zoomTo(v) {
+       //d3.json(flare, function(error, root) {
+       //if (error) return console.error(error);
 
 
-        var k = diameter / v[2]; view = v;
-        node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-        circle.attr("r", function(d) { return d.r * k; });
-       // leafnode.attr("r",  function(d) {  return d.attr.radius * k; });
-      }
-    //});
+       root = jsonData;
+       var focus = root,
+           nodes = pack.nodes(root),
+           view;
 
-    d3.select(self.frameElement).style("height", diameter + "px");
-    var nodes = svg.selectAll("circle");
-    nodes.each(function(d) {
-        if(d.id != 0)
-          renderDetailBox2(this, d);
-    });
-  }
+       removePlaceholders(nodes);
 
-  function renderDetailBox2(svg, d)
-  {
-      var placement = d.children ? "left" : "right";
-      $(svg).popover('destroy');
-      $(svg).popover({
-          'trigger': 'manual',
-          'html': true,
-          'title': '<a href='+ d.attr.url +'>'+d.attr.name + '</a>',
-          'content': renderQuestDetail2(d),
-          'placement': placement,
-          'container': '#tower-defense'
-      }).on("mouseenter", function() {
-          var _this = this;
-          $(this).popover("show");
-          $(this).siblings(".popover").on("mouseleave", function() {
-            $(_this).popover('hide');
-          });
-          var thisPopover = "#td-popover-" + d.id;
-          $(thisPopover).parent().parent().mouseleave(function() {
-            $(_this).popover('hide');
-          });
-        }).on("mouseleave", function() {
-          var _this = this;
-          setTimeout(function() {
-            var thisPopover = "#td-popover-" + d.id;
-            if (!$(".popover:hover").length) {
-              $(_this).popover("hide")
-            }
-          }, 100);
-        });
-  }
+       centerNodes( nodes );
+
+       makePositionsRelativeToZero( nodes );
+
+       var circle = svg.selectAll("circle")
+           .data(nodes)
+           .enter().append("circle")
+           .attr("class", function (d) {
+               return d.parent ? d.children ? "node" : "node" : "node node--root";
+           })
+           .style("fill", function (d) {
+              if(d.attr.color == undefined)
+                  return "#1f77b4";
+              else
+                  return d.attr.color;
+           })
+           .style("fill-opacity", function (d) {
+              if(d.attr.color == undefined)
+                  return .1;
+              else
+                  return 1;
+           })
+           .on("click", function (d) {
+               if (focus !== d) zoom(d), d3.event.stopPropagation();
+           });
+
+       var text = svg.selectAll("text")
+           .data(nodes)
+           .enter().append("text")
+           .attr("class", "td-label")
+           .style("fill-opacity", function (d) {
+               return d.parent === root ? 1 : 0;
+           })
+           .style("display", function (d) {
+               return d.parent === root ? null : "none";
+           })
+           .text(function (d) {
+               return d.attr.name;
+           });
+
+       var node = svg.selectAll("circle,text");
+       var leafnode = svg.selectAll(".node--leaf");
+
+       d3.select("#tower-defense")
+           .on("click", function () {
+               zoom(root);
+           });
+
+       zoomTo([root.x, root.y, root.r * 2 + margin]);
+
+       function zoom(d) {
+           var focus0 = focus;
+           focus = d;
+
+           var transition = d3.transition()
+               .duration(d3.event.altKey ? 7500 : 750)
+               .tween("zoom", function (d) {
+                   var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+                   return function (t) {
+                       zoomTo(i(t));
+                   };
+               });
+
+           transition.selectAll("text")
+               .filter(function (d) {
+                   return d.parent === focus || this.style.display === "inline";
+               })
+               .style("fill-opacity", function (d) {
+                   return d.parent === focus ? 1 : 0;
+               })
+               .each("start", function (d) {
+                   if (d.parent === focus) this.style.display = "inline";
+               })
+               .each("end", function (d) {
+                   if (d.parent !== focus) this.style.display = "none";
+               });
+
+           $('#tower-defense .popover').remove();
+           setTimeout(function () {
+               var nodes = svg.selectAll("circle");
+               nodes.on('mousein', function (d) {
+                   if (d.id != 0)
+                       renderDetailBox2(this, d);
+               });
+           }, duration + 100);
+       }
+
+       function zoomTo(v) {
+
+
+           var k = diameter / v[2];
+           view = v;
+           node.attr("transform", function (d) {
+               return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")";
+           });
+           circle.attr("r", function (d) {
+               return d.r * k;
+           });
+           // leafnode.attr("r",  function(d) {  return d.attr.radius * k; });
+       }
+       //});
+
+       d3.select(self.frameElement).style("height", diameter + "px");
+       var nodes = svg.selectAll("circle");
+       nodes.each(function (d) {
+           if (d.id != 0)
+               renderDetailBox2(this, d);
+       });
+   }
+
+   function renderDetailBox2(svg, d) {
+       var placement = d.children ? "left" : "right";
+       $(svg).popover('destroy');
+       $(svg).popover({
+           'trigger': 'manual',
+           'html': true,
+           'title': '<a href=' + d.attr.url + '>' + d.attr.name + '</a>',
+           'content': renderQuestDetail2(d),
+           'placement': placement,
+           'container': '#tower-defense'
+       }).on("mouseenter", function () {
+           var _this = this;
+           $(this).popover("show");
+           $(this).siblings(".popover").on("mouseleave", function () {
+               $(_this).popover('hide');
+           });
+           var thisPopover = "#td-popover-" + d.id;
+           $(thisPopover).parent().parent().mouseleave(function () {
+               $(_this).popover('hide');
+           });
+       }).on("mouseleave", function () {
+           var _this = this;
+           setTimeout(function () {
+               var thisPopover = "#td-popover-" + d.id;
+               if (!$(".popover:hover").length) {
+                   $(_this).popover("hide")
+               }
+           }, 100);
+       });
+   }
 
   function renderQuestDetail2(d) {
       var css = d.attr.status.toString().trim().replace(/ /g,'');
@@ -188,4 +458,84 @@
                  "Status: <span class='label label-"+ css+"'>"+ d.attr.status +"</span></div>";
       return html;
   }
+
+  function addPlaceholders( node ) {
+
+      if(node.children) {
+
+          for( var i = 0; i < node.children.length; i++ ) {
+
+              var child = node.children[i];
+              addPlaceholders( child );
+          }
+
+          if(node.children.length === 1) {
+
+              node.children.push({ name:'placeholder', children: [ { name:'placeholder', children:[] }] });
+          }
+      }
+  };
+
+  function removePlaceholders( nodes ) {
+
+      for( var i = nodes.length - 1; i >= 0; i-- ) {
+
+          var node = nodes[i];
+
+          if( node.name === 'placeholder' ) {
+
+              nodes.splice(i,1);
+          } else {
+
+              if( node.children ) {
+
+                  removePlaceholders( node.children );
+              }
+          }
+      }
+  };
+
+  function centerNodes( nodes ) {
+
+      for( var i = 0; i < nodes.length; i ++ ) {
+
+          var node = nodes[i];
+
+          if( node.children ) {
+
+              if( node.children.length === 1) {
+
+                  var offset = node.x - node.children[0].x;
+                  node.children[0].x += offset;
+                  reposition(node.children[0],offset);
+              }
+          }
+      }
+
+      function reposition( node, offset ) {
+
+          if(node.children) {
+              for( var i = 0; i < node.children.length; i++ ) {
+
+                  node.children[i].x += offset;
+                  reposition( node.children[i], offset );
+              }
+          }
+      };
+  };
+
+  function makePositionsRelativeToZero( nodes ) {
+
+      //use this to have vis centered at 0,0,0 (easier for positioning)
+      var offsetX = nodes[0].x;
+      var offsetY = nodes[0].y;
+
+      for( var i = 0; i < nodes.length; i ++ ) {
+
+          var node = nodes[i];
+
+          node.x -= offsetX;
+          node.y -= offsetY;
+      }
+  };
 

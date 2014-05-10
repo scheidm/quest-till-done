@@ -80,7 +80,7 @@ module JsonGenerator
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
     def generateTDJSON(user)
-      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#', :color => '#fdd0a2'}}
+      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#'}}
       data[:children] = children = []
       user.campaigns.each {|campaigns|
         children << generateTDQuestJSON(campaigns)
