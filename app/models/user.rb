@@ -106,7 +106,6 @@ class User < ActiveRecord::Base
     self.active_quest=q
     self.save
     self.reload
-    enc = Encounter.create({ user: self})
     enc.end_time = Time.now.utc
     enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.save

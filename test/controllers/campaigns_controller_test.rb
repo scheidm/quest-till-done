@@ -23,7 +23,7 @@ class CampaignsControllerTest < ActionController::TestCase
 
   test "Get show" do
     get :show, id: @campaign.id
-    assert_response :redirect
+    assert_response :sucess
     assert_not_nil assigns(:campaign)
   end
 

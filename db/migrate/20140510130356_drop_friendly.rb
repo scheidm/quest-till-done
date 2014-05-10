@@ -1,6 +1,8 @@
 class DropFriendly < ActiveRecord::Migration
   def up
     drop_table :friendly_id_slugs
+    remove_index :quests, :slug
+    remove_index :records, :slug
   end
   def down
     create_table "friendly_id_slugs", force: true do |t|

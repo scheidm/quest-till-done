@@ -10,8 +10,6 @@ class Record < ActiveRecord::Base
   validates_attachment_content_type :code, :content_type => ["image/jpg", "image/jpeg", "image/png", "application/zip", "application/x-zip", "application/x-zip-compressed", "application/pdf", "application/x-pdf"]
 
   searchkick
-  # extend FriendlyId
-  # friendly_id :description, use: [:slugged, :history]
   acts_as_taggable
   acts_as_taggable_on :skills
   attr_accessor :encounter, :quest, :questname

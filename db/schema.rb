@@ -120,8 +120,6 @@ ActiveRecord::Schema.define(version: 20140510130356) do
     t.integer  "user_id"
   end
 
-  add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
-
   create_table "receipts", force: true do |t|
     t.integer  "receiver_id"
     t.string   "receiver_type"
@@ -153,8 +151,6 @@ ActiveRecord::Schema.define(version: 20140510130356) do
     t.integer  "code_file_size"
     t.datetime "code_updated_at"
   end
-
-  add_index "records", ["slug"], name: "index_records_on_slug", using: :btree
 
   create_table "rounds", force: true do |t|
     t.string   "type"
