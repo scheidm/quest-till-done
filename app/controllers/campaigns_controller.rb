@@ -19,7 +19,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] the campaign detail with that id
   def show
-    @campaign = Campaign.friendly.find(params[:id])
+    @campaign = Campaign.find(params[:id])
     #reverse history but direct to new
 
     if request.path != campaign_path(@campaign)
@@ -64,14 +64,14 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] Campaign editing page
   def edit
-    @campaign = Campaign.friendly.find(params[:id])
+    @campaign = Campaign.find(params[:id])
   end
 
   # Update campaign changes and save the changes
   # @param campaign_params [campaign_params] field input from creation page
   # @return [Html] redirect back to campaigns index page
   def update
-    @campaign = Campaign.friendly.find(params[:id])
+    @campaign = Campaign.find(params[:id])
     respond_to do |format|
       if @campaign.update(campaign_params)
         create_round(@campaign, action_name, @campaign)
@@ -88,7 +88,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] redirect back to campaigns index page
   def destroy
-    @campaign = Campaign.friendly.find{ params[:id]}
+    @campaign = Campaign.find{ params[:id]}
     create_round(@campaign, action_name, @campaign)
     @campaign.destroy
     respond_to do |format|
@@ -101,14 +101,14 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign'id to be viewed
   # @return [Html] partial view of the timeline
   def timeline
-    @campaign = Campaign.friendly.find(params[:id])
+    @campaign = Campaign.find(params[:id])
   end
 
   # Get the current timeline for the campaign
   # @param campaign [Campaign] Campaign
   # @return [JSON] JSON of the timeline details
   def get_campaign_timeline
-    @campaign = Campaign.friendly.find(params[:id])
+    @campaign = Campaign.find(params[:id])
     render :text => generateTimeline(@campaign.rounds.limit(100))
   end
 

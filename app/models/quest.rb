@@ -3,8 +3,6 @@
 class Quest < ActiveRecord::Base
 
   searchkick
-  extend FriendlyId
-  friendly_id :name, use: [:slugged, :history]
 
   scope :search_import, -> { includes(:records) }
   acts_as_taggable

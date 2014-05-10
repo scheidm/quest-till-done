@@ -130,8 +130,6 @@ GEM
       jquery-rails (>= 1.0.17)
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
-    friendly_id (5.0.3)
-      activerecord (>= 4.0.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     github_api (0.11.2)
@@ -320,7 +318,6 @@ DEPENDENCIES
   devise
   execjs
   flipclockjs-rails (~> 0.4.0b)
-  friendly_id
   github_api
   haml
   high_voltage

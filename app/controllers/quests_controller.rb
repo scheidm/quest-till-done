@@ -16,7 +16,7 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] Quest detail page with that id
   def show
-    @quest = Quest.friendly.find(params[:id])
+    @quest = Quest.find(params[:id])
     if(!@user.active_quest.nil?&&User.find(@user.id).active_quest.id == @quest.id)
       @active_quest = true
     else
@@ -76,14 +76,14 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] Quest's editing page
   def edit
-    @quest = Quest.friendly.find(params[:id])
+    @quest = Quest.find(params[:id])
   end
 
   # Update quest changes and save the changes
   # @param quest_params [quest_params] field input from creation page
   # @return [Html] redirect back to quest's campaign page
   def update
-    @quest = Quest.friendly.find(params[:id])
+    @quest = Quest.find(params[:id])
     respond_to do |format|
       if @quest.save
         if params['quest']['status']=="Closed"
@@ -117,7 +117,7 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] redirect back to quest's campaign page
   def destroy
-    @quest = Quest.friendly.find(params[:id])
+    @quest = Quest.find(params[:id])
     create_round(@quest, action_name, @quest.campaign)
     @quest.destroy
     respond_to do |format|
@@ -130,14 +130,14 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [JSON] quest's information in JSON format
   def getTree
-    quest = Quest.friendly.find(params[:id])
+    quest = Quest.find(params[:id])
     render :text => generateQuestTree(quest)
   end
 
   # Set quest as user's current active quest
   # @param id [Integer] Quest's id
   def set_active
-    quest = Quest.friendly.find(params[:id])
+    quest = Quest.find(params[:id])
     user = User.find(@user.id)
     user.active_quest_id = quest.id
     user.save

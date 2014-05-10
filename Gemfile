@@ -80,9 +80,6 @@ gem 'attr_encrypted'
 gem 'github_api'
 gem 'searchkick'
 
-# Friendly URL
-gem 'friendly_id'
-
 # Postgresql
 gem 'pg'
 # Local_time convert UTC to user local
