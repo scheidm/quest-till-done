@@ -63,23 +63,22 @@ class UsersController < ApplicationController
   end
 
   def github_list
-    login
+    login(@user)
     list_projects
     @projects = GithubRepo.where("group_id=?", @user.wrapper_group)
   end
 
   def github_project_import
-    login
-    initial_import params[:github_user], params[:repo_name] , nil
+    GithubInit.perform_async(@user.id, params[:github_user], params[:repo_name])
   end
 
   def github_project_del
-    login
+    login(@user)
     del_project params[:github_user], params[:repo_name]
   end
 
   def github_update
-    login
+    login(@user)
     update_project params[:github_user], params[:repo_name]
   end
 
@@ -109,14 +108,6 @@ class UsersController < ApplicationController
   def user_config_params
     params.require(:user_config).permit(:id, :encounter_duration, :short_break_duration, :extended_break_duration, :encounter_extend_duration, :user_id, :status, :importance, :deadline)
   end
-
-  def github_background_jobs
-    login? || login
-    github_update_all_projects
-  end
-
-  handle_asynchronously :github_background_jobs
-
 
 
   def get_td_json

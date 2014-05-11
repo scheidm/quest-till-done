@@ -1,32 +1,38 @@
+%hr
+Subject :
 = conversation.subject
-= conversation.mark_as_read(@user)
+- conversation.mark_as_read(@user)
 
-%br
+
 - conversation.participants.each do |participant|
   - if participant != @user
     - @userself = participant.message_user.to_s
   - else
     - @otherself = participant.message_user.to_s
 %p
-  A conversation with
+  A conversation between
   -if @userself.nil?
-    = @user.message_user.to_s
+    %b
+      = @user.message_user.to_s
   -else
-    = @userself
+    %b
+      = @userself
   and
-  = @otherself
+  %b
+    = @otherself
 
-
-= conversation.original_message.body
-
-
+%p
+  Body:
+=  conversation.original_message.body.html_safe
 
 
 - conversation.receipts_for(@user) do |receipt|
   = receipt.message
   = message.sender.message_user
 
-%p
-  Sent on
+%hr
+  This message is sent on
   = conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p")
--#= render 'messages/form', conversation: conversation
+
+%br
+=link_to "Back", :back

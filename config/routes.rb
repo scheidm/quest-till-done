@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 QuestTillDone::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => 'qtdregistrations' }
@@ -58,6 +60,8 @@ QuestTillDone::Application.routes.draw do
     collection do
       get 'promote', 'timeline', 'demote'
     end
+    get ':user_id/accept' => 'groups#accept'
+    get ':user_id/reject' => 'groups#reject'
   end
 
   resource :group do
@@ -65,12 +69,16 @@ QuestTillDone::Application.routes.draw do
       get ':id/kick' => 'groups#kick'
       get ':id/invite_user' => 'groups#invite_user'
       get ':id/leave' => 'groups#leave'
+
     end
   end
 
   resources :notifications do
     get 'reply', 'trashbin', 'group_kick', 'group_invite', 'group_promote'
   end
+
+
+  mount Sidekiq::Web, at: '/jobs'
 
   #get '/project', to: redirect('/')
 
@@ -174,6 +182,7 @@ QuestTillDone::Application.routes.draw do
       post :empty_trash
     end
   end
+
 
  # match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
 

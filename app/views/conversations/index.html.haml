@@ -1,11 +1,28 @@
-- @conversations.each do |conversation|
-  - if conversation.participants != @user
-    %ul
-      %li
-        -#= conversation.participants
-        = link_to conversation.subject, conversation
-        = conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p")
-        %p
-          = link_to "Move to Trash", {:controller => "conversations", :action => "untrash", :id => conversation.id},  :title => "Move to Inbox", :method=>'post'
-        %br
-        %br
+- if @conversations.size !=0
+  %table
+    %tr
+      %th
+        Subject
+      %th
+        Date Sent
+      %th
+        Delete
+
+    - @conversations.sort_by { | conversation | conversation.updated_at  }.reverse.each do |t|
+      - if t.participants != @user
+        %tr
+          %td
+            - if t.is_unread?(@user)
+              %b
+                = link_to t.subject, t
+            -else
+              = link_to t.subject, t
+          %td
+            = t.updated_at.strftime("%a, %m/%e/%Y %I:%M %p")
+          %td
+            = link_to 'Trash It' , {:controller => "conversations", :action => "trash", :id => t.id}, :method=>'post'
+
+-else
+  You don't have any notifications
+
+

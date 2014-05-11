@@ -553,3 +553,8 @@ input:-webkit-autofill:focus {
     }
 
 }
+
+/*adding style for notification count number*/
+#notifcation_count{
+    color : #ffffff;
+}
