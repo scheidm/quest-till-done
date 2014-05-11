@@ -88,7 +88,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] redirect back to campaigns index page
   def destroy
-    @campaign = Campaign.find{ params[:id]}
+    @campaign = Campaign.find(params[:id])
     create_round(@campaign, action_name, @user.campaigns.where(name: "My Journey").first)
     @campaign.destroy
     respond_to do |format|
@@ -149,6 +149,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name, :group_id)
+    params.require(:campaign).permit(:description, :name, :group_id,:id)
   end
 end
