@@ -1,4 +1,6 @@
 var towerDefense = function () {
+
+    var duration = 0;
     buildTowerDefense();
     function buildTowerDefense(){
         $.ajax({
