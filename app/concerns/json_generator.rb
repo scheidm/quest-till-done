@@ -123,7 +123,7 @@ module JsonGenerator
         if !data.nil?
           children << data
         else
-          children << {:id => nil, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaign/' + campaign.id.to_s, :status => campaign.status, :color => '#AF4D43'}}
+          children << {:id => nil, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status, :color => '#AF4D43'}}
         end
         if number != 0
           count = 0
