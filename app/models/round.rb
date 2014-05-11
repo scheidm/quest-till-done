@@ -19,9 +19,15 @@ class Round < ActiveRecord::Base
     end
     round.campaign_id = campaign.id
     round.group=campaign.group
-    round.event_id = model.id
-    round.type = model.class.name.demodulize
-    round.event_description = operation.gsub("_"," ")
+    if operation=="destroy"
+      round.event_id = campaign.id
+      round.event_description = "A campaign named #{model.name} was destroyed"
+      round.type = 'Campaign'
+    else
+      round.type = model.class.name.demodulize
+      round.event_id = model.id
+      round.event_description = operation.gsub("_"," ")
+    end
     round.save
   end
 

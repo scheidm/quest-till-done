@@ -23,3 +23,11 @@ Users can show off their achievements on their profiles in a social environment.
 ##Depolyment
 There are many solutions, we suggest using Apache and Passenger Phusion
 
+
+##Setup
+
+* redis-server
+* postgresql server
+* elasticsearch start
+* bundle exec sidekiq -e development
+

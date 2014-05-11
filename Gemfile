@@ -105,7 +105,19 @@ gem 'seed_dump'
 
 # messaging & notification
 gem 'mailboxer'
+# growal like notification
+gem 'gritter'
+
 
 # pdf
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
+
+
+
+# background Job
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+# infinite tasks
+gem 'whenever', :require => false

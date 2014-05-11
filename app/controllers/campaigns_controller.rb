@@ -89,7 +89,7 @@ class CampaignsController < ApplicationController
   # @return [Html] redirect back to campaigns index page
   def destroy
     @campaign = Campaign.find{ params[:id]}
-    create_round(@campaign, action_name, @campaign)
+    create_round(@campaign, action_name, @user.campaigns.where(name: "My Journey").first)
     @campaign.destroy
     respond_to do |format|
       format.html { redirect_to campaigns_path }
@@ -126,6 +126,17 @@ class CampaignsController < ApplicationController
   # @return [File] downloadable file
   def export
 
+  end
+
+  # Set quest parent through AJAX
+  # @param quest_id [Integer] Quest's id of quest to be moved
+  # @param parent_id [Integer] Quest's id of quest to be set as parent quest
+  def set_quest_parent
+    quest = Quest.find(params[:quest_id])
+    parent = Quest.find(params[:parent_id])
+    quest.parent_id = parent.id
+    quest.save
+    render :nothing => true
   end
 
   # custom helper path for timeline

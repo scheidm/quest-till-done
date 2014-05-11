@@ -80,10 +80,15 @@ module JsonGenerator
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
     def generateTDJSON(user)
-      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#', :color => '#fdd0a2'}}
+      data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#'}}
       data[:children] = children = []
-      user.campaigns.each {|campaigns|
-        children << generateTDQuestJSON(campaigns)
+      user.groups.each {|group|
+        group_data = {:id => "group_#{group.id}", :attr => { :name => group.name, :description => group.name, :url => '#'}}
+        group_data[:children] = group_children = []
+        group.campaigns.each {|campaigns|
+          group_children << generateTDQuestJSON2(campaigns)
+        }
+        children << group_data
       }
 
       return data.to_json
@@ -105,6 +110,38 @@ module JsonGenerator
         end
 
         children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status, :color => color, :radius => radius}}
+      }
+      return data
+    end
+
+    def generateTDQuestJSON2(campaign)
+      number_of_days = 7
+      data = nil
+      0.upto(number_of_days) {|number|
+        ring = {:id => "#{number}_days_#{campaign.id}"}
+        ring[:children] = children = []
+        if !data.nil?
+          children << data
+        else
+          children << {:id => nil, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaign/' + campaign.id.to_s, :status => campaign.status, :color => '#AF4D43'}}
+        end
+        if number != 0
+          count = 0
+          campaign.quests.where("deadline >= ? and deadline < ?", (number-1).days.from_now, number.days.from_now).each {|quest|
+            color = '#29AB87'
+            radius = 45;
+            if quest.importance then
+              color = '#0A6F75'
+              radius = 60;
+            end
+            children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status, :color => color, :radius => radius}}
+            count+=1
+          }
+          ring[:attr] = {:name => "#{number} Days", :description => "#{count} quests pending", :url => '#'}
+        else
+          ring[:attr] = {:name => "Campaign", :description => campaign.description, :url => '#'}
+        end
+        data = ring
       }
       return data
     end
