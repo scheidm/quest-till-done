@@ -40,6 +40,7 @@
           %h4#myModalLabel.modal-title Edit Campaign
         .modal-body
           = render 'form'
+          = button_to " x ", {:action => 'destroy'}, :method => :delete, :confirm => "Are you sure?"
   #new-quest-modal.modal.fade
     .modal-dialog
       .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
