@@ -38,6 +38,7 @@ QuestTillDone::Application.routes.draw do
   resources :campaigns do
     collection do
       get 'getTree', 'get_campaign_timeline', 'timeline'
+      post 'set_quest_parent'
     end
   end
 
