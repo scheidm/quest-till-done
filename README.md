@@ -26,8 +26,12 @@ There are many solutions, we suggest using Apache and Passenger Phusion
 
 ##Setup
 
+On Ubuntu Server
+* Install using #apt-get install redis-server postgresql-server
 * redis-server
 * postgresql server
 * elasticsearch start
 * bundle exec sidekiq -e development
+
+* change application.sample.yml to application.yml
 

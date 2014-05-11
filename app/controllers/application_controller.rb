@@ -39,8 +39,6 @@ class ApplicationController < ActionController::Base
       end
       @notification_count = @user.mailbox.inbox(:unread => true).count(:id, :distinct => true)
     end
-    GithubWorker.perform_async(@user.id)
-    RunnerWorker.perform_async(1)
   end
 
   # Limits parameters to those valid for devise user control, to prevent

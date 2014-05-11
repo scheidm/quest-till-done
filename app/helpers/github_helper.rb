@@ -3,12 +3,13 @@ module GithubHelper
   # Login for github information
   # @return [Github] Github Session
   def login(user)
-    @github = Github.new oauth_token: user.github_access_token, client_id: '264a6e1edf1194e61237', client_secret: '4a89a92ea733e1b2e25788f452a4f05692ace995'
+    @github = Github.new oauth_token: user.github_access_token, client_id: CONFIG["github_client_id"], client_secret: CONFIG["github_client_secret"]
   end
 
-  #initialize github session
-  def github_init(username, projectname)
-   login unless login?
+  #initialize @github for particular project
+  # @return [Github] github
+  def github_init(qtd_user, username, projectname)
+   login(qtd_user) unless login?
     # @github:user => username, :repo => projectname
     @github.user = username
     @github.repo = projectname
@@ -17,8 +18,8 @@ module GithubHelper
 
   # Check if login is sucessful
   # @return [bool] Logged in or not
-  def login?
-    if login
+  def login?(user)
+    if login(user)
       return true
     else
       return nil
@@ -222,20 +223,20 @@ module GithubHelper
 
 
   # Push Note as comments to Github Issue
-  def push_comment(username, projectname, issue_no, comment)
-    @github  = github_init(username, projectname)
+  def push_comment(user, username, projectname, issue_no, comment)
+    @github  = github_init( user, username, projectname)
     @new_comment = @github.issues.comments.create :repo_name=> projectname, :user_name => username , :issue_id => issue_no ,:body => comment
   end
 
   #Close Issue from a closed quest
-  def close_issue(username, projectname, issue_no)
-    @github  = github_init(username, projectname)
+  def close_issue(user, username, projectname, issue_no)
+    @github  = github_init(user, username, projectname)
     @github.issues.edit(:number => issue_no, :state => 'closed')
   end
 
   #Open Issue from a created quest
   def open_issue(username, projectname, quest)
-    @github  = github_init(username, projectname)
+    @github  = github_init(user, username, projectname)
     @github.issues.create(
       :title => quest.name,
       :body => quest.description,
