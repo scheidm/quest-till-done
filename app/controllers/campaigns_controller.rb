@@ -128,6 +128,17 @@ class CampaignsController < ApplicationController
 
   end
 
+  # Set quest parent through AJAX
+  # @param quest_id [Integer] Quest's id of quest to be moved
+  # @param parent_id [Integer] Quest's id of quest to be set as parent quest
+  def set_quest_parent
+    quest = Quest.find(params[:quest_id])
+    parent = Quest.find(params[:parent_id])
+    quest.parent_id = parent.id
+    quest.save
+    render :nothing => true
+  end
+
   # custom helper path for timeline
   # @param id [Integer] Campaign
   def campaign_timeline_path(campaign)
