@@ -118,14 +118,20 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def destroy
     @quest = Quest.find(params[:id])
-    create_round(@quest, action_name, @quest.campaign)
+    @campaign=@quest.campaign
+    create_round(@quest, action_name, @campaign)
     @quest.destroy
     respond_to do |format|
-      format.html { redirect_to campaigns_path }
+      format.html { redirect_to campaign_path(@campaign) }
       format.json { head :no_content }
     end
   end
 
+  def destroy_softly
+    @quest = Quest.find(params[:id])
+    @quest.relocate_sub_trees
+    destroy
+  end
   # Get Json for generating tree view
   # @param id [Integer] Quest's id
   # @return [JSON] quest's information in JSON format

@@ -11,15 +11,15 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   # has_many :conversations, dependent: :destroy
-  has_one :timer
-  has_one :wrapper_group, class_name: "Group"
-  has_many :campaigns, through: :wrapper_group
-  has_one :config, class_name: "UserConfig"
-  has_many :skill_pointses
+  has_one :timer, dependent: :destroy
+  has_one :wrapper_group, class_name: "Group", dependent: :destroy
+  has_many :campaigns, through: :wrapper_group, dependent: :destroy
+  has_one :config, class_name: "UserConfig", dependent: :destroy
+  has_many :skill_points, dependent: :destroy
   @group = Hash.new 
-  has_one :timer
-  has_many :encounters
-  has_many :rounds, through: :encounters
+  has_one :timer, dependent: :destroy
+  has_many :encounters, dependent: :destroy
+  has_many :rounds, through: :encounters, dependent: :destroy
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
   has_many :total_campaigns, through: :groups, source: :campaigns
