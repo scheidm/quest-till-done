@@ -87,7 +87,7 @@ gem 'local_time'
 
 #display response time
 
-gem 'rack-mini-profiler'
+# gem 'rack-mini-profiler'
 
 gem 'consul'
 # jquery ui

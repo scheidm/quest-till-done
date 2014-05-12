@@ -59,9 +59,11 @@ QuestTillDone::Application.routes.draw do
   resources :groups do
     collection do
       get 'promote', 'timeline', 'demote'
+      get 'accept/:invite_id/:user_id' => 'groups#accept'
+      get 'reject/:invite_id/:user_id' => 'groups#reject'
+
     end
-    get ':user_id/accept' => 'groups#accept'
-    get ':user_id/reject' => 'groups#reject'
+
   end
 
   resource :group do
@@ -69,7 +71,6 @@ QuestTillDone::Application.routes.draw do
       get ':id/kick' => 'groups#kick'
       get ':id/invite_user' => 'groups#invite_user'
       get ':id/leave' => 'groups#leave'
-
     end
   end
 

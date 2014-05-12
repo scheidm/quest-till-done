@@ -21,36 +21,43 @@ class GroupsController < ApplicationController
 
 
   def accept
-    group = Group.find(params[:group_id])
-    user = User.find(params[:user_id])
+    invitation = Groupinvitations.find(params[:invite_id])
+    @group = Group.find(invitation.group_id)
     #check validity of this request
-    invitation = Groupinvitations.where("group_id = ? AND user_id =? and accept != ? AND expired != ?", group.id, user.id, false, false).first
-    puts "========================RUNING WELL+++======================"
-    puts invitation.to_s
-    if invitation
+    invitee_id = params[:user_id]
+    user = User.find(invitee_id)
 
-      if ! @group.users.include? user
-        group.users.push user
-      end
-
-      redirect_to groups_path
+    if invitation.user_id == invitee_id.to_i && invitation.expired.nil? && invitation.accept.nil?
+          if ! @group.users.include? user
+            group.users.push user
+          end
+          invitation.accept = true
+          invitation.expired = true
+          invitation.save
+          gflash :success => "You have joined #{@group.name} successfully!"
+          redirect_to groups_path
     else
       gflash :now, :error => "Something went wrong. You should not see this page"
-      redirect_to conversations_path
+      redirect_to :back
     end
   end
 
   def reject
-    group = Group.find(params[:group_id])
-    user = User.find(params[:user_id])
-    invitation = Groupinvitations.where("group_id = ? AND user_id =? and accept != ? AND expired != ?", group.id, user.id, false, false).first
-    if invitation
+    invitation = Groupinvitations.find(params[:invite_id])
+    @group = Group.find(invitation.group_id)
+    invitee_id = params[:user_id]
+    #check validity of this request
+    if invitation.user_id == invitee_id.to_i && invitation.expired.nil? && invitation.accept.nil?
       invitation.accept = false
       invitation.expired = true
-      redirect_to conversations_path
+      invitation.save
+      #TODO background job to purge this table after 7 days
+      gflash :success => "You have rejected the group invitation from #{@group.name} successfully!"
+      redirect_to :back
+      #TODO notification to admin that a user rejected
     else
       gflash :now, :error => "Something went wrong. You should not see this page"
-      redirect_to conversations_path
+      redirect_to :back
     end
   end
 
@@ -135,13 +142,13 @@ class GroupsController < ApplicationController
       invitation = Groupinvitations.create({
                                                group_id: @group.id,
                                                user_id: user.id,
-                                               accept: false,
+                                               accept: nil,
                                                created_at: Time.now,
-                                               expired: false
+                                               expired: nil
                                            })
 
       #notification
-      @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='http://#{request.host}:#{request.port}/groups/#{@group.id}/#{user.id}/accept'>Accept</a> <a href='http://#{request.host}:#{request.port}/groups/#{@group.id}/#{user.id}/reject'>Reject</a> ", 'Group Invitation')
+      @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='http://#{request.host}:#{request.port}/groups/accept/#{invitation.id}/#{user.id}'>Accept</a> <a href='http://#{request.host}:#{request.port}/groups/reject/#{invitation.id}/#{user.id}'>Reject</a> ", 'Group Invitation')
 
       respond_to do |format|
         format.html { redirect_to group_path(@group), :flash => {:success => 'Member invitation has been sent successfully, wait for user to response.'} }
@@ -180,7 +187,7 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:id, :name, :user_id, :group_id)
+    params.require(:group).permit(:id, :name, :user_id, :invite_id)
   end
 
 
