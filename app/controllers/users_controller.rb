@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def authorize
     @github = @user.github
-    redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:8080/users/github_callback", scope: 'repo'
+    redirect_to @github.authorize_url redirect_uri: CONFIG["GITHUB_CALL_BACK_URL"], scope: 'repo'
   end
 
   # Get Github Access Token

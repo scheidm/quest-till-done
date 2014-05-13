@@ -17,21 +17,30 @@ Users can show off their achievements on their profiles in a social environment.
   * $git clone https://github.com/scheidm/quest-till-done.git  
   * $cd quest-till-done  
   * $rails s
-* Setup Searching:
+* Setup Elastic Search:
   * install [elasticsearch](http://www.elasticsearch.org/overview/elkdownloads/)
+    * $wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.deb
+    * $dkpg -i elasticsearch-1.1.1.deb
+    * $sudo /etc/init.d/elasticsearch start
+* Setup for Redis
+    * $sudo apt-get install redis-server
+    * ``` this should start server by defualt ```
+* Setup for Config File
+* Setup for apache passenger
+
 
 ##Depolyment
 There are many solutions, we suggest using Apache and Passenger Phusion
 
 
-##Setup
+##Setup Notes *updated*
 
 On Ubuntu Server
 * Install using #apt-get install redis-server postgresql-server
 * redis-server
 * postgresql server
 * elasticsearch start
-* bundle exec sidekiq -e development
+* bundle exec sidekiq -d -L sidekiq.log -q mailer,5 -q default -e development
 
 * change application.sample.yml to application.yml
 
