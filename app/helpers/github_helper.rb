@@ -9,7 +9,7 @@ module GithubHelper
   #initialize @github for particular project
   # @return [Github] github
   def github_init(qtd_user, username, projectname)
-   login(qtd_user) unless login?
+   login(qtd_user) unless login?(qtd_user)
     # @github:user => username, :repo => projectname
     @github.user = username
     @github.repo = projectname
@@ -49,8 +49,8 @@ module GithubHelper
   end
 
   #List Branches
-  def list_branches(username, projectname)
-    @github = github_init(username, projectname)
+  def list_branches(user, username, projectname)
+    @github = github_init(user, username, projectname)
     @branches = Hash.new()
     @github.repos.branches.each do |t|
       @branches[t["name"]] = t["commit"]["sha"]
@@ -109,9 +109,9 @@ module GithubHelper
   end
 
   # Get commits from a project
-  def list_commits(username, projectname, encounter, campaign)
+  def list_commits(user, username, projectname, encounter, campaign)
     @commits = Hash.new
-    list_branches username, projectname
+    list_branches user, username, projectname
     @branches.each do |branch_name, branch_sha|
       @github.repos.commits.list(username, projectname, :sha => branch_sha).each do |t|
 
@@ -135,7 +135,7 @@ module GithubHelper
 
   # Import a project to QTD
   # Note: this should be run only when first time import is initiated
-  def initial_import(username, projectname, group)
+  def initial_import(user, username, projectname, group)
     if group.nil?
       group = @user.wrapper_group
     end
@@ -166,7 +166,7 @@ module GithubHelper
       create_round(import_campaign, action_name, import_campaign)
 
       # import commits & issues
-      list_commits username, projectname, Encounter.last, import_campaign
+      list_commits user, username, projectname, Encounter.last, import_campaign
       list_issues username, projectname, Encounter.last, import_campaign
 
 
@@ -176,9 +176,9 @@ module GithubHelper
   end
 
   # Update Issues and Commits
-  def update_project(username, projectname)
+  def update_project(user, username, projectname)
     #handle commits
-    list_commits username, projectname, Encounter.last, Campaign.last
+    list_commits user, username, projectname, Encounter.last, Campaign.last
     #handle issues
     list_issues username, projectname, Encounter.last, Campaign.last
   end
@@ -188,7 +188,7 @@ module GithubHelper
     @repo_list = list_projects
     @repo_list.each do |t|
       if t.imported?
-        update_project(t.github_user, t.project_name)
+        update_project(user, t.github_user, t.project_name)
       end
     end
 
@@ -215,7 +215,7 @@ module GithubHelper
 
     #destroy all Commits
 
-    Record.destroy_all(type: 'Commit', github_username: username, github_projectname: projectname)
+    Record.destroy_all(type: 'Commit', github_user: username, project_name: projectname)
 
     #make sure there is an encounter there
     create_round(project, action_name, Campaign.last)

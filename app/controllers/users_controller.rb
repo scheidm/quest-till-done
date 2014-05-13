@@ -69,7 +69,9 @@ class UsersController < ApplicationController
   end
 
   def github_project_import
-    GithubInit.perform_async(@user.id, params[:github_user], params[:repo_name])
+    # GithubInit.perform_async(@user.id, params[:github_user], params[:repo_name])
+    login(@user)
+    initial_import @user, params[:github_user], params[:repo_name] , nil
   end
 
   def github_project_del
@@ -79,7 +81,7 @@ class UsersController < ApplicationController
 
   def github_update
     login(@user)
-    update_project params[:github_user], params[:repo_name]
+    update_project @user, params[:github_user], params[:repo_name]
   end
 
   def update
