@@ -1,7 +1,21 @@
+
 #help
   %h2 World View
   %span.glyphicon.glyphicon-question-sign.help-info
     Click the circles to zoom in/out
+  %br
+  %br
+  %ul.legend
+    %li
+      %span.campaign
+      Campaign
+    %li
+      %span.deadline_quest
+      Quest within deadline
+    %li
+      %span.importance_quest
+      Quest with importance
+
 #tower-defense{ :style => 'border: 1px solid #ccc; margin-top: 35px;'}
 
 :css
@@ -30,6 +44,15 @@
   /*.node--root,*/
   /*.node--leaf {*/
   /*}*/
+
+  /* basic positioning */
+  .legend { list-style: none; }
+  .legend li { float: left; margin-right: 10px; }
+  .legend span { border: 1px solid #ccc; float: left; width: 20px; height: 20px; margin: 2px; }
+  /* your colors */
+  .legend .deadline_quest { background-color: #29AB87; }
+  .legend .importance_quest { background-color: #0A6F75; }
+  .legend .campaign { background-color: #AF4D43; }
 
 :javascript
 
