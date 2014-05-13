@@ -1,7 +1,7 @@
 # A specific, actionable task to complete in given project.
 # Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
-
+  include RoundHelper
   searchkick
 
   scope :search_import, -> { includes(:records) }
@@ -37,7 +37,7 @@ class Quest < ActiveRecord::Base
   def delete_related
     campaign=self.campaign
     quest = Quest.new({name: self.name})
-    create_round(quest, action_name, campaign)
+    Round.create_event(quest, "destroy", campaign)
     Round.where( type: "Quest").where(event_id: self.id).destroy_all
     self.child_quests.each do |cq|
       cq.delete_related
