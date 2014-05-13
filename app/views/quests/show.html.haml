@@ -53,6 +53,16 @@
       .modal-body.a-unique-class
 %br
 %br
+#help
+  %h2 Tree View
+  %span.glyphicon.glyphicon-question-sign.help-info
+    Press the circle to expand/collapse nodes
+
+#tree-container{data: {quest_id: @quest.id} }
+
+%br
+%br
+
 #accordion.panel-group
   .panel.panel-default.panel-primary
     .panel-heading
@@ -63,18 +73,19 @@
       %ul.list-group
       - @quest.notes.each do |note|
         %a.list-group-item
-          %table
+          %table{:style=>"width:100%"}
             %tr
               %td
-                %h4.list-group-item-heading
-                  = note.created_at.strftime("%m/%d/%Y %I:%M%p")
-                %p.list-group-item-text
-                  = auto_link(note.description)
-              %td{:float => "right"}
-                = button_to " x ", {:controller => :records,
-                                           :action => 'destroy', :id => note.id }, :method => :delete, :confirm => "Are you sure?"
-              %td
-                =link_to " Modify ", edit_record_path(note.id)
+                .pull-left
+                  %h4.list-group-item-heading
+                    = note.created_at.strftime("%m/%d/%Y %I:%M%p")
+                  %p.list-group-item-text
+                    = auto_link(note.description)
+                .pull-right
+                  .pull-left{:style=>"margin-right:4px"}
+                    = button_to " Delete ", {:controller => :records, :action => 'destroy', :id => note.id }, :class => "btn btn-danger", :method => :delete, :confirm => "Are you sure?"
+                  .pull-right
+                    = link_to " Modify ", edit_record_path(note.id), :class => "btn btn-primary"
   .panel.panel-default.panel-primary
     .panel-heading
       %h4.panel-title
@@ -84,20 +95,23 @@
       %ul.list-group
       - @quest.images.each do |image|
         %a.list-group-item
-          %table
+          %table{:style=>"width:100%"}
             %tr
               %td
-                %h4.list-group-item-heading
-                  = image.created_at.strftime("%m/%d/%Y %I:%M%p")
-                %p.list-group-item-text
-                  = auto_link(image.description)
-                %p
-                  =image_tag image.code.url(image.code.url)
-              %td{:float => "right"}
-                = button_to " x ", {:controller => :records,
-                                           :action => 'destroy', :id => image.id }, :method => :delete, :confirm => "Are you sure?"
-              %td
-                =link_to " Modify ", edit_record_path(image.id)
+                .pull-left
+                  .pull-left{style:'margin-right:2px'}
+                    =image_tag image.code.url(image.code.url), size:'50x50', class:"img-rounded"
+                  .pull-right
+                    %h4.list-group-item-heading
+                      = image.created_at.strftime("%m/%d/%Y %I:%M%p")
+                    %p.list-group-item-text
+                      = auto_link(image.description)
+
+                .pull-right
+                  .pull-left{:style=>"margin-right:4px"}
+                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => image.id }, :class => "btn btn-danger", :method => :delete, :confirm => "Are you sure?"
+                  .pull-right
+                    =link_to "Modify", edit_record_path(image.id), :class => "btn btn-primary"
 
   .panel.panel-default.panel-primary
     .panel-heading
@@ -108,25 +122,23 @@
       %ul.list-group
       - @quest.links.each do |link|
         %a.list-group-item
-          %table
+          %table{:style=>"width:100%"}
             %tr
               %td
-                %h4.list-group-item-heading
-                  = link.created_at.strftime("%m/%d/%Y %I:%M%p")
-                %p.list-group-item-text
-                  = auto_link(link.description)
-                  %br
-                    = auto_link(link.url)
-              %td{:float => "right"}
-                = button_to " x ", {:controller => :records,
-                                    :action => 'destroy', :id => link.id }, :method => :delete, :confirm => "Are you sure?"
-              %td
-                =link_to " Modify ", edit_record_path(link.id)
-
-
-
-#tree-container{data: {quest_id: @quest.id} }
-
+                .pull-left
+                  %h4.list-group-item-heading
+                    = link.created_at.strftime("%m/%d/%Y %I:%M%p")
+                  %p.list-group-item-text
+                    = auto_link(link.description)
+                    %br
+                      = auto_link(link.url)
+                .pull-right
+                  .pull-left{:style=>"margin-right:4px"}
+                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => link.id }, :class => "btn btn-danger", :method => :delete, :confirm => "Are you sure?"
+                  .pull-right
+                    =link_to "Modify", edit_record_path(link.id), :class => "btn btn-primary"
+%br
+%br
 :javascript
   $(document).ready(function () {
      var treeId =  { id: $('#tree-container').data('quest-id')};
