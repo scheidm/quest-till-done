@@ -5,6 +5,10 @@ class Campaign < Quest
   has_many :quests,  :dependent => :destroy
   has_many :rounds,  :dependent => :destroy
   scope :search_import, -> { includes(:records, :quests) }
+  before_destroy :delete_related
+
+  def delete_related
+  end
 
   def progress
     Float(self.quests.where('status = (?)',"Closed").count)/Float(self.quests.count)*100 
