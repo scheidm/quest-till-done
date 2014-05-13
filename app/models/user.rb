@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_one :wrapper_group, class_name: "Group", dependent: :destroy
   has_many :campaigns, through: :wrapper_group, dependent: :destroy
   has_one :config, class_name: "UserConfig", dependent: :destroy
-  has_many :skill_points, dependent: :destroy
+  #has_many :skill_points, dependent: :destroy
   @group = Hash.new 
   has_one :timer, dependent: :destroy
   has_many :encounters, dependent: :destroy
@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :total_campaigns, through: :groups, source: :campaigns
   has_many :peers, through: :groups, source: :users
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
+  before_destroy :delete_related
   after_create :new_user_setup
   #validates :username,
   #  :uniqueness => {
@@ -173,6 +174,12 @@ class User < ActiveRecord::Base
       return nil
     end
 
+  end
+
+  def delete_related
+    self.groups_where_admin.each do |g|
+      g.leave self
+    end
   end
 
 end

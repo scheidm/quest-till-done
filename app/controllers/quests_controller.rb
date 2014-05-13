@@ -120,9 +120,7 @@ class QuestsController < ApplicationController
   def destroy
     @quest = Quest.find(params[:id])
     @campaign=@quest.campaign
-    quest = Quest.new({name: @quest.name})
     @quest.destroy
-    create_round(quest, action_name, @campaign)
     respond_to do |format|
       format.html { redirect_to campaign_path(@campaign) }
       format.json { head :no_content }

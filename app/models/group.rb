@@ -13,6 +13,9 @@ class Group < ActiveRecord::Base
   def leave user
     demote user
     self.users.destroy user
+    if self.users.size == 0
+      self.destroy
+    end
   end
 
   def demote user
