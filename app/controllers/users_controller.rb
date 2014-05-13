@@ -84,7 +84,11 @@ class UsersController < ApplicationController
     update_project @user, params[:github_user], params[:repo_name]
   end
 
-  def update
+  def dismiss
+    @user.mailbox.inbox.load.sort.each do |conversation|
+      conversation.mark_as_read(@user)
+    end
+    redirect_to :back
   end
   
   # Update timer config for the user
@@ -115,6 +119,7 @@ class UsersController < ApplicationController
   def get_td_json
     render :text => generateTDJSON(@user)
   end
+
 
 
 end

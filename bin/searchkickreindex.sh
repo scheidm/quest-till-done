@@ -1,5 +1,4 @@
 #!/bin/bash
 
-bundle exec rake searchkick:reindex CLASS='Quest'
-bundle exec rake searchkick:reindex CLASS='Record'
-bundle exec rake searchkick:reindex CLASS='User'
+rake searchkick:reindex CLASS='Quest'
+rake searchkick:reindex CLASS='Record'
