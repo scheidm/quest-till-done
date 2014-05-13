@@ -6,4 +6,7 @@ class Link < Record
   validates_presence_of :description, :url, :allow_blank => false
 
   belongs_to :quest
+  def destroy_rounds
+    Round.where( type: "Link").where(event_id: self.id).destroy_all
+  end
 end

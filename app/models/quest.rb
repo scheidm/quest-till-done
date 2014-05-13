@@ -35,6 +35,9 @@ class Quest < ActiveRecord::Base
   end
 
   def delete_related
+    campaign=self.campaign
+    quest = Quest.new({name: self.name})
+    create_round(quest, action_name, campaign)
     Round.where( type: "Quest").where(event_id: self.id).destroy_all
     self.child_quests.each do |cq|
       cq.delete_related
