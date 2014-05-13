@@ -52,10 +52,11 @@ class QuestsController < ApplicationController
     @quest.group_id = @user.wrapper_group.id
     @quest.status = 'Open'
     @quest.description = nil if @quest.description==""
+    path = @quest.parent.type == 'Campaign'? campaign_path(@quest.parent) : quest_path(@quest.parent)
     respond_to do |format|
       if @quest.save
         create_round(@quest, action_name, @quest.campaign)
-        format.html { redirect_to quest_path(@quest.parent), notice: 'Quest was successfully created.' }
+        format.html { redirect_to path, notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
         format.html { render action: 'new' }
