@@ -5,7 +5,9 @@ class Image < Record
 
 
   validates_attachment_presence :code
-
+  def destroy_rounds
+    Round.where( type: "Image").where(event_id: self.id).destroy_all
+  end
 
 
 end

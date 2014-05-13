@@ -14,20 +14,20 @@ class Round < ActiveRecord::Base
     raise ArgumentError, 'operation is empty' if operation.empty?
     round = Round.new
     round.encounter = Encounter.last
-    if(model.id.nil?)
-      model.reload
-    end
-    round.campaign_id = campaign.id
-    round.group=campaign.group
+    type= model.class.name.demodulize
     if operation=="destroy"
       round.event_id = campaign.id
-      round.event_description = "A campaign named #{model.name} was destroyed"
-      round.type = 'Campaign'
+      round.event_description = "A #{type.downcase} named #{model.name} was destroyed"
     else
-      round.type = model.class.name.demodulize
+      if(model.id.nil?)
+        model.reload
+      end
       round.event_id = model.id
       round.event_description = operation.gsub("_"," ")
     end
+    round.type = type
+    round.campaign_id = campaign.id
+    round.group=campaign.group
     round.save
   end
 

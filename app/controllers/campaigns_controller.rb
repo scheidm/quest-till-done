@@ -149,6 +149,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name, :group_id,:id)
+    params.require(:campaign).permit(:description, :name, :group_id, :id)
   end
 end
