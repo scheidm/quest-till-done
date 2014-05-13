@@ -15,6 +15,16 @@ $(document).ready(function(){
                             {
                                 clock.setTime(result.setting_time);
                                 clock.start();
+                            }else{
+                                $.gritter.add({
+                                    title: 'Your Timer is up!',
+                                    text: 'Please take a short break!',
+                                    time: 10000,
+                                    before_open: function () {
+//                                        play a sound will require a wave file TODO later work.
+                                    }
+                                });
+
                             }
                         }
                     });
