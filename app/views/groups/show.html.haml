@@ -67,6 +67,7 @@
             -#%input#quest_complete.form-control{ :value => :user_id}
             -#= button_tag 'Add', :type=> 'submit', :class => 'btn btn-default'
             %input#user_list.form-control
+            %input#user_list_id{:type=>'hidden', :name => 'user_id', :required => true}
             -#= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
           = button_tag 'Add', :type=> 'submit', :class => 'btn btn-primary pull-right'
 :css
@@ -155,7 +156,11 @@
                           }
                       }));
                   }
-              });
-          }
+                  })
+              },select: function(event, ui) {
+                     event.preventDefault();
+                     $("#user_list").val(ui.item.label);
+                     $("#user_list_id").val(ui.item.value);
+               }
       });
   });
