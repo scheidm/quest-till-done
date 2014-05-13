@@ -17,7 +17,7 @@ class Round < ActiveRecord::Base
     type= model.class.name.demodulize
     if operation=="destroy"
       round.event_id = campaign.id
-      round.event_description = "A #{type} named #{model.name} was destroyed"
+      round.event_description = "A #{type.downcase} named #{model.name} was destroyed"
     else
       if(model.id.nil?)
         model.reload
