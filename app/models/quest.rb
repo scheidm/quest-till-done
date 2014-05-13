@@ -8,7 +8,7 @@ class Quest < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :skills
   has_many :records, dependent: :destroy
-  has_many :rounds, dependent: :destroy
+  has_many :rounds
   has_many :links
   has_many :notes
   has_many :images
@@ -35,6 +35,7 @@ class Quest < ActiveRecord::Base
   end
 
   def delete_related
+    Round.where( type: "Quest").where(event_id: self.id).destroy_all
     self.child_quests.each do |cq|
       cq.delete_related
       cq.destroy

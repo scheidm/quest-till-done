@@ -55,7 +55,7 @@ class QuestsController < ApplicationController
     respond_to do |format|
       if @quest.save
         create_round(@quest, action_name, @quest.campaign)
-        format.html { redirect_to campaign_path(@quest.campaign), notice: 'Quest was successfully created.' }
+        format.html { redirect_to quest_path(@quest.parent), notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
         format.html { render action: 'new' }
@@ -119,8 +119,9 @@ class QuestsController < ApplicationController
   def destroy
     @quest = Quest.find(params[:id])
     @campaign=@quest.campaign
-    create_round(@quest, action_name, @campaign)
+    quest = Quest.new({name: @quest.name})
     @quest.destroy
+    create_round(quest, action_name, @campaign)
     respond_to do |format|
       format.html { redirect_to campaign_path(@campaign) }
       format.json { head :no_content }
