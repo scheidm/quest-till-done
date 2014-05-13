@@ -58,7 +58,7 @@ class RecordsController < ApplicationController
     @quest = Quest.find(@record.quest_id)
     unless @quest.issue_no.nil?
       accounts = GithubRepo.where(campaign_id: @quest.campaign_id).first
-      push_comment(accounts.github_user, accounts.project_name, @quest.issue_no, @record.description)
+      push_comment(@user, accounts.github_user, accounts.project_name, @quest.issue_no, @record.description)
     end
   end
 
