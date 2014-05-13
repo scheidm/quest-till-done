@@ -55,7 +55,7 @@ class QuestsController < ApplicationController
     respond_to do |format|
       if @quest.save
         create_round(@quest, action_name, @quest.campaign)
-        format.html { redirect_to campaign_path(@quest.campaign), notice: 'Quest was successfully created.' }
+        format.html { redirect_to quest_path(@quest.parent), notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
         format.html { render action: 'new' }
@@ -118,14 +118,21 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def destroy
     @quest = Quest.find(params[:id])
-    create_round(@quest, action_name, @quest.campaign)
+    @campaign=@quest.campaign
+    quest = Quest.new({name: @quest.name})
     @quest.destroy
+    create_round(quest, action_name, @campaign)
     respond_to do |format|
-      format.html { redirect_to campaigns_path }
+      format.html { redirect_to campaign_path(@campaign) }
       format.json { head :no_content }
     end
   end
 
+  def destroy_softly
+    @quest = Quest.find(params[:id])
+    @quest.relocate_sub_trees
+    destroy
+  end
   # Get Json for generating tree view
   # @param id [Integer] Quest's id
   # @return [JSON] quest's information in JSON format

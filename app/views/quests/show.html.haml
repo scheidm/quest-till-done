@@ -26,7 +26,7 @@
   %span.glyphicon.glyphicon-eye-open
 = link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
   %span.glyphicon.glyphicon-plus
-= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-record-modal.modal'
+= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
 
 = link_to '#edit-quest-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
   %span.glyphicon.glyphicon-pencil
@@ -41,6 +41,9 @@
         %h4#myModalLabel.modal-title Edit Quest
       .modal-body
         = render 'form'
+        .delete
+          = button_to "Delete", {:action => 'destroy_softly', :id => @quest.id}, :class => "btn btn-warning", :confirm => "Are you sure?", "data-toggle" => "tooltip", title: "Delete this quest only"
+          = button_to "Delete All", {:action => 'destroy'}, :class => "btn btn-danger", :method => :delete, :confirm => "This will irrevocably destroy all data tied to this quest and it's children! Continue?", "data-toggle" => "tooltip", title: "Delete this quest and all descendents"
 #new-quest-modal.modal.fade
   .modal-dialog
     .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}

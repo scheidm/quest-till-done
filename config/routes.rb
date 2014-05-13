@@ -32,6 +32,7 @@ QuestTillDone::Application.routes.draw do
   end
 
   resources :quests do
+    post 'destroy_softly', on: :member
     collection do
       get 'getTree'
       post 'set_active'

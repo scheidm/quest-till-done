@@ -1,4 +1,3 @@
-# Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
 
   has_attached_file :code,
@@ -20,6 +19,7 @@ class Record < ActiveRecord::Base
   # Record belongs to a user
   belongs_to :group
   delegate :user, to: :encounter
+  before_destroy :destroy_rounds
 
   validates_associated :encounter
 

@@ -1,13 +1,14 @@
 # A specific, actionable task to complete in given project.
 # Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
-
+  include RoundHelper
   searchkick
 
   scope :search_import, -> { includes(:records) }
   acts_as_taggable
   acts_as_taggable_on :skills
-  has_many :records
+  has_many :records, dependent: :destroy
+  has_many :rounds
   has_many :links
   has_many :notes
   has_many :images
@@ -21,8 +22,7 @@ class Quest < ActiveRecord::Base
   # Belongs to a user/owner
   belongs_to :group
   before_save :set_status
-
-
+  before_destroy :delete_related
 
   def search_data
     attributes.merge(
@@ -32,6 +32,24 @@ class Quest < ActiveRecord::Base
       sites: self.links.map(&:url),
       tags: self.tags.map(&:name)
     )
+  end
+
+  def delete_related
+    campaign=self.campaign
+    quest = Quest.new({name: self.name})
+    Round.create_event(quest, "destroy", campaign)
+    Round.where( type: "Quest").where(event_id: self.id).destroy_all
+    self.child_quests.each do |cq|
+      cq.delete_related
+      cq.destroy
+    end
+  end
+
+  def relocate_sub_trees
+    self.child_quests.each do |cq|
+      cq.parent=self.parent
+      cq.save
+    end
   end
 
   def campaign?
