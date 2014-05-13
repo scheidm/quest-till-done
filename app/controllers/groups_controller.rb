@@ -105,7 +105,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => {:success => "Removed member #{@target.username}"} }
       # send notification
-      @user.send(@target, "You have been kick from group #{@group.name}. <br> You no longer have access to #{@group.name}", 'You Have Been Kicked')
+      @user.send_message(@target, "You have been kick from group #{@group.name}. <br> You no longer have access to #{@group.name}", 'You Have Been Kicked')
     end
   end
 
