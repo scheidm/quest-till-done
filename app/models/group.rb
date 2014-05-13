@@ -20,11 +20,15 @@ class Group < ActiveRecord::Base
 
   def demote user
     if self.admins.include? user
-      if self.admins.length==1
+      if self.admins.length>1
         users=self.users-[user]
         self.admins.push users.first
+      else
+        #only user in the group, delete group
+        self.users.destroy user
       end
       self.admins.destroy user
+
     end
   end
 end
