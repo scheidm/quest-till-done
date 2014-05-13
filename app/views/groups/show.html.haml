@@ -66,9 +66,13 @@
           .form-group
             -#%input#quest_complete.form-control{ :value => :user_id}
             -#= button_tag 'Add', :type=> 'submit', :class => 'btn btn-default'
-            = select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
-          = button_tag 'Add', :type=> 'submit', :class => 'btn btn-default'
-
+            %input#user_list.form-control
+            -#= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
+          = button_tag 'Add', :type=> 'submit', :class => 'btn btn-primary pull-right'
+:css
+  ul.ui-autocomplete {
+      z-index: 1100;
+  }
 :javascript
   $(document).ready(function(){
           $("#treeView").jstree({
@@ -131,4 +135,27 @@
           ).bind("loaded.jstree", function (event, data) {
                        $(this).jstree("open_all");
           }) ;
+
+      $( "#user_list" ).autocomplete({
+          source: function( request, response ) {
+              $.ajax({
+                  url: "/searches/user_autocomplete",
+                  dataType: "json",
+                  data: {
+                      featureClass: "P",
+                      style: "full",
+                      maxRows: 12,
+                      query: request.term
+                  },
+                  success: function( data ) {
+                      response( $.map( data, function( item ) {
+                          return {
+                              label: item.username,
+                              value: item.id
+                          }
+                      }));
+                  }
+              });
+          }
       });
+  });

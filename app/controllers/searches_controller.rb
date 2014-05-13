@@ -26,6 +26,11 @@ class SearchesController < ApplicationController
     render json: search_json(quests.results + recs.results)
   end
 
+  # autocomplete for user
+  def user_autocomplete
+    render json: User.all.reject{ |u| u == @user }
+  end
+
   private
   def search_json(value)
     list = value.map do |item|
