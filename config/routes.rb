@@ -5,7 +5,7 @@ QuestTillDone::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'qtdregistrations' }
   resources :users do
     collection do
-      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings', 'get_td_json', 'github_revoke'
+      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings', 'get_td_json', 'github_revoke', 'dismiss'
       put 'update_config'
     end
   end
