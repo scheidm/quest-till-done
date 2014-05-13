@@ -61,6 +61,7 @@ module TimerHelper
       start_timer
       return get_current_time.merge get_setting_time
     else
+      reset_timer
       return {state: get_timer_state}
     end
   end
