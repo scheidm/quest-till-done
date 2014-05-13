@@ -235,7 +235,7 @@ module GithubHelper
   end
 
   #Open Issue from a created quest
-  def open_issue(username, projectname, quest)
+  def open_issue(user, username, projectname, quest)
     @github  = github_init(user, username, projectname)
     @github.issues.create(
       :title => quest.name,
