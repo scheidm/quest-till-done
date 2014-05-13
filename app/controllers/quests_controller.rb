@@ -67,7 +67,7 @@ class QuestsController < ApplicationController
     quest_parent = Campaign.find(@quest.campaign_id)
     if quest_parent.vcs
       githubinfo = GithubRepo.where(campaign_id: quest_parent.id).first
-      open_issue(githubinfo.github_user, githubinfo.project_name, @quest)
+      open_issue(@user, githubinfo.github_user, githubinfo.project_name, @quest)
     end
 
   end
@@ -91,7 +91,7 @@ class QuestsController < ApplicationController
           parent_campaign = Campaign.find(@quest.campaign_id)
           if parent_campaign.vcs
             github_info = GithubRepo.where(campaign_id: parent_campaign.id).first
-            close_issue(github_info.github_user, github_info.project_name, @quest.issue_no)
+            close_issue(@user, github_info.github_user, github_info.project_name, @quest.issue_no)
           end
           if @quest.id==@user.active_quest.id
             @user.active_quest=Quest.where('user_id = (?)', @quest.user_id).where('name = (?)', 'Unsorted Musings').first
