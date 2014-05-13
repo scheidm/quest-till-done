@@ -41,9 +41,9 @@
                   %span#badge.badge.badge-important{"data-placement" => "right", "data-toggle" => "tooltip", title: "Notification"}
                     = link_to "#{@notification_count}" , conversations_path, :id => 'notifcation_count'
                     -if @notification_count - 1 > 0
-                      = js add_gritter("You have multiple unread notifications, view them <a href=#{conversations_path}>Here</a> or <a href=#{dismiss_users_path}>Dismiss All</a>", :title => 'Please Take Notice', :time=> 4000)
+                      = js add_gritter("You have multiple unread notifications, view them <a href=#{conversations_path}>Here</a> or #{link_to 'Dismiss All', dismiss_users_path, remote: true}", :title => 'Multiple Notifications', :time=> 4000)
                     -elsif @notification_count == 1
-                      = js add_gritter("You have one unread notification, view them <a href=#{conversations_path}>Here</a> or <a href=#{dismiss_users_path}>Dismiss</a>", :title => 'One Notification' , :time=> 4000)
+                      = js add_gritter("You have one unread notification, view them <a href=#{conversations_path}>Here</a> or #{link_to 'Dismiss', dismiss_users_path, remote: true}", :title => 'One Notification' , :time=> 4000)
 
                 %div{style: "color:#999999"}
                   C# Guru
