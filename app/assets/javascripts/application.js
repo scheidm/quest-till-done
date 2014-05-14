@@ -22,4 +22,6 @@
 //= require d3
 //= require layout.js
 //= require jasny-bootstrap
+//= require bootstrap-switch
+//= require gritter
 

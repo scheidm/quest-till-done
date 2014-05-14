@@ -6,6 +6,7 @@
 class Round < ActiveRecord::Base
   belongs_to :encounter
   belongs_to :campaign
+  belongs_to :group
   self.inheritance_column = nil
 
   def self.create_event(model, operation, campaign)
@@ -13,13 +14,20 @@ class Round < ActiveRecord::Base
     raise ArgumentError, 'operation is empty' if operation.empty?
     round = Round.new
     round.encounter = Encounter.last
-    if(model.id.nil?)
-      model.reload
+    type= model.class.name.demodulize
+    if operation=="destroy"
+      round.event_id = campaign.id
+      round.event_description = "A #{type.downcase} named #{model.name} was destroyed"
+    else
+      if(model.id.nil?)
+        model.reload
+      end
+      round.event_id = model.id
+      round.event_description = operation.gsub("_"," ")
     end
+    round.type = type
     round.campaign_id = campaign.id
-    round.event_id = model.id
-    round.type = model.class.name.demodulize
-    round.event_description = operation.gsub("_"," ")
+    round.group=campaign.group
     round.save
   end
 

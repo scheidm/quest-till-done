@@ -9,6 +9,8 @@
       %nav#myNavmenu.navmenu.navmenu-default.navmenu-fixed-left.offcanvas{role: "navigation", style: ""}
         %a.navmenu-brand{href: "#"} Campaign
         %ul.nav.navmenu-nav
+          %li
+            %a{href: 'javascript:void(0)', class: 'all_link'}= 'All'
           - @campaigns.each do |campaign|
             %li
               %a{id: campaign.id, href: 'javascript:void(0)', class: 'campaign_link'}= campaign.name
@@ -29,11 +31,9 @@
           #fadingBarsG_8.fadingBarsG
       #priority-body.row
         .col-md-5
-          %h2 Importance
-          %ul#importance-ul
+          %ul#left-ul
         .col-md-5
-          %h2 Deadline
-          %ul#deadline-ul
+          %ul#right-ul
 
 
 :javascript
@@ -47,9 +47,24 @@
       toggle: "offcanvas"
     })
 
+    $('.all_link').click(function(e){
+      e.preventDefault();
+      $('.campaign_link').parent().removeClass("active");
+      $(this).parent().addClass("active");
+      $('#priority-message').hide();
+      $('#loading-image').show();
+      $.ajax({
+       type: 'GET',
+       url: '/priorities/get_all_priorities',
+       data: 'id=' + $(this).attr("id"),
+       success: populatePriorities,
+       complete: hideLoadingImage
+      });
+    })
     $('.campaign_link').click(function(e){
       e.preventDefault();
       $('.campaign_link').parent().removeClass("active");
+      $('.all_link').parent().removeClass("active");
       $(this).parent().addClass("active");
       $('#priority-message').hide();
       $('#loading-image').show();
@@ -63,15 +78,15 @@
     })
 
     function populatePriorities(result) {
-      $('#importance-ul').empty();
-      $('#deadline-ul').empty();
+      $('#left-ul').empty();
+      $('#right-ul').empty();
       var quests = JSON.parse(result);
       $.each(quests[0], function() {
-        $('#importance-ul').append('<div class="panel panel-primary"><div class="panel-heading"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
+        $('#left-ul').append('<div class="panel panel-primary"><div class="panel-heading"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
           +'<a class="list-group-item"><h4 class="list-group-item-heading">'+this.description+'</h4><p class="list-group-item-text">deadline: '+displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
       });
       $.each(quests[1], function() {
-        $('#deadline-ul').append('<div class="panel panel-danger"><div class="panel-heading panel-deadline"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
+        $('#right-ul').append('<div class="panel panel-danger"><div class="panel-heading panel-deadline"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
           +'<a class="list-group-item"><h4 class="list-group-item-heading">'+this.description+'</h4><p class="list-group-item-text">deadline: '+displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
       });
 

@@ -1,10 +1,14 @@
-# Campaigns model storing the root task in a project. The class is defined with
 # single table inheritance with the Quest model. That is, a Campaign is largely
 # a scope on quest, a Quest.where('campaign_id = NULL')
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
-  has_many :quests
+  has_many :quests,  :dependent => :destroy
+  has_many :rounds,  :dependent => :destroy
   scope :search_import, -> { includes(:records, :quests) }
+  before_destroy :delete_related
+
+  def delete_related
+  end
 
   def progress
     Float(self.quests.where('status = (?)',"Closed").count)/Float(self.quests.count)*100 
@@ -25,8 +29,7 @@ class Campaign < Quest
   # @return [collection] first page of encounters preceeding end_time
   # 
   def timeline( end_time=Time.now )
-    rounds=Round.where('campaign_id = (?)',self.id).where('created_at <= (?)', end_time).order(created_at: :desc).pluck(:encounter_id)
-    Encounter.where('id in (?)',rounds)
+    Encounter.where('id in (?)',self.rounds.pluck(:encounter_id))
   end
 
   def to_link

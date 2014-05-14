@@ -15,11 +15,55 @@ $(document).ready(function(){
                             {
                                 clock.setTime(result.setting_time);
                                 clock.start();
+                            }else{
+                                $.gritter.add({
+                                    title: 'Your Timer is up!',
+                                    text: 'Please take a short break!',
+                                    time: 10000,
+                                    before_open: function () {
+//                                        play a sound will require a wave file TODO later work.
+                                    }
+                                });
+
                             }
                         }
                     });
             }
         }
+    });
+
+    $('#timerConfigBtn').popover({
+        html: true,
+        placement: "bottom",
+        container: $(this).attr('id'),
+        trigger: "click",
+        content: function () {
+            return $('#timerPopContent').html();
+        }
+    });
+
+    $(document).on("click", ".mode-toggle", function() {
+        $('.mode-toggle').toggleClass('btn-primary');
+        $('.mode-toggle').toggleClass('btn-default');
+        var mode = $('.mode-toggle.btn-primary').attr('value');
+        $.ajax({
+            type: "POST",
+            url: "/timers/change_mode",
+            data: "mode=" + mode,
+            success: function(result) {
+                if(mode == 'auto')
+                {
+                    $('#extendBtn').prop('disabled', true);
+                    $('#restBtn').prop('disabled', true);
+                }
+                else
+                {
+                    $('#extendBtn').prop('disabled', false);
+                    $('#restBtn').prop('disabled', false);
+                }
+
+            }
+        });
     });
 
     $('#avatar').popover({
@@ -90,4 +134,67 @@ $(document).ready(function(){
             }
         });
     });
+    $('#extendBtn').click(function()
+    {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/timers/extend_countdown",
+            data: "current_time=" + clock.getTime(),
+            success: function(result) {
+                clock.setTime(result.new_time);
+                //clock.start();
+            }
+        });
+    });
+    $('#restBtn').click(function()
+    {
+        clock.stop();
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/timers/break_countdown",
+            success: function(result) {
+                clock.setTime(result.break_time);
+                clock.start();
+                $('#clock').popover('show');
+            }
+        });
+    });
+
+    /***************** Search *******************/
+    $( "#search-bar" ).autocomplete({
+        source: function( request, response ) {
+            $.ajax({
+                url: "/searches/all_autocomplete",
+                dataType: "json",
+                data: {
+                    featureClass: "P",
+                    style: "full",
+                    maxRows: 12,
+                    query: request.term
+                },
+                success: function( data ) {
+                    response( $.map( data, function( item ) {
+                        return {
+                            label: item.label,
+                            value: item.value,
+                            class: item.class
+                        }
+                    }));
+                }
+            });
+        },
+        select: function(event, ui) {
+            event.preventDefault();
+            $("#search-bar").val(ui.item.label);
+        }
+    }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        var s = item.label;
+        if(item.label.length > 18)
+            s = item.label.substring(0, 18) + "...";
+        return $( "<li>" )
+            .append( "<a>" + s + " <span class='label label-"+item.class+"'>"+item.class+"</span></a>" )
+            .appendTo( ul );
+    };
 });

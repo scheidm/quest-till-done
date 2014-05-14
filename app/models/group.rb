@@ -1,19 +1,34 @@
-# A user-defined group, whose members all share common projects and activity
 # timelines
 class Group < ActiveRecord::Base
+  belongs_to :user
+  has_many :campaigns
+  has_many :rounds
+  has_many :github_repos
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :admins, class_name: "User", join_table: "admins_groups"
   # Leave the group while preventing orphan groups. If the user is the last
   # admin, the function will automatically promote the oldest member to group
   # admin before leaving. If the user is the last member in the group, the
   # function will delete the group and associated campaigns from the database
-  def leave
-    @users_group = group.users_groups.where(user_id: current_user.id).first
+  def leave user
+    demote user
+    self.users.destroy user
+    if self.users.size == 0
+      self.destroy
+    end
+  end
 
-    if group.last_owner?(current_user)
-      redirect_to(profile_groups_path, alert: "You can't leave group. You must add at least one more owner to it.")
-    else
-      @users_group.destroy
-      redirect_to(profile_groups_path, info: "You left #{group.name} group.")
+  def demote user
+    if self.admins.include? user
+      if self.admins.length>1
+        users=self.users-[user]
+        self.admins.push users.first
+      else
+        #only user in the group, delete group
+        self.users.destroy user
+      end
+      self.admins.destroy user
+
     end
   end
 end

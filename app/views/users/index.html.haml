@@ -67,4 +67,4 @@
             = t.updated_at
             = t.event_description
             = t.type + " for "
-            = Campaign.find(t.campaign_id).name
+            = t.campaign.name unless t.campaign_id.nil?

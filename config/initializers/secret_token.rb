@@ -10,3 +10,4 @@
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
 QuestTillDone::Application.config.secret_key_base = '4b1f076bb6b35495d124fecaa745530b1d32f2a00802b67a58479ae144ea19a356c18c13f69dda901767d9919d6e2d99fcf0581ead09f39410fa5c17ab42f6aa'
+Gritter.rails_flash_fallback = true

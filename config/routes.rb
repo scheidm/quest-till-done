@@ -1,30 +1,38 @@
+require 'sidekiq/web'
+
 QuestTillDone::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => 'qtdregistrations' }
   resources :users do
     collection do
-      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings'
-      post 'update_config'
+      get 'github_authorize', 'github_callback' ,'github_list', 'github_project_import', 'github_project_del', 'github_update','restart_countdown', 'index', 'show', 'settings', 'get_td_json', 'github_revoke', 'dismiss'
+      put 'update_config'
     end
   end
   get 'welcome/index'
+
   resources :encounters do
     collection do
       get 'get_user_timeline'
       post 'setState'
     end
   end
+
   resources :records do
     get :autocomplete_quest_name, :on => :collection
+    get 'modify'
+    get 'download', on: :member
   end
+
   resources :timers do
     collection do
-      get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown'
-      post 'start_countdown', 'pause_countdown'
+      get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown', 'extend_countdown', 'break_countdown'
+      post 'start_countdown', 'pause_countdown', 'change_mode'
     end
   end
 
   resources :quests do
+    post 'destroy_softly', on: :member
     collection do
       get 'getTree'
       post 'set_active'
@@ -33,20 +41,46 @@ QuestTillDone::Application.routes.draw do
   resources :campaigns do
     collection do
       get 'getTree', 'get_campaign_timeline', 'timeline'
+      post 'set_quest_parent'
     end
   end
 
   resources :priorities do
     collection do
-      get 'get_priorities'
+      get 'get_priorities', 'get_all_priorities'
     end
   end
 
   resources :searches do
     collection do
-      get 'quest_autocomplete'
+      get 'quest_autocomplete', 'all_autocomplete', 'user_autocomplete'
     end
   end
+
+  resources :groups do
+    collection do
+      get 'promote', 'timeline', 'demote'
+      get 'accept/:invite_id/:user_id' => 'groups#accept'
+      get 'reject/:invite_id/:user_id' => 'groups#reject'
+
+    end
+
+  end
+
+  resource :group do
+    collection do
+      get ':id/kick' => 'groups#kick'
+      get ':id/invite_user' => 'groups#invite_user'
+      get ':id/leave' => 'groups#leave'
+    end
+  end
+
+  resources :notifications do
+    get 'reply', 'trashbin', 'group_kick', 'group_invite', 'group_promote'
+  end
+
+
+  mount Sidekiq::Web, at: '/jobs'
 
   #get '/project', to: redirect('/')
 
@@ -133,6 +167,24 @@ QuestTillDone::Application.routes.draw do
       resource :avatar, only: [:destroy]
     end
   end
+
+  resources :messages do
+    member do
+      post :new
+    end
+  end
+  resources :conversations do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+    collection do
+      get :trashbin
+      post :empty_trash
+    end
+  end
+
 
  # match "/u/:username" => "users#show", as: :user_profile, constraints: { username: /.*/ }, via: :get
 

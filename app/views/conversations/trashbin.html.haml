@@ -1,0 +1,7 @@
+- @trash.each do |conversation|
+  - if participant != @user
+    = participant.name
+    = link_to conversation.subject, conversation
+    = conversation.updated_at.strftime("%a, %m/%e/%Y %I:%M %p")
+    = link_to "Move to Trash", {:controller => "conversations",
+                                :action => "trash", :id => conversation.id }, :title=> "Move to Trash", :method=>'post'

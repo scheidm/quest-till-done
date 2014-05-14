@@ -1,0 +1,166 @@
+%h2.text-centered
+  = @group.name
+.container
+  .row
+    .col-md-6
+      .panel.panel-info{:style => 'height:825px'}
+        .panel-heading Activity
+        .panel-body#treeView{ 'data-id' => @group.id}
+    .col-md-6
+      .row
+        .panel.panel-info{:style => 'height:400px'}
+          .panel-heading Members
+          .panel-body.fill
+            %table{:class => "table table-hover" }
+              %thead
+                %tr
+                  %th Name
+                  %th Role
+              %tbody
+                - @group.users.paginate(page: params[:page], per_page: 4).each do |user|
+                  %tr
+                    %td= user.username
+                    %td
+                      = render_role(@group, user)
+                    %td
+                      = render_promote(user.id)
+                      = render_demote(user.id)
+                      = render_remove(user.id)
+            = will_paginate @group.users.paginate(page: params[:page], per_page: 4)
+            %br
+            = render_add_member
+      .row
+        .panel.panel-info{:style => 'height:400px'}
+          .panel-heading Campaigns
+          .panel-body
+            %table{:class => "table table-hover"}
+              %thead
+                %tr
+                  %th Name
+                  %th Description
+              %tbody
+                - @group.campaigns.each do |campaign|
+                  %tr
+                    %td
+                      = link_to campaign.name, campaign_path(campaign)
+                    %td
+                      %a.btn.btn-primary
+                        Open
+                        = render_quest_count(campaign, 'Open')
+                      %a.btn.btn-success
+                        In Progress
+                        = render_quest_count(campaign, 'In Progress')
+                      %a.btn.btn-primary{:style => 'background-color: #999;border-color: #999'}
+                        Closed
+                        = render_quest_count(campaign, 'Closed')
+            =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
+
+#add-member-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title Add New Member
+      .modal-body
+        = form_tag invite_user_path, :method => 'get' do |f|
+          .form-group
+            -#%input#quest_complete.form-control{ :value => :user_id}
+            -#= button_tag 'Add', :type=> 'submit', :class => 'btn btn-default'
+            %input#user_list.form-control
+            %input#user_list_id{:type=>'hidden', :name => 'user_id', :required => true}
+            -#= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
+          = button_tag 'Add', :type=> 'submit', :class => 'btn btn-primary pull-right'
+:css
+  ul.ui-autocomplete {
+      z-index: 1100;
+  }
+:javascript
+  $(document).ready(function(){
+          $("#treeView").jstree({
+              core : { "animation" : 100 },
+
+              themes : { "theme" : "apple", "icons" : true, "dots": true },
+              "json_data": {
+                  "ajax" : {
+                      "url" : "/groups/timeline?id=" + $('#treeView').attr('data-id')
+                  }
+              },
+              "types" : {
+                  "types" : {
+                      "encounter" : {
+                        "icon" : {
+                            "image" : "/assets/encounter.png"
+                        },
+                      },
+                      "round" : {
+                        "icon" : {
+                            "image" : "/assets/round.png"
+                        },
+                      },
+                      "link" : {
+                        "icon" : {
+                            "image" : "/assets/link.png"
+                        },
+                      },
+                      "note" : {
+                          "icon" : {
+                              "image" : "/assets/note.png"
+                          },
+                      },
+                      "campaign" : {
+                        "icon" : {
+                            "image" : "/assets/campaign.png"
+                        },
+                      },
+                      "quest" : {
+                          "icon" : {
+                              "image" : "/assets/quest.png"
+                          },
+                      },
+                      "image" : {
+                          "icon" : {
+                              "image" : "/assets/image.png"
+                          },
+                      },
+                      "default" : {
+                          "valid_children" : [ "default" ]
+                      }
+                  }
+              }  ,
+
+              plugins: ["themes", "json_data", "dnd", "ui", "types" ],
+          }).bind("select_node.jstree", function (e, data)
+              {
+                  window.location= data.rslt.obj.attr("href");
+              }
+          ).bind("loaded.jstree", function (event, data) {
+                       $(this).jstree("open_all");
+          }) ;
+
+      $( "#user_list" ).autocomplete({
+          source: function( request, response ) {
+              $.ajax({
+                  url: "/searches/user_autocomplete",
+                  dataType: "json",
+                  data: {
+                      featureClass: "P",
+                      style: "full",
+                      maxRows: 12,
+                      query: request.term
+                  },
+                  success: function( data ) {
+                      response( $.map( data, function( item ) {
+                          return {
+                              label: item.username,
+                              value: item.id
+                          }
+                      }));
+                  }
+                  })
+              },select: function(event, ui) {
+                     event.preventDefault();
+                     $("#user_list").val(ui.item.label);
+                     $("#user_list_id").val(ui.item.value);
+               }
+      });
+  });

@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140316143212) do
+ActiveRecord::Schema.define(version: 20140513022648) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "admins_groups", id: false, force: true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  create_table "conversations", force: true do |t|
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -34,20 +48,8 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "break_flag"
   end
-
-  create_table "friendly_id_slugs", force: true do |t|
-    t.string   "slug",                      null: false
-    t.integer  "sluggable_id",              null: false
-    t.string   "sluggable_type", limit: 50
-    t.string   "scope"
-    t.datetime "created_at"
-  end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "friends", force: true do |t|
     t.datetime "created_at"
@@ -55,7 +57,8 @@ ActiveRecord::Schema.define(version: 20140316143212) do
   end
 
   create_table "github_repos", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "assigned_user"
     t.string   "github_user"
     t.string   "project_name"
     t.string   "url"
@@ -64,13 +67,56 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "updated_at"
     t.text     "lastest_commit"
     t.datetime "lastest_issue"
+    t.integer  "campaign_id"
+  end
+
+  create_table "groupinvitations", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.boolean  "accept"
+    t.datetime "created_at"
+    t.boolean  "expired"
   end
 
   create_table "groups", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  create_table "groups_users", id: false, force: true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
+  end
+
+  create_table "invitation_status_tables", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.boolean  "accept"
+    t.datetime "created_at"
+    t.boolean  "expired"
+  end
+
+  create_table "notifications", force: true do |t|
+    t.string   "type"
+    t.text     "body"
+    t.string   "subject",              default: ""
+    t.integer  "sender_id"
+    t.string   "sender_type"
+    t.integer  "conversation_id"
+    t.boolean  "draft",                default: false
+    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                           null: false
+    t.integer  "notified_object_id"
+    t.string   "notified_object_type"
+    t.string   "notification_code"
+    t.string   "attachment"
+    t.boolean  "global",               default: false
+    t.datetime "expires"
+  end
+
+  add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id", using: :btree
 
   create_table "quests", force: true do |t|
     t.string   "name",                           null: false
@@ -82,33 +128,50 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.integer  "parent_id"
     t.integer  "campaign_id"
     t.date     "deadline"
-    t.integer  "user_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "importance",     default: false
     t.string   "type"
     t.string   "slug"
+    t.integer  "issue_no"
+    t.boolean  "vcs"
+    t.integer  "user_id"
   end
 
-  add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
+  create_table "receipts", force: true do |t|
+    t.integer  "receiver_id"
+    t.string   "receiver_type"
+    t.integer  "notification_id",                            null: false
+    t.boolean  "is_read",                    default: false
+    t.boolean  "trashed",                    default: false
+    t.boolean  "deleted",                    default: false
+    t.string   "mailbox_type",    limit: 25
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
 
   create_table "records", force: true do |t|
     t.string   "type"
-    t.text     "description",        null: false
+    t.text     "description",       null: false
     t.string   "url"
     t.integer  "encounter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "quest_id"
     t.text     "quote"
-    t.text     "github_username"
-    t.text     "github_projectname"
     t.text     "sha"
-    t.integer  "user_id"
+    t.integer  "group_id"
     t.string   "slug"
+    t.string   "code_file_name"
+    t.string   "code_content_type"
+    t.integer  "code_file_size"
+    t.datetime "code_updated_at"
+    t.string   "github_user"
+    t.string   "project_name"
   end
-
-  add_index "records", ["slug"], name: "index_records_on_slug", using: :btree
 
   create_table "rounds", force: true do |t|
     t.string   "type"
@@ -118,6 +181,7 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "campaign_id"
+    t.string   "group_id"
   end
 
   create_table "sessions", force: true do |t|
@@ -183,6 +247,9 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.integer  "encounter_extend_duration"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_notification"
+    t.integer  "notification_count"
+    t.integer  "dislayed_gritter_notifications"
   end
 
   create_table "users", force: true do |t|
@@ -219,5 +286,9 @@ ActiveRecord::Schema.define(version: 20140316143212) do
     t.integer "user_id"
     t.integer "group_id"
   end
+
+  add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
+
+  add_foreign_key "receipts", "notifications", name: "receipts_on_notification_id"
 
 end
