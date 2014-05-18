@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   has_many :campaigns, through: :wrapper_group, dependent: :destroy
   has_one :config, class_name: "UserConfig", dependent: :destroy
   #has_many :skill_points, dependent: :destroy
-  @group = Hash.new 
   has_one :timer, dependent: :destroy
   has_many :encounters, dependent: :destroy
   has_many :rounds, through: :encounters, dependent: :destroy
