@@ -437,7 +437,7 @@ var questTree = function (JsonData) {
 
     function renderQuestDetail(d) {
         var css = d.attr.status.toString().trim().replace(/ /g, '');
-        var html = "Description: " + d.attr.status + "</br>" +
+        var html = "Description: " + d.attr.description + "</br>" +
             "Status: <span class='label label-" + css + "'>" + d.attr.status + "</span>"
         return html;
     }

@@ -121,3 +121,4 @@ gem 'sinatra', require: false
 gem 'slim'
 # infinite tasks
 gem 'whenever', :require => false
+
