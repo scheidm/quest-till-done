@@ -16,9 +16,8 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-
+set :output, "/home/kevin/qtd_cron_log.log"
 every 1.minutes do
-  command "cd /project/qtd/myfork/ && bundle exec rake searchkick:reindex CLASS='Quest'"
-  command "cd /project/qtd/myfork/ && bundle exec rake searchkick:reindex CLASS='Record'"
-  command "cd /project/qtd/myfork/ && bundle exec rake searchkick:reindex CLASS='User'"
+  rake "searchkick:reindex CLASS='Quest'"
+  rake "searchkick:reindex CLASS='Record'"
 end
