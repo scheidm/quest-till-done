@@ -158,7 +158,8 @@ class User < ActiveRecord::Base
 
   # Will return an authentication token for github access
   def github
-    @github = Github.new client_id: CONFIG["GITHUB_CLIENT_ID"], client_secret: CONFIG["GITHUB_CLIENT_SECRET"]
+
+    @github = Github.new({ client_id: CONFIG[:GITHUB_CLIENT_ID], client_secret: CONFIG[:GITHUB_CLIENT_SECRET]   })
   end
 
   # Will Setup message username
