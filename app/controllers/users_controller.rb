@@ -1,35 +1,30 @@
-
 class UsersController < ApplicationController
 
+  require 'json_generator'
+  include JsonGenerator::QuestModule
   include RoundHelper
   include GithubHelper
 
 
   def authorize
-    @github = current_user.github
-    redirect_to @github.authorize_url redirect_uri: "http://art.cs.drexel.edu:8080/users/github_callback", scope: 'repo'
+    @github = @user.github
+    redirect_to @github.authorize_url redirect_uri: CONFIG["GITHUB_CALL_BACK_URL"], scope: 'repo'
   end
 
   # Get Github Access Token
   def callback         
-    @github = current_user.github
+    @github = @user.github
     token = (@github.get_token params['code']).token
     #store this value to user table
-    current_user.github_access_token = token
-    current_user.save
+    @user.github_access_token = token
+    @user.save
   end
 
 
   def index
-    @user = current_user
-    @recent_activities = Round.all.order(id: :desc).limit(10)
+    @recent_activities = Round.where(group_id: @user.wrapper_group).order(id: :desc).limit(10)
   end
-  def getFriends
-    @friends = current_user.getFriends
-  end
-  def getGroups
-    @groups = current_user.getGroups
-  end
+
   # define avatar by default value
   # @return [Binary] image file
   def show_avatar
@@ -46,17 +41,23 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.github_access_token.nil?
+    if @user.github_access_token.nil?
       github_authorize
     else
       github_list
     end
-
-
   end
 
   def github_authorize
       authorize
+  end
+
+  def github_revoke
+    @user.github_access_token = nil
+    GithubRepo.destroy_all(group_id: @user.wrapper_group)
+    @user.save
+    gflash :success => 'Your Github authentication have been stopped. You need manually revoke from Github website'
+    redirect_to welcome_index_path
   end
 
   def github_callback
@@ -64,31 +65,42 @@ class UsersController < ApplicationController
   end
 
   def github_list
-    login
+    login(@user)
     list_projects
-    @projects = GithubRepo.where(user_id: current_user)
+    @projects = GithubRepo.where("group_id=?", @user.wrapper_group)
   end
 
   def github_project_import
-    login
-    initial_import params[:github_user], params[:repo_name]
+    # GithubInit.perform_async(@user.id, params[:github_user], params[:repo_name])
+    login(@user)
+    initial_import @user, params[:github_user], params[:repo_name] , nil
   end
 
   def github_project_del
-    login
+    login(@user)
     del_project params[:github_user], params[:repo_name]
   end
 
   def github_update
-    login
-    update_project params[:github_user], params[:repo_name]
+    login(@user)
+    update_project @user, params[:github_user], params[:repo_name]
   end
 
-  def update
+  def dismiss
+    @user.mailbox.inbox.load.sort.each do |conversation|
+      conversation.mark_as_read(@user)
+    end
+    redirect_to :back
+  end
+  
+  # Update timer config for the user
+  # @param id [Integer] User config id
+  # @return [Html] User index page
+  def update_config
     @user_config = UserConfig.find(params[:id])
     respond_to do |format|
       if @user_config.update(user_config_params)
-        format.html { redirect_to @user, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to users_path, :flash => {:success => 'Timer setting was successfully updated.' }}
         format.json { head :no_content }
       else
         format.html { render user: 'setting' }
@@ -105,12 +117,10 @@ class UsersController < ApplicationController
     params.require(:user_config).permit(:id, :encounter_duration, :short_break_duration, :extended_break_duration, :encounter_extend_duration, :user_id, :status, :importance, :deadline)
   end
 
-  def github_background_jobs
-    login? || login
-    github_update_all_projects
-  end
 
-  handle_asynchronously :github_background_jobs
+  def get_td_json
+    render :text => generateTDJSON(@user)
+  end
 
 
 

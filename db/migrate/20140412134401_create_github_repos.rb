@@ -1,7 +1,8 @@
 class CreateGithubRepos < ActiveRecord::Migration
   def change
     create_table "github_repos", force: true do |t|
-      t.integer  "user_id"
+      t.integer  "group_id"
+      t.integer  "assigned_user"
       t.string   "github_user"
       t.string   "project_name"
       t.string   "url"

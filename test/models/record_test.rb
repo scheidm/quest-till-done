@@ -14,9 +14,9 @@ class RecordTest < ActiveSupport::TestCase
 
   test "Assign encounter id" do
     x = Record.new
-    x.user_id = User.first.id
+    x.group_id = Group.first.id
     x.description = 'test'
-    x.assign_encounter
+    x.assign_encounter User.first
     x.save
     assert_not_nil x.encounter_id
   end

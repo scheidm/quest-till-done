@@ -16,14 +16,19 @@ class SearchesController < ApplicationController
 
   # auto complete search for quest
   def quest_autocomplete
-    render json: Quest.search(params[:query], where: { :user_id => current_user.id})
+    render json: Quest.search(params[:query], where: { :group_id => @user.wrapper_group.id})
   end
 
   # auto complete search for record, quest and campaign
   def all_autocomplete
-    quests = Quest.search(params[:query], where: { :user_id => current_user.id})
-    recs = Record.search(params[:query], where: { :user_id => current_user.id})
+    quests = Quest.search(params[:query], where: { :group_id => @user.wrapper_group.id})
+    recs = Record.search(params[:query], where: { :group_id => @user.wrapper_group.id})
     render json: search_json(quests.results + recs.results)
+  end
+
+  # autocomplete for user
+  def user_autocomplete
+    render json: User.all.reject{ |u| u == @user }
   end
 
   private
@@ -45,19 +50,19 @@ class SearchesController < ApplicationController
 
   def get_search_result(model, query)
     if model.nil?
-      quests = Quest.search(query, where: { :user_id => current_user.id})
-      recs = Record.search(query, where: { :user_id => current_user.id})
+      quests = Quest.search(query, where: { :group_id => @user.wrapper_group.id})
+      recs = Record.search(query, where: { :group_id => @user.wrapper_group.id})
       results = quests.results + recs.results
       @type = 'All'
     elsif (model == Record || Record.child_classes.include?(model))
-      results = model.search(query, where: { :user_id => current_user.id}).results
+      results = model.search(query, where: { :group_id => @user.wrapper_group.id}).results
       @type = 'Record'
       @record_type = (model == Record)? 'All': model.to_s
     elsif model == Campaign
-      results = Campaign.search(query, where: { :user_id => current_user.id}).results
+      results = Campaign.search(query, where: { :group_id => @user.wrapper_group.id}).results
       @type = 'Campaign'
     elsif model == Quest
-      results = Quest.search(query, where: { :user_id => current_user.id, :campaign_id => {:not =>nil} }).results
+      results = Quest.search(query, where: { :group_id => @user.wrapper_group.id, :campaign_id => {:not =>nil} }).results
       @type = 'Quest'
     else
       results = []

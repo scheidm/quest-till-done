@@ -12,7 +12,7 @@ class CreateRecords < ActiveRecord::Migration
       t.text     "github_username"
       t.text     "github_projectname"
       t.text     "sha"
-      t.integer  "user_id"
+      t.integer  "group_id"
       t.string   "slug"
     end
 

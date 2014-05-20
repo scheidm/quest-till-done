@@ -15,17 +15,21 @@ QuestTillDone::Application.configure do
 
   #mailers
 
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
   # Defaults to:
   config.action_mailer.sendmail_settings = {
-      :address => 'no-reply@art.cs.drexel.edu',
-      :location => '/usr/sbin/sendmail',
-      :arguments => '-i -t'
+      address: CONFIG["SMTP_SERVER"],
+      port: CONFIG["SMTP_PORT"],
+      domain: CONFIG["YOUR_DOMAIN"],
+      authentication: "plain",
+      enable_starttls_auto: true,
+      user_name: ENV["SMTP_USER_NAME"],
+      password: ENV["SMTP_USER_PASS"]
   }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'no-reply@art.cs.drexel.edu'}
+  config.action_mailer.default_options = {from: "no-reply@#{CONFIG["YOUR_DOMAIN"]}"}
 
   # Raise error if mailer doesnt work
 

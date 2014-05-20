@@ -50,8 +50,6 @@ gem 'therubyracer'
 
 gem 'haml'
 
-gem 'delayed_job_active_record'
-
 gem 'jstree-rails', :git => 'git://github.com/tristanm/jstree-rails.git'
 
 gem 'd3_rails', "~> 3.4.1"
@@ -65,6 +63,7 @@ gem 'high_voltage'
 # session db gem
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
+gem 'single_test'
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
@@ -81,9 +80,6 @@ gem 'attr_encrypted'
 gem 'github_api'
 gem 'searchkick'
 
-# Friendly URL
-gem 'friendly_id'
-
 # Postgresql
 gem 'pg'
 # Local_time convert UTC to user local
@@ -91,7 +87,38 @@ gem 'local_time'
 
 #display response time
 
-gem 'rack-mini-profiler'
+# gem 'rack-mini-profiler'
 
+gem 'consul'
 # jquery ui
 gem 'jquery-ui-rails'
+
+
+#attachment
+gem 'paperclip'
+
+#link
+gem 'rails_autolink'
+
+#db seed
+gem 'seed_dump'
+
+# messaging & notification
+gem 'mailboxer'
+# growal like notification
+gem 'gritter'
+
+
+# pdf
+gem 'wkhtmltopdf-binary'
+gem 'pdfkit'
+
+
+
+# background Job
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+# infinite tasks
+gem 'whenever', :require => false
+

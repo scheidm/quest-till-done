@@ -7,3 +7,4 @@ log/*.log
 *.sw[a-z]
 .idea/
 .idea/
+config/application.yml

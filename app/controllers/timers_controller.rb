@@ -45,19 +45,29 @@ class TimersController < ApplicationController
 
   # Extend the timer duration for manual mode
   # @param current_time [Integer] current time in seconds
-  def extend_timer
-
+  def extend_countdown
+    render :text => extend_timer.to_json
   end
 
   # Pause the timer and create a new timer for break
   # @return [JSON] break_timer
-  def break
-
+  def break_countdown
+    start_break
+    render :text => get_break_time.to_json
   end
 
   # Extend the current break
   # @return [JSON] Updated break_timer
   def extend_break
+    start_break
+    render :text => get_current_time.to_json
+  end
 
+  # Ajax set timer to auto/manual
+  # @param mode [String] Mode to change to
+  def change_mode
+    @timer.mode = params[:mode];
+    @timer.save
+    render :nothing => true
   end
 end

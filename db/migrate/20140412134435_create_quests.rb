@@ -10,7 +10,7 @@ class CreateQuests < ActiveRecord::Migration
       t.integer  "parent_id"
       t.integer  "campaign_id"
       t.date     "deadline"
-      t.integer  "user_id"
+      t.integer  "group_id"
       t.datetime "created_at"
       t.datetime "updated_at"
       t.boolean  "importance",     default: false

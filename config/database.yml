@@ -8,7 +8,7 @@ development:
   encoding: utf8
   host: localhost
   database: db/development
-  pool: 5
+  pool: 25
   timeout: 5000
   username: qtd
   password: quest
@@ -22,7 +22,7 @@ test: &test
   encoding: utf8
   host: localhost
   database: db/test
-  pool: 5
+  pool: 25
   timeout: 5000
   username: qtd
   password: quest
@@ -32,7 +32,7 @@ production:
   encoding: utf8
   host: localhost
   database: db/production
-  pool: 5
+  pool: 25
   timeout: 5000
   username: qtd
   password: quest

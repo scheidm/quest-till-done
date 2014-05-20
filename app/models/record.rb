@@ -1,18 +1,25 @@
-# Record base model for Link, Note and Image
 class Record < ActiveRecord::Base
 
+  has_attached_file :code,
+                    :path => ":rails_root/uploads/:class/:id/:basename.:extension",
+                    :url => "/records/:id/download"
+
+
+
+  validates_attachment_content_type :code, :content_type => ["image/jpg", "image/jpeg", "image/png", "application/zip", "application/x-zip", "application/x-zip-compressed", "application/pdf", "application/x-pdf"]
 
   searchkick
-  extend FriendlyId
-  friendly_id :description, use: [:slugged, :history]
-
+  acts_as_taggable
+  acts_as_taggable_on :skills
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
   belongs_to :quest
   # Record belongs to a encounter
   belongs_to :encounter
   # Record belongs to a user
-  belongs_to :user
+  belongs_to :group
+  delegate :user, to: :encounter
+  before_destroy :destroy_rounds
 
   validates_associated :encounter
 
@@ -20,8 +27,8 @@ class Record < ActiveRecord::Base
   scope :link, ->{where(type: "Link")}
   scope :note, ->{where(type: "Note")}
 
-  def assign_encounter
-    self.encounter_id = Encounter.where(:user_id => self.user.id).last.id
+  def assign_encounter( user )
+    self.encounter_id = Encounter.where(:user_id => user.id).last.id
     self.save
   end
   

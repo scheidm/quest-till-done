@@ -31,7 +31,7 @@ class QuestsControllerTest < ActionController::TestCase
 
   test "Test create quest" do
     assert_difference('Quest.count') do
-      post :create, quest: {name: 'Test', description: 'Testing',user_id: @user.id, status: 'Open', campaign_id: 1, parent_id: 1}
+      post :create, quest: {name: 'Test', description: 'Testing',group_id: @user.wrapper_group.id, status: 'Open', campaign_id: 1, parent_id: 1}
     end
 
     assert_redirected_to campaign_path(Campaign.find(1).slug)
@@ -45,7 +45,6 @@ class QuestsControllerTest < ActionController::TestCase
 
     assert_response :found
   end
-
 
   test "can successfully set active quest" do
     @active=@user.active_quest

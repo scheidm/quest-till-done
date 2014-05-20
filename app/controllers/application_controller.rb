@@ -1,5 +1,7 @@
 # Default controller in Rails, from which all other users inherit
 class ApplicationController < ActionController::Base
+  include Consul::Controller
+#  require_power_check
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -9,6 +11,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  current_power do
+    Power.new(@user)
+  end
 
   # Once a user is signed in, the application uses this to ensure that the
   # header displays the correct information for the active task of the current
@@ -32,6 +37,7 @@ class ApplicationController < ActionController::Base
         @active_quest_campaign_name = active_quest.campaign.name
         @active_quest_campaign_url = campaign_path(active_quest.campaign)
       end
+      @notification_count = @user.mailbox.inbox(:unread => true).count(:id, :distinct => true)
     end
   end
 
@@ -47,7 +53,7 @@ class ApplicationController < ActionController::Base
   # into the program
   def check_password_expiration
     # check inactive mins
-    if current_user && current_user.password_expires_at && current_user.password_expires_at < Time.now
+    if @user && @user.password_expires_at && @user.password_expires_at < Time.now
       redirect_to new_profile_password_path and return
     end
   end
