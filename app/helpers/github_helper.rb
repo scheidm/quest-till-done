@@ -3,7 +3,7 @@ module GithubHelper
   # Login for github information
   # @return [Github] Github Session
   def login(user)
-    @github = Github.new oauth_token: user.github_access_token, client_id: CONFIG["github_client_id"], client_secret: CONFIG["github_client_secret"]
+    @github = Github.new oauth_token: user.github_access_token, client_id: CONFIG["GITHUB_CLIENT_ID"], client_secret: CONFIG["GITHUB_CLIENT_SECRET"]
   end
 
   #initialize @github for particular project
