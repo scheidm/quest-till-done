@@ -1,3 +1,10 @@
 #Change this file name to application.yml
-github_client_id: "Your Github Client Id"
-github_client_secret: "Your Github Client Secret"
+GITHUB_CLIENT_ID: ""
+GITHUB_CLIENT_SECRET: ""
+#match with your github page
+GITHUB_CALL_BACK_URL: "http://yourdomain:yourport/users/github_callback"
+SMTP_SERVER: ""
+SMTP_PORT: ""
+YOUR_DOMAIN: ""
+SMTP_USER_NAME: ""
+SMTP_USER_PASS: ""
