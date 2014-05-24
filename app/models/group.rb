@@ -1,9 +1,9 @@
 # timelines
 class Group < ActiveRecord::Base
   belongs_to :user
-  has_many :campaigns
-  has_many :rounds
-  has_many :github_repos
+  has_many :campaigns, dependent: :destroy
+  has_many :rounds, dependent: :destroy
+  has_many :github_repos, dependent: :destroy
   has_and_belongs_to_many :users
   has_and_belongs_to_many :admins, class_name: "User", join_table: "admins_groups"
   # Leave the group while preventing orphan groups. If the user is the last
@@ -20,15 +20,12 @@ class Group < ActiveRecord::Base
 
   def demote user
     if self.admins.include? user
-      if self.admins.length>1
+      #multi-user group, promote new admin
+      if self.admins.length==1&&self.users.length>1
         users=self.users-[user]
         self.admins.push users.first
-      else
-        #only user in the group, delete group
-        self.users.destroy user
       end
       self.admins.destroy user
-
     end
   end
 end
