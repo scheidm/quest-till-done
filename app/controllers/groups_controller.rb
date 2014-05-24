@@ -4,7 +4,8 @@ class GroupsController < ApplicationController
 
   include JsonGenerator::TimelineModule
   include RoundHelper
-  include ApplicationHelper # Display a list of all groups for the current user
+  include ApplicationHelper 
+  # Display a list of all groups for the current user
   def index
     @member_groups = @user.groups_where_member
     @admin_groups = @user.groups_where_admin
