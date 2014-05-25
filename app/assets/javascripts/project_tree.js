@@ -1,5 +1,6 @@
-var questTree = function (JsonData) {
+var questTree = function (url) {
 
+    var dataUrl = url;
     var tree;
     var root;
     var svg;
@@ -8,6 +9,8 @@ var questTree = function (JsonData) {
     var diagonal;
     var length;
     var nodes;
+    var toggleShow = true;
+    var JsonData;
 
     function buildTree(treeData) {
         var c = calculateHeight(treeData);
@@ -71,6 +74,7 @@ var questTree = function (JsonData) {
             }
             dragStarted = true;
             nodes = tree.nodes(d);
+            toggleShow = toggleDialog(false);
             d3.event.sourceEvent.stopPropagation();
         })
         .on("drag", function (d) {
@@ -167,10 +171,10 @@ var questTree = function (JsonData) {
             $('#tree-container .popover').remove();
             $(svg).popover('destroy');
             var allNodes = d3.selectAll(".node");
-            allNodes.each(function (n) {
-                if (this != domNode)
-                    renderDetailBox(this, n);
-            });
+//            allNodes.each(function (n) {
+//                if (this != domNode)
+//                    renderDetailBox(this, n);
+//            });
         }
 
         // remove parent link
@@ -271,6 +275,7 @@ var questTree = function (JsonData) {
         allNodes.each(function (n) {
             renderDetailBox(this, n);
         });
+        toggleShow = true;
     }
 
     function update(source) {
@@ -533,6 +538,39 @@ var questTree = function (JsonData) {
             });
     }
 
+    $('#toggle-dialog').click(function() {
+        toggleShow = toggleDialog(!toggleShow);
+    });
 
-    buildTree(JsonData);
+    function toggleDialog(option) {
+        if(option) {
+            svg.selectAll("text").remove();
+            recreateAllPopover();
+            return true;
+        }
+        else {
+            svg.selectAll("text").remove();
+            $('#tree-container .popover').remove();
+            var nodes = svg.selectAll(".node");
+            nodes.append("text")
+                .attr("dx", function(d) { return d.children ? -10 : 10; })
+                .attr("dy", 3)
+                .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
+                .text(function(d) { return d.attr.name; });
+            return false;
+        }
+    };
+
+    function CreateTree() {
+        $.ajax({
+            type: "GET",
+            url: dataUrl,
+            success: function(data) {
+                JsonData = JSON.parse(data);
+                buildTree(JsonData);
+            }
+        });
+    }
+
+    CreateTree();
 }
