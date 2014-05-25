@@ -1,9 +1,9 @@
 module GroupHelper
   def render_remove(user_id)
-    if @group.admins.include? @user 
-      if @user.id==user_id
-        link_to 'Leave', {:action => :leave, :id => @group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove member from group'
-      else
+    if @user.id==user_id
+      link_to 'Leave', {:action => :leave, :id => @group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove self from group'
+    else
+      if @group.admins.include? @user 
         unless @group.admins.include? User.find(user_id)
           link_to 'Remove', {:action => :kick, :id => @group.id, :user_id => user_id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove member from group'
         end

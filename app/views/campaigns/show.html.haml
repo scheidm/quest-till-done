@@ -30,6 +30,13 @@
     %h2 Tree View
     %span.glyphicon.glyphicon-question-sign.help-info
       Press the circle to expand/collapse nodes
+    %br
+  %br
+
+  #tree-control
+    .btn-group
+      %btn#toggle-dialog.btn.btn-default
+        Toggle Dialog
 
   #tree-container{data: {campaign_id: @campaign.id}}
   #edit-campaign-modal.modal.fade
@@ -49,7 +56,7 @@
           %h4#myModalLabel.modal-title New Quest
         .modal-body.a-unique-class
   #campaign-timeline-modal.modal.fade
-    .modal-dialog
+    .modal-dialog{:style => 'width: 800px;'}
       .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
@@ -57,17 +64,9 @@
         .modal-body.campaign-timeline-unique-class
 :javascript
   $(document).ready(function () {
-     var treeId =  { id: $('#tree-container').data('campaign-id')};
-     $.ajax({
-       type: "GET",
-       url: "getTree",
-       data: treeId,
-       success: function(data) {
-        var jsonData = JSON.parse(data);
-
-        questTree(jsonData);
-       }
-     });
+     var treeId = $('#tree-container').data('campaign-id');
+     var url = "getTree?id=" + treeId;
+     questTree(url);
   });
 
 

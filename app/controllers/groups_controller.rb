@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 
   include JsonGenerator::TimelineModule
   include RoundHelper
-
+  include ApplicationHelper 
   # Display a list of all groups for the current user
   def index
     @member_groups = @user.groups_where_member
@@ -173,7 +173,7 @@ class GroupsController < ApplicationController
 
   def timeline
     @group = Group.find(params[:id])
-    render :text => generateTimeline(@group.rounds.limit(100))
+    render :text => generateTimeline(@group.rounds.limit(100).order('created_at DESC'))
   end
 
   def confirm_invite

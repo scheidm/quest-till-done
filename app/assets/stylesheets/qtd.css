@@ -146,12 +146,13 @@
 }
 
 .priority-container {
-    position: relative
+    position: relative;
+    height: auto;
+    min-height: 100%;
 }
 
 .priority-navmenu-offcanvas-content {
     min-height: 200px;
-    overflow: hidden;
 }
 .priority-content {
     margin-left: 0;
@@ -199,10 +200,11 @@
 }
 
 .priority-navmenu-offcanvas-content > div {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     width: 100%;
     padding: 70px 15px 15px 15px;
 }
@@ -225,6 +227,7 @@
 .fill{
     /*height:100%;*/
     min-height:100%;
+    height: auto;
 }
 
 html,body {height:100%;}

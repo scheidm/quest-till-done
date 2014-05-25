@@ -141,6 +141,11 @@
 %br
 :javascript
   $(document).ready(function () {
+
+     var treeId = $('#tree-container').data('quest-id');
+     var url = "getTree?id=" + treeId;
+     questTree(url);
+
      var treeId =  { id: $('#tree-container').data('quest-id')};
      $.ajax({
        type: "GET",

@@ -10,8 +10,10 @@ module ApplicationHelper
     end
   end
 
-  def trunc(string, length = 25)
-    string.size > length+5 ? [string[0,length],string[-5,5]].join("...") : string
+  def trunc(string, length = 25, split=0.8)
+    before=length*split
+    after=length-before
+    string.size > length+5 ? [string[0,before],string[-after,after]].join("...") : string
   end
 
   def new_record_link(active_quest)
