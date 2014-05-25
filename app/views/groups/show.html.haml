@@ -5,7 +5,8 @@
     .col-md-6
       .panel.panel-info{:style => 'height:825px'}
         .panel-heading Activity
-        .panel-body#treeView{ 'data-id' => @group.id}
+        .panel-body
+          #treeView{ :style => 'overflow:auto; height: auto;', 'data-id' => @group.id}
     .col-md-6
       .row
         .panel.panel-info{:style => 'height:400px'}
