@@ -202,7 +202,7 @@ var questTree = function (url) {
             draggingNode = null;
         }
         setTimeout(function () {
-            recreateAllPopover();
+            toggleShow = toggleDialog(true);
         }, duration + 100);
     }
 
