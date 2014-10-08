@@ -95,7 +95,7 @@ class QuestsController < ApplicationController
             close_issue(@user, github_info.github_user, github_info.project_name, @quest.issue_no)
           end
           if @quest.id==@user.active_quest.id
-            @user.active_quest=Quest.where('user_id = (?)', @quest.user_id).where('name = (?)', 'Unsorted Musings').first
+            @user.active_quest=Quest.where('group_id = (?)', @user.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
             @user.save
           end
         end
@@ -159,7 +159,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :user_id, :status, :importance, :deadline, :tag_list)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list)
   end
 
 

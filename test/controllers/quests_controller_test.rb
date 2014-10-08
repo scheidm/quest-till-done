@@ -52,4 +52,18 @@ class QuestsControllerTest < ActionController::TestCase
     @user.reload
     assert_not_same(@active, @user.active_quest)
  end
+
+  test "update quest" do
+    put :update, id: @quest.id, quest: {status: 'Closed'}
+    assert_redirected_to quest_path(assigns(:quest))
+  end
+
+  test "close active quest" do
+    @user.active_quest=@quest
+    @user.save
+    put :update, id: @quest.id, quest: {status: 'Closed'}
+    assert_redirected_to quest_path(assigns(:quest))
+    @user.reload
+    assert_same(@user.active_quest.id, 5)
+  end
 end

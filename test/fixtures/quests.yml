@@ -43,4 +43,15 @@ shampoo: {
   group_id: 1
 }
 
+muse: {
+  name: Unsorted Musings,
+  id: 5,
+  description: A place to store those notes that doen't fit elsewhere,
+  campaign_id: 1,
+  parent_id: 1,
+  status: Open,
+  slug: muse,
+  group_id: 1
+}
+
  
