@@ -18,7 +18,6 @@
 //= require d3
 //= require jstree
 //= require_tree .
-//= stub record
 //= require d3
 //= require layout.js
 //= require jasny-bootstrap
