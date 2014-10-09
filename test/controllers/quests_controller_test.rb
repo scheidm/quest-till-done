@@ -30,20 +30,15 @@ class QuestsControllerTest < ActionController::TestCase
   end
 
   test "Test create quest" do
-    assert_difference('Quest.count') do
-      post :create, quest: {name: 'Test', description: 'Testing',group_id: @user.wrapper_group.id, status: 'Open', campaign_id: 1, parent_id: 1}
-    end
-
+    post :create, quest: {name: 'Test', description: 'Testing',group_id: @user.wrapper_group.id, status: 'Open', campaign_id: 1, parent_id: 1}
+    assert_not_nil( Campaign.where(description: "Testing") )
     assert_redirected_to campaign_path(Campaign.find(1).slug)
-    assert_not_nil(Quest.find_by(description: 'Testing'))
   end
 
   test "Test delete quest" do
-    assert_difference('Quest.count', -1) do
-      delete :destroy, id: @quest.id
-    end
-
+    delete :destroy, id: @quest.id
     assert_response :found
+    assert_nil Quest.find_by( name: "panda")
   end
 
   test "can successfully set active quest" do

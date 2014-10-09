@@ -54,4 +54,12 @@ muse: {
   group_id: 1
 }
 
- 
+My Journey: {
+  name: My Journey,
+  type: Campaign,
+  id: 6,
+  group_id: 1,
+  description: old man!,
+  status: Open,
+  slug: myJourneyCampaign
+}
