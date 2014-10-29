@@ -122,3 +122,7 @@ gem 'slim'
 # infinite tasks
 gem 'whenever', :require => false
 
+
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+gem 'angular-rails-templates'

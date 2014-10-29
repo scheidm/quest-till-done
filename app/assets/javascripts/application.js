@@ -24,4 +24,9 @@
 //= require jasny-bootstrap
 //= require bootstrap-switch
 //= require gritter
-
+//= stub record
+//= require angular
+//= require angular-route
+//= require angular-rails-templates
+//= require_tree ../templates
+//= require_tree .
