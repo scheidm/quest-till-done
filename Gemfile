@@ -78,7 +78,7 @@ gem 'yard'
 gem 'will_paginate'
 gem 'attr_encrypted'
 gem 'github_api'
-gem 'searchkick'
+gem 'searchkick', '~> 0.8.5'
 
 # Postgresql
 gem 'pg'
