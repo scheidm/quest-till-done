@@ -119,3 +119,7 @@ gem 'slim'
 gem 'whenever', :require => false
 
 gem 'simplecov',  '~> 0.7.1', :require => false, :group => :test
+
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails'
+gem 'angular-rails-templates'
