@@ -6,11 +6,7 @@ module JsonGenerator
       format = '%I:%M%p'
       data = []
       rounds.each do |round|
-        text="#{round.event_description} #{round.type}: #{round.related_obj.to_s} "
-        time="- #{distance_of_time_in_words(round.created_at.strftime(format), Time.now)} ago"
-        data << {:id => round.event_id, 
-                :data => trunc(text,54,0.7)+time,
-                :attr => { :rel => round.type, :href => round.related_link }}
+        data << {:id => round.event_id, :data => "#{trunc(round.event_description)} #{round.type}: #{round.related_obj.to_s} - #{round.created_at.to_time.strftime(format) } ago", :attr => { :rel => round.type, :href => round.related_link }}
       end
       return data.to_json
     end
@@ -23,12 +19,12 @@ module JsonGenerator
     # @param rounds [Round] Rounds to generate tree
     # @return [JSON] JSON formatted data
     def generateTree(encounters, campaign_id)
-      data = []
       format = '%I:%M%p'
+      data = []
       data_by_date = {}
       encounters.each do |encounter|
-        end_time = (encounter.end_time.nil? ) ? 'Now' : encounter.end_time.strftime(format)
-        encounter_data = {:data => encounter.created_at.strftime(format) + ' to ' + end_time, :attr => { :rel => 'round', :href => 'javascript:void(0)'} }
+        end_time = (encounter.end_time.nil? ) ? 'Now' : encounter.end_time.to_time.strftime(format)
+        encounter_data = {:data => encounter.created_at.to_time.strftime(format) + ' to ' + end_time, :attr => { :rel => 'round', :href => 'javascript:void(0)'} }
         encounter_data[:children] = children = []
         encounter.rounds.each {|round|
           if campaign_id.nil? || round.campaign_id == campaign_id.to_i
@@ -56,12 +52,12 @@ module JsonGenerator
       format = '%I:%M%p'
       data_by_date = {}
       encounters.each do |encounter|
-        end_time = (encounter.end_time.nil? ) ? 'Now' : encounter.end_time.strftime(format)
-        encounter_data = {:data => encounter.created_at.strftime(format) + ' to ' + end_time, :attr => { :rel => 'round', :href => 'javascript:void(0)'} }
+        end_time = (encounter.end_time.nil? ) ? 'Now' : encounter.end_time.to_time.strftime(format)
+        encounter_data = {:data => encounter.created_at.to_time.strftime(format) + ' to ' + end_time, :attr => { :rel => 'round', :href => 'javascript:void(0)'} }
         encounter_data[:children] = children = []
         encounter.rounds.each {|round|
           if campaign_id.nil? || round.campaign_id == campaign_id.to_i
-            children << {:id => round.event_id, :data => round.event_description + ' ' + round.type+": "+round.related_obj.to_s, :attr => { :rel => round.type, :href => round.related_link }}
+            children << {:id => round.event_id, :data => "#{round.event_description} #{round.type}: #{round.related_obj.to_s} - #{time_ago_in_words(round.created_at )} ago", :attr => { :rel => round.type, :href => round.related_link }}
           end
         }
         data_by_date[encounter.created_at.to_date] ||= Array.new
@@ -188,8 +184,8 @@ module JsonGenerator
          return data
       else
         data[:children] = children = []
-        quest.child_quests.each {|quest|
-          children << generateChildTree(quest)
+        quest.child_quests.each {|q|
+          children << generateChildTree(q)
         }
       end
       return data

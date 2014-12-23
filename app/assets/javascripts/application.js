@@ -24,4 +24,5 @@
 //= require jasny-bootstrap
 //= require bootstrap-switch
 //= require gritter
+//= require local_time
 
