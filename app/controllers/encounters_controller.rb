@@ -11,7 +11,7 @@ class EncountersController < ApplicationController
   end
 
   def get_user_timeline
-    @encounters = Encounter.where(:user_id => @user.id)
+    @encounters = Encounter.where(:user_id => @user.id).order(created_at: :desc)
     render :text => generateUserTree(@encounters, nil)
   end
 
