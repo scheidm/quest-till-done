@@ -9,7 +9,8 @@ class UserTest < ActiveSupport::TestCase
      assert_not_nil @user.config
      assert_not_nil @user.timer
      assert_equal 1, @user.encounters.length
-     assert_equal 2, @user.campaigns.length
+     assert_equal 1, @user.campaigns.length
+     assert_equal 3, @user.quests.length
    end
      
 end

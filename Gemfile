@@ -93,7 +93,6 @@ gem 'consul'
 # jquery ui
 gem 'jquery-ui-rails'
 
-
 #attachment
 gem 'paperclip'
 
@@ -108,12 +107,9 @@ gem 'mailboxer'
 # growal like notification
 gem 'gritter'
 
-
 # pdf
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
-
-
 
 # background Job
 gem 'sidekiq'
