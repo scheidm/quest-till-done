@@ -24,6 +24,10 @@ QuestTillDone::Application.routes.draw do
     get 'download', on: :member
   end
 
+  resources :links, :controller => "records", :type => "Link"
+  resources :notes, :controller => "records", :type => "Link"
+  resources :images, :controller => "records", :type => "Link"
+
   resources :timers do
     collection do
       get 'get_time_current', 'get_time_setting', 'reset_countdown', 'restart_countdown', 'extend_countdown', 'break_countdown'
