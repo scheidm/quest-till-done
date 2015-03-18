@@ -20,6 +20,7 @@ class CampaignsController < ApplicationController
   # @param id [Integer] Campaign's id
   # @return [Html] the campaign detail with that id
   def show
+    logger.info params
     @campaign = Campaign.find(params[:id])
     #reverse history but direct to new
 
@@ -39,7 +40,11 @@ class CampaignsController < ApplicationController
   # @return [JSON] campaign's information in JSON format
   def getTree
     campaign = Campaign.find(params[:id])
-    render :text => generateCampaignTree(campaign)
+    only_active = false
+    if params[:hide]=='1' then
+      only_active =  true
+    end
+    render :text => generateCampaignTree(campaign, only_active)
   end
 
 
@@ -150,6 +155,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name, :group_id, :id)
+    params.require(:campaign).permit(:description, :name, :group_id, :id, :hide)
   end
 end

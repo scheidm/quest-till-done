@@ -17,11 +17,11 @@
 %p
   %strong Deadline:
   =@quest.deadline || "None"
-
   %p#quest_id.hidden
     = @quest.id
   %p#active_quest.hidden
     = @active_quest
+    #hide.fade{data: { hide: params[:hide]||0}  }
 %button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
   %span.glyphicon.glyphicon-eye-open
 = link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
@@ -51,12 +51,18 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Quest
       .modal-body.a-unique-class
+  #help
+    %h2 Tree View
+    %span.glyphicon.glyphicon-question-sign.help-info
+      Press the circle to expand/collapse nodes
 %br
 %br
-#help
-  %h2 Tree View
-  %span.glyphicon.glyphicon-question-sign.help-info
-    Press the circle to expand/collapse nodes
+
+  =link_to "Toggle Closed Quests", quest_path(:id => params[:id],  :hide =>  params[:hide]=='1' ? 0 : 1)
+  #tree-control
+    .btn-group
+      %btn#toggle-dialog.btn.btn-default
+        Toggle Dialog
 
 #tree-container{data: {quest_id: @quest.id} }
 
@@ -143,7 +149,8 @@
   $(document).ready(function () {
 
      var treeId = $('#tree-container').data('quest-id');
-     var url = "getTree?id=" + treeId;
+     var showClosed = $('#hide').data('hide');
+     var url = "getTree?id=" + treeId+"&hide="+showClosed;
      questTree(url);
 
      var treeId =  { id: $('#tree-container').data('quest-id')};

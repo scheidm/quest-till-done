@@ -149,14 +149,14 @@ module JsonGenerator
     # Generate a Campaign tree JSON for a campaign
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
-    def generateCampaignTree (campaign)
+    def generateCampaignTree (campaign, only_active)
       if (!campaign.is_a?(Campaign))
         raise 'Expected argument to be a campaign'
       end
       data = {:id => campaign.id, :attr => { :name => campaign.name, :description => campaign.description, :url => '/campaigns/' + campaign.id.to_s, :status => campaign.status}}
       data[:children] = children = []
       campaign.child_quests.each {|quest|
-        children << generateChildTree(quest)
+        children << generateChildTree(quest,only_active) unless only_active&&quest.status=="Closed"
       }
 
       return data.to_json
@@ -165,11 +165,11 @@ module JsonGenerator
     # Generate a Quest tree JSON for a quest
     # @param quest [Quest] Quest to generate JSON
     # @return [JSON] JSON formatted tree data
-    def generateQuestTree (quest)
+    def generateQuestTree (quest, only_active)
       if (!quest.is_a?(Quest))
         raise 'Expected argument to be a campaign'
       end
-      data = generateChildTree(quest)
+      data = generateChildTree(quest, only_active)
 
       return data.to_json
     end
@@ -177,7 +177,7 @@ module JsonGenerator
     # Recursive function to generate json for all quest underneath a quest
     # @param quest [Quest] Quest to generate JSON
     # @return [JSON] JSON formatted tree data
-    def generateChildTree(quest)
+    def generateChildTree(quest, only_active)
 
       data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
       if(quest.child_quests.size == 0)
@@ -185,7 +185,7 @@ module JsonGenerator
       else
         data[:children] = children = []
         quest.child_quests.each {|q|
-          children << generateChildTree(q)
+          children << generateChildTree(q, only_active) unless only_active&&q.status=="Closed"
         }
       end
       return data

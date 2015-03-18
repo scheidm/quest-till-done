@@ -137,7 +137,11 @@ class QuestsController < ApplicationController
   # @return [JSON] quest's information in JSON format
   def getTree
     quest = Quest.find(params[:id])
-    render :text => generateQuestTree(quest)
+    only_active = false
+    if params[:hide]=='1' then
+      only_active =  true
+    end
+    render :text => generateQuestTree(quest, only_active)
   end
 
   # Set quest as user's current active quest
@@ -159,7 +163,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list, :hide)
   end
 
 
