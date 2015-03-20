@@ -32,8 +32,8 @@
       Press the circle to expand/collapse nodes
     %br
   %br
-
-  =link_to "Toggle Closed Quests", campaign_path(:id => params[:id],  :hide =>  params[:hide]=='1' ? 0 : 1)
+  -params[:show_all]=='1' ? text='Hide' : text='Show'
+  =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1)
   #tree-control
     .btn-group
       %btn#toggle-dialog.btn.btn-default
@@ -64,12 +64,12 @@
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4#myModalLabel.modal-title Timeline
         .modal-body.campaign-timeline-unique-class
-          #hide.fade{data: { hide: params[:hide]||0}  }
+          #show_all.fade{data: { show_all: params[:show_all]||0}  }
 :javascript
   $(document).ready(function () {
      var treeId = $('#tree-container').data('campaign-id');
-     var showClosed = $('#hide').data('hide');
-     var url = "getTree?id=" + treeId+"&hide="+showClosed;
+     var showClosed = $('#show_all').data('show-all');
+     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
      console.log(url);
      questTree(url);
   });

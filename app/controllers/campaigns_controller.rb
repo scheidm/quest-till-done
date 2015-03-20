@@ -40,9 +40,9 @@ class CampaignsController < ApplicationController
   # @return [JSON] campaign's information in JSON format
   def getTree
     campaign = Campaign.find(params[:id])
-    only_active = false
-    if params[:hide]=='1' then
-      only_active =  true
+    only_active = true
+    if params[:show_all]=='1' then
+      only_active =  false
     end
     render :text => generateCampaignTree(campaign, only_active)
   end
@@ -155,6 +155,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name, :group_id, :id, :hide)
+    params.require(:campaign).permit(:description, :name, :group_id, :id, :show_all)
   end
 end

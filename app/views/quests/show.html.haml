@@ -21,7 +21,7 @@
     = @quest.id
   %p#active_quest.hidden
     = @active_quest
-    #hide.fade{data: { hide: params[:hide]||0}  }
+    #show_all.fade{data: { show_all: params[:show_all]||0}  }
 %button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
   %span.glyphicon.glyphicon-eye-open
 = link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
@@ -58,7 +58,8 @@
 %br
 %br
 
-  =link_to "Toggle Closed Quests", quest_path(:id => params[:id],  :hide =>  params[:hide]=='1' ? 0 : 1)
+  -params[:show_all]=='1' ? text='Hide' : text='Show'
+  =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1)
   #tree-control
     .btn-group
       %btn#toggle-dialog.btn.btn-default
@@ -149,8 +150,8 @@
   $(document).ready(function () {
 
      var treeId = $('#tree-container').data('quest-id');
-     var showClosed = $('#hide').data('hide');
-     var url = "getTree?id=" + treeId+"&hide="+showClosed;
+     var showClosed = $('#show_all').data('show-all');
+     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
      questTree(url);
 
      var treeId =  { id: $('#tree-container').data('quest-id')};
