@@ -49,12 +49,18 @@
                   C# Guru
                 .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Experience"}
                   .progress-bar{role: "progressbar", style: "width: 50%;"}
-            .col-md-2
-              %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
-              %div{style: "margin-top: 5px"}
-                = new_record_link(@active_quest_model) do
-                  %span.glyphicon.glyphicon-plus-sign
-            .col-md-6.qtd-col
+            .col-md-3
+              .col-md-6
+                %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
+                %div{style: "margin-top: 5px"}
+                  = new_record_link(@active_quest_model) do
+                    %span.glyphicon.glyphicon-plus-sign
+              .col-md-6
+                = link_to campaign_path(@journey), :class => 'btn btn-primary' do
+                  %span.glyphicon.glyphicon-road
+                %div{style: "margin-top: 5px"}
+                  =link_to content_tag(:span, nil, class: 'glyphicon glyphicon-book'), new_record_path(:quest_id => @muse.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add record to quest', 'data-target' => '#new-record-modal.modal'
+            .col-md-5.qtd-col
               %table{style: "margin-top: 10px"}
                 %tr
                   %td

@@ -183,4 +183,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  def journey
+    return self.quests.first
+  end
+
 end
