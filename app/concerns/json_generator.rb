@@ -6,11 +6,7 @@ module JsonGenerator
       format = '%I:%M%p'
       data = []
       rounds.each do |round|
-        text="#{round.event_description} #{round.type}: #{round.related_obj.to_s} "
-        time="- #{distance_of_time_in_words(round.created_at.strftime(format), Time.now)} ago"
-        data << {:id => round.event_id, 
-                :data => trunc(text,54,0.7)+time,
-                :attr => { :rel => round.type, :href => round.related_link }}
+        data << {:id => round.event_id, :data => "#{trunc(round.event_description,40)} #{round.type}: #{trunc(round.related_obj.to_s,40)} - #{round.created_at.to_time.strftime(format) } ago", :attr => { :rel => round.type, :href => round.related_link }}
       end
       return data.to_json
     end

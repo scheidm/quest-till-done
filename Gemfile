@@ -122,3 +122,5 @@ gem 'slim'
 # infinite tasks
 gem 'whenever', :require => false
 
+gem 'simplecov',  '~> 0.7.1', :require => false, :group => :test
+gem 'byebug'
