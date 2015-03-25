@@ -134,6 +134,7 @@
            data: questId,
            success: function(data) {
               $('.flashMessage').html("Successfully set current quest to active quest");
+              window.location.reload();
           }
         });
      });
