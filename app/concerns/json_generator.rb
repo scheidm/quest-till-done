@@ -3,10 +3,9 @@ module JsonGenerator
   module TimelineModule
     include ActionView::Helpers::DateHelper
     def generateTimeline(rounds)
-      format = '%I:%M%p'
       data = []
       rounds.each do |round|
-        data << {:id => round.event_id, :data => "#{trunc(round.event_description, 125)} #{round.type}: #{trunc(round.related_obj.to_s,125)} - #{round.created_at.to_time.strftime(format) }", :attr => { :rel => round.type, :href => round.related_link }}
+        data << {:id => round.event_id, :data => round.to_str, :attr => { :rel => round.type, :href => round.related_link }}
       end
       return data.to_json
     end
