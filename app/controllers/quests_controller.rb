@@ -55,7 +55,7 @@ class QuestsController < ApplicationController
     path = @quest.parent.type == 'Campaign'? campaign_path(@quest.parent) : quest_path(@quest.parent)
     respond_to do |format|
       if @quest.save
-        create_round(@quest, action_name, @quest.campaign)
+        create_round(@quest, action_name.capitalize, @quest.campaign)
         format.html { redirect_to path, notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
@@ -104,7 +104,7 @@ class QuestsController < ApplicationController
 
 
       if @quest.update(quest_params)
-        create_round(@quest, action_name, @quest.campaign)
+        create_round(@quest, action_name.capitalize, @quest.campaign)
         format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
         format.json { head :no_content }
       else
@@ -137,16 +137,20 @@ class QuestsController < ApplicationController
   # @return [JSON] quest's information in JSON format
   def getTree
     quest = Quest.find(params[:id])
-    render :text => generateQuestTree(quest)
+    only_active = true
+    if params[:show_all]=='1' then
+      only_active =  false
+    end
+    render :text => generateQuestTree(quest, only_active)
   end
 
   # Set quest as user's current active quest
   # @param id [Integer] Quest's id
   def set_active
-    quest = Quest.find(params[:id])
-    user = User.find(@user.id)
-    user.active_quest_id = quest.id
-    user.save
+    @quest = Quest.find(params[:id])
+    @user.active_quest_id = @quest.id
+    @user.save
+    create_round(@quest, action_name.capitalize, @quest.campaign)
     render :nothing => true
   end
 
@@ -159,7 +163,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list, :show_all)
   end
 
 

@@ -39,6 +39,8 @@ class ApplicationController < ActionController::Base
         @active_quest_campaign_name = active_quest.campaign.name
         @active_quest_campaign_url = campaign_path(active_quest.campaign)
       end
+      @journey = @user.campaigns.first
+      @muse = @journey.quests.first
       @notification_count = @user.mailbox.inbox(:unread => true).distinct.count
     end
   end

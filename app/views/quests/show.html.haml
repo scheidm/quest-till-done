@@ -17,11 +17,11 @@
 %p
   %strong Deadline:
   =@quest.deadline || "None"
-
   %p#quest_id.hidden
     = @quest.id
   %p#active_quest.hidden
     = @active_quest
+    #show_all.fade{data: { show_all: params[:show_all]||0}  }
 %button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
   %span.glyphicon.glyphicon-eye-open
 = link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
@@ -51,12 +51,19 @@
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
         %h4#myModalLabel.modal-title New Quest
       .modal-body.a-unique-class
+  #help
+    %h2 Tree View
+    %span.glyphicon.glyphicon-question-sign.help-info
+      Press the circle to expand/collapse nodes
 %br
 %br
-#help
-  %h2 Tree View
-  %span.glyphicon.glyphicon-question-sign.help-info
-    Press the circle to expand/collapse nodes
+
+  -params[:show_all]=='1' ? text='Hide' : text='Show'
+  =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1)
+  #tree-control
+    .btn-group
+      %btn#toggle-dialog.btn.btn-default
+        Toggle Dialog
 
 #tree-container{data: {quest_id: @quest.id} }
 
@@ -68,82 +75,43 @@
     .panel-heading
       %h4.panel-title
         %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseNote"}
-          Notes
+          Records
     #collapseNote.panel-collapse.collapse
       %ul.list-group
-      - @quest.notes.each do |note|
-        %a.list-group-item
+      - @quest.records.each do |rec|
+        -href='#'
+        -if(rec.type=='Image'||'Link') then href="#{rec.url}" end
+        %a.list-group-item(href="#{href}" target='newtab')
           %table{:style=>"width:100%"}
             %tr
               %td
                 .pull-left
-                  %h4.list-group-item-heading
-                    = note.created_at.strftime("%m/%d/%Y %I:%M%p")
-                  %p.list-group-item-text
-                    = auto_link(note.description)
-                .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to " Delete ", {:controller => :records, :action => 'destroy', :id => note.id }, :class => "btn btn-danger", :method => :delete, data: {:confirm => "Are you sure?"}
-                  .pull-right
-                    = link_to " Modify ", edit_record_path(note.id), :class => "btn btn-primary"
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseImage"}
-          Images
-    #collapseImage.panel-collapse.collapse
-      %ul.list-group
-      - @quest.images.each do |image|
-        %a.list-group-item
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  .pull-left{style:'margin-right:2px'}
-                    =image_tag image.code.url(image.code.url), size:'50x50', class:"img-rounded"
+                  -if(rec.type=='Image') then 
+                    .pull-left{style:'margin-right:2px'}
+                      %a(href="#{rec.code.url}")
+                      =image_tag rec.code.url(rec.code.url), size:'50x50', class:"img-rounded"
                   .pull-right
                     %h4.list-group-item-heading
-                      = image.created_at.strftime("%m/%d/%Y %I:%M%p")
+                      = rec.created_at.strftime("%m/%d/%Y %I:%M%p")
                     %p.list-group-item-text
-                      = auto_link(image.description)
+                      = auto_link(rec.description)
+                    -if(rec.type=='Link') then
+                      %br
+                        = auto_link(rec.url)
 
                 .pull-right
                   .pull-left{:style=>"margin-right:4px"}
-                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => image.id }, :class => "btn btn-danger", :method => :delete, data: {:confirm => "Are you sure?"}
+                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => rec.id }, :class => "btn btn-danger", :method => :delete, data: {:confirm => "Are you sure?"}
                   .pull-right
-                    =link_to "Modify", edit_record_path(image.id), :class => "btn btn-primary"
-
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion3", "data-toggle" => "collapse", href: "#collapseLink"}
-          Links
-    #collapseLink.panel-collapse.collapse
-      %ul.list-group
-      - @quest.links.each do |link|
-        %a.list-group-item
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  %h4.list-group-item-heading
-                    = link.created_at.strftime("%m/%d/%Y %I:%M%p")
-                  %p.list-group-item-text
-                    = auto_link(link.description)
-                    %br
-                      = auto_link(link.url)
-                .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => link.id }, :class => "btn btn-danger", :method => :delete, data:{:confirm => "Are you sure?"}
-                  .pull-right
-                    =link_to "Modify", edit_record_path(link.id), :class => "btn btn-primary"
+                    =link_to "Modify", edit_record_path(rec.id), :class => "btn btn-primary"
 %br
 %br
 :javascript
   $(document).ready(function () {
 
      var treeId = $('#tree-container').data('quest-id');
-     var url = "getTree?id=" + treeId;
+     var showClosed = $('#show_all').data('show-all');
+     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
      questTree(url);
 
      var treeId =  { id: $('#tree-container').data('quest-id')};
@@ -166,6 +134,7 @@
            data: questId,
            success: function(data) {
               $('.flashMessage').html("Successfully set current quest to active quest");
+              window.location.reload();
           }
         });
      });

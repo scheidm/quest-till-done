@@ -8,6 +8,8 @@ class Round < ActiveRecord::Base
   belongs_to :campaign
   belongs_to :group
   self.inheritance_column = nil
+  include ActionView::Helpers::DateHelper
+  include ApplicationHelper
 
   def self.create_event(model, operation, campaign)
     raise ArgumentError, 'campaign id is nil' if campaign.id.nil?
@@ -37,5 +39,10 @@ class Round < ActiveRecord::Base
 
   def related_link
     self.related_obj.to_link
+  end
+
+  def to_str(length = 125)
+    format = '%I:%M%p'
+    return "#{trunc(self.event_description, length)} #{self.type}: #{trunc(self.related_obj.to_s,length)} - #{self.created_at.to_time.strftime(format)}"
   end
 end

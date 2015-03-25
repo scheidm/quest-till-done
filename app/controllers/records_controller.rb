@@ -82,6 +82,13 @@ class RecordsController < ApplicationController
     @record= Record.find(params[:id])
   end
 
+  def update
+    @record= Record.find(params[:id])
+    respond_to do |format|
+        format.html { redirect_to @record.quest, notice: 'Record was successfully updated.' }
+      end
+  end
+
   # Define allowed parameter for a record model
   # @param description [String] Record's description
   # @param encounter_id [Integer] Record's encounter_id

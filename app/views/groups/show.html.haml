@@ -2,59 +2,58 @@
   = @group.name
 .container
   .row
+    .panel.panel-info{:style => 'height:400'}
+      .panel-heading Activity
+      .panel-body{:style => 'overflow:auto; height:350px;'}
+        #treeView{ :style => 'height: auto;', 'data-id' => @group.id}
+  .row
     .col-md-6
-      .panel.panel-info{:style => 'height:825px'}
-        .panel-heading Activity
-        .panel-body{:style => 'overflow:auto; height:760px;'}
-          #treeView{ :style => 'height: auto;', 'data-id' => @group.id}
+      .panel.panel-info{:style => 'height:400px'}
+        .panel-heading Members
+        .panel-body.fill
+          %table{:class => "table table-hover" }
+            %thead
+              %tr
+                %th Name
+                %th Role
+            %tbody
+              - @group.users.paginate(page: params[:page], per_page: 4).each do |user|
+                %tr
+                  %td= user.username
+                  %td
+                    = render_role(@group, user)
+                  %td
+                    = render_promote(user.id)
+                    = render_demote(user.id)
+                    = render_remove(user.id)
+          = will_paginate @group.users.paginate(page: params[:page], per_page: 4)
+          %br
+          = render_add_member
     .col-md-6
-      .row
-        .panel.panel-info{:style => 'height:400px'}
-          .panel-heading Members
-          .panel-body.fill
-            %table{:class => "table table-hover" }
-              %thead
+      .panel.panel-info{:style => 'height:400px'}
+        .panel-heading Campaigns
+        .panel-body
+          %table{:class => "table table-hover"}
+            %thead
+              %tr
+                %th Name
+                %th Description
+            %tbody
+              - @group.campaigns.each do |campaign|
                 %tr
-                  %th Name
-                  %th Role
-              %tbody
-                - @group.users.paginate(page: params[:page], per_page: 4).each do |user|
-                  %tr
-                    %td= user.username
-                    %td
-                      = render_role(@group, user)
-                    %td
-                      = render_promote(user.id)
-                      = render_demote(user.id)
-                      = render_remove(user.id)
-            = will_paginate @group.users.paginate(page: params[:page], per_page: 4)
-            %br
-            = render_add_member
-      .row
-        .panel.panel-info{:style => 'height:400px'}
-          .panel-heading Campaigns
-          .panel-body
-            %table{:class => "table table-hover"}
-              %thead
-                %tr
-                  %th Name
-                  %th Description
-              %tbody
-                - @group.campaigns.each do |campaign|
-                  %tr
-                    %td
-                      = link_to campaign.name, campaign_path(campaign)
-                    %td
-                      %a.btn.btn-primary
-                        Open
-                        = render_quest_count(campaign, 'Open')
-                      %a.btn.btn-success
-                        In Progress
-                        = render_quest_count(campaign, 'In Progress')
-                      %a.btn.btn-primary{:style => 'background-color: #999;border-color: #999'}
-                        Closed
-                        = render_quest_count(campaign, 'Closed')
-            =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
+                  %td
+                    = link_to campaign.name, campaign_path(campaign)
+                  %td
+                    %a.btn.btn-primary
+                      Open
+                      = render_quest_count(campaign, 'Open')
+                    %a.btn.btn-success
+                      In Progress
+                      = render_quest_count(campaign, 'In Progress')
+                    %a.btn.btn-primary{:style => 'background-color: #999;border-color: #999'}
+                      Closed
+                      = render_quest_count(campaign, 'Closed')
+          =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
 
 #add-member-modal.modal.fade
   .modal-dialog
