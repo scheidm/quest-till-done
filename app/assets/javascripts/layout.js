@@ -1,5 +1,12 @@
-
+function update_title_countdown(new_time){
+  minutes = (Math.floor(new_time/60));
+  seconds = (new_time%60);
+  if(seconds<10)
+    seconds="0"+seconds
+  document.title = minutes+":"+seconds;
+}
 $(document).ready(function(){
+
     var clock = $('#clock').FlipClock({
         autoStart: false,
         countdown: true,
@@ -96,6 +103,8 @@ $(document).ready(function(){
         cache: false,
         success: function(result) {
             clock.setTime(result.current_time)
+            update_title_countdown(result.current_time)
+            
             if(result.state == true)
                 clock.start();
         }
@@ -104,6 +113,7 @@ $(document).ready(function(){
     $('#startBtn').click(function()
     {
         clock.start();
+        update_title_countdown(clock.getTime());
         $.ajax({
             type: "POST",
             url: "/timers/start_countdown",
@@ -131,6 +141,7 @@ $(document).ready(function(){
             url: "/timers/reset_countdown",
             success: function(result) {
                 clock.setTime(result.setting_time);
+                update_title_countdown(result.setting_time);
             }
         });
     });
@@ -143,6 +154,7 @@ $(document).ready(function(){
             data: "current_time=" + clock.getTime(),
             success: function(result) {
                 clock.setTime(result.new_time);
+                update_title_countdown(result.new_time);
                 //clock.start();
             }
         });
@@ -156,6 +168,8 @@ $(document).ready(function(){
             url: "/timers/break_countdown",
             success: function(result) {
                 clock.setTime(result.break_time);
+                update_title_countdown(result.break_time);
+                //clock.start();
                 clock.start();
                 $('#clock').popover('show');
             }
