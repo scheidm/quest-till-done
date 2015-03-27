@@ -32,7 +32,13 @@ class Round < ActiveRecord::Base
   end
 
   def related_obj
-    self.type.singularize.classify.constantize.find(self.event_id)
+    my_class=self.type.singularize.classify
+    if(my_class=='Note' or my_class=='Link' or my_class=='Image')then
+      rel=Record.find(self.event_id)
+    else
+      rel=my_class.constantize.find(self.event_id)
+    end
+    return rel
   end
 
   def related_link
