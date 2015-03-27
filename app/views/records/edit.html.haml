@@ -3,3 +3,6 @@
 = render @record.type.downcase
 
 = link_to 'Back', :back
+
+:javascript
+  $('.record-form-hidden').removeClass('record-form-hidden')

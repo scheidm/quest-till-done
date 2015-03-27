@@ -84,9 +84,8 @@ class RecordsController < ApplicationController
 
   def update
     @record= Record.find(params[:id])
-    respond_to do |format|
-        format.html { redirect_to @record.quest, notice: 'Record was successfully updated.' }
-      end
+    @record.update!(record_params)
+    redirect_to @record.quest, notice: 'Record was successfully updated.'
   end
 
   # Define allowed parameter for a record model
@@ -105,6 +104,5 @@ class RecordsController < ApplicationController
     @record = Record.find(params[:id])
     send_file @record.code.path, :type => @record.code_content_type, :disposition => 'inline'
   end
-
 
 end
