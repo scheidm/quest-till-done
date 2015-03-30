@@ -17,6 +17,13 @@ class QuestsController < ApplicationController
   # @return [Html] Quest detail page with that id
   def show
     @quest = Quest.find(params[:id])
+    if @quest.status=='Closed' then
+      @state_class="btn-danger"
+      @effect="Open"
+    else
+      @state_class="btn-success"
+      @effect="Close"
+    end
     if(!@user.active_quest.nil?&&User.find(@user.id).active_quest.id == @quest.id)
       @active_quest = true
     else
@@ -101,17 +108,26 @@ class QuestsController < ApplicationController
         end
       end
 
-
-
       if @quest.update(quest_params)
         create_round(@quest, action_name.capitalize, @quest.campaign)
-        format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
+        if params['quest']['status']=="Closed"
+          format.html { redirect_to @quest.parent, notice: 'Quest was successfully updated.' }
+        else
+          format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
+        end
         format.json { head :no_content }
       else
         format.html { render quest: 'edit' }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def toggle_state
+    @quest = Quest.find(params[:id])
+    @quest.status =='Open' ? @quest.status="Closed" : @quest.status="Open" 
+    @quest.save
+    redirect_to quest_path(@quest)
   end
 
   # Delete quest and all the records it associated with
