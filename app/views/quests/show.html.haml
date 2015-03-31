@@ -85,7 +85,7 @@
           Records
     #collapseNote.panel-collapse.collapse
       %ul.list-group
-      - @quest.records.order('created_at')>each do |rec|
+      - @quest.records.order('created_at').each do |rec|
         -href='#'
         -if(rec.type=='Image'||'Link') then href="#{rec.url}" end
         %a.list-group-item(href="#{href}" target='newtab')

@@ -142,6 +142,8 @@ GEM
     ffi (1.9.3)
     flipclockjs-rails (0.4.0b)
       jquery-rails (>= 1.0.17)
+    font-awesome-rails (4.3.0.0)
+      railties (>= 3.2, < 5.0)
     foreigner (1.6.1)
       activerecord (>= 3.0.0)
     gherkin (2.12.2)
@@ -347,6 +349,7 @@ DEPENDENCIES
   devise
   execjs
   flipclockjs-rails (~> 0.4.0b)
+  font-awesome-rails
   github_api
   gritter
   haml

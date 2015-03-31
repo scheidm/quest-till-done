@@ -22,6 +22,8 @@
 
   = link_to '#edit-campaign-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
     %span.glyphicon.glyphicon-pencil
+  - @campaign.group.user_id==nil ? owner='owner_group' : owner='owner_personal'
+  =render owner
   = link_to campaigns_path, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
     %span.glyphicon.glyphicon-share-alt
   = link_to campaign_timeline_path(@campaign), :remote => true, :class => 'btn btn-success pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
