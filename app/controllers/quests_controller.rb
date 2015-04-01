@@ -110,11 +110,7 @@ class QuestsController < ApplicationController
 
       if @quest.update(quest_params)
         create_round(@quest, action_name.capitalize, @quest.campaign)
-        if params['quest']['status']=="Closed"
-          format.html { redirect_to @quest.parent, notice: 'Quest was successfully updated.' }
-        else
-          format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
-        end
+        format.html { redirect_select params['quest']['status'] }
         format.json { head :no_content }
       else
         format.html { render quest: 'edit' }
@@ -123,11 +119,20 @@ class QuestsController < ApplicationController
     end
   end
 
+  def redirect_select
+    @quest = Quest.find(params[:id])
+    if @quest.status=="Closed"
+      redirect_to @quest.parent, notice: 'Quest was successfully updated.'
+    else
+      redirect_to @quest, notice: 'Quest was successfully updated.'
+    end
+  end
+
   def toggle_state
     @quest = Quest.find(params[:id])
     @quest.status =='Open' ? @quest.status="Closed" : @quest.status="Open" 
     @quest.save
-    redirect_to quest_path(@quest)
+    redirect_select
   end
 
   # Delete quest and all the records it associated with
