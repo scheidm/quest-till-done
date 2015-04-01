@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
   has_many :total_campaigns, through: :groups, source: :campaigns
+  has_many :total_quests, through: :groups, source: :quests
   has_many :peers, through: :groups, source: :users
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   before_destroy :delete_related

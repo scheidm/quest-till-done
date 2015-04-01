@@ -8,25 +8,20 @@ class PrioritiesController < ApplicationController
   def get_priorities
     @campaign = Campaign.find(params[:id])
     quests = @campaign.all_quests.where.not( :status => 'Closed')
-    @importance_quests = quests.where( :importance => true).order('deadline ASC')
-    @expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).order('deadline ASC')
+    @important_quests = quests.where( :importance => true).order('deadline ASC').limit(25) 
+    @expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).order('deadline ASC').limit(25) 
     data = []
-    data.push(@importance_quests)
+    data.push(@important_quests)
     data.push(@expiring_quests)
     render :text => data.to_json
   end
 
   def get_all_priorities
-    campaigns = @user.total_campaigns
+    quests = @user.total_quests.where.not( :status => 'Closed')
+    important_quests = quests.where( :importance => true).order('deadline ASC').limit(25) 
+    expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).order('deadline ASC').limit(25)
     data = []
-    importance_quests = []
-    expiring_quests = []
-    campaigns.each do |campaign|
-      quests = campaign.all_quests.where.not( :status => 'Closed')
-      importance_quests+=( quests.where( :importance => true) )
-      expiring_quests+=( quests.where( "deadline < ?", 30.days.from_now ).order('deadline DESC') )
-    end
-    data.push(importance_quests)
+    data.push(important_quests)
     data.push(expiring_quests)
     render :text => data.to_json
   end
