@@ -92,9 +92,11 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def update
     @quest = Quest.find(params[:id])
+    action=action_name.capitalize
     respond_to do |format|
       if @quest.save
         if params['quest']['status']=="Closed"
+          action="Close"
           #sync with github
           parent_campaign = Campaign.find(@quest.campaign_id)
           if parent_campaign.vcs
@@ -130,8 +132,16 @@ class QuestsController < ApplicationController
 
   def toggle_state
     @quest = Quest.find(params[:id])
-    @quest.status =='Open' ? @quest.status="Closed" : @quest.status="Open" 
+    if @quest.status =='Open' then
+      @quest.status="Closed" 
+      action="Closed" 
+    else
+      @quest.status="Open" 
+      action="Re-opened"
+    end
+    @quest.status =='Open'
     @quest.save
+    create_round(@quest, action, @quest.campaign)
     redirect_select
   end
 

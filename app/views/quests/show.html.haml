@@ -62,14 +62,12 @@
 %ul.list-inline
   %li
     -params[:show_all]=='1' ? text='Hide' : text='Show'
-    =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1), :class => 'btn btn-default'
+    =link_to "#{text} Closed Quests", quest_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1), :class => 'btn btn-default'
   %li
     #tree-control
       .btn-group
         %btn#toggle-dialog.btn.btn-default
           Toggle Dialog
-  %li
-    =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1), :class => 'btn btn-default'
 
 
 #tree-container{data: {quest_id: @quest.id} }
