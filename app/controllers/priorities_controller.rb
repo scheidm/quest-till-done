@@ -2,7 +2,7 @@
 class PrioritiesController < ApplicationController
 
   def index
-    @campaigns = @user.total_campaigns  
+    @campaigns = @user.total_campaigns.order('name ASC')
   end
 
   def get_priorities

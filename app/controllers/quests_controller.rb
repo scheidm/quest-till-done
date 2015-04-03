@@ -87,6 +87,11 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
   end
 
+  def set_default_active_quest
+    @user.active_quest=Quest.where('group_id = (?)', @user.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
+    @user.save
+  end
+ 
   # Update quest changes and save the changes
   # @param quest_params [quest_params] field input from creation page
   # @return [Html] redirect back to quest's campaign page
@@ -104,8 +109,7 @@ class QuestsController < ApplicationController
             close_issue(@user, github_info.github_user, github_info.project_name, @quest.issue_no)
           end
           if @quest.id==@user.active_quest.id
-            @user.active_quest=Quest.where('group_id = (?)', @user.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
-            @user.save
+            set_default_active_quest
           end
         end
       end
@@ -141,6 +145,9 @@ class QuestsController < ApplicationController
     end
     @quest.status =='Open'
     @quest.save
+    if @quest.id==@user.active_quest.id
+      set_default_active_quest
+    end
     create_round(@quest, action, @quest.campaign)
     redirect_select
   end
