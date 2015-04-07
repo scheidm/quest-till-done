@@ -85,7 +85,7 @@
       - @quest.records.order('created_at').each do |rec|
         -href='#'
         -if(rec.type=='Image'||'Link') then href="#{rec.url}" end
-        %a.list-group-item(href="#{href}" target='newtab')
+        %a.list-group-item(href="#{href}" target='_blank')
           %table{:style=>"width:100%"}
             %tr
               %td
@@ -101,7 +101,7 @@
                       = auto_link(rec.description)
                     -if(rec.type=='Link') then
                       %br
-                        = auto_link(rec.url)
+                        = auto_link(rec.url, html: {target: '_blank'})
 
                 .pull-right
                   .pull-left{:style=>"margin-right:4px"}
