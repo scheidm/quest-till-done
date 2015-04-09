@@ -116,7 +116,7 @@ class QuestsController < ApplicationController
 
       if @quest.update(quest_params)
         create_round(@quest, action_name.capitalize, @quest.campaign)
-        format.html { redirect_select params['quest']['status'] }
+        format.html { redirect_select }
         format.json { head :no_content }
       else
         format.html { render quest: 'edit' }
