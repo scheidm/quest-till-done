@@ -126,7 +126,7 @@ module JsonGenerator
         end
         if number != 0
           count = 0
-          campaign.quests.where("deadline >= ? and deadline < ?", (number-1).days.from_now, number.days.from_now).each {|quest|
+          campaign.quests.where("deadline >= ? and deadline < ?", (number-1).days.from_now, number.days.from_now).where("status != 'Closed'").each {|quest|
             color = '#29AB87'
             radius = 45;
             if quest.importance then
