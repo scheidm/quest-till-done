@@ -39,6 +39,10 @@ class RecordsController < ApplicationController
     @record.assign_encounter @user
     if @record.save
       create_round(@record, action_name, @record.quest.get_campaign)
+      if(@record.quest.status=="Open")
+        @record.quest.status="In Progress"
+        @record.quest.save
+      end
       success=true
     else
       success=false
