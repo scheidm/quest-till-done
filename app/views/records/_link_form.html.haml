@@ -1,0 +1,21 @@
+-if @record.errors.any?
+  = render 'errors'
+.field
+  .form-group
+  = f.label :description, "Url", :class => 'control-label'
+  %br
+  = f.url_field :url, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
+  %br
+  = f.label :description, "Description", :class => 'control-label'
+  %br
+  = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
+  = f.label :tag_list, "Tags (separated by commas)"
+  %br
+  = f.text_field :tag_list
+  %br
+  = f.hidden_field :type, :value => 'Link'
+  = f.hidden_field :quest_id
+
+  %br
+  .actions
+  = f.submit :class => "btn btn-primary pull-right", data: {:disable_with => "Please Wait..."}

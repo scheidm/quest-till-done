@@ -57,3 +57,4 @@ $(function(){
         $('#image').addClass('record-type-selected')
     });
 });
+
