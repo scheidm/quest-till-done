@@ -136,12 +136,16 @@ class QuestsController < ApplicationController
 
   def toggle_state
     @quest = Quest.find(params[:id])
-    if @quest.status =='Open' then
+    if @quest.status =='Closed' then
+      if @quest.records.count > 0 then
+        @quest.status="In Progress" 
+      else 
+        @quest.status="Open" 
+      end
+      action="Re-opened"
+    else
       @quest.status="Closed" 
       action="Closed" 
-    else
-      @quest.status="Open" 
-      action="Re-opened"
     end
     @quest.status =='Open'
     @quest.save
