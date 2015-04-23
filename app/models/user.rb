@@ -188,4 +188,9 @@ class User < ActiveRecord::Base
     return self.quests.first
   end
 
+  def set_default_active_quest
+    self.active_quest=Quest.where('group_id = (?)', self.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
+    self.save
+  end
+    
 end

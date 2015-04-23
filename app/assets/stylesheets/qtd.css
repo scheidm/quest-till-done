@@ -343,6 +343,9 @@ input:-webkit-autofill:focus {
 .label-InProgress {
     background-color: #5cb85c;
 }
+.label-OnHold {
+    background-color: #E67373;
+}
 .label-Note {
     background-color: #5bc0de;
 }

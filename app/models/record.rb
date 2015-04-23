@@ -20,12 +20,22 @@ class Record < ActiveRecord::Base
   belongs_to :group
   delegate :user, to: :encounter
   before_destroy :destroy_rounds
+  after_save :touch_quest
 
   validates_associated :encounter
 
   # Define scope for Single Table Inheritance
   scope :link, ->{where(type: "Link")}
   scope :note, ->{where(type: "Note")}
+
+  
+  def touch_quest
+    quest=self.quest
+    if(quest.status=="Open") then
+      quest.status="In Progress"
+      quest.save
+    end
+  end
 
   def assign_encounter( user )
     self.encounter_id = Encounter.where(:user_id => user.id).last.id

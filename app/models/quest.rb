@@ -96,4 +96,19 @@ class Quest < ActiveRecord::Base
     return children
   end
 
+  def toggle_state
+    if self.status =='Closed' then
+      if self.records.count > 0 then
+        self.status="In Progress" 
+      else 
+        self.status="Open" 
+      end
+      action="Re-opened"
+    else
+      self.status="Closed" 
+      action="Closed" 
+    end
+    self.save
+    return action;
+  end 
 end
