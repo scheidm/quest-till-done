@@ -11,7 +11,7 @@ class EncountersController < ApplicationController
   end
 
   def get_user_timeline
-    render :text => generateUserTree(@user, nil)
+    render :text => generateUserTree(@user)
   end
 
   # Create new encounter
