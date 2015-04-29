@@ -75,6 +75,7 @@ module JsonGenerator
 
   # Module for Quest and Campaigns
   module QuestModule
+    include ApplicationHelper
     # Generate a JSON for all campaigns
     # @param campaign [Campaign] Campaign to generate JSON for
     # @return [JSON] JSON formatted tree data
@@ -177,8 +178,12 @@ module JsonGenerator
     # @param quest [Quest] Quest to generate JSON
     # @return [JSON] JSON formatted tree data
     def generateChildTree(quest, only_active)
-
-      data = {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
+      if(quest.description) then
+        desc= trunc(quest.description, 100)
+      else
+        desc=''
+      end
+      data = {:id => quest.id, :attr => { :name => quest.name, :description => desc, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
       if(quest.child_quests.size == 0)
          return data
       else
