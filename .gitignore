@@ -3,6 +3,7 @@
 /html
 tmp/**/*
 db/*.sqlite3
+db/seeds.rb
 log/*.log
 *.sw[a-z]
 .idea/
