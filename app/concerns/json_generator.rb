@@ -5,7 +5,7 @@ module JsonGenerator
     def generateTimeline(rounds)
       data = []
       rounds.each do |round|
-        data << {:id => round.event_id, :data => round.to_str, :attr => { :rel => round.type, :href => round.related_link }}
+        data << round.to_json
       end
       return data.to_json
     end

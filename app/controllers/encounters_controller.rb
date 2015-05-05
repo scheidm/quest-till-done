@@ -35,7 +35,7 @@ class EncountersController < ApplicationController
   # @param id [Integer] Encounter's id
   # @return [JSON] the encounter's tree data in JSON format
   def getTree
-    #render :text => generateTree
+    render :text => generateTree
   end
 
   # Start an encounter
