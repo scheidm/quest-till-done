@@ -118,7 +118,7 @@ class QuestsController < ApplicationController
 
   def toggle_state
     @quest = Quest.find(params[:id])
-    @quest.toggle_state(@user)
+    action=@quest.toggle_state(@user)
     create_round(@quest, action, @quest.campaign)
     redirect_select
   end
