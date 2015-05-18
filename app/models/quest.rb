@@ -2,6 +2,7 @@
 # Shares a table through STI with Campaign
 class Quest < ActiveRecord::Base
   include RoundHelper
+  include GithubHelper
   searchkick
 
   scope :search_import, -> { includes(:records) }
@@ -96,7 +97,7 @@ class Quest < ActiveRecord::Base
     return children
   end
 
-  def toggle_state
+  def toggle_state(user)
     if self.status =='Closed' then
       if self.records.count > 0 then
         self.status="In Progress" 
@@ -109,6 +110,19 @@ class Quest < ActiveRecord::Base
       action="Closed" 
     end
     self.save
+    self.update_cleanup(user)
     return action;
   end 
+
+  def update_cleanup(user)
+    if self.status =='Closed' then
+      if self.campaign.vcs then #sync with github
+        github_info = GithubRepo.where(campaign_id: self.campaign.id).first
+        close_issue(@user, github_info.github_user, github_info.project_name, self.issue_no)
+      end
+      if self.id==user.active_quest.id then
+        user.set_default_active_quest
+      end
+    end
+  end
 end

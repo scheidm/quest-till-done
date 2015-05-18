@@ -122,5 +122,5 @@ gem 'simplecov',  '~> 0.7.1', :require => false, :group => :test
 gem 'byebug'
 gem 'font-awesome-rails'
 
-gem 'guard-livereload', :group => :developer
-gem 'rack-livereload', :group => :developer
+gem 'guard-livereload', :group => :development
+gem 'rack-livereload', :group => :development

@@ -139,8 +139,7 @@ class CampaignsController < ApplicationController
   # @param parent_id [Integer] Quest's id of quest to be set as parent quest
   def set_quest_parent
     quest = Quest.find(params[:quest_id])
-    parent = Quest.find(params[:parent_id])
-    quest.parent_id = parent.id
+    quest.parent_id = params[:parent_id]
     quest.save
     render :nothing => true
   end
@@ -150,8 +149,6 @@ class CampaignsController < ApplicationController
   def campaign_timeline_path(campaign)
     "/campaigns/timeline?id=#{campaign.id}"
   end
-
-  # Define allowed parameter for a Campaign model
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params

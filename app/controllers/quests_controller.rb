@@ -4,7 +4,6 @@ class QuestsController < ApplicationController
   require 'json_generator'
   include JsonGenerator::QuestModule
   include RoundHelper
-  include GithubHelper
 
   # Show all of user's quests
   # @return [Html] A list of quests of the user
@@ -92,21 +91,9 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def update
     @quest = Quest.find(params[:id])
-    action=action_name.capitalize
     respond_to do |format|
       if @quest.save
-        if params['quest']['status']=="Closed"
-          action="Close"
-          #sync with github
-          parent_campaign = Campaign.find(@quest.campaign_id)
-          if parent_campaign.vcs
-            github_info = GithubRepo.where(campaign_id: parent_campaign.id).first
-            close_issue(@user, github_info.github_user, github_info.project_name, @quest.issue_no)
-          end
-          if @quest.id==@user.active_quest.id
-            @user.set_default_active_quest
-          end
-        end
+        @quest.update_cleanup(@user)
       end
 
       if @quest.update(quest_params)
@@ -131,10 +118,7 @@ class QuestsController < ApplicationController
 
   def toggle_state
     @quest = Quest.find(params[:id])
-    action=@quest.toggle_state
-    if action=="Closed" and @quest.id==@user.active_quest.id
-      @user.set_default_active_quest
-    end
+    @quest.toggle_state(@user)
     create_round(@quest, action, @quest.campaign)
     redirect_select
   end
