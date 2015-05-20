@@ -21,21 +21,11 @@ class GroupsController < ApplicationController
 
 
   def accept
-    invitation = Groupinvitations.find(params[:invite_id])
-    @group = Group.find(invitation.group_id)
-    #check validity of this request
-    invitee_id = params[:user_id]
-    user = User.find(invitee_id)
-
-    if invitation.user_id == invitee_id.to_i && invitation.expired.nil? && invitation.accept.nil?
-          if ! @group.users.include? user
-            group.users.push user
-          end
-          invitation.accept = true
-          invitation.expired = true
-          invitation.save
-          gflash :success => "You have joined #{@group.name} successfully!"
-          redirect_to groups_path
+    @group = Group.find(params[:id])
+    status = Groupinvitations.find(params[:invite_id]).accept_me(@user.id)
+    if status then
+      gflash :success => "You have joined #{@group.name} successfully!"
+      redirect_to groups_path
     else
       gflash :now, :error => "Something went wrong. You should not see this page"
       redirect_to :back
@@ -43,18 +33,10 @@ class GroupsController < ApplicationController
   end
 
   def reject
-    invitation = Groupinvitations.find(params[:invite_id])
-    @group = Group.find(invitation.group_id)
-    invitee_id = params[:user_id]
-    #check validity of this request
-    if invitation.user_id == invitee_id.to_i && invitation.expired.nil? && invitation.accept.nil?
-      invitation.accept = false
-      invitation.expired = true
-      invitation.save
-      #TODO background job to purge this table after 7 days
+    status = Groupinvitations.find(params[:invite_id]).reject
+    if status then
       gflash :success => "You have rejected the group invitation from #{@group.name} successfully!"
       redirect_to :back
-      #TODO notification to admin that a user rejected
     else
       gflash :now, :error => "Something went wrong. You should not see this page"
       redirect_to :back
@@ -69,12 +51,10 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     respond_to do |format|
       if @group.save
-        @group.admins.push @user
-        @group.users.push @user
+        @group.creator_is_admin(user)
         format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
         # send notification
-        @user.send_message(@user, 'You created a new group! Start adding members from your group page!', 'New Group Created')
       else
         format.html { render action: 'new' }
         format.json { render json: @group.errors, status: :unprocessable_entity }
@@ -85,15 +65,11 @@ class GroupsController < ApplicationController
   def leave
     @group = Group.find(params[:id])
     @group.leave @user
+    @user.send_message(@user, "You left from group #{@group.name}!", "You left group #{@group.name}")
+    # send to group admin
+    @group.send_admin_message(@user,"Your group member #{@user.username} with email #{@user.email} has left your group, please reassign their tasks", 'You Left A Group')
     respond_to do |format|
       format.html { redirect_to groups_path, :flash => {:success => "Left group #{@group.name}"} }
-      # send notification
-      # send to user
-      @user.send_message(@user, "You left from group #{@group.name}!", "You left group #{@group.name}")
-      # send to group admin
-      @group.admins.each do |admin_user|
-        @user.send_message(admin_user, "Your group member #{@user.username} with email #{@user.email} has left your group, please reassign their tasks", 'You Left A Group')
-      end
     end
 
   end
@@ -105,7 +81,8 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => {:success => "Removed member #{@target.username}"} }
       # send notification
-      @user.send_message(@target, "You have been kick from group #{@group.name}. <br> You no longer have access to #{@group.name}", 'You Have Been Kicked')
+    @user.send_message(@target, "You have been kicked from group #{@group.name}. <br> You no longer have access to #{@group.name}", 'You Have Been Kicked')
+    @group.send_admin_message(@user,"Your group member #{@target.username} with email #{@target.email} has left your group, please reassign their tasks", 'You Left A Group')
     end
   end
 
@@ -115,7 +92,7 @@ class GroupsController < ApplicationController
     @target.promote_in_group @group
     respond_to do |format|
       format.html { redirect_to group_path(@group), :flash => {:success => "Promoted member #{@target.username}"} }
-      @user.send_message(@target, "You have been promoted in group #{@group.name}. Check you new privileges at group #{@group.name}", 'You Have Been Promoted')
+      @user.send_message(@target, "You have been promoted in group #{@group.name}. Check your new privileges at group #{@group.name}", 'You Have Been Promoted')
     end
   end
 
@@ -135,35 +112,26 @@ class GroupsController < ApplicationController
 
   def invite_user
     @group = Group.find(params[:id])
-    user = User.find(params[:user_id])
+    @target = User.find(params[:user_id])
 
-
-    if Groupinvitations.where("user_id=? AND group_id=?", user.id, group.id)
+    if Groupinvitations.where("user_id=? AND group_id=?", @target.id, group.id)
       invitation = Groupinvitations.create({
                                                group_id: @group.id,
-                                               user_id: user.id,
+                                               user_id: @target.id,
                                                accept: nil,
                                                created_at: Time.now,
                                                expired: nil
                                            })
-
-      #notification
-      @user.send_message(user, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='http://#{request.host}:#{request.port}/groups/accept/#{invitation.id}/#{user.id}'>Accept</a> <a href='http://#{request.host}:#{request.port}/groups/reject/#{invitation.id}/#{user.id}'>Reject</a> ", 'Group Invitation')
+      @user.send_message( @target, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='http://#{request.host}:#{request.port}/groups/accept/#{@group.id}/#{invitation.id}'>Accept</a> <a href='http://#{request.host}:#{request.port}/groups/reject/#{invitation.id}/#{@target.id}'>Reject</a> ", 'Group Invitation')
 
       respond_to do |format|
-        format.html { redirect_to group_path(@group), :flash => {:success => 'Member invitation has been sent successfully, wait for user to response.'} }
+        format.html { redirect_to group_path(@group), :flash => {:success => 'Member invitation has been sent successfully, wait for user to respond.'} }
       end
     else
       respond_to do |format|
-        format.html { redirect_to group_path(@group), :flash => {:failure => 'You have already sent invitation please wait till user respond.'} }
+        format.html { redirect_to group_path(@group), :flash => {:failure => 'You have already sent invitation please wait for user to respond.'} }
       end
     end
-
-
-    #no direct add member anymore
-    # if ! @group.users.include? user
-    #   @group.users.push user
-    # end
 
   end
 
