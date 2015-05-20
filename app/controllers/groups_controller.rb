@@ -124,13 +124,12 @@ class GroupsController < ApplicationController
                                            })
       @user.send_message( @target, "You are asked to join the group #{@group.name}, are you willing to join? <br> <a href='http://#{request.host}:#{request.port}/groups/accept/#{@group.id}/#{invitation.id}'>Accept</a> <a href='http://#{request.host}:#{request.port}/groups/reject/#{invitation.id}/#{@target.id}'>Reject</a> ", 'Group Invitation')
 
-      respond_to do |format|
-        format.html { redirect_to group_path(@group), :flash => {:success => 'Member invitation has been sent successfully, wait for user to respond.'} }
-      end
+      flash_hash={:success => 'Member invitation has been sent successfully, wait for user to respond.'}
     else
-      respond_to do |format|
-        format.html { redirect_to group_path(@group), :flash => {:failure => 'You have already sent invitation please wait for user to respond.'} }
-      end
+      flash_hash={:failure => 'You have already sent invitation please wait for user to respond.'}
+    end
+    respond_to do |format|
+      format.html { redirect_to group_path(@group), :flash =>flash_hash  }
     end
 
   end
