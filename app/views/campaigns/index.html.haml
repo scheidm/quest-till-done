@@ -15,6 +15,9 @@
           =render owner, :campaign => campaign
           =campaign.group.name
         %td
+          %btn.btn.btn-circle{ :style => "background-color:#{campaign.color}"}
+            %p{ :style => "vertical-align: text-top"}
+              =campaign.name[0].upcase
           %a{href: campaign_path(campaign)}= campaign.name
         %td= campaign.description
         %td

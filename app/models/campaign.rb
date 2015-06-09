@@ -1,5 +1,6 @@
 # single table inheritance with the Quest model. That is, a Campaign is largely
 # a scope on quest, a Quest.where('campaign_id = NULL')
+require 'digest/md5'
 class Campaign < Quest
   # Limit default scope so that campaign_id always equal to it's id
   has_many :quests,  :dependent => :destroy
@@ -7,6 +8,13 @@ class Campaign < Quest
   scope :search_import, -> { includes(:records, :quests) }
   before_destroy :delete_related
   def delete_related
+  end
+
+  def color
+    d=Digest::MD5.hexdigest(self.name)
+    x=(Integer("0x#{d}")& 0xCCCCCC)
+    y= sprintf("%06x",x)
+    return y
   end
 
   def progress

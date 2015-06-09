@@ -1,3 +1,15 @@
+.btn-circle {
+  color: white;
+  width: 49px;
+  height: 49px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+  border-color: black;
+  border-width: 4px;
+}
 tr.inactive{
   background-color: #DDDDDD;
 }
