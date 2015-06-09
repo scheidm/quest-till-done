@@ -13,17 +13,9 @@ class CampaignsController < ApplicationController
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
   def index
-    @campaigns = @user.total_campaigns.order(:name)
-    @inactive=[]
-    @active=[]
-    @campaigns.each{ |c| 
-      if(c.status=="On Hold")
-        @inactive.push(c)
-      else
-        @active.push(c)
-      end
-
-    }
+    @archive = @user.campaigns.where(:status => "Archived")
+    @campaigns = @user.total_campaigns.order(status: :desc, name: :asc)
+    @active=@campaigns.reject{ |c| c.status =~ /Archived/}
   end
 
   # Show the detail of a campaign

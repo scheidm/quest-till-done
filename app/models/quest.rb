@@ -26,10 +26,10 @@ class Quest < ActiveRecord::Base
   before_destroy :delete_related
   
   def status_class
-    stati={ Open: "Open",
-            Closed: "Closed",
-            "On Hold" => "OnHold",
-            Archived: "Archived"
+    stati={ "Open"     => "Open",
+            "Closed"   => "Closed",
+            "On Hold"  => "OnHold",
+            "Archived" => "Archived"
     }
     return stati[self.status]
   end
