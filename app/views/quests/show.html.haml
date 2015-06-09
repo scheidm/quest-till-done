@@ -4,7 +4,7 @@
   %span.glyphicon.glyphicon-plus
 = link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
 
-= link_to '#edit-quest-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Quest' do
+= link_to '#edit-quest-modal', :class => 'btn btn-warning', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Quest' do
   %span.glyphicon.glyphicon-pencil
 = link_to toggle_state_quest_path(@quest), :class => "btn #{@state_class}", :title =>"#{@effect} Quest" do
   %span{class: "glyphicon glyphicon-ok"}
@@ -18,7 +18,8 @@
   =@quest.description || "None"
 %p
   %strong Status:
-  = @quest.status
+  %span{ :class => "label label-#{@quest.status}"}
+    = @quest.status
 %p
   %strong Campaign:
   = link_to @quest.campaign.name, @quest.campaign.to_link

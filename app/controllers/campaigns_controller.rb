@@ -13,7 +13,17 @@ class CampaignsController < ApplicationController
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
   def index
-    @campaigns = @user.campaigns
+    @campaigns = @user.total_campaigns.order(:name)
+    @inactive=[]
+    @active=[]
+    @campaigns.each{ |c| 
+      if(c.status=="On Hold")
+        @inactive.push(c)
+      else
+        @active.push(c)
+      end
+
+    }
   end
 
   # Show the detail of a campaign
@@ -152,6 +162,6 @@ class CampaignsController < ApplicationController
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name, :group_id, :id, :show_all)
+    params.require(:campaign).permit(:description, :status, :name, :group_id, :id, :show_all)
   end
 end

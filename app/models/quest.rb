@@ -25,6 +25,14 @@ class Quest < ActiveRecord::Base
   before_save :set_status
   before_destroy :delete_related
   
+  def status_class
+    stati={ Open: "Open",
+            Closed: "Closed",
+            "On Hold" => "OnHold",
+            Archived: "Archived"
+    }
+    return stati[self.status]
+  end
 
   def search_data
     attributes.merge(

@@ -6,7 +6,6 @@ class Campaign < Quest
   has_many :rounds,  :dependent => :destroy
   scope :search_import, -> { includes(:records, :quests) }
   before_destroy :delete_related
-
   def delete_related
   end
 
@@ -30,6 +29,23 @@ class Campaign < Quest
   # 
   def timeline( end_time=Time.now )
     Encounter.where('id in (?)',self.rounds.pluck(:encounter_id))
+  end
+
+  def age
+    lapsed=Time.now-self.updated_at
+    if(lapsed < 1.day)
+      return "live"
+    elsif(lapsed < 1.week)
+      return "fresh"
+    elsif(lapsed < 1.month)
+      return "semi-fresh"
+    elsif(lapsed < 3.month)
+      return "semi-stale"
+    elsif(lapsed < 6.months)
+      return "very-stale"
+    else
+      return "dead"
+    end
   end
 
   def to_link

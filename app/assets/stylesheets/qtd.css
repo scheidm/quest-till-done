@@ -334,10 +334,34 @@ input:-webkit-autofill:focus {
 }
 
 /**************** Campaign/Quest ***********/
+.label-age-live {
+    background-color: #008c00;
+}
+.label-age-fresh {
+    background-color: #6DA300;
+}
+.label-age-semi-fresh {
+    background-color: #AFAF00;
+}
+.label-age-semi-stale {
+    background-color: #AF9100;
+}
+.label-age-stale {
+    background-color: #AF7500;
+}
+.label-age-very-stale {
+    background-color: #AF4f00;
+}
+.label-age-dead {
+    background-color: #AF0000;
+}
 .label-Open {
     background-color: #428bca;
 }
 .label-Closed {
+    background-color: #999;
+}
+.label-Archived {
     background-color: #999;
 }
 .label-InProgress {
