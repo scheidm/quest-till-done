@@ -13,7 +13,7 @@ class Quest < ActiveRecord::Base
   has_many :links
   has_many :notes
   has_many :images
-  belongs_to :campaign, :class_name => 'Quest'
+  belongs_to :campaign, :class_name => 'Quest', touch: true
   # Has many quests underneath this quest's subtree
   has_many :all_quests, :class_name => 'Quest', :foreign_key => 'campaign_id'
   # Belongs to a immediate parent quest
@@ -24,6 +24,7 @@ class Quest < ActiveRecord::Base
   belongs_to :group
   before_save :set_status
   before_destroy :delete_related
+  
 
   def search_data
     attributes.merge(

@@ -13,7 +13,7 @@ class Record < ActiveRecord::Base
   acts_as_taggable_on :skills
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
-  belongs_to :quest
+  belongs_to :quest, touch: true
   # Record belongs to a encounter
   belongs_to :encounter
   # Record belongs to a user
@@ -30,10 +30,9 @@ class Record < ActiveRecord::Base
 
   
   def touch_quest
-    quest=self.quest
-    if(quest.status=="Open") then
-      quest.status="In Progress"
-      quest.save
+    if(self.quest.status=="Open") then
+      self.quest.status="In Progress"
+      self.quest.save
     end
   end
 
