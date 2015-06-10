@@ -1,17 +1,7 @@
-%button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
-  %span.glyphicon.glyphicon-eye-open
-= link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
-  %span.glyphicon.glyphicon-plus
-= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
-
-= link_to '#edit-quest-modal', :class => 'btn btn-warning', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Quest' do
-  %span.glyphicon.glyphicon-pencil
-= link_to toggle_state_quest_path(@quest), :class => "btn #{@state_class}", :title =>"#{@effect} Quest" do
-  %span{class: "glyphicon glyphicon-ok"}
-= link_to campaign_path(@quest.campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
-  %span.glyphicon.glyphicon-share-alt
-%p
-  %strong Name:
+%div.name{ :style => "display: inline"}
+  %a{href: campaign_path(@quest.campaign)}
+    %btn.btn.btn-circle{ :style => "background-color:#{@quest.campaign.color}"}
+      =@quest.campaign.name[0].upcase
   = @quest.name
 %p
   %strong Description:
@@ -20,9 +10,6 @@
   %strong Status:
   %span{ :class => "label label-#{@quest.status}"}
     = @quest.status
-%p
-  %strong Campaign:
-  = link_to @quest.campaign.name, @quest.campaign.to_link
 %p
   %strong Parent:
   = link_to @quest.parent.name, @quest.parent.to_link
@@ -59,6 +46,18 @@
       Press the circle to expand/collapse nodes
 %br
 
+%button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
+  %span.glyphicon.glyphicon-eye-open
+= link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
+  %span.glyphicon.glyphicon-plus
+= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
+
+= link_to '#edit-quest-modal', :class => 'btn btn-warning', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Quest' do
+  %span.glyphicon.glyphicon-pencil
+= link_to toggle_state_quest_path(@quest), :class => "btn #{@state_class}", :title =>"#{@effect} Quest" do
+  %span{class: "glyphicon glyphicon-ok"}
+= link_to campaign_path(@quest.campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
+  %span.glyphicon.glyphicon-share-alt
 %ul.list-inline
   %li
     -params[:show_all]=='1' ? text='Hide' : text='Show'

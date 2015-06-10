@@ -1,5 +1,8 @@
 =if current_power.campaign? @campaign
-  %h2
+  %div.name{ :style => "display: inline"}
+    %a{href: campaign_path(@campaign)}
+      %btn.btn.btn-circle{ :style => "background-color:#{@campaign.color}"}
+        =@campaign.name[0].upcase
     = @campaign.name
 
   %p
@@ -16,33 +19,38 @@
     .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Progress"}
       .progress-bar{role: "progressbar", style: "width: #{@campaign.progress}%;"}
   %p
-  //= link_to new_quest_path(:id => @campaign.id), :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Add Quest' do
   = link_to new_quest_path(:id => @campaign.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
     %span.glyphicon.glyphicon-plus
   = link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @campaign.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
 
   = link_to '#edit-campaign-modal', :class => 'btn btn-warning', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
     %span.glyphicon.glyphicon-pencil
+
   - @campaign.group.user_id==nil ? owner='owner_group' : owner='owner_personal'
   =render owner, :campaign => @campaign
+
   = link_to campaigns_path, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
     %span.glyphicon.glyphicon-share-alt
+
   = link_to campaign_timeline_path(@campaign), :remote => true, :class => 'btn btn-success pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
     %span.glyphicon.glyphicon-list-alt
 
+%ul.list-inline
+  %li
+    -params[:show_all]=='1' ? text='Hide' : text='Show'
+    =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1), :class => 'btn btn-default'
+  %li
+    #tree-control
+      .btn-group
+        %btn#toggle-dialog.btn.btn-default
+          Toggle Dialog
+        
   #help
     %h2 Tree View
     %span.glyphicon.glyphicon-question-sign.help-info
       Press the circle to expand/collapse nodes
     %br
   %br
-  -params[:show_all]=='1' ? text='Hide' : text='Show'
-  =link_to "#{text} Closed Quests", campaign_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1)
-  #tree-control
-    .btn-group
-      %btn#toggle-dialog.btn.btn-default
-        Toggle Dialog
-        
 
   #tree-container{data: {campaign_id: @campaign.id}}
   #edit-campaign-modal.modal.fade

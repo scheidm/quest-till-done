@@ -153,7 +153,7 @@ class QuestsController < ApplicationController
     end
     data = quest.to_tree_json(only_active)
 
-    return data.to_json
+    render :text => data.to_json
   end
 
   # Set quest as user's current active quest
