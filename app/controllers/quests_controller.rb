@@ -1,8 +1,6 @@
 # Controller for Quest
 class QuestsController < ApplicationController
 
-  require 'json_generator'
-  include JsonGenerator::QuestModule
   include RoundHelper
 
   # Show all of user's quests
@@ -150,7 +148,12 @@ class QuestsController < ApplicationController
     if params[:show_all]=='1' then
       only_active =  false
     end
-    render :text => generateQuestTree(quest, only_active)
+    if (!quest.is_a?(Quest))
+      raise 'Expected argument to be a campaign'
+    end
+    data = quest.to_tree_json(only_active)
+
+    return data.to_json
   end
 
   # Set quest as user's current active quest

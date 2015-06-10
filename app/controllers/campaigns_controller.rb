@@ -2,9 +2,6 @@
 class CampaignsController < ApplicationController
   power :crud => :campaigns
 
-  require 'json_generator'
-  include JsonGenerator::QuestModule
-  include JsonGenerator::TimelineModule
   include RoundHelper
   include ApplicationHelper 
 
@@ -46,7 +43,15 @@ class CampaignsController < ApplicationController
     if params[:show_all]=='1' then
       only_active =  false
     end
-    render :text => generateCampaignTree(campaign, only_active)
+    if (!campaign.is_a?(Campaign))
+      raise 'Expected argument to be a campaign'
+    end
+    data = campaign.to_json
+    data[:children] = children = []
+    campaign.child_quests.each {|quest|
+      children << quest.to_tree_json(only_active) unless only_active&&quest.status=="Closed"
+    }
+    render :text => data.to_json
   end
 
 
@@ -117,7 +122,12 @@ class CampaignsController < ApplicationController
   # @return [JSON] JSON of the timeline details
   def get_campaign_timeline
     @campaign = Campaign.find(params[:id])
-    render :text => generateTimeline(@campaign.rounds.limit(100).order("created_at DESC"))
+    rounds=@campaign.rounds.limit(100).order("created_at DESC")
+    data = []
+    rounds.each do |round|
+      data << round.to_json
+    end
+    render :text => data.to_json  
   end
 
   # Import a QTD specific format Campaign to generate a campaign

@@ -2,7 +2,6 @@
 class GroupsController < ApplicationController
   power :crud => :groups
 
-  include JsonGenerator::TimelineModule
   include RoundHelper
   include ApplicationHelper 
   # Display a list of all groups for the current user

@@ -1,8 +1,5 @@
 class EncountersController < ApplicationController
 
-  require 'json_generator'
-  include JsonGenerator::EncounterModule
-
   # Show all of user's campaigns
   # @return [Html] the index page for all encounter
   def index
@@ -11,8 +8,22 @@ class EncountersController < ApplicationController
   end
 
   def get_user_timeline
-    @encounters = Encounter.where(:user_id => @user.id).order(created_at: :desc)
-    render :text => generateUserTree(@encounters, nil)
+    encounters = Encounter.where(:user_id => @user.id).order(created_at: :desc)
+    data = []
+    data_by_date = {}
+    encounters.each do |encounter|
+      encounter_data=encounter.to_json
+      data_by_date[encounter.created_at.to_date] ||= Array.new
+      if encounter_data[:children].size > 0
+        data_by_date[encounter.created_at.to_date].push(encounter_data)
+      end
+    end
+    data_by_date.each do |key, value|
+      temp = {:data => key, :attr => { :rel => 'encounter', :href => 'javascript:void(0)'}}
+      temp[:children] = value
+      data.push(temp)
+    end
+    render :text => data.to_json
   end
 
   # Create new encounter
@@ -30,13 +41,6 @@ class EncountersController < ApplicationController
 
   def not_found
     raise ActionController::RoutingError.new('Not Found')
-  end
-
-  # Show the tree view data of an encounter
-  # @param id [Integer] Encounter's id
-  # @return [JSON] the encounter's tree data in JSON format
-  def getTree
-    #render :text => generateTree
   end
 
   # Start an encounter

@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  require 'json_generator'
-  include JsonGenerator::QuestModule
   include RoundHelper
   include GithubHelper
 
@@ -119,7 +117,12 @@ class UsersController < ApplicationController
 
 
   def get_td_json
-    render :text => generateTDJSON(@user)
+    data = {:id => 0, :attr => { :name => "World View", :description => "World View", :url => '#'}}
+    data[:children] = children = []
+    @user.groups.each {|group|
+      children << group.to_td_json
+    }
+    render :text => data.to_json
   end
 
 
