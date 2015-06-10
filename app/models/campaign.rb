@@ -60,17 +60,6 @@ class Campaign < Quest
     '/campaigns/' + self.id.to_s
   end
 
-  def to_json
-    return {:id   => self.id, 
-            :attr => { 
-                     :name        =>  self.name, 
-                     :description =>  self.description,
-                     :url         => '/campaigns/' +  self.id.to_s, 
-                     :status      =>  self.status
-                     }
-            }
-  end 
-  
   def to_td_json
     number_of_days = 7
     data = nil

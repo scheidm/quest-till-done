@@ -91,7 +91,7 @@ module JsonGenerator
       data = campaign.to_json
       data[:children] = children = []
       campaign.child_quests.each {|quest|
-        children << generateChildTree(quest,only_active) unless only_active&&quest.status=="Closed"
+        children << quest.to_tree_json(only_active) unless only_active&&quest.status=="Closed"
       }
 
       return data.to_json
@@ -104,30 +104,10 @@ module JsonGenerator
       if (!quest.is_a?(Quest))
         raise 'Expected argument to be a campaign'
       end
-      data = generateChildTree(quest, only_active)
+      data = quest.to_tree_json(only_active)
 
       return data.to_json
     end
 
-    # Recursive function to generate json for all quest underneath a quest
-    # @param quest [Quest] Quest to generate JSON
-    # @return [JSON] JSON formatted tree data
-    def generateChildTree(quest, only_active)
-      if(quest.description) then
-        desc= trunc(quest.description, 100)
-      else
-        desc=''
-      end
-      data = {:id => quest.id, :attr => { :name => quest.name, :description => desc, :url => '/quests/' + quest.id.to_s, :status => quest.status}}
-      if(quest.child_quests.size == 0)
-         return data
-      else
-        data[:children] = children = []
-        quest.child_quests.each {|q|
-          children << generateChildTree(q, only_active) unless only_active&&q.status=="Closed"
-        }
-      end
-      return data
-    end
   end
 end

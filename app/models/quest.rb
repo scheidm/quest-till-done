@@ -78,6 +78,36 @@ class Quest < ActiveRecord::Base
     self.name
   end
 
+  def to_json
+    return {:id   => self.id, 
+            :attr => { 
+                     :name        =>  self.name, 
+                     :description =>  self.description,
+                     :url         =>  "/#{self.class.name.downcase.pluralize}/" +  self.id.to_s, 
+                     :status      =>  self.status
+                     }
+            }
+  end 
+  
+  
+  def to_tree_json(only_active)
+    if(self.description) then
+      desc= ApplicationController.helpers.trunc(self.description, 100)
+    else
+      desc=''
+    end
+    data = self.to_json
+    if(self.child_quests.size == 0)
+       return data
+    else
+      data[:children] = children = []
+      self.child_quests.each {|q|
+        children << q.to_tree_json(only_active) unless only_active&&q.status=="Closed"
+      }
+    end
+    return data
+  end
+
   def to_link
     '/quests/' + self.id.to_s
   end
