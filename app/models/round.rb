@@ -45,4 +45,14 @@ class Round < ActiveRecord::Base
     format = '%I:%M%p'
     return "#{trunc(self.event_description, length)} #{self.type}: #{trunc(self.related_obj.to_s,length)} - #{self.created_at.to_time.strftime(format)}"
   end
+
+  def to_json
+    return { :id    => self.event_id, 
+             :data  => self.to_str, 
+             :attr  => { 
+                       :rel => self.type, 
+                       :href => self.related_link
+                       }
+           }
+  end 
 end

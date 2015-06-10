@@ -59,4 +59,49 @@ class Campaign < Quest
   def to_link
     '/campaigns/' + self.id.to_s
   end
+
+  def to_json
+    return {:id   => self.id, 
+            :attr => { 
+                     :name        =>  self.name, 
+                     :description =>  self.description,
+                     :url         => '/campaigns/' +  self.id.to_s, 
+                     :status      =>  self.status
+                     }
+            }
+  end 
+  
+  def to_td_json
+    number_of_days = 7
+    data = nil
+    0.upto(number_of_days) {|number|
+      ring = {:id => "#{number}_days_#{self.id}"}
+      ring[:children] = children = []
+      if !data.nil?
+        children << data
+      else
+        json=self.to_json
+        json[:attr][:color]='#AF4D43'
+        children << json
+      end
+      if number != 0
+        count = 0
+        self.quests.where("deadline >= ? and deadline < ?", (number-1).days.from_now, number.days.from_now).where("status != 'Closed'").each {|quest|
+          color = '#29AB87'
+          radius = 45;
+          if quest.importance then
+            color = '#0A6F75'
+            radius = 60;
+          end
+          children << {:id => quest.id, :attr => { :name => quest.name, :description => quest.description, :url => '/quests/' + quest.id.to_s, :status => quest.status, :color => color, :radius => radius}}
+          count+=1
+        }
+        ring[:attr] = {:name => "#{number} Days", :description => "#{count} quests pending", :url => '#'}
+      else
+        ring[:attr] = {:name => "Campaign", :description => self.description, :url => '#'}
+      end
+      data = ring
+    }
+    return data
+  end
 end

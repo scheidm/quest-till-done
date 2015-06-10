@@ -42,4 +42,19 @@ class Group < ActiveRecord::Base
     user.send_message(user, 'You created a new group! Start adding members from your group page!', 'New Group Created')
   end
 
+  def to_td_json
+    group_data = { :id   => "group_#{self.id}", 
+                   :attr => {
+                            :name        => self.name,
+                            :description => self.name, 
+                            :url         => '#'
+                            }
+                 }
+    group_data[:children] = group_children = []
+    self.campaigns.each {|campaign|
+      group_children << campaign.to_td_json
+    }
+    return group_data
+  end
+
 end
