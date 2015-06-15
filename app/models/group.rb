@@ -57,4 +57,11 @@ class Group < ActiveRecord::Base
     return group_data
   end
 
+  def color
+    d=Digest::MD5.hexdigest(self.name)
+    x=(Integer("0x#{d}")& 0xFFFFFF)
+    y= sprintf("%06x",x)
+    return y
+  end
+
 end

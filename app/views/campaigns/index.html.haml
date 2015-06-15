@@ -14,10 +14,11 @@
           -campaign.group.user_id==nil ? owner='owner_group' : owner='owner_personal'
           =render owner, :campaign => campaign
           =campaign.group.name
-        %td
-          %btn.btn.btn-circle{ :style => "background-color:#{campaign.color}"}
-            %p{ :style => "vertical-align: text-top"}
-              =campaign.name[0].upcase
+        %td{ :align => 'left' }
+          %a{href: campaign_path(campaign), alt: campaign.name}
+            %btn.btn.btn-circle{ :style => "background-color:#{campaign.group.color}"}
+              %div.inner-circle{ :style => "background-color:#{campaign.color}"}
+                =campaign.name[0].upcase
           %a{href: campaign_path(campaign)}= campaign.name
         %td= campaign.description
         %td

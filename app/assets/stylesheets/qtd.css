@@ -2,9 +2,10 @@
   font-size: 20px;
 }
 .btn-circle {
+  text-decoration: none;
   color: white;
-  width: 49px;
-  height: 49px;
+  width: 51px;
+  height: 51px;
   text-align: center;
   padding: 5px 0;
   font-size: 20px;
@@ -12,6 +13,21 @@
   border-radius: 30px;
   border-color: black;
   border-width: 4px;
+}
+.name > a{
+  text-decoration: none;
+}
+.inner-circle {
+  color: white;
+  position: relative;
+  top: -2px;
+  left: 4px;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 20px;
 }
 tr.inactive{
   background-color: #DDDDDD;

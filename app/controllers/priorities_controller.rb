@@ -9,7 +9,7 @@ class PrioritiesController < ApplicationController
     @campaign = Campaign.find(params[:id])
     quests = @campaign.all_quests.where.not( :status => 'Closed')
     @important_quests = quests.where( :importance => true).order('deadline ASC').limit(25) 
-    @expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).order('deadline ASC').limit(25) 
+    @expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).where( :importance => false).order('deadline ASC').limit(25) 
     data = []
     data.push(@important_quests)
     data.push(@expiring_quests)
@@ -19,7 +19,7 @@ class PrioritiesController < ApplicationController
   def get_all_priorities
     quests = @user.total_quests.where.not( :status => 'Closed')
     important_quests = quests.where( :importance => true).order('deadline ASC').limit(25) 
-    expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).order('deadline ASC').limit(25)
+    expiring_quests = quests.where( "deadline < ?", 30.days.from_now ).where( :importance => false).order('deadline ASC').limit(25) 
     data = []
     data.push(important_quests)
     data.push(expiring_quests)
