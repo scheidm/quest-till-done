@@ -139,7 +139,11 @@ class GroupsController < ApplicationController
 
   def timeline
     @group = Group.find(params[:id])
-    render :text => generateTimeline(@group.rounds.limit(100).order('created_at DESC'))
+    data=[]
+    @group.rounds.each do |round|
+      data << round.to_json
+    end
+    render :text => data.to_json
   end
 
   def confirm_invite

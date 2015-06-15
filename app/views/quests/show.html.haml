@@ -111,9 +111,13 @@
                     =link_to "Modify", edit_record_path(rec.id), :class => "btn btn-primary"
 %br
 %br
+%div#title-div{ :data => { :campaign => @quest.campaign.name[0,5], :quest => trunc(@quest.name), :user => trunc(@user.username, 15)}}
+
 :javascript
   $(document).ready(function () {
-
+     var quest = $('#title-div').data('quest');
+     var campaign = $('#title-div').data('campaign');
+     document.title=[campaign, quest].join(' - ');
      var treeId = $('#tree-container').data('quest-id');
      var showClosed = $('#show_all').data('show-all');
      var url = "getTree?id=" + treeId+"&show_all="+showClosed;

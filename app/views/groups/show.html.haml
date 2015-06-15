@@ -70,12 +70,16 @@
             %input#user_list_id{:type=>'hidden', :name => 'user_id', :required => true}
             -#= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
           = button_tag 'Add', :type=> 'submit', :class => 'btn btn-primary pull-right'
+  %div#title-div{ :data => { :group => @group.name, :user => trunc(@user.username, 15)}}
 :css
   ul.ui-autocomplete {
       z-index: 1100;
   }
+
 :javascript
   $(document).ready(function(){
+     var group = $('#title-div').data('group');
+     document.title=group;
           $("#treeView").jstree({
               core : { "animation" : 100 },
 

@@ -9,12 +9,12 @@
   %tbody
     - @active.each do |campaign|
       - campaign.status != "On Hold" ? trclass = 'active' : trclass = 'inactive'
-      %tr{ :class => trclass }
+      %tr.mid{ :class => trclass }
         %td
           -campaign.group.user_id==nil ? owner='owner_group' : owner='owner_personal'
           =render owner, :campaign => campaign
           =campaign.group.name
-        %td{ :align => 'left' }
+        %td{ :align => 'left'}
           %a{href: campaign_path(campaign), alt: campaign.name}
             %btn.btn.btn-circle{ :style => "background-color:#{campaign.group.color}"}
               %div.inner-circle{ :style => "background-color:#{campaign.color}"}

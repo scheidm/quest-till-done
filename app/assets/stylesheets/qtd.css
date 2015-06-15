@@ -32,6 +32,12 @@
 tr.inactive{
   background-color: #DDDDDD;
 }
+tr.mid > td {
+ vertical-align: middle !important;
+}
+tr.mid a:first-child{
+  text-decoration: none;
+}
 tr.active{
   background-color: white;
 }

@@ -78,8 +78,12 @@
           %h4#myModalLabel.modal-title Timeline
         .modal-body.campaign-timeline-unique-class
           #show_all.fade{data: { show_all: params[:show_all]||0}  }
+  %div#title-div{ :data => { :campaign => @campaign.name, :user => trunc(@user.username, 15)}}
+
 :javascript
   $(document).ready(function () {
+     var campaign = $('#title-div').data('campaign');
+     document.title=campaign;
      var treeId = $('#tree-container').data('campaign-id');
      var showClosed = $('#show_all').data('show-all');
      var url = "getTree?id=" + treeId+"&show_all="+showClosed;
