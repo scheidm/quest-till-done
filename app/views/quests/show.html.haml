@@ -117,7 +117,7 @@
   $(document).ready(function () {
      var quest = $('#title-div').data('quest');
      var campaign = $('#title-div').data('campaign');
-     document.title=[campaign, quest].join(' - ');
+     document.title=["QTD", campaign, quest].join(' - ');
      var treeId = $('#tree-container').data('quest-id');
      var showClosed = $('#show_all').data('show-all');
      var url = "getTree?id=" + treeId+"&show_all="+showClosed;
