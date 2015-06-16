@@ -29,7 +29,8 @@ class Quest < ActiveRecord::Base
     stati={ "Open"     => "Open",
             "Closed"   => "Closed",
             "On Hold"  => "OnHold",
-            "Archived" => "Archived"
+            "Archived" => "Archived",
+            "In Progress" =>"InProgress"
     }
     return stati[self.status]
   end
@@ -82,7 +83,7 @@ class Quest < ActiveRecord::Base
     return {:id   => self.id, 
             :attr => { 
                      :name        =>  self.name, 
-                     :description =>  self.description,
+                     :description =>  self.description || "",
                      :url         =>  "/#{self.class.name.downcase.pluralize}/" +  self.id.to_s, 
                      :status      =>  self.status,
                      :record_count=>  self.records.count

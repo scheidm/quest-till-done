@@ -9,7 +9,7 @@
   =@quest.description || "None"
 %p
   %strong Status:
-  %span{ :class => "label label-#{@quest.status}"}
+  %span{ :class => "label label-#{@quest.status_class}"}
     = @quest.status
 %p
   %strong Parent:
