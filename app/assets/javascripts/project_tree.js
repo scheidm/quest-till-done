@@ -442,8 +442,12 @@ var questTree = function (url) {
 
     function renderQuestDetail(d) {
         var css = d.attr.status.toString().trim().replace(/ /g, '');
-        var html = "Description: " + d.attr.description + "</br>" +
-            "Status: <span class='label label-" + css + "'>" + d.attr.status + "</span>"
+        var count = d.attr.record_count;
+        var html = "Description: " + d.attr.description + "<br/>" +
+            "Status: <span class='label label-" + css + "'>" + d.attr.status + "</span>";
+        if(count>0){
+            html+="<br/>Records: "+count.toString();
+        }
         return html;
     }
 

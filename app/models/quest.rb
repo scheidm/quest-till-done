@@ -84,7 +84,8 @@ class Quest < ActiveRecord::Base
                      :name        =>  self.name, 
                      :description =>  self.description,
                      :url         =>  "/#{self.class.name.downcase.pluralize}/" +  self.id.to_s, 
-                     :status      =>  self.status
+                     :status      =>  self.status,
+                     :record_count=>  self.records.count
                      }
             }
   end 
