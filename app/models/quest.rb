@@ -22,7 +22,7 @@ class Quest < ActiveRecord::Base
   has_many :child_quests, :class_name => 'Quest', :foreign_key => 'parent_id'
   # Belongs to a user/owner
   belongs_to :group
-  before_save :set_status
+  before_save :cleanup
   before_destroy :delete_related
   
   def status_class
@@ -114,8 +114,9 @@ class Quest < ActiveRecord::Base
     '/quests/' + self.id.to_s
   end
 
-  def set_status
+  def cleanup
     self.status = 'Open' if self.status.nil?
+    self.description = nil if self.description==""
   end
 
   def is_ancestor(quest)
