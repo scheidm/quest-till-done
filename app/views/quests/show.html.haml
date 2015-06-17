@@ -20,7 +20,6 @@
   %p#quest_id.hidden
     = @quest.id
   %p#active_quest.hidden
-    = @active_quest
     #show_all.fade{data: { show_all: params[:show_all]||0}  }
 
 #edit-quest-modal.modal.fade
@@ -111,13 +110,18 @@
                     =link_to "Modify", edit_record_path(rec.id), :class => "btn btn-primary"
 %br
 %br
-%div#title-div{ :data => { :campaign => @quest.campaign.name[0,5], :quest => trunc(@quest.name), :user => trunc(@user.username, 15)}}
+-@quest==@active_quest ? active="1" : active="0"
+%div#title-div{ :data => { :campaign => @quest.campaign.name[0,5], :quest => trunc(@quest.name), :user => trunc(@user.username, 15), :act => active}}
 
 :javascript
   $(document).ready(function () {
      var quest = $('#title-div').data('quest');
      var campaign = $('#title-div').data('campaign');
      document.title=["QTD", campaign, quest].join(' - ');
+     var active = $('#title-div').data('act');
+     if(active===1){
+       document.title="* "+document.title;
+     }
      var treeId = $('#tree-container').data('quest-id');
      var showClosed = $('#show_all').data('show-all');
      var url = "getTree?id=" + treeId+"&show_all="+showClosed;

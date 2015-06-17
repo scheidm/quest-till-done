@@ -21,11 +21,6 @@ class QuestsController < ApplicationController
       @state_class="btn-success"
       @effect="Close"
     end
-    if(!@user.active_quest.nil?&&User.find(@user.id).active_quest.id == @quest.id)
-      @active_quest = true
-    else
-      @active_quest = false
-    end
 
     #reverse history but direct to new
 

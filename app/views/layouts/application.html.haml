@@ -3,8 +3,7 @@
     %meta{charset: "utf-8"}/
     %meta{content: "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
-    -c=params[:controller].capitalize
-    %title="QTD - #{c}"
+    %title="QTD - #{params[:controller].capitalize}"
 
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML elements
@@ -55,8 +54,9 @@
               .col-md-6
                 %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
                 %div{style: "margin-top: 5px"}
-                  = new_record_link(@active_quest_model) do
-                    %span.glyphicon.glyphicon-plus-sign
+                  -if(@active_quest.to_link)
+                    = link_to @active_quest, :class => 'btn btn-primary' do
+                      %span.glyphicon.glyphicon-plus-sign
               .col-md-6
                 = link_to campaign_path(@journey), :class => 'btn btn-primary' do
                   %span.glyphicon.glyphicon-road
@@ -67,13 +67,14 @@
                 %tr
                   %td
                     %span{style: "float: right;color:#ffffff"} Active Quest:
-                  %td
-                    = link_to( trunc(@active_quest_name), @active_quest_url)
-                %tr
-                  %td
-                    %span{style: "float: right;color:#ffffff"} Campaign:
-                  %td
-                    = link_to( trunc(@active_quest_campaign_name), @active_quest_campaign_url)
+                  -if(@active_quest.to_link)
+                    %td
+                      = link_to( trunc(@active_quest.name), @active_quest.to_link)
+                    %tr
+                      %td
+                        %span{style: "float: right;color:#ffffff"} Campaign:
+                      %td
+                        = link_to( trunc(@active_quest.campaign.name), @active_quest.campaign.to_link)
           .col-md-7.qtd-col
             .col-md-4.qtd-col
               = form_tag searches_path, :method => 'get', :role => 'search', :class => 'navbar-form navbar-left' do |f|
