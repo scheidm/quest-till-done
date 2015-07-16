@@ -46,7 +46,8 @@
       Press the circle to expand/collapse nodes
 %br
 
-%button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
+-@quest.id==@active_quest.id ? active_class="disabled" : active_class=""
+%button#activeBtn.btn.btn-info{ :class => "#{active_class}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
   %span.glyphicon.glyphicon-eye-open
 = link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
   %span.glyphicon.glyphicon-plus
