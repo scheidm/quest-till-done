@@ -2,7 +2,7 @@
   %div.name{ :style => "display: inline;min-height:35px"}
     %a{href: campaign_path(@campaign), alt: @campaign.name}
       %btn.btn.btn-circle{ :style => "background-color:#{@campaign.group.color}"}
-        %div.inner-circle{ :style => "background-color:#{@campaign.color}"}
+        %div.inner-circle{ :title => @campaign.name, :style => "background-color:#{@campaign.color}"}
           =@campaign.name[0].upcase
     = @campaign.name
 
