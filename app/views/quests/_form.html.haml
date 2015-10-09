@@ -16,7 +16,7 @@
 
     = f.label 'Parent Quest', :class => 'control-label'
     - if(@quest.id.nil?)
-      - parent_quest = Quest.where('campaign_id = ? or id = ?', @quest.campaign_id, @quest.campaign_id).order('name ASC')
+      - parent_quest = Quest.where('campaign_id = ? or id = ?', @quest.campaign_id, @quest.campaign_id).where.not(status: "Closed").order('name ASC')
     - else
       - parent_quest = Quest.where('(campaign_id = ? or id = ?) and id != ?',@quest.campaign_id, @quest.campaign_id, @quest.id).where.not(status: "Closed").order('name ASC').select { |q| !@quest.is_ancestor(q)}
     = f.collection_select :parent_id, parent_quest, :id, :name,  {}, :class => 'form-control'

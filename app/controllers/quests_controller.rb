@@ -157,6 +157,10 @@ class QuestsController < ApplicationController
     @quest = Quest.find(params[:id])
     @user.active_quest_id = @quest.id
     @user.save
+    if @quest.status=="On Hold"
+      @quest.status="In Progress"
+      @quest.save
+    end
     create_round(@quest, action_name.capitalize, @quest.campaign)
     render :nothing => true
   end
