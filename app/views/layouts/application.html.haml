@@ -55,8 +55,7 @@
                 %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
                 %div{style: "margin-top: 5px"}
                   -if(@active_quest.to_link)
-                    = new_record_link(@active_quest) do
-                      %span.glyphicon.glyphicon-plus-sign
+                    =render 'new_record_link'
               .col-md-6
                 = link_to campaign_path(@journey), :class => 'btn btn-primary' do
                   %span.glyphicon.glyphicon-road
@@ -102,7 +101,7 @@
             .col-md-3.qtd-col
               #clock.clock
               .btn-group.btn-group-sm
-                = render_timer_button
+                =render 'timer_button'
               %button#timerConfigBtn.btn-timer-setting.btn-xs{style: "border-radius: 50%"}
                 %span.glyphicon.glyphicon-wrench
     .container.special
@@ -126,7 +125,7 @@
     = link_to 'Log Out', destroy_user_session_path, :method => :delete
 
 #timerPopContent.hide
-  = render_timer_mode
+  =render 'timer_mode'
 
 #new-record-modal.modal.fade
   .modal-dialog{:style=> 'width: 800px;'}

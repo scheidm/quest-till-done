@@ -1,0 +1,2 @@
+-if(@active_quest)
+  =link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @active_quest.id), :remote => true, :class => 'btn btn-success', :'datcta-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add record to quest', 'data-target' => '#new-record-modal.modal'

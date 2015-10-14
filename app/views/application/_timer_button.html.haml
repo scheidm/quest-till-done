@@ -1,0 +1,8 @@
+- state = true
+-if(@user.timer.mode == 'manual')
+  -state = false
+=button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-play'), :id => 'startBtn', :class => 'btn btn-success', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Start countdown"
+=button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-pause'), :id => 'stopBtn', :class => 'btn btn-warning', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Pause countdown"
+=button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-stop'), :id => 'resetBtn', :class => 'btn btn-danger', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Reset countdown"
+=button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-plus'), :id => 'extendBtn', :class => 'btn btn-info', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Extend Encounter", :disabled => state
+=button_tag content_tag(:span, nil, class: 'glyphicon glyphicon-bell'), :id => 'restBtn', :class => 'btn btn-primary', :'data-placement' => "bottom", :'data-toggle' => "tooltip", :title => "Take a break", :disabled => state
