@@ -1,27 +1,4 @@
-%div.name{ :style => "display: inline"}
-  %a{href: campaign_path(@quest.campaign), alt: @quest.campaign.name}
-    %btn.btn.btn-circle{ :style => "background-color:#{@quest.campaign.group.color}"}
-      %div.inner-circle{ :title => @quest.campaign.name, :style => "background-color:#{@quest.campaign.color}"}
-        =@quest.campaign.name[0].upcase
-  = @quest.name
-%p
-  %strong Description:
-  =@quest.description || "None"
-%p
-  %strong Status:
-  %span{ :class => "label label-#{@quest.status_class}"}
-    = @quest.status
-%p
-  %strong Parent:
-  = link_to @quest.parent.name, @quest.parent.to_link
-%p
-  %strong Deadline:
-  =@quest.deadline || "None"
-  %p#quest_id.hidden
-    = @quest.id
-  %p#active_quest.hidden
-    #show_all.fade{data: { show_all: params[:show_all]||0}  }
-
+=render "actionable_top"
 #edit-quest-modal.modal.fade
   .modal-dialog
     .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
@@ -31,88 +8,9 @@
       .modal-body
         = render 'form'
         .delete
-          = button_to "Delete", {:action => 'destroy_softly', :id => @quest.id}, :class => "btn btn-warning", data: { :confirm => "Are you sure?"}, "data-toggle" => "tooltip", title: "Delete this quest only"
+          = button_to "Delete", {:action => 'destroy_softly', :id => @actionable.id}, :class => "btn btn-warning", data: { :confirm => "Are you sure?"}, "data-toggle" => "tooltip", title: "Delete this quest only"
           = button_to "Delete All", {:action => 'destroy'}, :class => "btn btn-danger", :method => :delete, data: { :confirm => "This will irrevocably destroy all data tied to this quest and it's children! Continue?"}, "data-toggle" => "tooltip", title: "Delete this quest and all descendents"
-#new-quest-modal.modal.fade
-  .modal-dialog
-    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h4#myModalLabel.modal-title New Quest
-      .modal-body.a-unique-class
-  #help
-    %h2 Tree View
-    %span.glyphicon.glyphicon-question-sign.help-info
-      Press the circle to expand/collapse nodes
-%br
-
--@quest.id==@active_quest.id ? active_class="disabled" : active_class=""
-%button#activeBtn.btn.btn-info{ :class => "#{active_class}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
-  %span.glyphicon.glyphicon-eye-open
-= link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
-  %span.glyphicon.glyphicon-plus
-= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
-
-= link_to '#edit-quest-modal', :class => 'btn btn-warning', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Quest' do
-  %span.glyphicon.glyphicon-pencil
-= link_to toggle_state_quest_path(@quest), :class => "btn #{@state_class}", :title =>"#{@effect} Quest" do
-  %span{class: "glyphicon glyphicon-ok"}
-= link_to campaign_path(@quest.campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
-  %span.glyphicon.glyphicon-share-alt
-%ul.list-inline
-  %li
-    -params[:show_all]=='1' ? text='Hide' : text='Show'
-    =link_to "#{text} Closed Quests", quest_path(:id => params[:id],  :show_all =>  params[:show_all]=='1' ? 0 : 1), :class => 'btn btn-default'
-  %li
-    #tree-control
-      .btn-group
-        %btn#toggle-dialog.btn.btn-default
-          Toggle Dialog
-
-
-#tree-container{data: {quest_id: @quest.id} }
-
-%br
-%br
-
-#accordion.panel-group
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseNote"}
-          Records
-    #collapseNote.panel-collapse.collapse
-      %ul.list-group
-      - @quest.records.order('created_at').each do |rec|
-        -href='#'
-        -if(rec.type=='Image'||'Link') then href="#{rec.url}" end
-        %a.list-group-item(href="#{href}" target='_blank')
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  -if(rec.type=='Image') then 
-                    .pull-left{style:'margin-right:2px'}
-                      %a(href="#{rec.code.url}")
-                      =image_tag rec.code.url(rec.code.url), size:'50x50', class:"img-rounded"
-                  .pull-right
-                    %h4.list-group-item-heading
-                      = rec.created_at.strftime("%m/%d/%Y %I:%M%p")
-                    %p.list-group-item-text
-                      = auto_link(rec.description)
-                    -if(rec.type=='Link') then
-                      %br
-                        = auto_link(rec.url, html: {target: '_blank'})
-
-                .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => rec.id }, :class => "btn btn-danger", :method => :delete, data: {:confirm => "Are you sure?"}
-                  .pull-right
-                    =link_to "Modify", edit_record_path(rec.id), :class => "btn btn-primary"
-%br
-%br
--@quest==@active_quest ? active="1" : active="0"
-%div#title-div{ :data => { :campaign => @quest.campaign.name[0,5], :quest => trunc(@quest.name), :user => trunc(@user.username, 15), :act => active}}
+=render 'actionable_bottom'
 
 :javascript
   $(document).ready(function () {
@@ -123,7 +21,7 @@
      if(active===1){
        document.title="* "+document.title;
      }
-     var treeId = $('#tree-container').data('quest-id');
+     var treeId = $('#tree-container').data('actionable-id');
      var showClosed = $('#show_all').data('show-all');
      var url = "getTree?id=" + treeId+"&show_all="+showClosed;
      questTree(url);
@@ -141,7 +39,7 @@
      });
      $('#activeBtn').click(function()
      {
-     var questId = { id: $('#quest_id').html()}
+     var questId = { id: $('#actionable_id').html()}
         $.ajax({
            type: "POST",
            url: "set_active",

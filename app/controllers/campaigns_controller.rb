@@ -21,6 +21,7 @@ class CampaignsController < ApplicationController
   def show
     logger.info params
     @campaign = Campaign.find(params[:id])
+    @actionable=@campaign
     #reverse history but direct to new
 
     if request.path != campaign_path(@campaign)

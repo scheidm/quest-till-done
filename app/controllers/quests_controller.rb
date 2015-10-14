@@ -13,7 +13,10 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] Quest detail page with that id
   def show
+    @is_quest=true
     @quest = Quest.find(params[:id])
+    @actionable=@quest
+    @campaign = @quest.campaign
     if @quest.status=='Closed' then
       @state_class="btn-danger"
       @effect="Open"

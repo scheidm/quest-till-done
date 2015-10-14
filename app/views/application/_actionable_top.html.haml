@@ -1,0 +1,31 @@
+%div.name{ :style => "display: inline"}
+  %a{href: campaign_path(@campaign), alt: @campaign.name}
+    %btn.btn.btn-circle{ :style => "background-color:#{@campaign.group.color}"}
+      %div.inner-circle{ :title => @campaign.name, :style => "background-color:#{@campaign.color}"}
+        =@campaign.name[0].upcase
+  = @actionable.name
+%p
+  %strong Description:
+  =@actionable.description || "None"
+%p
+  %strong Status:
+  %span{ :class => "label label-#{@actionable.status_class}"}
+    = @actionable.status
+-if !@is_quest
+  %p
+    %strong Progress:
+  %p
+    .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Progress"}
+      .progress-bar{role: "progressbar", style: "width: #{@campaign.progress}%;"}
+-else
+  %p
+    %strong Parent:
+    = link_to @actionable.parent.name, @actionable.parent.to_link
+  %p
+    %strong Deadline:
+    =@actionable.deadline || "None"
+    %p#quest_id.hidden
+      = @actionable.id
+    %p#active_quest.hidden
+      #show_all.fade{data: { show_all: params[:show_all]||0}  }
+
