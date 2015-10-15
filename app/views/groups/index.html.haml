@@ -4,38 +4,13 @@
 .panel.panel-info
   .panel-heading Groups (Member)
   .panel-body
-    %table{:class => "table table-hover" }
-      %thead
-        %tr
-          %th Name
-          %th Role
-      %tbody
-        - @member_groups.each do |group|
-          %tr
-            %td
-              =link_to group.name, group
-            %td
-              = render_role(group, current_user)
-            %td
-              = link_to 'Leave', {:action => :leave, :id => group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Leave group'
-
+    -@current_groups=@member_groups
+    =render 'roster'
 .panel.panel-success
   .panel-heading Groups (Admin)
   .panel-body
-    %table{:class => "table table-hover" }
-      %thead
-        %tr
-          %th Name
-          %th Role
-      %tbody
-        - @admin_groups.each do |group|
-          %tr
-            %td
-              =link_to group.name, group
-            %td
-              = render_role(group, current_user)
-            %td
-              = link_to 'Leave', {:action => :leave, :id => group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Leave group'
+    -@current_groups=@admin_groups
+    =render 'roster'
 
 %br
 %br

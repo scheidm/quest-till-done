@@ -631,3 +631,9 @@ input:-webkit-autofill:focus {
 #notifcation_count{
     color : #ffffff;
 }
+.left_quarter{
+  padding: 0 15px 0 0;
+}
+.right_quarter{
+  padding: 0 0 0 15px;
+}

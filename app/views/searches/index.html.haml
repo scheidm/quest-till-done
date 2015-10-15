@@ -1,7 +1,10 @@
 %h2 Search Result:
 
 %h2
-  =render_result_count(@results)
+  -count=result_count(@results)
+  = content_tag(:span, count[:record].to_s + ' Records', :class => 'label label-info', :style => 'margin: 3px 3px 3px 3px;')
+  = content_tag(:span, count[:quest].to_s + ' Quests',:class => 'label label-primary', :style => 'margin: 3px 3px 3px 3px;')
+  = content_tag(:span, count[:campaign].to_s + ' Campaigns',:class => 'label label-success', :style => 'margin: 3px 3px 3px 3px;')
 %br
 %br
   =render 'filtration'
@@ -20,6 +23,6 @@
       %td
         %a{href: result.to_link}
           = result.to_s
-        = render_status_tag(result)
+        = content_tag(:span, result.status, :class => status_tag(result))
 
 = will_paginate @results, :renderer => 'SearchesHelper::LinkRenderer'
