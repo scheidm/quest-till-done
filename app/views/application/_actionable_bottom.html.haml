@@ -1,15 +1,16 @@
--unless @actionable.id==@campaign.id
+-if @is_quest
   -@actionable.id==@active_quest.id ? active_class="disabled" : active_class=""
   %button#activeBtn.btn.btn-info{ :class => "#{active_class}", 'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
     %span.glyphicon.glyphicon-eye-open
+  = link_to toggle_state_quest_path(@actionable), :class => "btn #{@state_class}", :title =>"#{@effect} Quest" do
+    %span{class: "glyphicon glyphicon-ok"}
+
 = link_to new_quest_path(:id => @actionable.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
   %span.glyphicon.glyphicon-plus
 = link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @actionable.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
 
 = link_to '#edit-quest-modal', :class => 'btn btn-warning', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Quest' do
   %span.glyphicon.glyphicon-pencil
-= link_to toggle_state_quest_path(@actionable), :class => "btn #{@state_class}", :title =>"#{@effect} Quest" do
-  %span{class: "glyphicon glyphicon-ok"}
 = link_to campaign_path(@campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
   %span.glyphicon.glyphicon-share-alt
 -unless @is_quest

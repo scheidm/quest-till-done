@@ -25,18 +25,6 @@
      var showClosed = $('#show_all').data('show-all');
      var url = "getTree?id=" + treeId+"&show_all="+showClosed;
      questTree(url);
-
-     var treeId =  { id: $('#tree-container').data('quest-id')};
-     $.ajax({
-       type: "GET",
-       url: "getTree",
-       data: treeId,
-       success: function(data) {
-        var jsonData = JSON.parse(data);
-
-        questTree(jsonData);
-       }
-     });
      $('#activeBtn').click(function()
      {
      var questId = { id: $('#actionable_id').html()}
