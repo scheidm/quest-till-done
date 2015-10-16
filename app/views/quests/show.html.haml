@@ -27,7 +27,7 @@
      questTree(url);
      $('#activeBtn').click(function()
      {
-     var questId = { id: $('#actionable_id').html()}
+     var questId = { id: treeId}
         $.ajax({
            type: "POST",
            url: "set_active",

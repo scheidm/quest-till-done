@@ -52,14 +52,15 @@
                   .progress-bar{role: "progressbar", style: "width: 50%;"}
             .col-md-3
               .col-md-6
-                %button.btn.btn-info{style: "margin-top: 0px;width: 40px", "data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
-                %div{style: "margin-top: 5px"}
+                %div.grid-button.btn.btn-info{"data-placement" => "right", "data-toggle" => "tooltip", title: "Level"} 13
+                %div.grid-button
                   -if(@active_quest.to_link)
                     =render 'new_record_link'
               .col-md-6
-                = link_to campaign_path(@journey), :class => 'btn btn-primary' do
-                  %span.glyphicon.glyphicon-road
-                %div{style: "margin-top: 5px"}
+                %div.grid-button
+                  = link_to campaign_path(@journey), :class => 'btn btn-primary grid-button' do
+                    %span.glyphicon.glyphicon-road
+                %div.grid-button
                   =link_to content_tag(:span, nil, class: 'glyphicon glyphicon-book'), new_record_path(:quest_id => @muse.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add record to quest', 'data-target' => '#new-record-modal.modal'
             .col-md-5.qtd-col
               %table{style: "margin-top: 10px"}
