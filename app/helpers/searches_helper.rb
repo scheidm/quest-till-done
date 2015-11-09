@@ -43,10 +43,11 @@ module SearchesHelper
 
   def status_tag(result)
     if ['Quest', 'Campaign'].include? result.class.name
-      status = ''
+      status = "label label-"+result.status.gsub(/\s+/, "")
       case result.status
         when 'Open' then status = 'label label-primary'
         when 'In Progress' then status = 'label label-success'
+        when 'In Progress' then status = 'label label-'
         when 'Closed' then status = 'label label-default'
       end
       return status

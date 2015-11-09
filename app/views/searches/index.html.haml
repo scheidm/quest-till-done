@@ -17,12 +17,13 @@
       %th Description
   %tbody
   - @results.each do |result|
+    -n = result.class.name
     %tr
       %td
-        = result.class.name
+        = n
       %td
         %a{href: result.to_link}
           = result.to_s
-        = content_tag(:span, result.status, :class => status_tag(result))
+        = content_tag(:span, result.status, :class => status_tag(result)) if n=="Quest" or n=="Campaign"
 
 = will_paginate @results, :renderer => 'SearchesHelper::LinkRenderer'

@@ -87,6 +87,7 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def update
     @quest = Quest.find(params[:id])
+    @quest.tag_list=params[:tag_list]
     respond_to do |format|
       if @quest.save
         @quest.update_cleanup(@user)
