@@ -1,5 +1,5 @@
-Quest Till Done Project
--
+Quest Till Done
+[![Code Climate](https://codeclimate.com/github/scheidm/quest-till-done/badges/gpa.svg)](https://codeclimate.com/github/scheidm/quest-till-done)
 
 In the spirit of [Habit RPG](https://habitrpg.com/static/front) and [Dungeons and Developers](http://www.dungeonsanddevelopers.com/), Quest Till  Done is a fun, visual task-management tool to help users juggle multiple projects, classes and/or hobbies.   
 Rather than working through bland checklists, ascend project ‘talent trees’, gaining skill points in everything from cooking to python along the way. The product allows you to quantify your productivity and skill-set, while helping keep track of where you left off on each project in your ‘quest log’.  
