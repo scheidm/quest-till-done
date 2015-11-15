@@ -16,14 +16,14 @@
 
     = f.label 'Parent Quest', :class => 'control-label'
     - if(@quest.id.nil?)
-      - parent_quest = Quest.where('campaign_id = ? or id = ?', @quest.campaign_id, @quest.campaign_id).order('name ASC')
+      - parent_quest = Quest.where('campaign_id = ? or id = ?', @quest.campaign_id, @quest.campaign_id).where.not(status: "Closed").order('name ASC')
     - else
-      - parent_quest = Quest.where('(campaign_id = ? or id = ?) and id != ?',@quest.campaign_id, @quest.campaign_id, @quest.id).order('name ASC').select { |q| !@quest.is_ancestor(q)}
+      - parent_quest = Quest.where('(campaign_id = ? or id = ?) and id != ?',@quest.campaign_id, @quest.campaign_id, @quest.id).where.not(status: "Closed").order('name ASC').select { |q| !@quest.is_ancestor(q)}
     = f.collection_select :parent_id, parent_quest, :id, :name,  {}, :class => 'form-control'
     = f.label 'Owner', :class => 'control-label'
     = f.collection_select :user_id, @user.peers.uniq, :id, :username, {:include_blank => "Please select"}, :class => 'form-control'
     = f.label 'Status', :class => 'control-label'
-    = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'], ['Closed', 'Closed']], @quest.status), {}, html_options = {:class => 'form-control'}
+    = f.select :status, options_for_select([['Open', 'Open'], ['In Progress', 'In Progress'],['On Hold','On Hold'], ['Closed', 'Closed']], @quest.status), {}, html_options = {:class => 'form-control'}
     = f.label 'Deadline', :class => 'control-label'
     = f.date_field :deadline, :class => 'form-control'
     = f.label 'Is Important?', :class => 'control-label'
@@ -31,4 +31,4 @@
     = f.hidden_field :campaign_id
 
   .actions
-    = f.submit :class => 'btn btn-primary pull-right'
+    = f.submit :class => 'btn btn-primary pull-right', data: {:disable_with => "Please Wait..."}

@@ -2,59 +2,60 @@
   = @group.name
 .container
   .row
-    .col-md-6
-      .panel.panel-info{:style => 'height:825px'}
-        .panel-heading Activity
-        .panel-body{:style => 'overflow:auto; height:760px;'}
-          #treeView{ :style => 'height: auto;', 'data-id' => @group.id}
-    .col-md-6
-      .row
-        .panel.panel-info{:style => 'height:400px'}
-          .panel-heading Members
-          .panel-body.fill
-            %table{:class => "table table-hover" }
-              %thead
+    .panel.panel-info{:style => 'height:400'}
+      .panel-heading Activity
+      .panel-body{:style => 'overflow:auto; height:350px;'}
+        #treeView{ :style => 'height: auto;', 'data-id' => @group.id}
+  .row
+    .col-md-6.left_quarter
+      .panel.panel-info{:style => 'height:400px'}
+        .panel-heading Members
+        .panel-body.fill
+          -if @group.admins.include? @user
+            =link_to 'Add Member', '#add-member-modal', :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add new members'
+          %table{:class => "table table-hover" }
+            %thead
+              %tr
+                %th Name
+                %th Role
+            %tbody
+              - @group.users.paginate(page: params[:page], per_page: 4).each do |member|
+                -@member=member
                 %tr
-                  %th Name
-                  %th Role
-              %tbody
-                - @group.users.paginate(page: params[:page], per_page: 4).each do |user|
-                  %tr
-                    %td= user.username
-                    %td
-                      = render_role(@group, user)
-                    %td
-                      = render_promote(user.id)
-                      = render_demote(user.id)
-                      = render_remove(user.id)
-            = will_paginate @group.users.paginate(page: params[:page], per_page: 4)
-            %br
-            = render_add_member
-      .row
-        .panel.panel-info{:style => 'height:400px'}
-          .panel-heading Campaigns
-          .panel-body
-            %table{:class => "table table-hover"}
-              %thead
+                  %td= @member.username
+                  %td
+                    =role_for(@group,@member)
+                  %td
+                    -if @group.admins.include? @user
+                      =render 'admin_buttons'
+                    =link_to 'Leave', {:action => :leave, :id => @group.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove self from group'
+          = will_paginate @group.users.paginate(page: params[:page], per_page: 4)
+          %br
+    .col-md-6.right_quarter
+      .panel.panel-info{:style => 'height:400px'}
+        .panel-heading Campaigns
+        .panel-body
+          %table{:class => "table table-hover"}
+            %thead
+              %tr
+                %th Name
+                %th Description
+            %tbody
+              - @group.campaigns.each do |campaign|
                 %tr
-                  %th Name
-                  %th Description
-              %tbody
-                - @group.campaigns.each do |campaign|
-                  %tr
-                    %td
-                      = link_to campaign.name, campaign_path(campaign)
-                    %td
-                      %a.btn.btn-primary
-                        Open
-                        = render_quest_count(campaign, 'Open')
-                      %a.btn.btn-success
-                        In Progress
-                        = render_quest_count(campaign, 'In Progress')
-                      %a.btn.btn-primary{:style => 'background-color: #999;border-color: #999'}
-                        Closed
-                        = render_quest_count(campaign, 'Closed')
-            =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
+                  %td
+                    = link_to campaign.name, campaign_path(campaign)
+                  %td
+                    %a.btn.btn-primary
+                      Open
+                      = quest_count(campaign, 'Open')
+                    %a.btn.btn-success
+                      In Progress
+                      = quest_count(campaign, 'In Progress')
+                    %a.btn.btn-primary{:style => 'background-color: #999;border-color: #999'}
+                      Closed
+                      = quest_count(campaign, 'Closed')
+          =link_to "New Campaign", controller: "campaigns", action: "new", group_id: @group.id
 
 #add-member-modal.modal.fade
   .modal-dialog
@@ -71,12 +72,16 @@
             %input#user_list_id{:type=>'hidden', :name => 'user_id', :required => true}
             -#= select_tag :user_id, options_from_collection_for_select(User.all, 'id', 'username'), prompt: "Select something", class: "form-control"
           = button_tag 'Add', :type=> 'submit', :class => 'btn btn-primary pull-right'
+  %div#title-div{ :data => { :group => @group.name, :user => trunc(@user.username, 15)}}
 :css
   ul.ui-autocomplete {
       z-index: 1100;
   }
+
 :javascript
   $(document).ready(function(){
+     var group = $('#title-div').data('group');
+     document.title = "QTD - "+group;
           $("#treeView").jstree({
               core : { "animation" : 100 },
 

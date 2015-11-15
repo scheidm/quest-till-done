@@ -31,4 +31,23 @@ class Encounter < ActiveRecord::Base
     end
   end
 
+  def to_str
+    format = '%I:%M%p'
+    end_time = (self.end_time.nil? ) ? 'Now' : self.end_time.to_time.strftime(format)
+    self.created_at.to_time.strftime(format) + ' to ' + end_time
+  end
+  
+  def to_json
+    encounter_data = {  :data => self.to_str,
+                        :attr => { 
+                                 :rel  => 'round',
+                                 :href => 'javascript:void(0)'
+                                 }
+                     }
+    encounter_data[:children] = children = []
+    self.rounds.order(created_at: :desc).each {|round|
+      children << round.to_json
+    }
+    return encounter_data
+  end
 end

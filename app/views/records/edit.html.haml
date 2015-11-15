@@ -1,6 +1,5 @@
 %h2 Modify Record
-
-= render @record.type.downcase
+= render "#{@record.type.downcase}_edit"
 
 = link_to 'Back', :back
 

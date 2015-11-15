@@ -1,25 +1,2 @@
-= form_for @record, :as => :record, :html => {:id => 'image-form', :class => 'new_record record-form-hidden' ,  :multipart => true} do |f|
-  -if @record.errors.any?
-    = render 'errors'
-
-  .field
-    .form-group
-    = f.label :description, "Description", :class => 'control-label'
-    %br
-    = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
-    %br
-
-    = f.label :code , "Upload Image", :class => 'control-label'
-    %br/
-    = f.file_field :code
-
-    = f.label :tag_list, "Tags (separated by commas)"
-    %br
-    = f.text_field :tag_list
-    %br
-    = f.hidden_field :quest_id
-    = f.hidden_field :type, :value => 'Image'
-
-    %br
-    .actions
-    = f.submit :class => "btn btn-primary pull-right"
+= form_for @record, :html => {:id => 'image-form', :class => 'new_record record-form-hidden' ,  :multipart => true} do |f|
+  =render 'image_form', :f => f

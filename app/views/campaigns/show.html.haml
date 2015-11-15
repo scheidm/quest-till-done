@@ -1,74 +1,23 @@
-=if current_power.campaign? @campaign
-  %h2
-    = @campaign.name
+=render "actionable_top"
+#edit-campaign-modal.modal.fade
+  .modal-dialog
+    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %h4#myModalLabel.modal-title Edit Campaign
+      .modal-body
+        = render 'form'
+        = button_to "Delete!", {:action => 'destroy'}, :method => :delete, :class => "btn btn-warning", :confirm => "Are you sure?", "data-toggle" => "tooltip", title: "Delete this campaign"
+  %div#title-div{ :data => { :campaign => @campaign.name, :user => trunc(@user.username, 15)}}
+=render "actionable_bottom"
 
-  %p
-    %strong Description:
-    = @campaign.description
-  %p
-    %strong Status:
-    = @campaign.status
-
-  %p
-    %strong Progress:
-  %p
-    .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Progress"}
-      .progress-bar{role: "progressbar", style: "width: #{@campaign.progress}%;"}
-  %p
-  //= link_to new_quest_path(:id => @campaign.id), :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Add Quest' do
-  //%span.glyphicon.glyphicon-plus
-  = link_to new_quest_path(:id => @campaign.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
-    %span.glyphicon.glyphicon-plus
-  = link_to '#edit-campaign-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
-    %span.glyphicon.glyphicon-pencil
-  = link_to campaigns_path, :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
-    %span.glyphicon.glyphicon-share-alt
-  = link_to campaign_timeline_path(@campaign), :remote => true, :class => 'btn btn-success pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
-    %span.glyphicon.glyphicon-list-alt
-
-  #help
-    %h2 Tree View
-    %span.glyphicon.glyphicon-question-sign.help-info
-      Press the circle to expand/collapse nodes
-    %br
-  %br
-
-  #tree-control
-    .btn-group
-      %btn#toggle-dialog.btn.btn-default
-        Toggle Dialog
-
-  #tree-container{data: {campaign_id: @campaign.id}}
-  #edit-campaign-modal.modal.fade
-    .modal-dialog
-      .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-          %h4#myModalLabel.modal-title Edit Campaign
-        .modal-body
-          = render 'form'
-          = button_to "Delete!", {:action => 'destroy'}, :method => :delete, :class => "btn btn-warning", :confirm => "Are you sure?", "data-toggle" => "tooltip", title: "Delete this campaign"
-  #new-quest-modal.modal.fade
-    .modal-dialog
-      .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-          %h4#myModalLabel.modal-title New Quest
-        .modal-body.a-unique-class
-  #campaign-timeline-modal.modal.fade
-    .modal-dialog{:style => 'width: 800px;'}
-      .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
-        .modal-header
-          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-          %h4#myModalLabel.modal-title Timeline
-        .modal-body.campaign-timeline-unique-class
 :javascript
   $(document).ready(function () {
-     var treeId = $('#tree-container').data('campaign-id');
-     var url = "getTree?id=" + treeId;
+     var campaign = $('#title-div').data('campaign');
+     document.title=["QTD", campaign].join(' - ');
+     var treeId = $('#tree-container').data('actionable-id');
+     var showClosed = $('#show_all').data('show-all');
+     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
+     console.log(url);
      questTree(url);
   });
-
-
-
-

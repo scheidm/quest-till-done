@@ -2,6 +2,7 @@
 class Group < ActiveRecord::Base
   belongs_to :user
   has_many :campaigns, dependent: :destroy
+  has_many :quests
   has_many :rounds, dependent: :destroy
   has_many :github_repos, dependent: :destroy
   has_and_belongs_to_many :users
@@ -18,6 +19,12 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def send_admin_message(user,body,subject)
+      self.admins.each do |admin|
+        user.send_message(admin, body, subject)
+      end
+  end
+
   def demote user
     if self.admins.include? user
       #multi-user group, promote new admin
@@ -28,4 +35,33 @@ class Group < ActiveRecord::Base
       self.admins.destroy user
     end
   end
+
+  def creator_is_admin(user)
+    self.admins.push user
+    self.users.push user
+    user.send_message(user, 'You created a new group! Start adding members from your group page!', 'New Group Created')
+  end
+
+  def to_td_json
+    group_data = { :id   => "group_#{self.id}", 
+                   :attr => {
+                            :name        => self.name,
+                            :description => self.name, 
+                            :url         => '#'
+                            }
+                 }
+    group_data[:children] = group_children = []
+    self.campaigns.each {|campaign|
+      group_children << campaign.to_td_json
+    }
+    return group_data
+  end
+
+  def color
+    d=Digest::MD5.hexdigest(self.name)
+    x=(Integer("0x#{d}")& 0xFFFFFF)
+    y= sprintf("%06x",x)
+    return y
+  end
+
 end

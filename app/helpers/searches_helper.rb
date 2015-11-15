@@ -41,45 +41,30 @@ module SearchesHelper
     end
   end
 
-  def render_status_tag(result)
+  def status_tag(result)
     if ['Quest', 'Campaign'].include? result.class.name
-      status = ''
+      status = "label label-"+result.status.gsub(/\s+/, "")
       case result.status
         when 'Open' then status = 'label label-primary'
         when 'In Progress' then status = 'label label-success'
+        when 'In Progress' then status = 'label label-'
         when 'Closed' then status = 'label label-default'
       end
-      content_tag(:span, result.status, :class => status)
+      return status
     end
   end
 
-  def render_row_class(result)
-    case result.class.name
-      when 'Quest' then 'info'
-      when 'Campaign' then 'success'
-      else ''
-    end
-  end
-
-  def render_result_count(results)
-    record = quest = campaign = 0
+  def result_count(results)
+    count={record:0, quest:0, campaign: 0}
     results.each do |result|
       if Record.child_classes.to_s.include? result.class.name
-        record += 1
+        count[:record] += 1
       elsif result.class.name == 'Quest'
-        quest += 1
+        count[:quest] += 1
       elsif result.class.name == 'Campaign'
-        campaign += 1
+        count[:campaign] += 1
       end
     end
-    record_tag = content_tag(:span, record.to_s + ' Records', :class => 'label label-info', :style => 'margin: 3px 3px 3px 3px;')
-    quest_tag = content_tag(:span, quest.to_s + ' Quests',:class => 'label label-primary', :style => 'margin: 3px 3px 3px 3px;')
-    campaign_tag = content_tag(:span, campaign.to_s + ' Campaigns',:class => 'label label-success', :style => 'margin: 3px 3px 3px 3px;')
-    arr = [record_tag, quest_tag, campaign_tag]
-    content_tag(:div) do
-      arr.each do |content|
-        concat content
-      end
-    end
+    return count
   end
 end

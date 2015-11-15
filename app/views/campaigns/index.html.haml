@@ -1,13 +1,51 @@
+%h2 Active Quests
 %table{:class => "table table-hover"}
-  %thead
+  %thead 
     %tr
+      %th Owner
       %th Name
       %th Description
+      %th Last Activity
   %tbody
-    - @campaigns.each do |campaign|
-      %tr
+    - @active.each do |campaign|
+      - campaign.status != "On Hold" ? trclass = 'active' : trclass = 'inactive'
+      %tr.mid{ :class => trclass }
         %td
+          -campaign.group.user_id==nil ? owner='owner_group' : owner='owner_personal'
+          =render owner, :campaign => campaign
+          =campaign.group.name
+        %td{ :align => 'left'}
+          %a{href: campaign_path(campaign), alt: campaign.name}
+            %btn.btn.btn-circle{ :style => "background-color:#{campaign.group.color}"}
+              %div.inner-circle{ :style => "background-color:#{campaign.color}"}
+                =campaign.name[0].upcase
           %a{href: campaign_path(campaign)}= campaign.name
         %td= campaign.description
+        %td
+          %span{ :class => "label label-age-#{campaign.age}"}
+            = time_ago_in_words(campaign.updated_at)
+-if(@archive)
+  %h2 Archived Quests
+  %table{:class => "table table-hover"}
+    %thead 
+      %tr
+        %th Owner
+        %th Name
+        %th Description
+        %th Last Activity
+    %tbody
+      - @archive.each do |campaign|
+        %tr
+          %td
+            -campaign.group.user_id==nil ? owner='owner_group' : owner='owner_personal'
+            =render owner, :campaign => campaign
+            =campaign.group.name
+          %td
+            %a{href: campaign_path(campaign)}= campaign.name
+          %td= campaign.description
+          %td
+            %span{ :class => "label label-age-#{campaign.age}"}
+              = time_ago_in_words(campaign.updated_at)
 
-= link_to 'New Campaign', new_campaign_path(group_id: @user.wrapper_group.id)
+
+  = link_to 'New Campaign', new_campaign_path(group_id: @user.wrapper_group.id)

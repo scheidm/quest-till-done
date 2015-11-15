@@ -1,38 +1,4 @@
-%p#notice= notice
-%p
-  %strong Name:
-  = @quest.name
-%p
-  %strong Description:
-  =@quest.description || "None"
-%p
-  %strong Status:
-  = @quest.status
-%p
-  %strong Campaign:
-  = link_to @quest.campaign.name, @quest.campaign.to_link
-%p
-  %strong Parent:
-  = link_to @quest.parent.name, @quest.parent.to_link
-%p
-  %strong Deadline:
-  =@quest.deadline || "None"
-
-  %p#quest_id.hidden
-    = @quest.id
-  %p#active_quest.hidden
-    = @active_quest
-%button#activeBtn.btn.btn-info{'data-placement' => 'bottom', 'data-toggle' => 'tooltip', :title => 'Set as Active'}
-  %span.glyphicon.glyphicon-eye-open
-= link_to new_quest_path(:id => @quest.id), :remote => true, :class => 'btn btn-primary', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Quest', 'data-target' => '#new-quest-modal.modal' do
-  %span.glyphicon.glyphicon-plus
-= link_to content_tag(:span, nil, class: 'glyphicon glyphicon-plus-sign'), new_record_path(:quest_id => @quest.id), :remote => true, :class => 'btn btn-success', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Add Record', 'data-target' => '#new-record-modal.modal'
-
-= link_to '#edit-quest-modal', :class => 'btn btn-info', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'Edit Campaign' do
-  %span.glyphicon.glyphicon-pencil
-= link_to campaign_path(@quest.campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
-  %span.glyphicon.glyphicon-share-alt
-
+=render "actionable_top"
 #edit-quest-modal.modal.fade
   .modal-dialog
     .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
@@ -42,130 +8,33 @@
       .modal-body
         = render 'form'
         .delete
-          = button_to "Delete", {:action => 'destroy_softly', :id => @quest.id}, :class => "btn btn-warning", :confirm => "Are you sure?", "data-toggle" => "tooltip", title: "Delete this quest only"
-          = button_to "Delete All", {:action => 'destroy'}, :class => "btn btn-danger", :method => :delete, :confirm => "This will irrevocably destroy all data tied to this quest and it's children! Continue?", "data-toggle" => "tooltip", title: "Delete this quest and all descendents"
-#new-quest-modal.modal.fade
-  .modal-dialog
-    .modal-content{:style=> 'overflow: auto;padding-bottom: 15px;'}
-      .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
-        %h4#myModalLabel.modal-title New Quest
-      .modal-body.a-unique-class
-%br
-%br
-#help
-  %h2 Tree View
-  %span.glyphicon.glyphicon-question-sign.help-info
-    Press the circle to expand/collapse nodes
+          = button_to "Delete", {:action => 'destroy_softly', :id => @actionable.id}, :class => "btn btn-warning", data: { :confirm => "Are you sure?"}, "data-toggle" => "tooltip", title: "Delete this quest only"
+          = button_to "Delete All", {:action => 'destroy'}, :class => "btn btn-danger", :method => :delete, data: { :confirm => "This will irrevocably destroy all data tied to this quest and it's children! Continue?"}, "data-toggle" => "tooltip", title: "Delete this quest and all descendents"
+=render 'actionable_bottom'
 
-#tree-container{data: {quest_id: @quest.id} }
-
-%br
-%br
-
-#accordion.panel-group
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseNote"}
-          Notes
-    #collapseNote.panel-collapse.collapse
-      %ul.list-group
-      - @quest.notes.each do |note|
-        %a.list-group-item
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  %h4.list-group-item-heading
-                    = note.created_at.strftime("%m/%d/%Y %I:%M%p")
-                  %p.list-group-item-text
-                    = auto_link(note.description)
-                .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to " Delete ", {:controller => :records, :action => 'destroy', :id => note.id }, :class => "btn btn-danger", :method => :delete, :confirm => "Are you sure?"
-                  .pull-right
-                    = link_to " Modify ", edit_record_path(note.id), :class => "btn btn-primary"
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion2", "data-toggle" => "collapse", href: "#collapseImage"}
-          Images
-    #collapseImage.panel-collapse.collapse
-      %ul.list-group
-      - @quest.images.each do |image|
-        %a.list-group-item
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  .pull-left{style:'margin-right:2px'}
-                    =image_tag image.code.url(image.code.url), size:'50x50', class:"img-rounded"
-                  .pull-right
-                    %h4.list-group-item-heading
-                      = image.created_at.strftime("%m/%d/%Y %I:%M%p")
-                    %p.list-group-item-text
-                      = auto_link(image.description)
-
-                .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => image.id }, :class => "btn btn-danger", :method => :delete, :confirm => "Are you sure?"
-                  .pull-right
-                    =link_to "Modify", edit_record_path(image.id), :class => "btn btn-primary"
-
-  .panel.panel-default.panel-primary
-    .panel-heading
-      %h4.panel-title
-        %a{"data-parent" => "#accordion3", "data-toggle" => "collapse", href: "#collapseLink"}
-          Links
-    #collapseLink.panel-collapse.collapse
-      %ul.list-group
-      - @quest.links.each do |link|
-        %a.list-group-item
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  %h4.list-group-item-heading
-                    = link.created_at.strftime("%m/%d/%Y %I:%M%p")
-                  %p.list-group-item-text
-                    = auto_link(link.description)
-                    %br
-                      = auto_link(link.url)
-                .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => link.id }, :class => "btn btn-danger", :method => :delete, :confirm => "Are you sure?"
-                  .pull-right
-                    =link_to "Modify", edit_record_path(link.id), :class => "btn btn-primary"
-%br
-%br
 :javascript
   $(document).ready(function () {
-
-     var treeId = $('#tree-container').data('quest-id');
-     var url = "getTree?id=" + treeId;
+     var quest = $('#title-div').data('quest');
+     var campaign = $('#title-div').data('campaign');
+     document.title=["QTD", campaign, quest].join(' - ');
+     var active = $('#title-div').data('act');
+     if(active===1){
+       document.title="* "+document.title;
+     }
+     var treeId = $('#tree-container').data('actionable-id');
+     var showClosed = $('#show_all').data('show-all');
+     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
      questTree(url);
-
-     var treeId =  { id: $('#tree-container').data('quest-id')};
-     $.ajax({
-       type: "GET",
-       url: "getTree",
-       data: treeId,
-       success: function(data) {
-        var jsonData = JSON.parse(data);
-
-        questTree(jsonData);
-       }
-     });
      $('#activeBtn').click(function()
      {
-     var questId = { id: $('#quest_id').html()}
+     var questId = { id: treeId}
         $.ajax({
            type: "POST",
            url: "set_active",
            data: questId,
            success: function(data) {
               $('.flashMessage').html("Successfully set current quest to active quest");
+              window.location.reload();
           }
         });
      });

@@ -2,9 +2,6 @@
 class CampaignsController < ApplicationController
   power :crud => :campaigns
 
-  require 'json_generator'
-  include JsonGenerator::QuestModule
-  include JsonGenerator::TimelineModule
   include RoundHelper
   include ApplicationHelper 
 
@@ -13,14 +10,18 @@ class CampaignsController < ApplicationController
   # Show all of user's campaigns
   # @return [Html] the index page for all campaign
   def index
-    @campaigns = @user.campaigns
+    @archive = @user.campaigns.where(:status => "Archived")
+    @campaigns = @user.total_campaigns.order(status: :desc, name: :asc)
+    @active=@campaigns.reject{ |c| c.status =~ /Archived/}
   end
 
   # Show the detail of a campaign
   # @param id [Integer] Campaign's id
   # @return [Html] the campaign detail with that id
   def show
+    logger.info params
     @campaign = Campaign.find(params[:id])
+    @actionable=@campaign
     #reverse history but direct to new
 
     if request.path != campaign_path(@campaign)
@@ -39,7 +40,19 @@ class CampaignsController < ApplicationController
   # @return [JSON] campaign's information in JSON format
   def getTree
     campaign = Campaign.find(params[:id])
-    render :text => generateCampaignTree(campaign)
+    only_active = true
+    if params[:show_all]=='1' then
+      only_active =  false
+    end
+    if (!campaign.is_a?(Campaign))
+      raise 'Expected argument to be a campaign'
+    end
+    data = campaign.to_json
+    data[:children] = children = []
+    campaign.child_quests.each {|quest|
+      children << quest.to_tree_json(only_active) unless only_active&&quest.status=="Closed"
+    }
+    render :text => data.to_json
   end
 
 
@@ -110,7 +123,12 @@ class CampaignsController < ApplicationController
   # @return [JSON] JSON of the timeline details
   def get_campaign_timeline
     @campaign = Campaign.find(params[:id])
-    render :text => generateTimeline(@campaign.rounds.limit(100).order("created_at DESC"))
+    rounds=@campaign.rounds.limit(100).order("created_at DESC")
+    data = []
+    rounds.each do |round|
+      data << round.to_json
+    end
+    render :text => data.to_json  
   end
 
   # Import a QTD specific format Campaign to generate a campaign
@@ -134,8 +152,7 @@ class CampaignsController < ApplicationController
   # @param parent_id [Integer] Quest's id of quest to be set as parent quest
   def set_quest_parent
     quest = Quest.find(params[:quest_id])
-    parent = Quest.find(params[:parent_id])
-    quest.parent_id = parent.id
+    quest.parent_id = params[:parent_id]
     quest.save
     render :nothing => true
   end
@@ -145,11 +162,9 @@ class CampaignsController < ApplicationController
   def campaign_timeline_path(campaign)
     "/campaigns/timeline?id=#{campaign.id}"
   end
-
-  # Define allowed parameter for a Campaign model
   # @param description [String] Campaign's description
   # @param name [String] Campaign's name
   def campaign_params
-    params.require(:campaign).permit(:description, :name, :group_id, :id)
+    params.require(:campaign).permit(:description, :status, :name, :group_id, :id, :show_all)
   end
 end

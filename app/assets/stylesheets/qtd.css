@@ -1,3 +1,46 @@
+.name{
+  font-size: 20px;
+}
+.btn-circle {
+  text-decoration: none;
+  color: white;
+  width: 51px;
+  height: 51px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+  border-color: black;
+  border-width: 4px;
+}
+.name > a{
+  text-decoration: none;
+}
+.inner-circle {
+  color: white;
+  position: relative;
+  top: -2px;
+  left: 4px;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 20px;
+}
+tr.inactive{
+  background-color: #DDDDDD;
+}
+tr.mid > td {
+ vertical-align: middle !important;
+}
+tr.mid a:first-child{
+  text-decoration: none;
+}
+tr.active{
+  background-color: white;
+}
 .header-table{
     width:100%;
     margin-bottom:5px;
@@ -334,14 +377,41 @@ input:-webkit-autofill:focus {
 }
 
 /**************** Campaign/Quest ***********/
+.label-age-live {
+    background-color: #008c00;
+}
+.label-age-fresh {
+    background-color: #6DA300;
+}
+.label-age-semi-fresh {
+    background-color: #AFAF00;
+}
+.label-age-semi-stale {
+    background-color: #AF9100;
+}
+.label-age-stale {
+    background-color: #AF7500;
+}
+.label-age-very-stale {
+    background-color: #AF4f00;
+}
+.label-age-dead {
+    background-color: #AF0000;
+}
 .label-Open {
     background-color: #428bca;
 }
 .label-Closed {
     background-color: #999;
 }
+.label-Archived {
+    background-color: #999;
+}
 .label-InProgress {
     background-color: #5cb85c;
+}
+.label-OnHold {
+    background-color: #E67373;
 }
 .label-Note {
     background-color: #5bc0de;
@@ -560,4 +630,10 @@ input:-webkit-autofill:focus {
 /*adding style for notification count number*/
 #notifcation_count{
     color : #ffffff;
+}
+.left_quarter{
+  padding: 0 15px 0 0;
+}
+.right_quarter{
+  padding: 0 0 0 15px;
 }

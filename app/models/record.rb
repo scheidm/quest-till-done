@@ -13,19 +13,28 @@ class Record < ActiveRecord::Base
   acts_as_taggable_on :skills
   attr_accessor :encounter, :quest, :questname
   # Record belongs to a quest
-  belongs_to :quest
+  belongs_to :quest, touch: true
   # Record belongs to a encounter
   belongs_to :encounter
   # Record belongs to a user
   belongs_to :group
   delegate :user, to: :encounter
   before_destroy :destroy_rounds
+  after_save :touch_quest
 
   validates_associated :encounter
 
   # Define scope for Single Table Inheritance
   scope :link, ->{where(type: "Link")}
   scope :note, ->{where(type: "Note")}
+
+  
+  def touch_quest
+    if(self.quest.status=="Open") then
+      self.quest.status="In Progress"
+      self.quest.save
+    end
+  end
 
   def assign_encounter( user )
     self.encounter_id = Encounter.where(:user_id => user.id).last.id

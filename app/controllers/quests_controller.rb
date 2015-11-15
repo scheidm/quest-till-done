@@ -1,10 +1,7 @@
 # Controller for Quest
 class QuestsController < ApplicationController
 
-  require 'json_generator'
-  include JsonGenerator::QuestModule
   include RoundHelper
-  include GithubHelper
 
   # Show all of user's quests
   # @return [Html] A list of quests of the user
@@ -16,11 +13,16 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   # @return [Html] Quest detail page with that id
   def show
+    @is_quest=true
     @quest = Quest.find(params[:id])
-    if(!@user.active_quest.nil?&&User.find(@user.id).active_quest.id == @quest.id)
-      @active_quest = true
+    @actionable=@quest
+    @campaign = @quest.campaign
+    if @quest.status=='Closed' then
+      @state_class="btn-danger"
+      @effect="Open"
     else
-      @active_quest = false
+      @state_class="btn-success"
+      @effect="Close"
     end
 
     #reverse history but direct to new
@@ -55,7 +57,7 @@ class QuestsController < ApplicationController
     path = @quest.parent.type == 'Campaign'? campaign_path(@quest.parent) : quest_path(@quest.parent)
     respond_to do |format|
       if @quest.save
-        create_round(@quest, action_name, @quest.campaign)
+        create_round(@quest, action_name.capitalize, @quest.campaign)
         format.html { redirect_to path, notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else
@@ -85,33 +87,37 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def update
     @quest = Quest.find(params[:id])
+    @quest.tag_list=params[:tag_list]
     respond_to do |format|
       if @quest.save
-        if params['quest']['status']=="Closed"
-          #sync with github
-          parent_campaign = Campaign.find(@quest.campaign_id)
-          if parent_campaign.vcs
-            github_info = GithubRepo.where(campaign_id: parent_campaign.id).first
-            close_issue(@user, github_info.github_user, github_info.project_name, @quest.issue_no)
-          end
-          if @quest.id==@user.active_quest.id
-            @user.active_quest=Quest.where('group_id = (?)', @user.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
-            @user.save
-          end
-        end
+        @quest.update_cleanup(@user)
       end
 
-
-
       if @quest.update(quest_params)
-        create_round(@quest, action_name, @quest.campaign)
-        format.html { redirect_to @quest, notice: 'Quest was successfully updated.' }
+        create_round(@quest, action_name.capitalize, @quest.campaign)
+        format.html { redirect_select }
         format.json { head :no_content }
       else
         format.html { render quest: 'edit' }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def redirect_select
+    @quest = Quest.find(params[:id])
+    if @quest.status=="Closed"
+      redirect_to @quest.parent, notice: 'Quest was successfully updated.'
+    else
+      redirect_to @quest, notice: 'Quest was successfully updated.'
+    end
+  end
+
+  def toggle_state
+    @quest = Quest.find(params[:id])
+    action=@quest.toggle_state(@user)
+    create_round(@quest, action, @quest.campaign)
+    redirect_select
   end
 
   # Delete quest and all the records it associated with
@@ -137,16 +143,29 @@ class QuestsController < ApplicationController
   # @return [JSON] quest's information in JSON format
   def getTree
     quest = Quest.find(params[:id])
-    render :text => generateQuestTree(quest)
+    only_active = true
+    if params[:show_all]=='1' then
+      only_active =  false
+    end
+    if (!quest.is_a?(Quest))
+      raise 'Expected argument to be a campaign'
+    end
+    data = quest.to_tree_json(only_active)
+
+    render :text => data.to_json
   end
 
   # Set quest as user's current active quest
   # @param id [Integer] Quest's id
   def set_active
-    quest = Quest.find(params[:id])
-    user = User.find(@user.id)
-    user.active_quest_id = quest.id
-    user.save
+    @quest = Quest.find(params[:id])
+    @user.active_quest_id = @quest.id
+    @user.save
+    if @quest.status=="On Hold"
+      @quest.status="In Progress"
+      @quest.save
+    end
+    create_round(@quest, action_name.capitalize, @quest.campaign)
     render :nothing => true
   end
 
@@ -159,7 +178,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list, :show_all)
   end
 
 

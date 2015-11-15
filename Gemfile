@@ -78,7 +78,7 @@ gem 'yard'
 gem 'will_paginate'
 gem 'attr_encrypted'
 gem 'github_api'
-gem 'searchkick'
+gem 'searchkick', '~> 0.8.5'
 
 # Postgresql
 gem 'pg'
@@ -92,7 +92,6 @@ gem 'local_time'
 gem 'consul'
 # jquery ui
 gem 'jquery-ui-rails'
-
 
 #attachment
 gem 'paperclip'
@@ -108,12 +107,9 @@ gem 'mailboxer'
 # growal like notification
 gem 'gritter'
 
-
 # pdf
 gem 'wkhtmltopdf-binary'
 gem 'pdfkit'
-
-
 
 # background Job
 gem 'sidekiq'
@@ -124,3 +120,7 @@ gem 'whenever', :require => false
 
 gem 'simplecov',  '~> 0.7.1', :require => false, :group => :test
 gem 'byebug'
+gem 'font-awesome-rails'
+
+gem 'guard-livereload', :group => :development
+gem 'rack-livereload', :group => :development

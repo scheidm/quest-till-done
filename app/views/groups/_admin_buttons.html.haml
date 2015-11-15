@@ -1,0 +1,6 @@
+-if !(@group.admins.include? @member)
+  =link_to 'Promote', {:action => :promote, :id => @group.id, :user_id => @member.id}, :class => 'btn btn-default', :'data-placement' => 'bottom', :title => 'Promote member to admin'
+-if @user.id==@member.id
+  =link_to 'Demote', {:action => :demote, :id => @group.id, :userId => @member.id}, :class => 'btn btn-default', :'data-placement' => 'bottom', :title => 'Promote member to admin'
+-else
+  =link_to 'Remove', {:action => :kick, :id => @group.id, :user_id => @member.id}, :class => 'btn btn-danger', :'data-placement' => 'bottom', :title => 'Remove member from group'

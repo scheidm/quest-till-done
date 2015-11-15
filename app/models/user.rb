@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
   has_many :total_campaigns, through: :groups, source: :campaigns
+  has_many :total_quests, through: :groups, source: :quests
   has_many :peers, through: :groups, source: :users
   belongs_to :active_quest, :class_name => 'Quest', :foreign_key => 'active_quest_id'
   before_destroy :delete_related
@@ -97,12 +98,13 @@ class User < ActiveRecord::Base
     self.wrapper_group=g
     self.promote_in_group g
     cam=Campaign.create({ name: "My Journey", description: "A collection of to-dos and notes that don't fit anywhere else", group_id: g.id, status: "Open"})
+    Quest.create({name: "To Do's", description: "Odds and ends that still need to get done", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
+    Quest.create({name: "Regular Rituals", description: "Frequent chores, repeated tasks, or any other habitual activity", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     enc = Encounter.create({ user: self})
     enc.end_time = Time.now.utc
     enc.rounds << Round.create({ type: 'Campaign', event_id: cam.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
-    q=Quest.create({name: "To Do's", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     self.active_quest=q
     self.save
     self.reload
@@ -182,4 +184,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def journey
+    return self.quests.first
+  end
+
+  def set_default_active_quest
+    self.active_quest=Quest.where('group_id = (?)', self.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
+    self.save
+  end
+    
 end

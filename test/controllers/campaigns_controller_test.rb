@@ -23,25 +23,21 @@ class CampaignsControllerTest < ActionController::TestCase
 
   test "Get show" do
     get :show, id: @campaign.id
-    assert_response :sucess
+    assert_response :success
     assert_not_nil assigns(:campaign)
   end
 
   test "Test create campaign" do
-    assert_difference('Campaign.count') do
-      post :create, campaign: {name: 'Test', description: 'Testing',group_id: @user.wrapper_group.id, status: 'Open'}
-    end
-
+    post :create, campaign: {name: 'Test', description: 'Testing',group_id: @user.wrapper_group.id, status: 'Open'}
+    assert_not_nil( Campaign.where(description: "Testing") )
     assert_redirected_to campaign_path(assigns(:campaign))
-    assert_not_nil(Campaign.find_by(description: 'Testing'))
   end
 
   test "Test delete campaign" do
-    assert_difference('Campaign.count', -1) do
-      delete :destroy, id: @campaign.id
-    end
-
+    dId = @campaign.id
+    delete :destroy, id: dId
     assert_response :found
+    assert_nil Campaign.find_by( name: "genma")
   end
 
 end

@@ -430,10 +430,14 @@ var questTree = function (url) {
     function renderDetailBox(svg, d) {
         $(svg).popover('destroy');
         var placement = d.children ? "left" : "right";
+        var name = d.attr.name;
+        if(name.length>37){
+            name=name.substring(0,37)+"...";
+        }
         $(svg).popover({
             'trigger': 'manual',
             'html': true,
-            'title': '<a href=' + d.attr.url + '>' + d.attr.name + '</a>',
+            'title': '<a href=' + d.attr.url + '>' + name + '</a>',
             'content': renderQuestDetail(d),
             'placement': placement,
             'container': '#tree-container'
@@ -442,8 +446,16 @@ var questTree = function (url) {
 
     function renderQuestDetail(d) {
         var css = d.attr.status.toString().trim().replace(/ /g, '');
-        var html = "Description: " + d.attr.description + "</br>" +
-            "Status: <span class='label label-" + css + "'>" + d.attr.status + "</span>"
+        var count = d.attr.record_count;
+        var description = d.attr.description;
+        if(description.length>37){
+            description=description.substring(0,37)+"...";
+        }
+        var html = "Description: " + description  + "<br/>" +
+            "Status: <span class='label label-" + css + "'>" + d.attr.status + "</span>";
+        if(count>0){
+            html+="<br/>Records: "+count.toString();
+        }
         return html;
     }
 

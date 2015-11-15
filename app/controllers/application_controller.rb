@@ -1,12 +1,14 @@
 # Default controller in Rails, from which all other users inherit
 class ApplicationController < ActionController::Base
+  include ActionView::Helpers::DateHelper, ActionView::Helpers::TagHelper
+  include LocalTimeHelper
   include Consul::Controller
 #  require_power_check
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_filter  :configure_permitted_parameters, if: :devise_controller?
-  before_filter :load_user
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_filter :instantiate_variables
   before_filter :authenticate_user!
 
   protected
@@ -18,26 +20,24 @@ class ApplicationController < ActionController::Base
   # Once a user is signed in, the application uses this to ensure that the
   # header displays the correct information for the active task of the current
   # user
-  def load_user
+  def instantiate_variables
     if(user_signed_in?)
+      @model=nil
       @user = User.find(current_user.id)
       @config = @user.config
       @timer = @user.timer
-      active_quest = @user.active_quest
-      if(active_quest.nil?)
-         @active_quest_model = nil
-         @active_quest_name = ''
-         @active_quest_url = '#'
-         @active_quest_campaign_name = ''
-         @active_quest__campaign_url = '#'
-      else
-        @active_quest_model = active_quest
-        @active_quest_name = active_quest.name
-        @active_quest_url = quest_path(active_quest)
-        @active_quest_campaign_name = active_quest.campaign.name
-        @active_quest_campaign_url = campaign_path(active_quest.campaign)
+      @active_quest = @user.active_quest
+      if(@active_quest.nil?)
+         aq = { name: '',
+                to_link: nil, 
+                campaign: { name: '', to_link: nil}
+              }
+                                                          
+         @active_quest = to_ostruct(aq)
       end
-      @notification_count = @user.mailbox.inbox(:unread => true).count(:id, :distinct => true)
+      @journey = @user.campaigns.first
+      @muse = @journey.quests.first
+      @notification_count = @user.mailbox.inbox(:unread => true).distinct.count
     end
   end
 
@@ -58,8 +58,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-
   def record_autocomplete
     render json:  Record.search(params[:query], fields: [{name: :text_start}], limit: 10).map(&:name)
   end
@@ -68,5 +66,18 @@ class ApplicationController < ActionController::Base
     recs=Records.search query
     quests=Quest.search query
     @results=recs.results+quests.results
+  end
+
+  private
+  
+  def to_ostruct(object)
+    case object
+    when Hash
+      OpenStruct.new(Hash[object.map {|k, v| [k, to_ostruct(v)] }])
+    when Array
+      object.map {|x| to_ostruct(x) }
+    else
+      object
+    end
   end
 end

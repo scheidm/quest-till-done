@@ -1,19 +1,2 @@
-= form_for @record, :as => :record, :html => {:id => 'note-form'} do |f|
-  -if @record.errors.any?
-    = render 'errors'
-
-  .field
-    .form-group
-    = f.label :description, "Note", :class => 'control-label'
-    %br
-    = f.text_area :description, :cols => 55, :rows => 5, :required => 'true', :class => 'form-control'
-    = f.label :tag_list, "Tags (separated by commas)"
-    %br
-    = f.text_field :tag_list
-    %br
-    = f.hidden_field :quest_id
-    = f.hidden_field :type, :value => 'Note'
-
-    %br
-    .actions
-    = f.submit :class => "btn btn-primary pull-right"
+= form_for @record, :html => {:id => 'note-form', :class => 'note-form new_record'} do |f|
+  =render 'note_form', :f => f
