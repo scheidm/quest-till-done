@@ -17,7 +17,19 @@
 //= require flipclock
 //= require d3
 //= require jstree
-//= require_tree .
+//= require project_tree.js
+//= require record.js
+//= require skill_points.js.coffee
+//= require skills.js.coffee
+//= require tower_defense.js
+//= require welcome.js.coffee
+//= require bootstrap-datepicker.js
+//= require countdown.js
+//= require devise.js
+//= require layout.js
+//= require note.js
+//= require action.js
+//
 //= stub record
 //= require d3
 //= require layout.js
