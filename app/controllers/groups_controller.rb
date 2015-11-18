@@ -140,8 +140,11 @@ class GroupsController < ApplicationController
   def timeline
     @group = Group.find(params[:id])
     data=[]
+    count=0
     @group.rounds.each do |round|
+      break if count>100
       data << round.to_json
+      count+=1
     end
     render :text => data.to_json
   end

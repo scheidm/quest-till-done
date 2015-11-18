@@ -62,8 +62,10 @@ class CampaignsController < ApplicationController
   def create
     @campaign = Campaign.new(campaign_params)
 
+    @user.tag_list.add(params[:tag_list])
     respond_to do |format|
       if @campaign.save
+        @user.save
         create_round(@campaign, action_name, @campaign)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully started.', location: campaigns_path(@campaign) }
         format.json { render action: 'show', status: :created, location: @campaign }
@@ -86,7 +88,12 @@ class CampaignsController < ApplicationController
   # @return [Html] redirect back to campaigns index page
   def update
     @campaign = Campaign.find(params[:id])
+    @campaign.tag_list=params[:tag_list]
+    @user.tag_list.add(params[:tag_list])
     respond_to do |format|
+      if @quest.save
+        @user.save
+      end
       if @campaign.update(campaign_params)
         create_round(@campaign, action_name, @campaign)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }

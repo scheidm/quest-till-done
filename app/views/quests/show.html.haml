@@ -1,3 +1,4 @@
+=javascript_include_tag "quests"
 =render "actionable_top"
 #edit-quest-modal.modal.fade
   .modal-dialog
@@ -11,37 +12,3 @@
           = button_to "Delete", {:action => 'destroy_softly', :id => @actionable.id}, :class => "btn btn-warning", data: { :confirm => "Are you sure?"}, "data-toggle" => "tooltip", title: "Delete this quest only"
           = button_to "Delete All", {:action => 'destroy'}, :class => "btn btn-danger", :method => :delete, data: { :confirm => "This will irrevocably destroy all data tied to this quest and it's children! Continue?"}, "data-toggle" => "tooltip", title: "Delete this quest and all descendents"
 =render 'actionable_bottom'
-
-:javascript
-  $(document).ready(function () {
-     var quest = $('#title-div').data('quest');
-     var campaign = $('#title-div').data('campaign');
-     document.title=["QTD", campaign, quest].join(' - ');
-     var active = $('#title-div').data('act');
-     if(active===1){
-       document.title="* "+document.title;
-     }
-     var treeId = $('#tree-container').data('actionable-id');
-     var showClosed = $('#show_all').data('show-all');
-     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
-     questTree(url);
-     $('#activeBtn').click(function()
-     {
-     var questId = { id: treeId}
-        $.ajax({
-           type: "POST",
-           url: "set_active",
-           data: questId,
-           success: function(data) {
-              $('.flashMessage').html("Successfully set current quest to active quest");
-              window.location.reload();
-          }
-        });
-     });
-     var active = $('#active_quest').html().trim();
-     if(active == "true")
-        $('#activeBtn').prop('disabled', true);
-     $('#activeBtn').click(function() {
-        $('#activeBtn').prop('disabled', true);
-     });
-  });

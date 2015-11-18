@@ -631,9 +631,23 @@ input:-webkit-autofill:focus {
 #notifcation_count{
     color : #ffffff;
 }
-.left_quarter{
+.left-quarter{
   padding: 0 15px 0 0;
 }
-.right_quarter{
+.right-quarter{
   padding: 0 0 0 15px;
+}
+.navbar .navbar-inner .grid-button{
+  height: 32px;
+  width: 40px;
+  padding:5px;
+  border: 0px;
+  margin: 5px;
+}
+.navbar .navbar-inner .grid-button a{
+  height: 32px;
+  width: 40px;
+  padding:5px;
+  border: 0px;
+  margin: 5px;
 }

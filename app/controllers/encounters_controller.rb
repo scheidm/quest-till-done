@@ -11,8 +11,11 @@ class EncountersController < ApplicationController
     encounters = Encounter.where(:user_id => @user.id).order(created_at: :desc)
     data = []
     data_by_date = {}
+    count=0
     encounters.each do |encounter|
+      break unless count<=100
       encounter_data=encounter.to_json
+      count+=encounter_data.count
       data_by_date[encounter.created_at.to_date] ||= Array.new
       if encounter_data[:children].size > 0
         data_by_date[encounter.created_at.to_date].push(encounter_data)

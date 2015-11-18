@@ -52,11 +52,12 @@ class QuestsController < ApplicationController
   def create
     @quest = Quest.new(quest_params)
     @quest.group_id = @user.wrapper_group.id
-    @quest.status = 'Open'
     @quest.description = nil if @quest.description==""
     path = @quest.parent.type == 'Campaign'? campaign_path(@quest.parent) : quest_path(@quest.parent)
+    @user.tag_list.add(params[:tag_list])
     respond_to do |format|
       if @quest.save
+        @user.save
         create_round(@quest, action_name.capitalize, @quest.campaign)
         format.html { redirect_to path, notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
@@ -88,6 +89,8 @@ class QuestsController < ApplicationController
   def update
     @quest = Quest.find(params[:id])
     @quest.tag_list=params[:tag_list]
+    @user.tag_list=params[:tag_list]
+    @user.save
     respond_to do |format|
       if @quest.save
         @quest.update_cleanup(@user)

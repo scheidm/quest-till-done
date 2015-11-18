@@ -39,9 +39,10 @@ class Encounter < ActiveRecord::Base
   
   def to_json
     encounter_data = {  :data => self.to_str,
+                        :count => self.rounds.length,
                         :attr => { 
                                  :rel  => 'round',
-                                 :href => 'javascript:void(0)'
+                                 :href => 'javascript:void(0)',
                                  }
                      }
     encounter_data[:children] = children = []

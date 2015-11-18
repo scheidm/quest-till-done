@@ -1,11 +1,13 @@
-function  campaign_timeline(){
+function group_show(){
+     var group = $('#title-div').data('group');
+     document.title = "QTD - "+group;
           $("#treeView").jstree({
               core : { "animation" : 100 },
 
               themes : { "theme" : "apple", "icons" : true, "dots": true },
               "json_data": {
                   "ajax" : {
-                      "url" : "/campaigns/get_campaign_timeline?id=" + $('#treeView').attr('data-id')
+                      "url" : "/groups/timeline?id=" + $('#treeView').attr('data-id')
                   }
               },
               "types" : {
@@ -59,20 +61,34 @@ function  campaign_timeline(){
           ).bind("loaded.jstree", function (event, data) {
                        $(this).jstree("open_all");
           }) ;
+
+      $( "#user_list" ).autocomplete({
+          source: function( request, response ) {
+              $.ajax({
+                  url: "/searches/user_autocomplete",
+                  dataType: "json",
+                  data: {
+                      featureClass: "P",
+                      style: "full",
+                      maxRows: 12,
+                      query: request.term
+                  },
+                  success: function( data ) {
+                      response( $.map( data, function( item ) {
+                          return {
+                              label: item.username,
+                              value: item.id
+                          }
+                      }));
+                  }
+                  })
+              },select: function(event, ui) {
+                     event.preventDefault();
+                     $("#user_list").val(ui.item.label);
+                     $("#user_list_id").val(ui.item.value);
+               }
+      });
 }
-function campaign_show(){
-    campaign_tree_display();
-    $('#timeline').click(campaign_timeline);
-}
-function  campaign_tree_display(){
-     var campaign = $('#title-div').data('campaign');
-     document.title=["QTD", campaign].join(' - ');
-     var treeId = $('#tree-container').data('actionable-id');
-     var showClosed = $('#show_all').data('show-all');
-     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
-     console.log(url);
-     questTree(url);
-}
-$(document).ready(function () {
-  campaign_show();
+$(document).ready(function(){
+  group_show();
 });

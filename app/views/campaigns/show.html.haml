@@ -1,3 +1,4 @@
+= javascript_include_tag "campaign"
 =render "actionable_top"
 #edit-campaign-modal.modal.fade
   .modal-dialog
@@ -10,8 +11,3 @@
         = button_to "Delete!", {:action => 'destroy'}, :method => :delete, :class => "btn btn-warning", :confirm => "Are you sure?", "data-toggle" => "tooltip", title: "Delete this campaign"
   %div#title-div{ :data => { :campaign => @campaign.name, :user => trunc(@user.username, 15)}}
 =render "actionable_bottom"
-
-:javascript
-  $(document).ready(function () {
-    campaign_show();
-  });

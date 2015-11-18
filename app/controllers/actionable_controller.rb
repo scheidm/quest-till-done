@@ -1,0 +1,2 @@
+class ActionableController < ApplicationController
+end
