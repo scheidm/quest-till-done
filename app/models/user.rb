@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   acts_as_taggable_on :skills
+  acts_as_taggable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   acts_as_messageable
