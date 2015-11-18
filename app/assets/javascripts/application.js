@@ -21,6 +21,7 @@
 //= stub record
 //= require d3
 //= require layout.js
+//= require campaign.js
 //= require jasny-bootstrap
 //= require bootstrap-switch
 //= require gritter

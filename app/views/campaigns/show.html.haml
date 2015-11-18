@@ -13,11 +13,5 @@
 
 :javascript
   $(document).ready(function () {
-     var campaign = $('#title-div').data('campaign');
-     document.title=["QTD", campaign].join(' - ');
-     var treeId = $('#tree-container').data('actionable-id');
-     var showClosed = $('#show_all').data('show-all');
-     var url = "getTree?id=" + treeId+"&show_all="+showClosed;
-     console.log(url);
-     questTree(url);
+    campaign_show();
   });

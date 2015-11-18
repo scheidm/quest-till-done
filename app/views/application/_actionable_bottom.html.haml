@@ -14,7 +14,7 @@
 = link_to campaign_path(@campaign_id), :class => 'btn btn-default', :'data-placement' => 'bottom', :'data-toggle' => 'tooltip', :title => 'Back' do
   %span.glyphicon.glyphicon-share-alt
 -unless @is_quest
-  = link_to campaign_timeline_path(@campaign), :remote => true, :class => 'btn btn-success pull-right', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
+  = link_to '#', :remote => true, :class => 'btn btn-success pull-right', :id => 'timeline', :'data-placement' => 'bottom', :'data-toggle' => 'modal', :title => 'View Timeline', 'data-target' => '#campaign-timeline-modal.modal' do
     %span.glyphicon.glyphicon-list-alt
 %ul.list-inline
   %li
@@ -81,6 +81,7 @@
         .modal-header
           %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
           %h4#myModalLabel.modal-title Timeline
+          #treeView{ 'data-id' => @campaign.id}
         .modal-body.campaign-timeline-unique-class
           #show_all.fade{data: { show_all: params[:show_all]||0}  }
 
