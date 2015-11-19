@@ -43,16 +43,27 @@ function priorities_index(){
       $('#left-ul').empty();
       $('#right-ul').empty();
       var quests = JSON.parse(result);
+      var campaigns=quests[2];
       var desc;
       $.each(quests[0], function() {
         this.description === null ? desc="": desc=this.description;
-        $('#left-ul').append('<div class="panel panel-primary"><div class="panel-heading"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
-          +'<a class="list-group-item"><p class="list-group-item-heading">'+desc+'</p><p class="list-group-item-text">deadline: '+displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+        $('#left-ul').append('<div class="panel panel-primary"><div class="panel-heading">'
+          +'<a href=/campaign/'+this.campaign_id+'>'
+          +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
+          +this.id+'>'+this.name+'</a></div><div class="panel-body">'
+          +'<a class="list-group-item"><p class="list-group-item-heading">'
+          +desc+'</p><p class="list-group-item-text">deadline: '
+          +displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
       });
       $.each(quests[1], function() {
         this.description === null ? desc="": desc=this.description;
-        $('#right-ul').append('<div class="panel panel-danger"><div class="panel-heading panel-deadline"><a href=/quests/'+this.id+'>'+this.name+'</a></div><div class="panel-body">'
-          +'<a class="list-group-item"><p class="list-group-item-heading">'+desc+'</p><p class="list-group-item-text">deadline: '+displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+        $('#right-ul').append('<div class="panel panel-danger"><div class="panel-heading panel-deadline">'
+          +'<a href=/campaign/'+this.campaign_id+'>'
+          +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
+          +this.id+'>'+this.name+'</a></div><div class="panel-body">'
+          +'<a class="list-group-item"><p class="list-group-item-heading">'
+          +desc+'</p><p class="list-group-item-text">deadline: '
+          +displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
       });
 
 
