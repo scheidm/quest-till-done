@@ -48,7 +48,7 @@ function priorities_index(){
       $.each(quests[0], function() {
         this.description === null ? desc="": desc=this.description;
         $('#left-ul').append('<div class="panel panel-primary"><div class="panel-heading">'
-          +'<a href=/campaign/'+this.campaign_id+'>'
+          +'<a href=/campaigns/'+this.campaign_id+'>'
           +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
           +this.id+'>'+this.name+'</a></div><div class="panel-body">'
           +'<a class="list-group-item"><p class="list-group-item-heading">'
@@ -58,7 +58,7 @@ function priorities_index(){
       $.each(quests[1], function() {
         this.description === null ? desc="": desc=this.description;
         $('#right-ul').append('<div class="panel panel-danger"><div class="panel-heading panel-deadline">'
-          +'<a href=/campaign/'+this.campaign_id+'>'
+          +'<a href=/campaigns/'+this.campaign_id+'>'
           +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
           +this.id+'>'+this.name+'</a></div><div class="panel-body">'
           +'<a class="list-group-item"><p class="list-group-item-heading">'
