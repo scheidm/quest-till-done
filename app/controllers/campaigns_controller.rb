@@ -11,7 +11,7 @@ class CampaignsController < ApplicationController
   # @return [Html] the index page for all campaign
   def index
     @archive = @user.campaigns.where(:status => "Archived")
-    @campaigns = @user.total_campaigns.order(status: :desc, name: :asc)
+    @campaigns = @user.total_campaigns.order(status: :asc, name: :asc)
     @active=@campaigns.reject{ |c| c.status =~ /Archived/}
   end
 
@@ -91,7 +91,7 @@ class CampaignsController < ApplicationController
     @campaign.tag_list=params[:tag_list]
     @user.tag_list.add(params[:tag_list])
     respond_to do |format|
-      if @quest.save
+      if @campaign.save
         @user.save
       end
       if @campaign.update(campaign_params)

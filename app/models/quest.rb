@@ -30,6 +30,7 @@ class Quest < ActiveRecord::Base
             "Closed"   => "Closed",
             "On Hold"  => "OnHold",
             "Archived" => "Archived",
+            "Active" => "InProgress",
             "In Progress" =>"InProgress"
     }
     return stati[self.status]
