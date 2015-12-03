@@ -42,7 +42,7 @@
       %h4.panel-title
         %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseNote"}
           Records
-    #collapseNote.panel-collapse.collapse
+    #collapseNote.panel-collapse
       %ul.list-group
       - @actionable.records.order('created_at').each do |rec|
         -href='#'

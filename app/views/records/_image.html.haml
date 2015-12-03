@@ -1,2 +1,2 @@
-= form_for @record, :html => {:id => 'image-form', :class => 'new_record record-form-hidden' ,  :multipart => true} do |f|
+= form_for @record, :as => :record, :html => {:id => 'image-form', :class => 'new_record record-form-hidden' ,  :multipart => true} do |f|
   =render 'image_form', :f => f

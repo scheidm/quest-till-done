@@ -1,2 +1,2 @@
-= form_for @record, :html => {:id => 'note-edit'} do |f|
+= form_for @record, :as => :record, :html => {:id => 'note-edit'} do |f|
   =render 'note_form', :f => f

@@ -1,2 +1,2 @@
-= form_for @record, :html => {:id => 'link-edit'} do |f|
+= form_for @record, :as => :record,  :html => {:id => 'link-edit'} do |f|
   =render 'link_form', :f => f
