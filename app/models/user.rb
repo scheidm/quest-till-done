@@ -190,7 +190,8 @@ class User < ActiveRecord::Base
   end
 
   def set_default_active_quest
-    self.active_quest=Quest.where('group_id = (?)', self.wrapper_group.id).where('name = (?)', 'Unsorted Musings').first
+    #Due to the order of quest creation for a new user, this will always be "Unsorted Musings"
+    self.active_quest=Quest.where('group_id = (?)', self.wrapper_group.id).order(:id).limit(2)[1]
     self.save
   end
     
