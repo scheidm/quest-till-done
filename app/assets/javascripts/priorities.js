@@ -8,7 +8,6 @@ function priorities_index(){
       target: "#myNavmenu",
       toggle: "offcanvas"
     })
-
     $('.all_link').click(function(e){
       e.preventDefault();
       $('.campaign_link').parent().removeClass("active");
@@ -51,18 +50,26 @@ function priorities_index(){
       }
       var count=0;
       var quest;
+      var campaign;
       $.each(quests, function() {
         console.log(count);
         quest=this;
         $.each(quest, function() {
+          campaign=campaigns[this.campaign_id];
           this.description === null ? desc="": desc=this.description;
-          $('#actionables').append('<div class="panel '+panelClass[count]+' col-md-6"><div class="panel-heading">'
+          $('#actionables').append('<div class="panel '+panelClass[count]+' col-md-5"><div class="panel-heading">'
+            +'<a href=/campaign/'+this.campaign_id+' alt="'+campaign['name']
+            +'"><btn class="btn btn-circle" style="background-color:#'+campaign['group_color']
+            +'"><div class="inner-circle" title="'+campaign['name']+'" style="background-color:#'+campaign['color']
+            +'">'+campaign['name'].substr(0,1).toUpperCase()
+            +'</div></btn></a>'
             +'<a href=/campaigns/'+this.campaign_id+'>'
-            +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
+            +campaign['name']+'</a> - <a href=/quests/'
             +this.id+'>'+this.name+'</a></div><div class="panel-body">'
             +'<a class="list-group-item"><p class="list-group-item-heading">'
             +desc+'</p><p class="list-group-item-text">deadline: '
-            +displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+            +displayEmptyIfNull(this.deadline)+'</p></a></div></div><div class="col-md-1"></div>');
+
         });
         count+=1;
       });

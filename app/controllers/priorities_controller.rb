@@ -44,10 +44,13 @@ class PrioritiesController < ApplicationController
       c_ids[i.campaign_id]=1
     end
     c_ids.tap { |hs| hs.delete(nil) }
-    campaigns=Campaign.where('id IN (?)', c_ids.keys).pluck(:id,:name)
+    campaigns=Campaign.where('id IN (?)', c_ids.keys)
     campaign_hash={}
     campaigns.each do |c|
-      campaign_hash[c[0]]=c[1]
+      campaign_hash[c.id]={}
+      campaign_hash[c.id]['name']=c.name
+      campaign_hash[c.id]['group_color']=c.group.color
+      campaign_hash[c.id]['color']=c.color
     end
     data = []
     data.push(sqs)

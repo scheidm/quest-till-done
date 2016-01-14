@@ -266,6 +266,9 @@ tr.active{
 .panel-heading h4 a {
     color: #fff;
 }
+.panel-heading a {
+    margin: 5px;
+}
 
 .panel-deadline a {
     color: #000;
@@ -277,7 +280,9 @@ tr.active{
     height: auto;
 }
 #actionables .panel{
-  height: 155px;
+  height: 175px;
+}
+#actionables .panel{
 }
 
 html,body {height:100%;}
