@@ -11,10 +11,12 @@
         %a.navmenu-brand{href: "#"} Campaign
         %ul.nav.navmenu-nav
           %li
-            %a{href: 'javascript:void(0)', class: 'all_link'}= 'All'
+            = link_to content_tag(:span, nil, class: 'glyphicon glyphicon-eye-open'), campaigns_path, :class => 'btn btn-primary col-md-2'
+            %a{href: 'javascript:void(0)', class: 'all_link col-md-10'}= 'All'
           - @campaigns.each do |campaign|
             %li
-              %a{id: campaign.id, href: 'javascript:void(0)', class: 'campaign_link'}= campaign.name
+              = link_to content_tag(:span, nil, class: 'glyphicon glyphicon-eye-open'), campaign_path(campaign.id), :class => 'btn btn-primary col-md-2'
+              %a.col-md-10{id: campaign.id, href: 'javascript:void(0)', class: 'campaign_link'}= campaign.name
       .navbar.navbar-default.navbar-fixed-top
         %button.navbar-toggle{"data-canvas" => "#myNavmenuCanvas", "data-placement" => "left", "data-target" => "#myNavmenu", "data-toggle" => "offcanvas", type: "button"}
           %span.glyphicon.glyphicon-transfer
