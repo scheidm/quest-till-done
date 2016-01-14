@@ -40,32 +40,32 @@ function priorities_index(){
     })
 
     function populatePriorities(result) {
-      $('#left-ul').empty();
-      $('#right-ul').empty();
+      $('#actionables').empty();
       var quests = JSON.parse(result);
-      var campaigns=quests[2];
+      var campaigns=quests.pop();
       var desc;
-      $.each(quests[0], function() {
-        this.description === null ? desc="": desc=this.description;
-        $('#left-ul').append('<div class="panel panel-primary"><div class="panel-heading">'
-          +'<a href=/campaigns/'+this.campaign_id+'>'
-          +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
-          +this.id+'>'+this.name+'</a></div><div class="panel-body">'
-          +'<a class="list-group-item"><p class="list-group-item-heading">'
-          +desc+'</p><p class="list-group-item-text">deadline: '
-          +displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+      var panelClass={ 0: 'panel-warning',
+        1: 'panel-info',
+        2: 'panel-danger',
+        3: 'panel-info',
+      }
+      var count=0;
+      var quest;
+      $.each(quests, function() {
+        console.log(count);
+        quest=this;
+        $.each(quest, function() {
+          this.description === null ? desc="": desc=this.description;
+          $('#actionables').append('<div class="panel '+panelClass[count]+' col-md-6"><div class="panel-heading">'
+            +'<a href=/campaigns/'+this.campaign_id+'>'
+            +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
+            +this.id+'>'+this.name+'</a></div><div class="panel-body">'
+            +'<a class="list-group-item"><p class="list-group-item-heading">'
+            +desc+'</p><p class="list-group-item-text">deadline: '
+            +displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
+        });
+        count+=1;
       });
-      $.each(quests[1], function() {
-        this.description === null ? desc="": desc=this.description;
-        $('#right-ul').append('<div class="panel panel-danger"><div class="panel-heading panel-deadline">'
-          +'<a href=/campaigns/'+this.campaign_id+'>'
-          +campaigns[this.campaign_id]+'</a> - <a href=/quests/'
-          +this.id+'>'+this.name+'</a></div><div class="panel-body">'
-          +'<a class="list-group-item"><p class="list-group-item-heading">'
-          +desc+'</p><p class="list-group-item-text">deadline: '
-          +displayEmptyIfNull(this.deadline)+'</p></a></div></div>');
-      });
-
 
     }
 

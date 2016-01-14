@@ -259,7 +259,7 @@ tr.active{
     text-shadow: -1px -1px 0 rgba(0,0,0,0.25);
 }
 
-.panel-heading a {
+.panel-heading h4 a {
     color: #fff;
 }
 
@@ -271,6 +271,9 @@ tr.active{
     /*height:100%;*/
     min-height:100%;
     height: auto;
+}
+#actionables .panel{
+  height: 155px;
 }
 
 html,body {height:100%;}
