@@ -168,4 +168,9 @@ class Quest < ActiveRecord::Base
       end
     end
   end
+  def delete_cleanup(user)
+    if self.id==user.active_quest.id then
+      user.set_default_active_quest
+    end
+  end
 end

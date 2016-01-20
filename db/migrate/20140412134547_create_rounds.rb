@@ -8,7 +8,7 @@ class CreateRounds < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "campaign_id"
-      t.string   "group_id"
+      t.integer   "group_id"
     end
   end
 end

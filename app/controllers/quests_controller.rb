@@ -57,6 +57,10 @@ class QuestsController < ApplicationController
     @user.tag_list.add(params[:tag_list])
     respond_to do |format|
       if @quest.save
+        if params[:set_active] then
+          params[:id]=@quest.id
+          activate 
+        end
         @user.save
         create_round(@quest, action_name.capitalize, @quest.campaign)
         format.html { redirect_to path, notice: 'Quest was successfully created.' }
@@ -128,10 +132,10 @@ class QuestsController < ApplicationController
   # @return [Html] redirect back to quest's campaign page
   def destroy
     @quest = Quest.find(params[:id])
-    @campaign=@quest.campaign
+    parent=@quest.parent
     @quest.destroy
     respond_to do |format|
-      format.html { redirect_to campaign_path(@campaign) }
+      format.html { redirect_to quest_path(parent) }
       format.json { head :no_content }
     end
   end
@@ -162,6 +166,11 @@ class QuestsController < ApplicationController
   # @param id [Integer] Quest's id
   def set_active
     @quest = Quest.find(params[:id])
+    activate 
+    render :nothing => true
+  end
+
+  def activate
     @user.active_quest_id = @quest.id
     @user.save
     if @quest.status=="On Hold"
@@ -169,7 +178,7 @@ class QuestsController < ApplicationController
       @quest.save
     end
     create_round(@quest, action_name.capitalize, @quest.campaign)
-    render :nothing => true
+      
   end
 
   # Define allowed parameter for a Campaign model
@@ -181,7 +190,7 @@ class QuestsController < ApplicationController
   # @param status [String] Quest's status
   # @param importance [Boolean] Quest importance check
   def quest_params
-    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list, :show_all)
+    params.require(:quest).permit(:id, :description, :name, :parent_id, :campaign_id, :group_id, :status, :importance, :deadline, :tag_list, :show_all, :set_active)
   end
 
 

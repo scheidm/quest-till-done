@@ -28,6 +28,8 @@
     = f.date_field :deadline, :class => 'form-control'
     = f.label 'Is Important?', :class => 'control-label'
     = f.check_box :importance
+    =label_tag 'set_active'
+    = check_box_tag 'set_active'
     = f.hidden_field :campaign_id
 
   .actions
