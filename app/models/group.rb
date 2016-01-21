@@ -58,10 +58,14 @@ class Group < ActiveRecord::Base
   end
 
   def color
-    d=Digest::MD5.hexdigest(self.name)
-    x=(Integer("0x#{d}")& 0xFFFFFF)
-    y= sprintf("%06x",x)
-    return y
+    color=Color.where(type: "Group").where(related_id: self.id).first
+    if color
+      return color.color_hex
+    else
+      c=Color.new
+      c.create_color(self)
+      return c.color_hex
+    end
   end
 
 end

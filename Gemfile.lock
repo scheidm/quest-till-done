@@ -172,6 +172,7 @@ GEM
     hike (1.2.3)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
+    ice_cube (0.13.2)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -376,6 +377,7 @@ DEPENDENCIES
   guard-livereload
   haml
   high_voltage
+  ice_cube
   jbuilder (~> 1.2)
   jquery-rails
   jquery-ui-rails

@@ -3,7 +3,7 @@ class CreateRecords < ActiveRecord::Migration
     create_table "records", force: true do |t|
       t.string   "type"
       t.text     "description",        null: false
-      t.string   "url"
+      t.text     "url"
       t.integer  "encounter_id"
       t.datetime "created_at"
       t.datetime "updated_at"

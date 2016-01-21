@@ -116,6 +116,8 @@ gem 'slim'
 # infinite tasks
 gem 'whenever', :require => false
 
+gem 'ice_cube'
+
 gem 'simplecov',  '~> 0.7.1', :require => false, :group => :test
 gem 'byebug'
 gem 'font-awesome-rails'

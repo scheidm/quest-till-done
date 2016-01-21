@@ -13,7 +13,7 @@ class Quest < ActiveRecord::Base
   has_many :links
   has_many :notes
   has_many :images
-  belongs_to :campaign, :class_name => 'Quest', touch: true
+  belongs_to :campaign, :class_name => 'Quest'
   # Has many quests underneath this quest's subtree
   has_many :all_quests, :class_name => 'Quest', :foreign_key => 'campaign_id'
   # Belongs to a immediate parent quest
