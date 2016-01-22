@@ -5,17 +5,17 @@
 # object
 class Round < ActiveRecord::Base
   belongs_to :encounter
+  belongs_to :user
   belongs_to :campaign
-  belongs_to :group
   self.inheritance_column = nil
   include ActionView::Helpers::DateHelper
   include ApplicationHelper
 
-  def self.create_event(model, operation, campaign)
+  def self.create_event(model, operation, campaign, user)
     raise ArgumentError, 'campaign id is nil' if campaign.id.nil?
     raise ArgumentError, 'operation is empty' if operation.empty?
     round = Round.new
-    round.encounter = Encounter.last
+    round.user = user
     type= model.class.name.demodulize
     if operation=="destroy"
       round.event_id = campaign.id
@@ -25,12 +25,13 @@ class Round < ActiveRecord::Base
         model.reload
       end
       round.event_id = model.id
-      round.event_description = operation.gsub("_"," ")
+      round.event_description = operation.gsub("_"," ").capitalize
     end
+    round.encounter_id=user.encounters.pluck(:id).last
     round.type = type
     round.campaign_id = campaign.id
-    round.group=campaign.group
     round.save
+    return round
   end
 
   def related_obj

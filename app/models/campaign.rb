@@ -10,6 +10,10 @@ class Campaign < Quest
   def delete_related
   end
 
+  def recent
+    self.quests.order(:updated_at).limit(3).pluck(:name,:id)
+  end
+
   def color
     color=Color.where(type: "Campaign").where(related_id: self.id).first
     if color

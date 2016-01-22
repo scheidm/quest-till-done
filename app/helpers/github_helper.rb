@@ -80,7 +80,7 @@ module GithubHelper
                                  })
 
 
-        create_round(new_issue, action_name, campaign)
+        create_round(new_issue, action_name, campaign,@user)
 
         if t.comments - 1 >= 0
           @github.issues.comments.all(:repo => projectname, :user => username, :issue_id => t.number).each do |f|
@@ -94,7 +94,7 @@ module GithubHelper
                                            group_id: campaign.group_id
 
                                        })
-            create_round(new_record, action_name, campaign)
+            create_round(new_record, action_name, campaign,@user)
           end
         end
       end

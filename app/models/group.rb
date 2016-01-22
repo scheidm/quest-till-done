@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   belongs_to :user
   has_many :campaigns, dependent: :destroy
   has_many :quests
-  has_many :rounds, dependent: :destroy
+  has_many :rounds, through: :campaigns, dependent: :destroy
   has_many :github_repos, dependent: :destroy
   has_and_belongs_to_many :users
   has_and_belongs_to_many :admins, class_name: "User", join_table: "admins_groups"

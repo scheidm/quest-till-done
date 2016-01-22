@@ -62,7 +62,7 @@ class QuestsController < ApplicationController
           activate 
         end
         @user.save
-        create_round(@quest, action_name.capitalize, @quest.campaign)
+        create_round(@quest, action_name.capitalize, @quest.campaign, @user)
         format.html { redirect_to path, notice: 'Quest was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
       else

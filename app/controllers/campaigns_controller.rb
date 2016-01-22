@@ -66,7 +66,7 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       if @campaign.save
         @user.save
-        create_round(@campaign, action_name, @campaign)
+        create_round(@campaign, action_name, @campaign,@user)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully started.', location: campaigns_path(@campaign) }
         format.json { render action: 'show', status: :created, location: @campaign }
       else

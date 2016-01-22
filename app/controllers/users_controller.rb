@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
 
   def index
-    @recent_activities = Round.where(group_id: @user.wrapper_group).order(id: :desc).limit(10)
+    @recent_activities = Round.where(user_id: @user.id).order(id: :desc).limit(10)
   end
 
   # define avatar by default value

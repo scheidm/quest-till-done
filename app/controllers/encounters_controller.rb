@@ -8,18 +8,19 @@ class EncountersController < ApplicationController
   end
 
   def get_user_timeline
-    encounters = Encounter.where(:user_id => @user.id).order(created_at: :desc)
+    rounds=@user.rounds.limit(100).order(created_at: :desc)
+    encounters = Encounter.where('id in (?)', rounds.pluck(:encounter_id).uniq).order(created_at: :desc)
     data = []
     data_by_date = {}
-    count=0
-    encounters.each do |encounter|
-      break unless count<=100
-      encounter_data=encounter.to_json
-      count+=encounter_data.count
-      data_by_date[encounter.created_at.to_date] ||= Array.new
-      if encounter_data[:children].size > 0
-        data_by_date[encounter.created_at.to_date].push(encounter_data)
-      end
+    jhash={}
+    encounters.each do |e|
+      jhash[e.id]=e.to_json
+      data_by_date[e.created_at.to_date] ||= Array.new
+      data_by_date[e.created_at.to_date].push( jhash[e.id] )
+    end
+    rounds.each do |r|
+      jhash[r.encounter_id][:children].push(r.to_json)
+      jhash[r.encounter_id][:count]+=1
     end
     data_by_date.each do |key, value|
       temp = {:data => key, :attr => { :rel => 'encounter', :href => 'javascript:void(0)'}}

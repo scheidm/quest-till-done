@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   #has_many :skill_points, dependent: :destroy
   has_one :timer, dependent: :destroy
   has_many :encounters, dependent: :destroy
-  has_many :rounds, through: :encounters, dependent: :destroy
+  has_many :rounds, through: :campaigns, dependent: :destroy
   has_and_belongs_to_many :groups
   has_and_belongs_to_many :groups_where_admin_and_wrapper, class_name: "Group", join_table: "admins_groups"
   has_many :total_campaigns, through: :groups, source: :campaigns
@@ -103,14 +103,13 @@ class User < ActiveRecord::Base
     Quest.create({name: "Regular Rituals", description: "Frequent chores, repeated tasks, or any other habitual activity", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     q=Quest.create({name: "Unsorted Musings", description: "A place to store those notes that doen't fit elsewhere", parent_id: cam.id, campaign_id: cam.id, group_id: g.id, status: "Open"})
     enc = Encounter.create({ user: self})
-    enc.end_time = Time.now.utc
-    enc.rounds << Round.create({ type: 'Campaign', event_id: cam.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
-    enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
+    Round.create_event(cam, "create", cam, self)
+    Round.create_event(q, "Create", cam, self)
     self.active_quest=q
     self.save
     self.reload
+    Round.create_event(q, "Create", cam, self)
     enc.end_time = Time.now.utc
-    enc.rounds << Round.create({ type: 'Quest', event_id: q.id, event_description: 'create', encounter_id: enc.id, campaign: cam})
     enc.save
 
     UserConfig.create({
