@@ -21,6 +21,7 @@ class CampaignsController < ApplicationController
   def show
     logger.info params
     @campaign = Campaign.find(params[:id])
+    @activity = @campaign.quests.order(updated_at: :desc).limit(3)
     @actionable=@campaign
     #reverse history but direct to new
 

@@ -17,6 +17,18 @@
   %p
     .progress.progress-mini{"data-placement" => "right", "data-toggle" => "tooltip", title: "Progress"}
       .progress-bar{role: "progressbar", style: "width: #{@campaign.progress}%;"}
+  %ul.list-inline
+    %li
+      Last activity 
+      =time_ago_in_words(@activity.first.updated_at)
+      ago: 
+    -last=@activity.pop
+    -@activity.each do |q|
+      %li
+        =link_to q
+        , 
+    %li
+      =link_to last
 -else
   %p
     %strong Parent:
