@@ -53,9 +53,11 @@ class Round < ActiveRecord::Base
     return "#{trunc(self.event_description, length)} #{self.type}: #{trunc(self.related_obj.to_s,length)} - #{self.created_at.to_time.strftime(format)}"
   end
 
-  def to_json
+  def to_json(username='')
+    my_description=self.to_str
+    my_description="#{username} - #{my_description}" if username
     return { :id    => self.event_id, 
-             :data  => self.to_str, 
+             :data  => my_description, 
              :attr  => { 
                        :rel => self.type, 
                        :href => self.related_link

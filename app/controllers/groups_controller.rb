@@ -50,7 +50,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     respond_to do |format|
       if @group.save
-        @group.creator_is_admin(user)
+        @group.creator_is_admin(@user)
         format.html { redirect_to group_path(@group), notice: 'Group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @quest.campaign }
         # send notification
@@ -143,7 +143,7 @@ class GroupsController < ApplicationController
     count=0
     @group.rounds.each do |round|
       break if count>100
-      data << round.to_json
+      data << round.to_json(@user.username)
       count+=1
     end
     render :text => data.to_json
