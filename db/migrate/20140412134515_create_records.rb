@@ -9,13 +9,14 @@ class CreateRecords < ActiveRecord::Migration
       t.datetime "updated_at"
       t.integer  "quest_id"
       t.text     "quote"
-      t.text     "github_username"
-      t.text     "github_projectname"
       t.text     "sha"
+      t.string   "code_file_name"
+      t.string   "code_content_type"
+      t.integer  "code_file_size"
+      t.datetime "code_updated_at"
       t.integer  "group_id"
       t.string   "slug"
     end
 
-    add_index "records", ["slug"], name: "index_records_on_slug", using: :btree
   end
 end

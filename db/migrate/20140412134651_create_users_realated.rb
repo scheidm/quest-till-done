@@ -11,6 +11,12 @@ class CreateUsersRealated < ActiveRecord::Migration
       t.integer  "encounter_extend_duration"
       t.datetime "created_at"
       t.datetime "updated_at"
+      t.datetime "last_notification"
+      t.integer  "notification_count"
+      t.integer  "dislayed_gritter_notifications"
+      t.string   "github_token"
+      t.text     "github_access_token"
+      t.text     "github_username"
     end
 
     create_table "users", force: true do |t|
@@ -35,9 +41,6 @@ class CreateUsersRealated < ActiveRecord::Migration
       t.integer  "level"
       t.integer  "exp"
       t.integer  "group_id"
-      t.string   "github_token"
-      t.text     "github_access_token"
-      t.text     "github_username"
     end
 
     add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

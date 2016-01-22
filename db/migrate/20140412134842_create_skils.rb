@@ -5,13 +5,14 @@ class CreateSkils < ActiveRecord::Migration
       t.datetime "updated_at"
       t.integer  "level"
       t.integer  "exp"
-      t.integer  "user_id_id"
+      t.integer  "user_id"
     end
 
     create_table "skills", force: true do |t|
       t.datetime "created_at"
       t.datetime "updated_at"
-      t.string   "achievements"
+      t.integer  "level"
+      t.string   "achievement"
       t.string   "description"
     end
   end

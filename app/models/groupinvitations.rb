@@ -1,4 +1,4 @@
-class Groupinvitations < ActiveRecord::Base
+class Groupinvitation < ActiveRecord::Base
   belongs_to :group
 
   def accept_me(invitee_id)

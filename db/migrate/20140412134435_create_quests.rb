@@ -18,8 +18,7 @@ class CreateQuests < ActiveRecord::Migration
       t.string   "slug"
       t.integer  "issue_no"
       t.boolean  "vcs"
+      t.integer  "user_id"
     end
-
-    add_index "quests", ["slug"], name: "index_quests_on_slug", using: :btree
   end
 end

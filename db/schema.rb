@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121190921) do
+ActiveRecord::Schema.define(version: 20160122202851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20160121190921) do
     t.integer  "campaign_id"
   end
 
-  create_table "groupinvitations", force: true do |t|
+  create_table "group_invitations", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.boolean  "accept"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20160121190921) do
     t.integer "user_id"
   end
 
-  create_table "invitation_status_tables", force: true do |t|
+  create_table "invitation_status", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.boolean  "accept"
@@ -171,14 +171,12 @@ ActiveRecord::Schema.define(version: 20160121190921) do
     t.integer  "quest_id"
     t.text     "quote"
     t.text     "sha"
-    t.integer  "group_id"
-    t.string   "slug"
     t.string   "code_file_name"
     t.string   "code_content_type"
     t.integer  "code_file_size"
     t.datetime "code_updated_at"
-    t.string   "github_user"
-    t.string   "project_name"
+    t.integer  "group_id"
+    t.string   "slug"
   end
 
   create_table "rounds", force: true do |t|
@@ -207,13 +205,14 @@ ActiveRecord::Schema.define(version: 20160121190921) do
     t.datetime "updated_at"
     t.integer  "level"
     t.integer  "exp"
-    t.integer  "user_id_id"
+    t.integer  "user_id"
   end
 
   create_table "skills", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "achievements"
+    t.integer  "level"
+    t.string   "achievement"
     t.string   "description"
   end
 
@@ -258,6 +257,9 @@ ActiveRecord::Schema.define(version: 20160121190921) do
     t.datetime "last_notification"
     t.integer  "notification_count"
     t.integer  "dislayed_gritter_notifications"
+    t.string   "github_token"
+    t.text     "github_access_token"
+    t.text     "github_username"
   end
 
   create_table "users", force: true do |t|
@@ -282,9 +284,6 @@ ActiveRecord::Schema.define(version: 20160121190921) do
     t.integer  "level"
     t.integer  "exp"
     t.integer  "group_id"
-    t.string   "github_token"
-    t.text     "github_access_token"
-    t.text     "github_username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

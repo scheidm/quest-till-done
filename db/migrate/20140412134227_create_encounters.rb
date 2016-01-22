@@ -5,6 +5,7 @@ class CreateEncounters < ActiveRecord::Migration
       t.datetime "created_at"
       t.datetime "updated_at"
       t.integer  "user_id"
+      t.boolean  "break_flag"
     end
   end
 end
