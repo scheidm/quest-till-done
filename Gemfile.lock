@@ -261,6 +261,7 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    redcarpet (3.3.4)
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -390,6 +391,7 @@ DEPENDENCIES
   rack-livereload
   rails (= 4.0.0)
   rails_autolink
+  redcarpet
   sass-rails (~> 4.0.0)
   sdoc
   searchkick (~> 0.8.5)

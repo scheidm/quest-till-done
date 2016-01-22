@@ -101,7 +101,7 @@ class QuestsController < ApplicationController
       end
 
       if @quest.update(quest_params)
-        create_round(@quest, action_name.capitalize, @quest.campaign)
+        create_round(@quest, action_name.capitalize, @quest.campaign,@user)
         format.html { redirect_select }
         format.json { head :no_content }
       else
@@ -123,7 +123,7 @@ class QuestsController < ApplicationController
   def toggle_state
     @quest = Quest.find(params[:id])
     action=@quest.toggle_state(@user)
-    create_round(@quest, action, @quest.campaign)
+    create_round(@quest, action, @quest.campaign, @user)
     redirect_select
   end
 
@@ -177,7 +177,7 @@ class QuestsController < ApplicationController
       @quest.status="In Progress"
       @quest.save
     end
-    create_round(@quest, action_name.capitalize, @quest.campaign)
+    create_round(@quest, action_name.capitalize, @quest.campaign, @user)
       
   end
 

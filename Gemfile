@@ -117,6 +117,7 @@ gem 'slim'
 gem 'whenever', :require => false
 
 gem 'ice_cube'
+gem 'redcarpet'
 
 gem 'simplecov',  '~> 0.7.1', :require => false, :group => :test
 gem 'byebug'

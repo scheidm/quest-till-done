@@ -663,3 +663,15 @@ input:-webkit-autofill:focus {
   border: 0px;
   margin: 5px;
 }
+.pull-right.button-tray{
+  width:250px;
+}
+.list-group-item-heading.inline{
+  display: inline;
+}
+table .description{
+  display: none;
+}
+#accordion td{
+  padding:5px;
+}

@@ -43,33 +43,42 @@
         %a{"data-parent" => "#accordion", "data-toggle" => "collapse", href: "#collapseNote"}
           Records
     #collapseNote.panel-collapse
-      %ul.list-group
-      - @actionable.records.order('created_at').each do |rec|
-        -href='#'
-        -if(rec.type=='Image'||'Link') then href="#{rec.url}" end
-        %a.list-group-item(href="#{href}" target='_blank')
-          %table{:style=>"width:100%"}
-            %tr
-              %td
-                .pull-left
-                  -if(rec.type=='Image') then 
-                    .pull-left{style:'margin-right:2px'}
-                      %a(href="#{rec.code.url}")
-                      =image_tag rec.code.url(rec.code.url), size:'50x50', class:"img-rounded"
-                  .pull-right
-                    %h4.list-group-item-heading
-                      = rec.created_at.strftime("%m/%d/%Y %I:%M%p")
-                    %p.list-group-item-text
-                      = auto_link(rec.description)
-                    -if(rec.type=='Link') then
-                      %br
-                        = auto_link(rec.url, html: {target: '_blank'})
-
+      %table.table-striped{:style=>"width:100%"}
+        - @actionable.records.order('created_at').each do |rec|
+          -long_rec=rec.description.length>170
+          -href=''
+          -if(rec.type=='Image'||'Link') then href="#{rec.url}" end
+          %tr
+            %td{ id: "rec-#{rec.id}"}
+              .pull-left
+                -if(rec.type=='Image') then 
+                  .pull-left{style:'margin-right:2px'}
+                    %a(href="#{rec.code.url}")
+                    =image_tag rec.code.url(rec.code.url), size:'50x50', class:"img-rounded"
                 .pull-right
-                  .pull-left{:style=>"margin-right:4px"}
-                    = button_to "Delete", {:controller => :records, :action => 'destroy', :id => rec.id }, :class => "btn btn-danger", :method => :delete, data: {:confirm => "Are you sure?"}
-                  .pull-right
-                    =link_to "Modify", edit_record_path(rec.id), :class => "btn btn-primary"
+                  %h4.list-group-item-heading.inline
+                    = rec.created_at.strftime("%m/%d/%Y %I:%M%p")
+                  -if href!=''
+                    = link_to "#{href}", :class => 'btn inline', :id => "rec-#{rec.id}-link", target: '_blank' do
+                      %span.fa.fa-2x.fa-external-link
+                  %p.list-group-item-text
+                    - if long_rec
+                      .brief
+                        = auto_link(trunc(rec.description, 170, 1))
+                      .description
+                        = raw @markdown.render(rec.description)
+                    - else
+                      = auto_link(rec.description)
+                  -if(rec.type=='Link') then
+                    %br
+                      = auto_link(rec.url, html: {target: '_blank'})
+
+              .pull-right.button-tray
+                - if long_rec
+                  %button.btn.pull-right{ onclick: "toggle_record_expansion(#{rec.id})", id: "rec-#{rec.id}-btn"}
+                    Show More
+                =link_to "Modify", edit_record_path(rec.id), :class => "btn btn-primary pull-right"
+                = button_to "Delete", {:controller => :records, :action => 'destroy', :id => rec.id }, :class => "btn btn-danger pull-right inline", :method => :delete, data: {:confirm => "Are you sure?"}
 %br
 %br
 -@actionable==@active_quest ? active="1" : active="0"

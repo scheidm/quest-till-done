@@ -36,8 +36,7 @@ class RecordsController < ApplicationController
     @record.group_id = @user.wrapper_group.id
     @record.assign_encounter @user
     if @record.save
-      @record.append_url(record_params['url'])
-      create_round(@record, action_name, @record.quest.get_campaign)
+      create_round(@record, action_name, @record.quest.get_campaign, @user)
       success=true
     else
       success=false

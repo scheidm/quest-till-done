@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
       @config = @user.config
       @timer = @user.timer
       @active_quest = @user.active_quest
+      @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, no_intra_emphasis: true)
       if(@active_quest.nil?)
          aq = { name: '',
                 to_link: nil, 

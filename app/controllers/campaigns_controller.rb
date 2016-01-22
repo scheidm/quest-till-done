@@ -96,7 +96,7 @@ class CampaignsController < ApplicationController
         @user.save
       end
       if @campaign.update(campaign_params)
-        create_round(@campaign, action_name, @campaign)
+        create_round(@campaign, action_name, @campaign, @user)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
         format.json { head :no_content }
       else
