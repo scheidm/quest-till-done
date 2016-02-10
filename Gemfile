@@ -94,6 +94,9 @@ gem 'jquery-ui-rails'
 #attachment
 gem 'paperclip'
 
+#undo
+gem 'paper_trail'
+
 #link
 gem 'rails_autolink'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122202851) do
+ActiveRecord::Schema.define(version: 20160208185834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,11 @@ ActiveRecord::Schema.define(version: 20160122202851) do
     t.integer  "user_id"
   end
 
+  create_table "groups_records", id: false, force: true do |t|
+    t.integer "group_id"
+    t.integer "record_id"
+  end
+
   create_table "groups_users", id: false, force: true do |t|
     t.integer "group_id"
     t.integer "user_id"
@@ -147,6 +152,11 @@ ActiveRecord::Schema.define(version: 20160122202851) do
     t.integer  "user_id"
   end
 
+  create_table "quests_records", id: false, force: true do |t|
+    t.integer "quest_id"
+    t.integer "record_id"
+  end
+
   create_table "receipts", force: true do |t|
     t.integer  "receiver_id"
     t.string   "receiver_type"
@@ -186,6 +196,14 @@ ActiveRecord::Schema.define(version: 20160122202851) do
     t.integer  "user_id"
     t.integer  "encounter_id"
     t.integer  "campaign_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "schedules", force: true do |t|
+    t.json     "schedule_dump"
+    t.string   "related_type"
+    t.integer  "related_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -293,6 +311,17 @@ ActiveRecord::Schema.define(version: 20160122202851) do
     t.integer "user_id"
     t.integer "group_id"
   end
+
+  create_table "versions", force: true do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
 

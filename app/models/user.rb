@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   # has_many :conversations, dependent: :destroy
+  has_many :github_repos, through: :wrapper_group
   has_one :timer, dependent: :destroy
   has_one :wrapper_group, class_name: "Group", dependent: :destroy
   has_many :campaigns, through: :wrapper_group, dependent: :destroy
@@ -186,6 +187,20 @@ class User < ActiveRecord::Base
 
   def journey
     return self.quests.first
+  end
+
+  def save_git_token(code)
+    github = self.github
+    token = ( github.get_token(code) ).token
+    #store this value to user table
+    self.github_access_token = token
+    self.save
+  end
+
+  def revoke_github_permissions
+    self.github_access_token = nil
+    GithubRepo.destroy_all(group_id: self.wrapper_group)
+    self.save
   end
 
   def set_default_active_quest

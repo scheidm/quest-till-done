@@ -11,11 +11,7 @@ class UsersController < ApplicationController
 
   # Get Github Access Token
   def callback         
-    @github = @user.github
-    token = (@github.get_token params['code']).token
-    #store this value to user table
-    @user.github_access_token = token
-    @user.save
+    @user.save_git_token params['code']
   end
 
 
@@ -51,9 +47,7 @@ class UsersController < ApplicationController
   end
 
   def github_revoke
-    @user.github_access_token = nil
-    GithubRepo.destroy_all(group_id: @user.wrapper_group)
-    @user.save
+    @user.revoke_github_permissions
     gflash :success => 'Your Github authentication have been stopped. You need manually revoke from Github website'
     redirect_to welcome_index_path
   end
@@ -65,7 +59,7 @@ class UsersController < ApplicationController
   def github_list
     login(@user)
     list_projects
-    @projects = GithubRepo.where("group_id=?", @user.wrapper_group)
+    @projects = @user.github_repos
   end
 
   def github_project_import

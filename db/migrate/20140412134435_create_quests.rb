@@ -1,6 +1,7 @@
 class CreateQuests < ActiveRecord::Migration
   def change
-    create_table "quests", force: true do |t|
+    create_table "quests", :id => false do |t|
+      t.integer :id, :limit => 8
       t.string   "name",                           null: false
       t.string   "status"
       t.string   "priority"

@@ -1,6 +1,7 @@
 class CreateRecords < ActiveRecord::Migration
   def change
-    create_table "records", force: true do |t|
+    create_table "records", :id => false do |t|
+      t.integer :id, :limit => 8
       t.string   "type"
       t.text     "description",        null: false
       t.text     "url"
