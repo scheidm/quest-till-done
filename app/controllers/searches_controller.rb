@@ -9,9 +9,11 @@ class SearchesController < ApplicationController
         model = params[:type].constantize
       end
     end
+    archive=0
+    archive=1 if(params.has_key? 'inc_archive')
     @type = 'All'
     @record_type = 'All'
-    @results = get_search_result(model, params[:query]).paginate page: params[:page], per_page: 10
+    @results = get_search_result(model, params[:query], archive).paginate page: params[:page], per_page: 10
   end
 
   # auto complete search for quest
@@ -48,21 +50,26 @@ class SearchesController < ApplicationController
     list.to_json
   end
 
-  def get_search_result(model, query)
+  def get_search_result(model, query, include_archive)
+    whash={ :group_id => @user.wrapper_group.id}
+    if include_archive==0
+      whash[:status]={ :not  => ["Archived", "Closed"]}
+    end
     if model.nil?
-      quests = Quest.search(query, where: { :group_id => @user.wrapper_group.id})
+      quests = Quest.search(query, where: whash)
       recs = Record.search(query, where: { :group_id => @user.wrapper_group.id})
       results = quests.results + recs.results
       @type = 'All'
     elsif (model == Record || Record.child_classes.include?(model))
-      results = model.search(query, where: { :group_id => @user.wrapper_group.id}).results
+      results = model.search(query, where: whash).results
       @type = 'Record'
       @record_type = (model == Record)? 'All': model.to_s
     elsif model == Campaign
-      results = Campaign.search(query, where: { :group_id => @user.wrapper_group.id}).results
+      results = Campaign.search(query, where: whash).results
       @type = 'Campaign'
     elsif model == Quest
-      results = Quest.search(query, where: { :group_id => @user.wrapper_group.id, :campaign_id => {:not =>nil} }).results
+      whash[:campaign_id]={ :not => nil}
+      results = Quest.search(query, where: whash ).results
       @type = 'Quest'
     else
       results = []
