@@ -52,16 +52,17 @@ class SearchesController < ApplicationController
 
   def get_search_result(model, query, include_archive)
     whash={ :group_id => @user.wrapper_group.id}
+    rhash={ :group_id => @user.wrapper_group.id}
     if include_archive==0
       whash[:status]={ :not  => ["Archived", "Closed"]}
     end
     if model.nil?
       quests = Quest.search(query, where: whash)
-      recs = Record.search(query, where: { :group_id => @user.wrapper_group.id})
+      recs = Record.search(query, where: rhash)
       results = quests.results + recs.results
       @type = 'All'
     elsif (model == Record || Record.child_classes.include?(model))
-      results = model.search(query, where: whash).results
+      results = model.search(query, where: rhash).results
       @type = 'Record'
       @record_type = (model == Record)? 'All': model.to_s
     elsif model == Campaign

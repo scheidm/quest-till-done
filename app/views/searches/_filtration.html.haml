@@ -51,6 +51,17 @@ Sort:
       %a{href: '#', class: 'sort-select'} Type
     %li
       %a{href: '#', class: 'sort-select'} Date
+Scope:
+.btn-group
+  %button#scope-filter.btn.btn-default{type: "button"} Active
+  %button.btn.btn-default.dropdown-toggle{"data-toggle" => "dropdown", type: "button"}
+    %span.caret
+    %span.sr-only Toggle Dropdown
+  %ul.dropdown-menu{role: "menu"}
+    %li
+      %a{href: '#', class: 'scope-select'} Active Quests
+    %li
+      %a{href: '#', class: 'scope-select'} All Quests
 
 %button#search-filter.btn.btn-primary{type: "button"} Search
 
@@ -71,6 +82,9 @@ Sort:
     $(".sort-select").click(function () {
         $('#sort-filter').text(this.innerHTML);
     });
+    $(".scope-select").click(function () {
+        $('#scope-filter').text(this.innerHTML);
+    });
     $("#search-filter").click(function () {
         var type = $.trim($('#model-filter').text());
         if (type == 'Record')
@@ -79,9 +93,13 @@ Sort:
           if(s != 'All')
             type = s;
         }
-
-        window.location.href = '/searches?utf8=✓'
+        url='/searches?utf8=✓'
         + "&query=" + escape($.trim($("#search-bar").val()))
         + "&type=" + escape($.trim(type));
-    });
+        var scope = $.trim($('#scope-filter').text());
+        if(scope == 'All'){
+          url=url+"&inc_archive";
+        }
+
+        window.location.href = url     });
   });
