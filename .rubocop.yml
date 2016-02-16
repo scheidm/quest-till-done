@@ -1,0 +1,18 @@
+Rails:
+  Enabled: true
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - '*.sw[a-z]'
+    - 'seed2sql.rb'
+    - 'features/*'
+    - 'spec/**/*'
+    - 'config.ru'
+    - 'user_groups_creation.rb'
+    - 'log/**/*'
+    - 'bin/*'
